@@ -19,11 +19,11 @@ class DatabaseConnector {
     }
 
     getQueuesJSON() {
-        return Alarm.findAll({raw: true});
+        return Queue.findAll({raw: true, where: { execute_date: null, user_id: null, status: 'executed' }});
     }
 
     getAlarmsJSON() {
-        return Queue.findAll({raw: true});
+        return Alarm.findAll({raw: true, where: { date_confirm: null, usr_confirm: 0 }});
     }
 
     getDevices() {
@@ -35,10 +35,10 @@ class DatabaseConnector {
     }
 
     addQueue(queue) {
-        let uuid = uuidv1,
-            q = Object.assign({uuid: uuid()}, queue);
+/*        let uuid = uuidv1,
+            q = Object.assign({uuid: uuid()}, queue);*/
         return Queue
-            .create(q)
+            .create(queue)
             .catch((e) => {
             });
     }
@@ -63,6 +63,9 @@ class DatabaseConnector {
             .catch((e) => {
                 console.log(`Error while updating queue status`.red)
             });
+    }
+    updateAlarm(ivan_id, user_id, date_confirm){
+        return Alarm.update({ usr_confirm: user_id, date_confirm: date_confirm }, {where: { ivan_id: ivan_id }})
     }
 
     addDevices() {

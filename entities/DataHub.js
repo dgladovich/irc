@@ -13,8 +13,9 @@ class DataHub {
         return Promise
             .all(dataToLoad)
             .then((data) => {
-                let alarms = data[0];
-                let queues = data[1];
+                let queues = data[0];
+                let alarms = data[1];
+
                 this.mdb.addQueues(queues);
                 this.mdb.addAlarms(alarms);
             })
@@ -71,7 +72,12 @@ class DataHub {
     removeAlarm(uuid) {
     }
 
-    updateAlarm(uuid, status) {
+    updateAlarm(ivan_id, user_id, date_confirm ) {
+        return this.dbc.updateAlarm(ivan_id, user_id, date_confirm )
+            .then(()=>{
+                this.mdb.updateAlarm(ivan_id, user_id, date_confirm);
+            })
+            .catch((e)=>{})
     }
 
     addQueue(qm) {

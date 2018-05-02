@@ -92,9 +92,9 @@ export default class ControllerConnection {
                     let alarm = data.arguments;
                     app.alarms.add(alarm)
                 } else {
-                    console.log('Confirmin alarm');
-                    let alarm = data.arguments;
-                    app.alarms.remove(alarm);
+                    let alarm = app.alarms.findWhere({ ivan_id: data.arguments.ivan_id });
+                    app.alarms
+                        .remove(alarm);
                 }
                 break;
             case 'controll':

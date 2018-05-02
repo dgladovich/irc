@@ -24,14 +24,7 @@ class MemoryDataBase {
         return this.devices;
     }
     getQueue(uuid){
-        console.log(uuid);
-        console.log(this.queues.where({uuid: uuid}));
-        return this.queues.map((queue)=>{
-            if(queue.get('uuid') === uuid){
-                console.log('It found some ')
-                return queue
-            }
-        });
+        return this.queues.findWhere({uuid: uuid});
     }
     getDevicesJSON(){
         return this.devices;
@@ -59,6 +52,9 @@ class MemoryDataBase {
         if (executedQueue) {
             executedQueue.set('status', status);
         }
+    }
+    updateAlarm(ivan_id, user_id, date_confirm){
+        this.alarms.findWhere({ivan_id: ivan_id}).set({usr_confirm: user_id, date_confirm: date_confirm})
     }
     addQueues(queues){
         this.queues.add(queues);

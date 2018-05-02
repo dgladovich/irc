@@ -8,6 +8,12 @@ const Alarm = Backbone.Model.extend({
         date_confirm: null
     },
     initialize: function () {
+
+        this.on('change:usr_confirm', () => {
+            if (this.get('usr_confirm') !== 0) {
+                this.collection.remove(this);
+            }
+        })
     }
 });
 

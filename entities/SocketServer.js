@@ -22,11 +22,11 @@ class SocketServer {
         this.socketConnector.sendData(message)
     }
 
-    sendAlarmConfirmation(alarm) {
+    sendAlarmConfirmation(ivan_id) {
         let message = {
             eventGroup: 'alarm',
             method: 'confirm',
-            arguments: [Object.assign({}, stat)]
+            arguments: Object.assign({ivan_id: ivan_id}, {})
         };
         this.socketConnector.sendData(message)
     }

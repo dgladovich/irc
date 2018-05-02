@@ -107,7 +107,7 @@ function handleConnection(conn) {
     conn.on('data', onConnData);
     conn.once('close', onConnClose);
     conn.on('error', onConnError);
-    setInterval(() => {
+    this.gen = setInterval(() => {
         const action = eventGroups[_.random(0, 3)];
         //const action = 'status';
         const data = generateData(action);
@@ -139,6 +139,7 @@ function handleConnection(conn) {
     }
 
     function onConnError(err) {
+        clearInterval(this.gen);
         console.log('Connection %s error: %s', remoteAddress, err.message);
     }
 }

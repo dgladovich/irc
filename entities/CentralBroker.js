@@ -7,7 +7,7 @@ const DataHub = require('./DataHub');
 const uuidv1 = require('uuid/v1');
 
 const CC = Radio.channel('ControllerConnector');
- 
+
 class CentralBroker {
     constructor() {
         let broker = {broker: this};
@@ -21,11 +21,11 @@ class CentralBroker {
 
     sendControllerInitialData() {
         let queues = this.dh.getQueues();
-/*        if (queues.length > 0) {
-            queues.each(queue => {
-                this.controllerConnector.sendDataToController();
-            });
-        }*/
+        /*        if (queues.length > 0) {
+                    queues.each(queue => {
+                        this.controllerConnector.sendDataToController();
+                    });
+                }*/
     }
 
     getUserInitialAlarms() {
@@ -117,73 +117,48 @@ class CentralBroker {
             status: 'executed'
         };
 
-        console.log(this.dh.getQueue(uuid))
-/*        this.dh.updateQueue(uuid, vals).then((queue) => {
-            this.afterExecutionAction.call(this, uuid)
-        });*/
-        //console.log(`Controller executed command with uuid: ${uuid}`.cyan);
+
+        this.dh.updateQueue(uuid, vals).then((queue) => {
+            this.afterExecutionAction.call(this, this.dh.getQueue(uuid))
+        });
     }
 
     onFailControllerExecution(data) {
         this.logger.onFailControllerExecution();
     }
 
-    afterExecutionAction(uuid) {
+    afterExecutionAction(queue) {
 
-        //console.log(queue)
-        /*        let method = queue.get('method');
-                switch (method) {
-                    case 'confirm':
-                        this.onControllerAlarmConfirm.call(this, queue)
-                        break;
-                    case 'speed':
-                        this.onControllerSpeedChange.call(this, queue);
-                        break;
-                    case 'repair':
-                        this.onControllerRepairExecution.call(this, queue);
-                        break;
-                    case 'stop':
-                        this.onControllerStopExecution.call(this, queue);
-                        break;
-                    case 'start':
-                        this.onControllerStartExecution.call(this, queue);
-                        break;
-                    default:
-                        console.log(`Unknown type of execution command method: ${method}`.red);
-                        return;
-                }*/
+        let method = queue.get('method');
+        switch (method) {
+            case 'confirm':
+                this.onControllerAlarmConfirm.call(this, queue)
+                break;
+            case 'speed':
+                this.onControllerSpeedChange.call(this, queue);
+                break;
+            case 'repair':
+                this.onControllerRepairExecution.call(this, queue);
+                break;
+            case 'stop':
+                this.onControllerStopExecution.call(this, queue);
+                break;
+            case 'start':
+                this.onControllerStartExecution.call(this, queue);
+                break;
+            default:
+                console.log(`Unknown type of execution command method: ${method}`.red);
+                return;
+        }
     }
 
     onControllerAlarmConfirm(queue) {
-        let aID = queue.get('argument'),
-            userId = queue.get('user_id'),
-            date_confirm = moment().format(`DD-MM-YYYY HH:mm:ss`),
-            alarmUpdates = {
-                usr_confirm: userId,
-                date_confirm: date_confirm
-            },
-            alarmUpdatesConditions = {
-                where: {id: aID}
-            };
-        Alarm
-            .update(alarmUpdates, alarmUpdatesConditions)``
+        let {argument, execute_date, user_id} = queue.toJSON();
+        this.dh
+            .updateAlarm(argument, user_id, execute_date)
             .then((alarm) => {
-                console.log('Alarm updated in DB'.cyan);
-                let message = {
-                    method: 'confirm',
-                    data: {
-                        aID: aID,
-                        userId: userId,
-                        date_confirm: date_confirm
-                    }
-                }
-
-                ch.trigger('alarm', message);
-
-            })
-            .catch((e) => {
-                console.log(`Error while updating alarm in DB`.red, e)
-            })
+                this.socketServer.sendAlarmConfirmation(argument)
+            });
     }
 
     disconnectFromController() {
@@ -206,7 +181,8 @@ class CentralBroker {
                 queueMessage = {
                     method: 'confirm',
                     argument: pack.ivan_id,
-                    user_id: pack.user_id
+                    user_id: pack.user_id,
+                    uuid: uuid
                 };
             this.dh
                 .addQueue(queueMessage)
