@@ -1,0 +1,20 @@
+<% 	let measurment;
+	let status = app.statuses.findWhere({ num: dev.get('stat'), grp: dev.get('sgrp') }).get('trans');
+	if(measure){ 
+		measurment = ', ' + measure.get('translate').rus 
+	} else {
+		measurment = '';
+		def = status;
+	}
+%>
+    <td style="width: 63.8041%; padding-left: 25px;">
+        <p class="top-margined">
+            <%= name %> <%= measurment %>
+        </p>
+    </td>
+    <td class="text-center" style="width: 10.4329%;">
+        <p class="top-margined">
+            <%= def %>
+        </p>	
+            
+    </td>

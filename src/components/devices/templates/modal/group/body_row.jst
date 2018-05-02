@@ -1,0 +1,7 @@
+<td style="width: 63.8041%;">
+    <h4 class="panel-title"><a data-toggle="collapse" href="#<%= id %>"><span class="indicator text-left">&nbsp;</span><span><%= name %></span>&nbsp;</a></h4>
+    <div class="panel-collapse collapse" id="<%= id %>">
+        <div class="panel-body">Устройство исправно</div>
+    </div>
+</td>
+<td class="text-center" style="width: 10.4329%; padding-top: 15px;"><%= app.statuses.findWhere({ num: stat, grp: sgrp }).get('trans') %></td>

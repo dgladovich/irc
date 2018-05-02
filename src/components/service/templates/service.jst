@@ -1,0 +1,43 @@
+<div class="service-padding">
+    <div class="row">
+        <div class="col-xs-9" id="heading<%= id %>">
+            <h4 class="panel-title">
+                <a aria-controls="<%= id %>" data-toggle="collapse" href="#<%= id %>" class="collapsed" role="button"
+                   data-toggle="collapse" data-parent="#accordion" aria-expanded="false">
+                    <span>Техническое обслуживание ТО<%= ser_num %></span>
+                    <span style="float:right;">
+                        <span id="time-left"></span>
+                    </span>&nbsp;
+                </a>
+            </h4>
+        </div>
+        <div class="col-xs-3" style="text-align: center;">
+            <button class="btn btn-default make-service">Выполнить ТО</button>
+        </div>
+        <div class="col-xs-12">
+            <div class="panel-collapse collapse" id="<%= id %>" role="tabpanel" aria-labelledby="heading<%= id %>">
+                <div class="panel-body">
+                    <h4>Работы:</h4>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="wrks"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="materials"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="total" class="text-right">
+                                <span>Итого: </span><span class="total-value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

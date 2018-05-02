@@ -1,0 +1,15 @@
+<td data-label='№' class="text-center"><%= list_index %></td>
+<td data-label='Дата' class="text-center"><%= idle_day %></td>
+<td data-label='Время'  class="text-center"><%= idle_time %></td>
+<td data-label='Устройство'  class="text-center"></td>
+<td data-label='Тип сообщения'  class="text-center"><span class="indicator <%= typeClass %>">&nbsp;</span></td>
+<td data-label='Код' class="text-center">  <%= code %></td>
+<td data-label='Описание'  class="text-center"><%= description %></td>
+<td data-label='Подтверждение' >
+	<%if(date_confirm){%>
+       	<p>Сообщение подтверждено: <%= date_confirm%> </p>
+    	<%if(usr_confirm){%>
+    	<p>Пользователь: <%= user.name %></p>
+    	<% } %>
+    <%}%>
+</td>

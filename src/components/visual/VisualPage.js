@@ -1,0 +1,34 @@
+import template from '../general/templates/page.jst';
+import Filter from './VisualPageFilter';
+import Noria from './VisualPageNoria';
+import Conv from './VisualPageConv';
+import Device from './Device';
+import { View, Model } from 'backbone.marionette';
+
+const model = new Backbone.Model({
+	title: 'Визуальное наблюдение'
+});
+
+export default View.extend({
+    template: template,
+    model: model,
+    regions: {
+        device: '.panel-container'
+    },
+    events: {
+        'click #close-page': 'hidePage'
+    },
+    hidePage: function() {
+        this.$el.fadeOut(500, ()=>{
+            document.location.href = '#';
+        });
+    },
+    onRender: function(){
+        this.showChildView('device', this.device);
+        this.$el.fadeIn('slow');
+    },
+    initialize: function(){
+        this.device = new Device();
+    }
+
+});
