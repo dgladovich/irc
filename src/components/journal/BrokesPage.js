@@ -19,6 +19,10 @@ const BodyRowView = View.extend({
     template: body_row,
     updateStatus: function(){
         console.log('I am updating status');
+        console.log(this.model.toJSON())
+    },
+    onRender: function(){
+        this.updateStatus.call(this);
     },
     initialize: function () {
         this.listenTo(this.model, 'destroy', this.destroy.bind(this));
@@ -72,6 +76,7 @@ const TableHead = View.extend({
                     .addClass('glyphicon-triangle-top')
             }
         } else {
+
             $(this.previousTag)
                 .find('.glyphicon')
                 .removeClass('glyphicon-triangle-bottom glyphicon-triangle-top')
