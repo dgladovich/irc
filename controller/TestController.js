@@ -108,8 +108,8 @@ function handleConnection(conn) {
     conn.once('close', onConnClose);
     conn.on('error', onConnError);
     this.gen = setInterval(() => {
-        const action = eventGroups[_.random(0, 3)];
-        //const action = 'status';
+        //const action = eventGroups[_.random(0, 3)];
+        const action = 'values';
         const data = generateData(action);
 
         console.log(`Sending changed data. Action: ${action}`)
@@ -117,7 +117,7 @@ function handleConnection(conn) {
             eventGroup: action,
             data: data
         }))
-    }, 5000);
+    }, 250);
 
     function onConnData(d) {
         let body = {};

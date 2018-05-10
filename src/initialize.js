@@ -20,7 +20,7 @@ Backbone.sync = function (method, model, options) {
          */
         'Authorization': 'Bearer ' + store.get('token')
     };
-
+    backboneSync('peer to peer', 'dasfd');
     /*
      * Call the stored original Backbone.sync method with
      * extra headers argument added

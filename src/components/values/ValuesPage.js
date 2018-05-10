@@ -4,6 +4,7 @@ import CustomPanel from '../general/panel/CustomPanel';
 import Measurments from './Measurments';
 import ValvesView from './ValvesView';
 import template from '../general/templates/page.jst';
+import ChartModal from './ChartModal';
 
 const model = new Backbone.Model({
     title: 'Текущие показатели'
@@ -20,6 +21,11 @@ export default View.extend({
             document.location.href = '#';
         });
     },
+    showChartModal: function(){
+        let modal = new ChartModal();
+        modal.render().$el.modal('show');
+        $('body').append(modal.el);
+    },
 /*    onDestroy: function() {
         this.measurments.forEach((measurement) => {
             measurement.destroy();
@@ -34,6 +40,7 @@ export default View.extend({
     },
     onRender: function() {
         this.showChildView('tabpanel', new CustomPanel({ collection: this.viewGroups, view: Measurments, viewKey: 'faces' }));
+        this.getChildView('tabpanel').$el.append(`<button class="btn btn-start btn-charts">Графики</button>`).on('click', this.showChartModal.bind(this));
        /* this.measurments = [];
         this.showChildView('tabpanel', this.tabPanel);
 

@@ -165,6 +165,11 @@ a {
   background-color: #ffd842;
   border-color: #ffd842;
 }
+.btn-charts {
+  position: fixed;
+  bottom: 20px;
+  right: 66px;
+}
 
 .panel-default {
   margin-bottom: 0;
@@ -2918,4 +2923,20 @@ p .exitButton {
 .alarms-dialog {
   width: inherit;
   margin: 50px;
+}
+
+.serial-chart {
+  background: rgba(29, 29, 29, 0.8);
+  border: 2px solid #494949;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  /* float: left; */
+  /* width: 100%; */
+  /* margin-left: 1%; */
+  /* margin-right: 1%; */
+  box-sizing: border-box;
+  display: block;
+  padding: 10px 10px 20px;
+  position: relative;
+  height: 175px;
 }
