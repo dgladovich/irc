@@ -1,26 +1,27 @@
 import template from './templates/chart.jst';
-import { View, Model } from 'backbone.marionette';
+import {View, Model} from 'backbone.marionette';
 import Chart from 'chart.js';
+import 'chartjs-plugin-streaming';
 import moment from 'moment';
 import faker from 'faker';
 
 export default View.extend({
     template: template,
     className: 'serial-chart',
-    updateChart: function(){
-        let { labels, datasets } = this.chart.data;
-        let maxLabels = 10;
+    updateChart: function () {
+        let {labels, datasets} = this.chart.data;
+        let maxLabels = 1000;
         let time = moment().format('HH:MM:ss');
-        if(labels.length < maxLabels){
+        if (labels.length < maxLabels) {
             labels.push(time);
-            datasets.forEach((set)=>{
+            datasets.forEach((set) => {
                 let data = set.data;
                 data.push(this.model.get('def'))
             })
         } else {
             labels.shift();
             labels.push(time);
-            datasets.forEach((set)=>{
+            datasets.forEach((set) => {
                 let data = set.data;
                 data.shift();
                 data.push(this.model.get('def'))
@@ -28,10 +29,10 @@ export default View.extend({
         }
         this.chart.update();
     },
-    onDestroy: function(){
+    onDestroy: function () {
         clearInterval(this.updatingChart);
     },
-    onRender: function(){
+    onRender: function () {
         let ctx = this.$('.canvas-chart')[0].getContext('2d');
         let labelText = this.model.get('translate');
 
@@ -54,20 +55,31 @@ export default View.extend({
             },
             options: {
                 scales: {
+                    xAxes: [{
+                        type: 'time',
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 20
+                        }
+                    }],
                     yAxes: [{
                         ticks: {
-                            beginAtZero:true
+                            beginAtZero: true,
                         }
                     }]
                 },
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: false
+                animation: {
+                    duration: 1000 * 1,
+                    easing: 'linear'
+                },
+                legend: false,
             }
         });
         this.updatingChart = setInterval(this.updateChart.bind(this), 1000);
     },
-    initialize: function(){
+    initialize: function () {
         this.listenTo(this.model, 'change:def', this.updateChart.bind(this))
     }
 });
