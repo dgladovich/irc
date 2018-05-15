@@ -9,6 +9,7 @@ const backboneSync = Backbone.sync;
 
 
 Backbone.sync = function (method, model, options) {
+    console.log(options)
     /*
      * The jQuery `ajax` method includes a 'headers' option
      * which lets you set any headers you like

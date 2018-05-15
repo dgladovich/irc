@@ -52,7 +52,7 @@ function generateValues() {
     return facs.map((face) => {
         return {
             id: face.get('id'),
-            def: _.random(0, 9999)
+            def: _.random(0, 100000)
         }
     })
 }

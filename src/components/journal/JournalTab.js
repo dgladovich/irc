@@ -114,6 +114,18 @@ export default View.extend({
             this.showChildView('table', new NotFoundQuery());
         }
     },
+    fetchInit: function(){
+        aja()
+            .url('/journal')
+            .on('success', (data) => {
+                this.collection.add(data);
+                this.$('.table-wrapper').scroll(this.onScroll.bind(this))
+            })
+            .on('error', (e) => {
+            })
+            .data(this.journalFilterModel.toJSON())
+            .go()
+    },
     onRender: function () {
         this.$('#dateFrom').val(this.journalFilterModel.get('dateFrom'))
         this.$('#dateTo').val(this.journalFilterModel.get('dateTo'))
@@ -125,11 +137,10 @@ export default View.extend({
     },
     initialize: function () {
         this.collection = new JournalCollection();
-        this.collection.url = 'journal';
-        this.collection.fetch();
         this.journalFilterModel = new JournalFilterModel({
             page: 2
         });
+        this.fetchInit.call(this);
         this.listenTo(this.collection, 'update', this.updateJournal.bind(this));
         this.listenTo(this.collection, 'reset', this.updateJournal.bind(this));
         this.journalFilterModel.on({
