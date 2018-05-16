@@ -27,7 +27,7 @@ export default View.extend({
             this.$('.status-name').html(valueStatus.get('translate'));
         } else {
             this.previousClass = 'off';
-            console.log('Get wrong status; Value' + this.model.get('id') + '; Value' + this.model.get('name') + '; Status:' + this.model.get('def') + '; Group:' + this.model.get('stat_grp'))
+            //console.log('Get wrong status; Value' + this.model.get('id') + '; Value' + this.model.get('name') + '; Status:' + this.model.get('def') + '; Group:' + this.model.get('stat_grp'))
         }
 
         indicator.addClass(this.previousClass);

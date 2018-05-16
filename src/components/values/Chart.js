@@ -9,33 +9,22 @@ export default View.extend({
     className: 'serial-chart',
     updateChart: function () {
         let {labels, datasets} = this.chart.data;
-        const MAX_LABELS = 30;
-        const MAX_TICKS = 450;
-        let time = moment().format('HH:MM:ss');
-        datasets.forEach((set) => {
-            let data = set.data;
-            if(data.length < MAX_TICKS){
-                data.unshift(this.model.get('def'));
-            } else {
-                data.unshift(this.model.get('def'));
-                data.pop();
-            }
-        })
-/*        if (labels.length < MAX_LABELS) {
-            labels.push(time);
-            datasets.forEach((set) => {
-                let data = set.data;
-                data.push(this.model.get('def'))
-            })
+        let R_END = this.store.length;
+        let R_START = this.store.length <= this.TICKS_TO_SHOW ? 0 : R_END - this.TICKS_TO_SHOW;
+
+        if(this.store.length < this.TICKS_TO_STORE){
+            this.store.unshift(this.model.get('def'))
         } else {
-            labels.shift();
-            labels.push(time);
-            datasets.forEach((set) => {
-                let data = set.data;
-                data.shift();
-                data.push(this.model.get('def'))
-            })
-        }*/
+            this.store.unshift(this.model.get('def'));
+            this.store.pop();
+        }
+        if(this.model.get('id') === 34){
+            console.log(R_START, R_END);
+        }
+        datasets.forEach((set) => {
+            set.data = this.store;
+        });
+
         this.chart.update();
     },
     onDestroy: function () {
@@ -56,8 +45,9 @@ export default View.extend({
         let ctx = this.$('.canvas-chart')[0].getContext('2d');
         let labelText = this.model.get('translate');
         let labels = [];
-        labels.length = 500;
+        labels.length = this.LABELS;
         labels.fill('');
+
         this.chart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -102,6 +92,9 @@ export default View.extend({
     initialize: function () {
         this.store = [];
         this.MAX_SHOW = 1;
+        this.TICKS_TO_STORE = 500;
+        this.TICKS_TO_SHOW = 10;
+        this.LABELS = this.TICKS_TO_SHOW + parseInt((( 30/ 100) * this.TICKS_TO_SHOW));
         this.listenTo(this.model, 'change:def', this.updateChart.bind(this))
     }
 });
