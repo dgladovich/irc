@@ -9,34 +9,50 @@ export default View.extend({
     className: 'serial-chart',
     updateChart: function () {
         let {labels, datasets} = this.chart.data;
-        let R_END = this.store.length;
-        let R_START = this.store.length <= this.TICKS_TO_SHOW ? 0 : R_END - this.TICKS_TO_SHOW;
+        /* let R_END = this.store.length + this.OFFSET;
+         let R_START = this.store.length <= this.TICKS_TO_SHOW ? 0 : R_END - this.TICKS_TO_SHOW + this.OFFSET;*/
+        let R_OFFSET = Math.round(this.OFFSET);
+        let R_START = R_OFFSET;
+        let R_END = this.TICKS_TO_SHOW + R_OFFSET;
 
-        if(this.store.length < this.TICKS_TO_STORE){
-            this.store.unshift(this.model.get('def'))
-        } else {
-            this.store.unshift(this.model.get('def'));
-            this.store.pop();
+        let shown = this.store.slice(R_START, R_END);
+        if (this.model.get('id') === 34) {
+            //console.log(this.store[R_START], shown, R_START, R_END);
         }
-        if(this.model.get('id') === 34){
-            console.log(R_START, R_END);
-        }
+
         datasets.forEach((set) => {
-            set.data = this.store;
+            set.data = shown;
         });
 
         this.chart.update();
     },
+    updateStore: function () {
+        if (this.store.length < this.TICKS_TO_STORE) {
+            this.store.unshift(this.model.get('def'))
+        }
+        else {
+            this.store.unshift(this.model.get('def'));
+            this.store.pop();
+        }
+    },
+    _completeUpdate: function () {
+        this.updateStore.call(this);
+        this.updateChart.call(this);
+    },
     onDestroy: function () {
         clearInterval(this.updatingChart);
     },
-    onPanLeft: function(){
-        console.log('panned left')
+    onPanLeft: function (e) {
+        if(!(this.OFFSET > this.store.length + 1)){
+            this.OFFSET = this.OFFSET + (e.velocityX * (-1));
+            this.updateChart.call(this)
+        }
     },
-    onPanRight: function(){
-        console.log('panned')
+    onPanRight: function (e) {
+        this.OFFSET = Math.round(this.OFFSET) <= 0 ? 0 : this.OFFSET - e.velocityX;
+        this.updateChart.call(this)
     },
-    _bindTouchEvents: function(){
+    _bindTouchEvents: function () {
         let mc = new Hammer(this.el);
         mc.on("panleft", this.onPanLeft.bind(this));
         mc.on("panright", this.onPanRight.bind(this));
@@ -75,26 +91,29 @@ export default View.extend({
                     }],
                     yAxes: [{
                         ticks: {
-                            //beginAtZero: true,
+                            max: 10000,
+                            beginAtZero: true,
                         }
                     }]
                 },
                 responsive: true,
                 maintainAspectRatio: false,
-                //animation: false,
+                animation: false,
                 legend: false,
-                elements: { point: { radius: 0 } }
+                elements: {point: {radius: 0}}
             }
         });
-        this.updatingChart = setInterval(this.updateChart.bind(this), 1000);
+        this.updatingChart = setInterval(this._completeUpdate.bind(this), 1000);
         this._bindTouchEvents.call(this);
     },
     initialize: function () {
         this.store = [];
-        this.MAX_SHOW = 1;
+        this.MAX_SHOW = 400;
+        this.MIN_SHOW = 30
         this.TICKS_TO_STORE = 500;
-        this.TICKS_TO_SHOW = 10;
-        this.LABELS = this.TICKS_TO_SHOW + parseInt((( 30/ 100) * this.TICKS_TO_SHOW));
-        this.listenTo(this.model, 'change:def', this.updateChart.bind(this))
+        this.TICKS_TO_SHOW = 30;
+        this.OFFSET = 0;
+        this.LABELS = this.TICKS_TO_SHOW + parseInt(((10 / 100) * this.TICKS_TO_SHOW));
+        this.listenTo(this.model, 'change:def', this._completeUpdate.bind(this))
     }
 });

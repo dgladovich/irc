@@ -5,7 +5,7 @@ const ch = Radio.channel('controller');
 
 export default class ControllerConnection {
     constructor() {
-        this.socket = io('http://localhost:9001');
+        this.socket = io('http://192.168.15.21:9001');
         this.socket.on('connect', this.onConnectionEstablishing.bind(this))
 
     }
