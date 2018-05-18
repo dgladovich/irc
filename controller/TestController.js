@@ -117,7 +117,7 @@ function handleConnection(conn) {
             eventGroup: action,
             data: data
         }))
-    }, 250);
+    }, 1000);
 
     function onConnData(d) {
         let body = {};

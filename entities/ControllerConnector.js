@@ -2,7 +2,7 @@ const net = require('net');
 const Logger = require('./Logger');
 const SECRET = process.env.AUTH_SECRET;
 const PORT = process.env.TEST_CONTROLLER_PORT;
-const ADDRESS = '127.0.0.1';
+const ADDRESS = process.env.TEST_CONTROLLER_IP;
 
 class ControllerConnector {
     constructor(opt){
