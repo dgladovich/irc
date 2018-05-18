@@ -48,6 +48,9 @@ export default View.extend({
             this.updateChart.call(this)
         }
     },
+    onScroll: function(e){
+        console.log(e)
+    },
     onPanRight: function (e) {
         this.OFFSET = Math.round(this.OFFSET) <= 0 ? 0 : this.OFFSET - e.velocityX;
         this.updateChart.call(this)
@@ -56,6 +59,10 @@ export default View.extend({
         let mc = new Hammer(this.el);
         mc.on("panleft", this.onPanLeft.bind(this));
         mc.on("panright", this.onPanRight.bind(this));
+        console.log(this.$('canvas'))
+        this.$('canvas').scroll(()=>{
+            console.log('this shit scrolling')
+        });
     },
     onRender: function () {
         let ctx = this.$('.canvas-chart')[0].getContext('2d');
