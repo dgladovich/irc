@@ -211,5 +211,5 @@ class ZeoClient {
     }
 }
 
-module.exports = ZeoClient;
+//module.exports = ZeoClient;
 
