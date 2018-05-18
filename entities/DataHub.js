@@ -90,7 +90,9 @@ class DataHub {
 
     removeQueue() {
     }
-
+    writeValue(value) {
+        return this.dbc.writeValue(value);
+    }
     updateQueue(uuid, values) {
         return this.dbc.updateQueue(uuid, values).then(()=>{
             this.mdb.updateQueue(uuid, values)

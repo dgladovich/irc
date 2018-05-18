@@ -1,4 +1,4 @@
-const {Alarm, Queue, User, SystemError} = require('../models/index');
+const {Alarm, Queue, User, SystemError, Registering} = require('../models/index');
 const Logger = require('./Logger');
 const moment = require('moment');
 const uuidv1 = require('uuid/v1');
@@ -78,6 +78,13 @@ class DatabaseConnector {
     }
 
     removeAlarm() {
+    }
+    writeValue(value){
+        let valueToCreate = {
+            face_id: value.id,
+            def: value.def
+        };
+        return Registering.create(valueToCreate);
     }
 }
 

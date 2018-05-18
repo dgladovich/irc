@@ -83,6 +83,7 @@ class CentralBroker {
         const values = pack.data;
         values.forEach((value) => {
             this.dh.updateValue(value);
+            this.dh.writeValue(value)
             this.socketServer.sendValue(value);
         });
     }
