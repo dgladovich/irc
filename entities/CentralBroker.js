@@ -5,6 +5,9 @@ const SocketServer = require('./SocketServer');
 const Radio = require('backbone.radio');
 const DataHub = require('./DataHub');
 const uuidv1 = require('uuid/v1');
+const moment = require('moment');
+const Datastore = require('nedb');
+const db = new Datastore({filename: 'Register', autoload: true});
 
 const CC = Radio.channel('ControllerConnector');
 
@@ -89,14 +92,30 @@ class CentralBroker {
             this.socketServer.sendValue(value);
         });
     }
-    writeValueBuffer(value){
+
+    writeValueBuffer(value) {
         return this.BUFFER.push({
             face_id: value.id,
             def: value.def
         });
     }
-    uploadBuffer(){
-        this.dh.bulkWriteValue(this.BUFFER);
+
+    uploadBuffer() {
+        this.BUFFER.forEach((buff) => {
+            let buffer = {
+                face_id: buff.face_id,
+                def: buff.def,
+                created_at: moment().format('YYYY-MM-DD')
+            };
+
+            db.insert(buffer, (err, newDocs)=>{
+                console.log()
+            })
+        });
+        setTimeout(() => {
+            console.log(db.find({}, (err, docs)=>{console.log(docs)}))
+        }, 1000)
+        //this.dh.bulkWriteValue(this.BUFFER);
         this.BUFFER = [];
     }
 
