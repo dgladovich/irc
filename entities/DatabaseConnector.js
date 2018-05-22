@@ -77,6 +77,11 @@ class DatabaseConnector {
     removeQueue() {
     }
 
+    bulkWriteValues(values){
+        console.log(values)
+        return Registering.bulkCreate(values)
+    }
+
     removeAlarm() {
     }
     writeValue(value){

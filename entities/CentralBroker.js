@@ -16,6 +16,8 @@ class CentralBroker {
         this.zeoClient = new ZeoClient(broker);
         this.socketServer = new SocketServer(broker);
         this.logger = new Logger(broker);
+        this.BUFFER = [];
+        this.writingBuffer = setInterval(this.uploadBuffer.bind(this), 3000)
 
     }
 
@@ -83,9 +85,19 @@ class CentralBroker {
         const values = pack.data;
         values.forEach((value) => {
             this.dh.updateValue(value);
-            this.dh.writeValue(value)
+            this.writeValueBuffer(value)
             this.socketServer.sendValue(value);
         });
+    }
+    writeValueBuffer(value){
+        return this.BUFFER.push({
+            face_id: value.id,
+            def: value.def
+        });
+    }
+    uploadBuffer(){
+        this.dh.bulkWriteValue(this.BUFFER);
+        this.BUFFER = [];
     }
 
     onOriginAlarm(pack) {

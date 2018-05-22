@@ -71,6 +71,9 @@ class DataHub {
 
     removeAlarm(uuid) {
     }
+    bulkWriteValue(values){
+        return this.dbc.bulkWriteValues(values);
+    }
 
     updateAlarm(ivan_id, user_id, date_confirm ) {
         return this.dbc.updateAlarm(ivan_id, user_id, date_confirm )
