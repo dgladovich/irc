@@ -108,12 +108,10 @@ class CentralBroker {
                 created_at: moment().format('YYYY-MM-DD')
             };
 
-            db.insert(buffer, (err, newDocs)=>{
-                console.log()
-            })
+            db.insert(buffer, (err, newDocs)=>{})
         });
         setTimeout(() => {
-            console.log(db.find({}, (err, docs)=>{console.log(docs)}))
+            //console.log(db.find({}, (err, docs)=>{console.log(docs)}))
         }, 1000)
         //this.dh.bulkWriteValue(this.BUFFER);
         this.BUFFER = [];

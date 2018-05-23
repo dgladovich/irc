@@ -118,7 +118,8 @@ switch (process.env.npm_lifecycle_event) {
                         "/login",
                         "/login/users",
                         "/config",
-                        "/config/locale"
+                        "/config/locale",
+                        "/values"
                     ],
                     target: "http://localhost:3001",
                 }]

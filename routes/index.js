@@ -14,6 +14,7 @@ const controller = require('./controller');
 const devices = require('./devices');
 const statuses = require('./statuses');
 const analitics = require('./analitics');
+const values = require('./values');
 const login = require('./login');
 const config = require('./config');
 const passport = require('../middleware/passport');
@@ -39,6 +40,7 @@ router.use('/analitics', analitics);
 router.use('/svc', svc);
 router.use('/login', login);
 router.use('/errors', errors);
+router.use('/values', values);
 router.use('/config', config);
 
 
