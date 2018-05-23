@@ -7,7 +7,7 @@ const DataHub = require('./DataHub');
 const uuidv1 = require('uuid/v1');
 const moment = require('moment');
 const Datastore = require('nedb');
-const db = new Datastore({filename: 'register.json', autoload: true});
+const db = new Datastore({filename: 'register', autoload: true});
 
 const CC = Radio.channel('ControllerConnector');
 
