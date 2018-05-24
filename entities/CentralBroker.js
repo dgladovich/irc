@@ -20,7 +20,7 @@ class CentralBroker {
         this.socketServer = new SocketServer(broker);
         this.logger = new Logger(broker);
         this.BUFFER = [];
-        this.writingBuffer = setInterval(this.uploadBuffer.bind(this), 3000)
+        this.writingBuffer = setInterval(this.uploadBuffer.bind(this), 15000)
 
     }
 
@@ -113,7 +113,7 @@ class CentralBroker {
         setTimeout(() => {
             //console.log(db.find({}, (err, docs)=>{console.log(docs)}))
         }, 1000)
-        //this.dh.bulkWriteValue(this.BUFFER);
+        this.dh.bulkWriteValue(this.BUFFER);
         this.BUFFER = [];
     }
 

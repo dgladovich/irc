@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
     const {from, to} = req.query;
     console.log(from, to, req.query);
     if(req.query !== undefined){
-        console.log('found docs')
         db.find({}, (err, docs)=>{
             if(err){console.error('Some error while reading stuff')}
             const shit = _.filter(docs, (doc)=>{return moment(doc.created_at).isBetween(from, to)});
