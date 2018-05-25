@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "accounting": "^0.4.1",
+    "air-datepicker": "^2.2.3",
     "aja": "^0.4.1",
     "async": "^2.5.0",
     "autonumeric": "^4.1.0-beta.25",
@@ -43,7 +44,9 @@
     "humane-js": "^3.2.2",
     "jade": "~1.11.0",
     "jquery": "~1.12.2",
+    "jquery-datepicker": "^1.12.3",
     "jquery-scroll": "^1.1.1",
+    "jquery-ui": "^1.12.1",
     "jquery-ui-slider": "^1.12.1",
     "jquery-ui-touch-punch": "^0.2.3",
     "jsonwebtoken": "^8.2.0",

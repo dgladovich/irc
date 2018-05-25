@@ -2938,5 +2938,11 @@ p .exitButton {
   display: block;
   padding: 10px 10px 20px;
   position: relative;
-  height: 175px;
+/*  height: 175px;*/
+}
+.chart-date-checkbox{
+  margin-left: 10px;
+}
+input[type='text'].chart-datepicker{
+  color: rgb(29, 29, 29)
 }

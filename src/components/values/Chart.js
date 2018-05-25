@@ -1,12 +1,21 @@
 import template from './templates/chart.jst';
 import {View, Model} from 'backbone.marionette';
 import Chart from 'chart.js';
+import ChartDatePicker from './ChartDatePicker';
 import moment from 'moment';
 import faker from 'faker';
 
 export default View.extend({
     template: template,
     className: 'serial-chart',
+    events: {
+        'click .chart-date-checkbox':'toggleDate'
+    },
+    regions: {
+      datepicker: {
+          el: '.datepicker-field'
+      }
+    },
     updateChart: function () {
         let {labels, datasets} = this.chart.data;
 
@@ -27,6 +36,17 @@ export default View.extend({
 
         this.chart.update();
     },
+    toggleDate: function(e){
+        this.isSelectedDate = ! this.isSelectedDate;
+        if(this.isSelectedDate){
+            this.datePicker = new ChartDatePicker({model: this.model});
+            this.datePicker.on('change:date', this._onChangeDate.bind(this));
+            this.showChildView('datepicker', this.datePicker)
+        } else {
+            this.datePicker.destroy();
+        }
+    },
+    setDate: function(){},
     updateStore: function () {
         if (this.store.length < this.TICKS_TO_STORE) {
             this.store.unshift(this.model.get('def'))
@@ -35,6 +55,9 @@ export default View.extend({
             this.store.unshift(this.model.get('def'));
             this.store.pop();
         }
+    },
+    _onChangeDate: function(){
+
     },
     _completeUpdate: function () {
         this.updateStore.call(this);
@@ -61,7 +84,6 @@ export default View.extend({
         let mc = new Hammer(this.el);
         mc.on("panleft", this.onPanLeft.bind(this));
         mc.on("panright", this.onPanRight.bind(this));
-        console.log(this.$('canvas'))
         this.$('canvas').scroll(()=>{
             console.log('this shit scrolling')
         });
@@ -103,7 +125,7 @@ export default View.extend({
                     }]
                 },
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 animation: false,
                 legend: false,
                 elements: { point: { radius: 0 } }
