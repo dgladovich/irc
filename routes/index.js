@@ -18,6 +18,7 @@ const values = require('./values');
 const login = require('./login');
 const config = require('./config');
 const passport = require('../middleware/passport');
+const bot = require('./bot.js');
 
 
 /* GET home page. */
@@ -42,6 +43,7 @@ router.use('/login', login);
 router.use('/errors', errors);
 router.use('/values', values);
 router.use('/config', config);
+router.use('/bot', bot);
 
 
 
