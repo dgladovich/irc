@@ -17,7 +17,7 @@ const NetworkActivityModel = Backbone.Model.extend({
         status: true,
         statusTitle: 'Соединение установлено успешно'
     },
-    initialize: function() {
+    initialize: function () {
         network.on('network:activity', (response) => {
             this.set(response)
         });
@@ -28,7 +28,7 @@ const IndividualActivityModel = Backbone.Model.extend({
         status: true,
         statusTitle: 'Соединение с устройством установлено'
     },
-    initialize: function() {
+    initialize: function () {
         individual.on('individual:activity', (response) => {
             this.set(response)
         });
@@ -43,7 +43,7 @@ const NetworkActivity = Marionette.View.extend({
     },
     model: new NetworkActivityModel,
     channelName: 'network',
-    updateStatus: function() {
+    updateStatus: function () {
         this.model.get('status') === true ? this.$el.removeClass('offline') : this.$el.addClass('offline');
         this.$el.tooltip({
             placement: 'bottom',
@@ -53,11 +53,11 @@ const NetworkActivity = Marionette.View.extend({
             },
         })
     },
-    onRender: function() {
+    onRender: function () {
         this.updateStatus();
 
     },
-    initialize: function() {
+    initialize: function () {
         this.listenTo(this.model, 'change:status', this.updateStatus.bind(this))
     }
 })
@@ -69,7 +69,7 @@ const IndividualActivity = Marionette.View.extend({
         id: 'individual'
     },
     model: new IndividualActivityModel,
-    updateStatus: function() {
+    updateStatus: function () {
         this.model.get('status') === true ? this.$el.removeClass('offline') : this.$el.addClass('offline');
         this.$el.tooltip({
             placement: 'bottom',
@@ -79,11 +79,11 @@ const IndividualActivity = Marionette.View.extend({
             },
         })
     },
-    onRender: function() {
+    onRender: function () {
         this.updateStatus();
 
     },
-    initialize: function() {
+    initialize: function () {
         if (app.controller.get('stat') === 9) {
             this.model.set({
                 status: false,
@@ -119,31 +119,41 @@ export default Marionette.View.extend({
         }
     },
     events: {
-        'click .user-name': 'onUserNameClick'
+        'click .user-name': 'onUserNameClick',
+        'click #locale-ru': 'onChangeLocale',
+        'click #locale-ua': 'onChangeLocale',
+        'click #locale-en': 'onChangeLocale',
     },
-    onUserNameClick: function() {
+    onChangeLocale: function (e) {
+        e.preventDefault();
+        let locale = e.currentTarget.id.split('-')[1];
+        $.get(`config/locale/${locale}`).then(() => {
+            document.location.reload();
+        });
+    },
+    onUserNameClick: function () {
         this.authModalBox = new AuthModalBox();
         $('body').append(this.authModalBox.render().el);
         this.authModalBox.$('#login-modal').modal('show');
     },
-    renderClock: function() {
+    renderClock: function () {
         this.$('#clockbox').html(moment().format('DD.MM.YYYY HH:mm:ss'))
     },
-    startClock: function() {
+    startClock: function () {
         this.clock = setInterval(this.renderClock.bind(this), 1000);
     },
-    stopClock: function() {
+    stopClock: function () {
         this.clearInterval(this.clock);
     },
-    updateUserName: function(){
+    updateUserName: function () {
         let userName = 'Гость';
         let user = store.get('user');
-        if(user) {
+        if (user) {
             userName = user.name;
         }
         this.$('#navbar-username').html(userName);
     },
-    onRender: function() {
+    onRender: function () {
         // Get rid of that pesky wrapping-div.
         // Assumes 1 child element present in template.
         this.$el = this.$el.children();
@@ -155,11 +165,11 @@ export default Marionette.View.extend({
         this.showChildView('network', new NetworkActivity());
         this.showChildView('individual', new IndividualActivity());
         this.showChildView('bot', new Bot());
-        this.$('#cloud').tooltip({title: 'Нет связи с ZeoCloud', placement: 'bottom', trigger: 'hover'});
+        this.$('#cloud').tooltip({title: 'Связь с сервером', placement: 'bottom', trigger: 'hover'});
         this.startClock();
         this.updateUserName();
     },
-    initialize: function() {
+    initialize: function () {
         this.listenTo(authChannel, 'change:auth', this.updateUserName.bind(this));
     }
 });

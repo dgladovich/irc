@@ -22,15 +22,28 @@
             <span id="individual" class="glyphicon glyphicon-hdd"></span>
         </div>
         <div style="margin-right: 25px;">
-            <span id="cloud" class="glyphicon glyphicon-cloud offline" style="font-size: 1.85em;"></span>
+            <span id="cloud" class="glyphicon glyphicon-tasks offline" style="font-size: 1.85em;"></span>
         </div>
     </div>
     <div style="display:inline-flex; float:right;">
         <div class="messages no-mes" style="margin-top:2px;"></div>
+        <div class="settings-icon" style="
+            margin-top: 5px;
+            margin-left: 5px;
+            margin-right: 5px;
+        ">
+            <div class="dropdown">
+                <ul class="dropdown-menu custom-dropdown"  aria-labelledby="lang-sett">
+                    <li><a id="locale-ru">Рус</a></li>
+                    <li><a id="locale-ua">Укр</a></li>
+                    <li><a id="locale-en">Eng</a></li>
+                </ul>
+                <span class='glyphicon glyphicon-cog' id="lang-sett" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+            </div>
+        </div>
         <div class="bot-service-mask">
             <span id='bot-service' class='glyphicon glyphicon-eye-open' style=""></span>
         </div>
         <div id="clockbox"></div>
     </div>
-
 </header>
