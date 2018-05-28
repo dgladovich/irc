@@ -97,6 +97,7 @@ switch (process.env.npm_lifecycle_event) {
             devServer: {
                 contentBase: [path.join(__dirname, "dist"), path.join(__dirname, "public")],
                 compress: true,
+		port: 9000,
                 proxy: [{
                     context: [
                         "/",
