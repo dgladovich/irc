@@ -32,11 +32,11 @@ export default View.extend({
 
         from.val(dateFrom);
         to.val(dateTo);
-
+/*
         from.datepicker({
             defaultDate: dateFrom,
             changeMonth: true,
-        }).on('change', ());
+        }).on('change', ());*/
         to.datepicker({
             defaultDate: dateTo,
             changeMonth: true,
