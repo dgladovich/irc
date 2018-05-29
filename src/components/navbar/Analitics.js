@@ -1,14 +1,14 @@
 import template from './templates/analitics.jst';
-import Radio from 'backbone.radio';
+import anal_template from './templates/anal_template.jst';
 import {View} from 'backbone.marionette';
 import moment from 'moment';
 import Spinner from 'spin.js';
 import Chart from 'chart.js';
-
-const bot = Radio.channel('bot');
+import aja from 'aja';
 
 export default View.extend({
     template: template,
+    analTemplate: _.template(anal_template),
     regions: {
         chart: {
             el: "#chart"
@@ -134,43 +134,19 @@ export default View.extend({
     },
     updateAnalitics: function (analitics) {
         this.model.set('history_events', analitics.history_events);
-        let text = `<p>${app.infos.findWhere({id: analitics.info}).get('text')}</p>`,
-            adviceTitle = `<h4 style="text-align: center; font-weight: 600">Совет дня:</h4>`
         let {worktime_count, errortime_delay, crashes_count, load_percent} = analitics;
-        let style = `style='line-height: 16px;padding-left: 40px; text-indent: 20px'`;
-        let anal = `<div ${style}>${adviceTitle}<br> ${text} <br><br>
-            <h4 style="text-align: center; font-weight: 600">Аналитика</h4><br>
-            <p>За последние 24 часа оборудование отработало ${worktime_count} час(ов).</p>
-            <p>Простой по причине аварии: ${moment(errortime_delay).format('HH:mm:ss:SSS')} часов.</p>
-            <p>Количество аварий: ${crashes_count}.</p>
-            <p>Средняя загрузка оборудования составила ${load_percent} %.</p> 
-            <p>Температурный режим механизма не выходил за пределы нормы.</p>
-            <p>Вибрация оборудования была в пределах нормы. </p>
-            <p>Техническое обслуживание не требуется. </p>
-            <p>Ближайшее ТО2 через ${_.random(12, 74)} часов.</p> 
-            <p>Потреблено ${_.random(5, 15)} кВт.</p></div>`;
         this.$('#anal').html(anal);
         this.$('#chart').append(this.canvas);
         this.showChart()
     },
+    _requestAnalitics: function(){
+        return $.get('bot')
+    },
     onRender: function () {
         let device = app.devices.findWhere({parent: 0});
-        var spinner = new Spinner({
-            color: '#ccc',
-            marginTop: '40%',
-            left: '30%',
-            //margin: 100,
-            position: 'relative'
-        }).spin();
-        this.$('#anal').html(spinner.el);
-        bot.trigger('analyze:request', {
-            ctrl: device.get('ctrl'),
-            dev: device.get('id'),
-            type: 0
-        });
-    },
-    initialize: function () {
-        this.model = new Backbone.Model();
-        this.listenTo(bot, 'analyze:info', this.updateAnalitics.bind(this));
+        this._requestAnalitics().then((data)=>{
+            let anal = this.analTemplate(data);
+            this.$('#anal').html(anal);
+        })
     }
 });
