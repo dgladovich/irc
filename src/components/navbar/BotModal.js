@@ -2,7 +2,6 @@ import template from './templates/botmodal.jst';
 import { View } from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import Analitics from './Analitics';
-
 const bot = Radio.channel('bot');
 
 export default View.extend({
