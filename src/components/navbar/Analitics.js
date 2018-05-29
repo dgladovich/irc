@@ -8,7 +8,7 @@ import aja from 'aja';
 
 export default View.extend({
     template: template,
-    analTemplate: _.template(anal_template),
+    analTemplate: anal_template,
     regions: {
         chart: {
             el: "#chart"
