@@ -180,6 +180,20 @@ export default View.extend({
             val: this.previousSpeed
         });
     },
+    updateMode: function(){
+        let mode = this.controller.get('mode');
+        let translate = '';
+        let controllerMode = app.modes.findWhere({ id: mode});
+        if(controllerMode){
+            let name = controllerMode.get('name');
+            translate = app.language[name];
+            console.log(name, translate)
+        } else {
+            translate = 'there is no translate'
+        }
+        this.$('#work-type').html(translate);
+
+    },
     updateStatus: function() {
 /*        if (this.model.get('stat') === 4) {
             this.getUI('remote').prop('checked', false);
@@ -211,7 +225,8 @@ export default View.extend({
         return this;
     },
     onRender: function() {
-        this.model = app.devices.findWhere({ parent: 0 });
+        this.model = app.devices.findWhere({ parent: null });
+        this.controller = app.controller;
         this.showChildView('devices', new DevicesList({
             collection: app.devices,
         }));
@@ -245,7 +260,9 @@ export default View.extend({
             }
         });
         this.updateStatus();
+        this.updateMode();
 
-        this.listenTo(this.model, 'change:stat', this.updateStatus.bind(this))
+        this.listenTo(this.model, 'change:stat', this.updateStatus.bind(this));
+        this.listenTo(this.controller, 'change:mode', this.updateMode.bind(this));
     }
 });

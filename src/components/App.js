@@ -20,12 +20,13 @@ export default Marionette.Application.extend({
         this.devices = this.controller.get('devs');
         this.deviceGroups = new Backbone.Collection(this.controller.get('dev_grps'));
         this.measurments = new Backbone.Collection(_.toArray(data.options[0].meas));
-        this.faces = new FacesCollection(prepareFaces(data.options[0].ctrl['cfaces']));
+        this.faces = new FacesCollection(prepareFaces(this.devices));
         this.statuses = new StatusesCollection(prepareStatuses(data.options[0].statuses));
         this.errors = new Backbone.Collection(_.toArray(data.options[0].ecodes));
         this.users = new Backbone.Collection(data.options[0].usrs);
         this.viewgrps = new ViewGroupCollection(prepareViewGroups(data.options[0].viewgrps, this.faces));
         this.controllerConnection = new ControllerConnection();
+        this.modes = new Backbone.Collection(_.toArray(this.controller.get('modes')));
         this.alarms = new AlarmsCollection();
     },
     onStart(app, options) {

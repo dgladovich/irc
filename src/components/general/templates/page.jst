@@ -3,7 +3,7 @@
         <div class="header-wrap">
             <a type="button" id="close-page" class="btn btn-default btn-back"><span></span></a>
             <h1><%= title %></h1>
-            <div class="main-asset-title"><%= app.devices.findWhere({ parent: 0 }).get('name')%></div>
+            <div class="main-asset-title"><%= app.devices.findWhere({ parent: null }).get('name')%></div>
         </div>
     </div>
     <div class="container panel-container"></div>

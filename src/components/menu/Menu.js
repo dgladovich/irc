@@ -37,7 +37,10 @@ export default View.extend({
     },
     updateStatus: function() {
         let device = this.$('.hover-btn');
-        let deviceStatus = app.statuses.findWhere({ id: this.device.get('sgrp')}).get('sgrps_opts').findWhere({num: this.device.get('stat')});
+        let deviceStatus = app.statuses
+            .findWhere({ id: this.device.get('sgrp')})
+            .get('sgrps_opts')
+            .findWhere({num: this.device.get('stat')});
         device.removeClass(this.previousClass);
         if (deviceStatus !== undefined) {
             this.previousClass = deviceStatus.get('dclass');
@@ -58,7 +61,7 @@ export default View.extend({
     initialize: function() {
         this.previousClass = '';
         this.device = app.devices.findWhere({
-            parent: 0
+            parent: null
         });
         this.on('rendered', this.onRender.bind(this));
         this.on('setheight', this.onSetHeight.bind(this));

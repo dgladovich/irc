@@ -40,6 +40,7 @@ export function loadInitialData(x) {
         });
     }))
 }
+
 export function loadJSONData(data) {
     let urls = ['/config', 'config/locale'];
     return Promise.all(urls.map(url => {
@@ -47,12 +48,13 @@ export function loadJSONData(data) {
     }));
 
 }
+
 export function prepareViewGroups(groups, faces) {
-    return  _.filter(_.toArray(groups), (group) => {
+    return _.filter(_.toArray(groups), (group) => {
         group.faces = new Backbone.Collection(faces.where({viewgrp: group.id}));
         group.translate = app.language[group.name] || group.name;
 
-        if(group.faces.length === 0 ){
+        if (group.faces.length === 0) {
             return false;
         } else {
             return true;
@@ -60,37 +62,47 @@ export function prepareViewGroups(groups, faces) {
 
     })
 }
-export function prepareFaces(faces) {
-    return _.each(_.toArray(faces), (face)=>{
-        let key = app.measurments.findWhere({id: face.meas});
-        if(key){
-            face.translate = app.language[key.get('name')];
-        } else {
-            face.translate = 'no name for meas'
-        }
 
-    })
+export function prepareFaces(devices) {
+    let faces = [];
+    devices.each((device) => {
+        let deviceFaces = _.toArray(device.get('dfaces'));
+        _.each(deviceFaces, (face) => {
+            let key = app.measurments.findWhere({id: face.meas});
+            if (key) {
+                face.translate = app.language[key.get('name')];
+            } else {
+                face.translate = 'no name for meas'
+            }
+        });
+        faces = faces.concat(deviceFaces);
+    });
+    return faces;
 }
+
 export function prepareStatuses(statuses) {
-    return _.each(_.toArray(statuses), (status)=>{
-        status.sgrps_opts = _.each(_.toArray(status.sgrps_opts), (opt)=>{
+    return _.each(_.toArray(statuses), (status) => {
+        status.sgrps_opts = _.each(_.toArray(status.sgrps_opts), (opt) => {
             opt.translate = app.language[opt.name] || opt.name
         })
 
     })
 }
+
 export function setWrapHeight(el) {
     if ($(el).length) {
         return $(el).height($(window).height() - $(el).offset().top - 40);
     }
     ;
 }
+
 export function hidePreloader() {
     $('.loader').fadeOut('slow', () => {
         $('.loader').remove();
         $('#loader-style').remove();
     });
 }
+
 export function setWrapHeightN(el) {
     if ($(el).length) {
         return $(el).height($(window).height() - $(el).offset().top - 140);

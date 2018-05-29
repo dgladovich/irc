@@ -11,7 +11,7 @@
             </filter>
             <svg id="homebtn-1" class="h-btn" onclick="javascript:location.href='#devices'">
                 <circle class="image-btn" cx="450" cy="263.5" r="122.5"></circle>
-                <image width="250" x="323.5" y="141" height="250" xlink:href="images/<%=app.devices.findWhere({ parent: 0}).get('typ')%>_0.png" clip-path="url(#circleView)"></image>
+                <image width="250" x="323.5" y="141" height="250" xlink:href="images/<%=app.devices.findWhere({ parent: null}).get('typ')%>_0.png" clip-path="url(#circleView)"></image>
                 <circle class="hover-btn" cx="450" cy="263.5" r="122.5" filter="url(#blurMe)"></circle>
             </svg>
             <svg id="homebtn-2" class="h-btn" onclick="javascript:location.href='#individual'">
