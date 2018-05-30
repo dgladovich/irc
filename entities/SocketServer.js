@@ -47,10 +47,19 @@ class SocketServer {
         this.socketConnector.sendData(message)
     }
 
+    sendSpeed(speed) {
+        let message = {
+            eventGroup: 'speed',
+            data: {speed: speed}
+        };
+        this.socketConnector.sendData(message);
+    }
+
     sendInitialData(socket) {
         let alarms = this.broker.getUserInitialAlarms(),
             statuses = this.broker.getUserInitialStatuses(),
             values = this.broker.getUserInitialValues(),
+            speed = this.broker.getInitialSpeed(),
             statusPack = {
                 eventGroup: 'status',
                 data: statuses
@@ -59,6 +68,10 @@ class SocketServer {
                 eventGroup: 'value',
                 data: values
             },
+            speedPack = {
+                eventGroup: 'speed',
+                data: {speed: speed}
+            },
             alarmsPack = {
                 eventGroup: 'alarm',
                 method: 'add'
@@ -66,6 +79,7 @@ class SocketServer {
         setTimeout(() => {
             socket.emit('controller', statusPack);
             socket.emit('controller', valuesPack);
+            socket.emit('controller', speedPack);
             alarms.forEach((alarm) => {
                 socket.emit('controller', Object.assign(alarmsPack, {arguments: alarm}))
             });

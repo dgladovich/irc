@@ -8,6 +8,7 @@ const config = require('../config.json');
 
 class MemoryDataBase {
     constructor(){
+        this.speed = 0;
         this.controller = new ControllerModel(config.ctrl);
         this.devices = new DevicesCollection(config.ctrl.devs);
         this.faces = new FacesCollection(_.toArray(config.ctrl.cfaces));
@@ -22,6 +23,9 @@ class MemoryDataBase {
     }
     getDevices(){
         return this.devices;
+    }
+    getSpeed(){
+        return this.speed;
     }
     getQueue(uuid){
         return this.queues.findWhere({uuid: uuid});
@@ -52,6 +56,9 @@ class MemoryDataBase {
         if (executedQueue) {
             executedQueue.set('status', status);
         }
+    }
+    updateSpeed(value){
+        return this.speed = value;
     }
     updateAlarm(ivan_id, user_id, date_confirm){
         this.alarms.findWhere({ivan_id: ivan_id}).set({usr_confirm: user_id, date_confirm: date_confirm})

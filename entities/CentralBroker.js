@@ -32,7 +32,9 @@ class CentralBroker {
                     });
                 }*/
     }
-
+    getInitialSpeed(){
+        return this.dh.getSpeed();
+    }
     getUserInitialAlarms() {
         return this.dh.getAlarmsJSON();
     }
@@ -178,6 +180,11 @@ class CentralBroker {
                 return;
         }
     }
+    onControllerSpeedChange(queue){
+        let speed = queue.get('argument');
+        this.dh.updateSpeed(speed);
+        this.socketServer.sendSpeed(speed);
+    }
 
     onControllerAlarmConfirm(queue) {
         let {argument, execute_date, user_id} = queue.toJSON();
@@ -222,7 +229,32 @@ class CentralBroker {
     setRepair() {
     }
 
-    changeSpeed() {
+    changeSpeed(pack) {
+        if (pack) {
+            let uuid = uuidv1(),
+                changeSpeedMessage = {
+                    eventGroup: 'controll',
+                    method: 'speed',
+                    arguments: {
+                        uuid: uuid
+                    }
+                },
+                queueMessage = {
+                    method: 'speed',
+                    argument: +pack.arguments.speed,
+                    user_id: pack.user_id,
+                    uuid: uuid
+                };
+            this.dh
+                .addQueue(queueMessage)
+                .then((data) => {
+                    this.controllerConnector.sendDataToController(changeSpeedMessage);
+                })
+                .catch((e)=>{
+                    console.error(e)
+                });
+        }
+
     }
 
     startController() {

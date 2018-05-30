@@ -32,6 +32,9 @@ class DataHub {
         return this.mdb.getQueue(uuid);
     }
 
+    getSpeed(){
+        return this.mdb.getSpeed();
+    }
     getDevices() {
         return this.mdb.getDevices();
     }
@@ -100,6 +103,9 @@ class DataHub {
         return this.dbc.updateQueue(uuid, values).then(()=>{
             this.mdb.updateQueue(uuid, values)
         });
+    }
+    updateSpeed(value){
+        return this.mdb.updateSpeed(value);
     }
 
 }

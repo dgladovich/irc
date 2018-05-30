@@ -4,9 +4,11 @@ import slider from 'webpack-jquery-ui/slider';
 import GodMode from './GodMode';
 import 'jquery-ui-touch-punch';
 import Radio from 'backbone.radio';
+import Noty from 'noty';
 import { View, Model, CollectionView } from 'backbone.marionette';
 
 
+const ch = Radio.channel('controller');
 let channel = Radio.channel('controll');
 
 const ControllPanelModel = Backbone.Model.extend({
@@ -179,6 +181,12 @@ export default View.extend({
             cmd: '_speed',
             val: this.previousSpeed
         });
+        ch.trigger('controller', {
+            action: 'speed',
+            arguments: {
+                speed: this.previousSpeed
+            }
+        })
     },
     updateMode: function(){
         let mode = this.controller.get('mode');
@@ -187,12 +195,27 @@ export default View.extend({
         if(controllerMode){
             let name = controllerMode.get('name');
             translate = app.language[name];
-            console.log(name, translate)
+
         } else {
             translate = 'there is no translate'
         }
         this.$('#work-type').html(translate);
 
+    },
+    updateSpeed: function(){
+        let speed = app.controller.get('speed');
+        this.getUI('slider').slider({value: speed});
+        this.$('.ui-slider-handle').html(speed);
+        this.$('.ui-slider-range').width(100 * speed / 120 + '%');
+        new Noty({
+            text: `Скорость изменена до значения: ${speed}`,
+            theme: 'metroui',
+            type: 'error',
+            layout: 'topCenter',
+            killer: true,
+            timeout: 3000,
+            progressBar: false
+        }).show();
     },
     updateStatus: function() {
 /*        if (this.model.get('stat') === 4) {
@@ -264,5 +287,6 @@ export default View.extend({
 
         this.listenTo(this.model, 'change:stat', this.updateStatus.bind(this));
         this.listenTo(this.controller, 'change:mode', this.updateMode.bind(this));
+        this.listenTo(this.controller, 'change:speed', this.updateSpeed.bind(this));
     }
 });

@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import store from 'store';
 import Radio from 'backbone.radio';
 
 const ch = Radio.channel('controller');
@@ -37,6 +38,7 @@ export default class ControllerConnection {
             case 'start':
                 break;
             case 'speed':
+                this.onUserChangeSpeed.call(this, data);
                 break;
             case 'out_repair':
                 break;
@@ -53,6 +55,17 @@ export default class ControllerConnection {
             arguments: data.arguments
         };
         this.socket.emit('controller', userConfirmation)
+    }
+
+    onUserChangeSpeed(data) {
+        let user_id = store.get('user').id;
+        let userSpeedInfo = {
+            eventGroup: 'controll',
+            method: 'speed',
+            arguments: data.arguments,
+            user_id: user_id
+        }
+        this.socket.emit('controller', userSpeedInfo)
     }
 
     onReciveDataFromController(data) {
@@ -92,12 +105,16 @@ export default class ControllerConnection {
                     let alarm = data.arguments;
                     app.alarms.add(alarm)
                 } else {
-                    let alarm = app.alarms.findWhere({ ivan_id: data.arguments.ivan_id });
+                    let alarm = app.alarms.findWhere({ivan_id: data.arguments.ivan_id});
                     app.alarms
                         .remove(alarm);
                 }
                 break;
             case 'controll':
+                break;
+            case 'speed':
+                console.log(data)
+                app.controller.set('speed', data.data.speed);
                 break;
             default:
                 return;
