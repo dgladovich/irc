@@ -11,7 +11,6 @@ export default View.extend({
     },
     // Get rid of that pesky wrapping-div.
 onRender: function () {
-    console.log(this.$el)
     // Unwrap the element to prevent infinitely
         // Assumes 1 child element present in template.
         this.$el = this.$el.children();

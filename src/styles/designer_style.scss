@@ -165,6 +165,7 @@ a {
   background-color: #ffd842;
   border-color: #ffd842;
 }
+
 .btn-charts {
   position: fixed;
   bottom: 20px;
@@ -196,6 +197,7 @@ a {
 .dark-table > tbody > tr > td {
   border-top: #333;
 }
+
 .table > thead > tr > th {
   border-bottom: 1px solid #777;
   background: #777;
@@ -1078,11 +1080,12 @@ ul.nav.nav-pills {
     border-top: 0;
 }
 */
-.modal-motovar{
+.modal-motovar {
   height: 50vh;
   text-align: center;
 }
-.motovars{
+
+.motovars {
   margin-top: 25%;
 }
 
@@ -1477,12 +1480,14 @@ svg.radial-shkala {
   padding-bottom: 10px;
   text-align: center;
 }
-.authorize-logo>img {
+
+.authorize-logo > img {
   margin: auto;
   margin-top: 40px;
   margin-bottom: 30px;
 }
-.messages-body{
+
+.messages-body {
   text-align: center;
   margin-top: 25%;
   height: 50Vh;
@@ -1930,17 +1935,19 @@ form.login-form {
 
 /*************** Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒÑÑ Ð½Ð°Ð·Ð°Ð´ */
 .video {
-  width:100%;
+  width: 100%;
   height: 65vh;
 }
-.camera-error{
+
+.camera-error {
   width: 100%;
   height: 100%;
   text-align: center;
   position: relative;
   top: 30%;
 }
-.roll-up{
+
+.roll-up {
   position: absolute;
   right: 54px;
   z-index: 1000;
@@ -1999,6 +2006,7 @@ form.login-form {
   transform: rotate(-45deg);
   transition-property: top, transform;
 }
+
 .visual-window {
   position: fixed;
   width: 20%;
@@ -2011,6 +2019,7 @@ form.login-form {
   animation: 1s all ease;
 
 }
+
 .btn-back span::before,
 .btn-back span::after {
   position: absolute;
@@ -2615,10 +2624,18 @@ background-image: linear-gradient(to bottom, #9dd993, #65bd63);
 /* Ð¢ÐµÑ…Ð½Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ð¿Ð°ÑÐ¿Ð¾Ñ€Ñ‚ */
 
 .passport-scroller {
-  height: 65vh;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+    height: 65vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.passport-scroller iframe {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .text h1 {
@@ -2855,7 +2872,7 @@ p .exitButton {
   font-weight: normal;
 }
 
-#service-chat{
+#service-chat {
   position: fixed;
   width: 300px;
   height: 450px;
@@ -2871,7 +2888,8 @@ p .exitButton {
   transition: 1s all ease;
 
 }
-#service-chat.chat-wrapped{
+
+#service-chat.chat-wrapped {
   position: fixed;
   width: 70px;
   height: 70px;
@@ -2887,24 +2905,29 @@ p .exitButton {
   transition: 1s all ease;
 
 }
+
 .chat-wrapped .service-chat-wrapper {
   display: none;
 }
+
 .chat-wrapped .chat-expander {
   display: inherit;
   text-align: center;
   margin-top: 6%;
   font-size: 2.5em;
 }
+
 .chat-expander {
   display: none;
 }
-.chat-closer{
+
+.chat-closer {
   border: 1px solid #494949;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+
 .service-chat-title {
   text-align: center;
   padding: 10px;
@@ -2917,7 +2940,7 @@ p .exitButton {
   color: #c3c3c3;
 }
 
-.device-modal-status{
+.device-modal-status {
   text-align: center;
 }
 
@@ -2939,16 +2962,18 @@ p .exitButton {
   display: block;
   padding: 10px 10px 20px;
   position: relative;
-/*  height: 175px;*/
+  /*  height: 175px;*/
 }
-.chart-date-checkbox{
+
+.chart-date-checkbox {
   margin-left: 10px;
 }
-input[type='text'].chart-datepicker{
+
+input[type='text'].chart-datepicker {
   color: rgb(29, 29, 29)
 }
 
-.anal-block{
+.anal-block {
   line-height: 16px;
   padding-left: 40px;
   text-indent: 20px;

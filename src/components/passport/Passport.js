@@ -4,7 +4,6 @@ import {View, Model} from 'backbone.marionette';
 export default View.extend({
     template: template,
     onRender() {
-        console.log(this.$('#about'))
         // Get rid of that pesky wrapping-div.
         // Assumes 1 child element present in template.
         /*        this.$el = this.$el.children();
