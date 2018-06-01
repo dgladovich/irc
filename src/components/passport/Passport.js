@@ -12,7 +12,7 @@ export default View.extend({
                 // nesting elements during re-render.
                 this.$el.unwrap();
                 this.setElement(this.$el);*/
-        console.log(this.el)
+
 
 
     }

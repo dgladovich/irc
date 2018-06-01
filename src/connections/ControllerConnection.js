@@ -113,7 +113,6 @@ export default class ControllerConnection {
             case 'controll':
                 break;
             case 'speed':
-                console.log(data)
                 app.controller.set('speed', data.data.speed);
                 break;
             default:
