@@ -3,7 +3,7 @@
 
 //req
 {
-	api: 'vasiliy'
+	api: 'vasiliy',
 	eventGroup: 'controll',
 	method: 'controllerStart',
 	arguments: {}

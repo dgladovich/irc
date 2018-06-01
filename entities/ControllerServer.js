@@ -1,13 +1,12 @@
-const SocketConnector = require('./SocketConnector');
+const ControllerConnector = require('./ControllerConnector');
 
-class SocketServer {
+class ControllerServer {
     constructor(opt) {
         this.broker = opt.broker;
-        this.socketConnector = new SocketConnector({server: this});
-        this.listeners = [];
+        this.controllerConnector = new ControllerConnector({server: this});
     }
 
-    sendAlarmOrigin(alarm) {
+    onAlarmOrigin(alarm) {
         let message = {
             eventGroup: 'alarm',
             method: 'add',
@@ -16,7 +15,7 @@ class SocketServer {
         this.socketConnector.sendData(message)
     }
 
-    sendAlarmConfirmation(ivan_id) {
+    onAlarmConfirmation(ivan_id) {
         let message = {
             eventGroup: 'alarm',
             method: 'confirm',
@@ -25,7 +24,7 @@ class SocketServer {
         this.socketConnector.sendData(message)
     }
 
-    sendStatus(stat) {
+    onChangeStatus(stat) {
         let message = {
             eventGroup: 'status',
             data: [Object.assign({}, stat)]
@@ -33,7 +32,7 @@ class SocketServer {
         this.socketConnector.sendData(message)
     }
 
-    sendValue(value) {
+    onChangeValue(value) {
         let message = {
             eventGroup: 'value',
             data: [Object.assign({}, value)]
@@ -41,46 +40,19 @@ class SocketServer {
         this.socketConnector.sendData(message)
     }
 
-    sendSpeed(speed) {
+    onChangeSpeed(speed) {
         let message = {
             eventGroup: 'speed',
             data: {speed: speed}
         };
         this.socketConnector.sendData(message);
     }
+    changeSpeed(speed){}
+    startDevice(){}
+    stopDevice(){}
+    sendControllerInitialData(socket) {}
 
-    sendInitialData(socket) {
-        let alarms = this.broker.getUserInitialAlarms(),
-            statuses = this.broker.getUserInitialStatuses(),
-            values = this.broker.getUserInitialValues(),
-            speed = this.broker.getInitialSpeed(),
-            statusPack = {
-                eventGroup: 'status',
-                data: statuses
-            },
-            valuesPack = {
-                eventGroup: 'value',
-                data: values
-            },
-            speedPack = {
-                eventGroup: 'speed',
-                data: {speed: speed}
-            },
-            alarmsPack = {
-                eventGroup: 'alarm',
-                method: 'add'
-            };
-        setTimeout(() => {
-            socket.emit('controller', statusPack);
-            socket.emit('controller', valuesPack);
-            socket.emit('controller', speedPack);
-            alarms.forEach((alarm) => {
-                socket.emit('controller', Object.assign(alarmsPack, {arguments: alarm}))
-            });
-        }, 750);
-    }
-
-    handleUserData(data) {
+    handleControllerData(data) {
         let method = data.method;
         switch (method) {
             case 'confirm':
@@ -89,7 +61,7 @@ class SocketServer {
                         ivan_id: args.ivan_id,
                         user_id: 1
                     };
-                this.broker.confirmAlarm(pack);
+                this.onAlarmConfirmation.call(this);
                 break;
             case 'repair':
                 this.broker.setRepair(data)

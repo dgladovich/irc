@@ -13,7 +13,7 @@ const CC = Radio.channel('ControllerConnector');
 
 class CentralBroker {
     constructor() {
-        let broker = {broker: this};
+        let broker = { broker: this };
         this.controllerConnector = new ControllerConnector(broker);
         this.dh = new DataHub(broker);
         this.zeoClient = new ZeoClient(broker);
@@ -22,15 +22,6 @@ class CentralBroker {
         this.BUFFER = [];
         this.writingBuffer = setInterval(this.uploadBuffer.bind(this), 15000)
 
-    }
-
-    sendControllerInitialData() {
-        let queues = this.dh.getQueues();
-        /*        if (queues.length > 0) {
-                    queues.each(queue => {
-                        this.controllerConnector.sendDataToController();
-                    });
-                }*/
     }
     getInitialSpeed(){
         return this.dh.getSpeed();
@@ -47,13 +38,85 @@ class CentralBroker {
         return this.dh.getStatusesJSON();
     }
 
+    onOriginAlarm(pack) {
+        const alarm = pack.data;
+
+        this.logger.onRecieveAlarm();
+        this.dh.addAlarm(alarm).then((alrm) => {
+            this.socketServer.sendAlarmOrigin(alrm);
+            this.zeoClient.sendAlarmOrigin(alrm);
+        });
+    }
+    onControllerSpeedChange(queue){
+        let speed = queue.get('argument');
+        this.dh.updateSpeed(speed);
+        this.socketServer.sendSpeed(speed);
+        this.zeoClient.sendSpeed(speed);
+    }
+
+    onControllerAlarmConfirm(queue) {
+        let {argument, execute_date, user_id} = queue.toJSON();
+        this.dh
+            .updateAlarm(argument, user_id, execute_date)
+            .then((alarm) => {
+                this.socketServer.sendAlarmConfirmation(argument);
+                this.zeoClient.sendAlarmConfirmation(argument);
+            });
+    }
+    onChangeDeviceStatus(pack) {
+        const statuses = pack.data;
+        statuses.forEach((status) => {
+            this.dh.updateStatus(status);
+            this.socketServer.sendStatus(status);
+            this.zeoClient.sendStatus(status);
+        })
+    }
+
+    onChangeDeviceValue(pack) {
+        const values = pack.data;
+        values.forEach((value) => {
+            this.dh.updateValue(value);
+            this.writeValueBuffer(value)
+            this.socketServer.sendValue(value);
+            this.zeoClient.sendValue(value)
+        });
+    }
+
+    onChangeDeviceMode(pack) {}
+
+    onControllerCommandResponse(pack) {
+        if (pack.data.executed) {
+            this.onControllerExecution.call(this, pack.data);
+        } else {
+            this.onFailControllerExecution.call(this, pack.data);
+        }
+    }
+
+    onControllerExecution(data) {
+        let uuid = data.uuid;
+        let vals = {
+            status: 'executed'
+        };
+
+        this.dh.updateQueue(uuid, vals).then((queue) => {
+            this.afterExecutionAction.call(this, this.dh.getQueue(uuid))
+        });
+    }
+
+    onFailControllerExecution(data) {
+        this.logger.onFailControllerExecution();
+    }
+
+    sendControllerInitialData() {
+        let queues = this.dh.getQueues();
+    }
+
     setDevicesOffline() {
         this.dh.getDevices().each((device) => {
             console.log(`Setting device ${device.get('name')} offline`);
             device.set('stat', 6);
         })
     }
-
     handleControllerData(data) {
         const eventGroup = data.eventGroup;
         switch (eventGroup) {
@@ -77,24 +140,6 @@ class CentralBroker {
         }
     }
 
-
-    onChangeDeviceStatus(pack) {
-        const statuses = pack.data;
-        statuses.forEach((status) => {
-            this.dh.updateStatus(status);
-            this.socketServer.sendStatus(status);
-        })
-    }
-
-    onChangeDeviceValue(pack) {
-        const values = pack.data;
-        values.forEach((value) => {
-            this.dh.updateValue(value);
-            this.writeValueBuffer(value)
-            this.socketServer.sendValue(value);
-        });
-    }
-
     writeValueBuffer(value) {
         return this.BUFFER.push({
             face_id: value.id,
@@ -115,47 +160,6 @@ class CentralBroker {
 
         this.BUFFER = [];
     }
-
-    onOriginAlarm(pack) {
-        const alarm = pack.data;
-
-        this.logger.onRecieveAlarm();
-        this.dh.addAlarm(alarm).then((alrm) => {
-            this.socketServer.sendAlarmOrigin(alrm);
-        });
-    }
-
-
-    onChangeDeviceMode(pack) {
-        /*        _.each(data, (item) => {
-                    this.controller.get('devices').findWhere({id: +item.id}).set('mode', +item.mode);
-                })*/
-    }
-
-    onControllerCommandResponse(pack) {
-        if (pack.data.executed) {
-            this.onControllerExecution.call(this, pack.data);
-        } else {
-            this.onFailControllerExecution.call(this, pack.data);
-        }
-    }
-
-    onControllerExecution(data) {
-        let uuid = data.uuid;
-        let vals = {
-            status: 'executed'
-        };
-
-
-        this.dh.updateQueue(uuid, vals).then((queue) => {
-            this.afterExecutionAction.call(this, this.dh.getQueue(uuid))
-        });
-    }
-
-    onFailControllerExecution(data) {
-        this.logger.onFailControllerExecution();
-    }
-
     afterExecutionAction(queue) {
 
         let method = queue.get('method');
@@ -180,26 +184,7 @@ class CentralBroker {
                 return;
         }
     }
-    onControllerSpeedChange(queue){
-        let speed = queue.get('argument');
-        this.dh.updateSpeed(speed);
-        this.socketServer.sendSpeed(speed);
-    }
 
-    onControllerAlarmConfirm(queue) {
-        let {argument, execute_date, user_id} = queue.toJSON();
-        this.dh
-            .updateAlarm(argument, user_id, execute_date)
-            .then((alarm) => {
-                this.socketServer.sendAlarmConfirmation(argument)
-            });
-    }
-
-    disconnectFromController() {
-    }
-
-    onControllerData() {
-    }
 
     confirmAlarm(pack) {
         if (pack) {
@@ -221,13 +206,14 @@ class CentralBroker {
             this.dh
                 .addQueue(queueMessage)
                 .then((data) => {
+                    console.log(confirmationMessage)
                     this.controllerConnector.sendDataToController(confirmationMessage);
                 });
         }
     }
-
-    setRepair() {
-    }
+    setRepair() {}
+    startController() {}
+    stopController() {}
 
     changeSpeed(pack) {
         if (pack) {
@@ -256,28 +242,13 @@ class CentralBroker {
         }
 
     }
-
-    startController() {
-    }
-
-    stopController() {
-    }
-
-
     init() {
         this.dh
             .loadInitialData()
             .then(() => {
                 this.controllerConnector.connect();
-                this.zeoCon
             })
     }
 }
 
 module.exports = CentralBroker;
-
-/*
-<!--
-<div class="passport-scroller nano">
-    <iframe class="content" id="passport" src="docs/<%= app.controller.get('id')%>/passport.html" height="100%" width="100%"></iframe>
-    </div>-->*/

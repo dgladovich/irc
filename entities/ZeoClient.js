@@ -1,4 +1,7 @@
 const ZeoConnector = require('./ZeoConnector');
+const {
+    CONTROLLER_ID,
+} = process.env;
 
 class ZeoClient {
     constructor(opt) {
@@ -11,18 +14,44 @@ class ZeoClient {
         let speed = this.broker.getInitialSpeed(),
             alarms = this.broker.getUserInitialAlarms(),
             statuses = this.broker.getUserInitialStatuses();
-        console.log(speed, alarms, statuses);
+        statuses.forEach(status=>{
+            this.sendStatus(status);
+        });
+        alarms.forEach((alarm)=>{
+            this.sendAlarmOrigin(alarm);
+        });
+        this.sendSpeed(speed);
+        this.sendMode();
+    }
+    sendStatus(status){
+        let apiStatus = {
+            eventGroup: 'status',
+            data: [status],
+            controller: {
+                controllerId: CONTROLLER_ID
+            }
+        }
+        this.zeoConnector.sendData(apiStatus)
+    }
+    sendSpeed(speed){
+        let apiSpeed = {};
+        this.zeoConnector.sendData(apiSpeed);
+    }
+    sendMode(pack){
+        let apiMode = {};
+        this.zeoConnector.sendData(apiMode);
     }
 
-    onUserCommand() {
-    }
+    sendAlarmOrigin(pack){
+        let apiAlarmOrigin = {};
+        this.zeoConnector.sendData(apiAlarmOrigin);
 
-    onControllerData() {
     }
-
-    validate() {
+    sendAlarmConfirmation(pack){
+        let apiAlarmConfirmation = {};
+        this.zeoConnector.sendData(apiAlarmConfirmation);
     }
+    onOperatorCommand() {}
 }
-
 
 module.exports = ZeoClient;

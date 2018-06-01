@@ -6,7 +6,7 @@ const ADDRESS = process.env.TEST_CONTROLLER_IP;
 
 class ControllerConnector {
     constructor(opt){
-        this.broker = opt.broker;
+        this.server = opt.server;
         this.client = new net.Socket();
         this.logger = new Logger();
 
@@ -25,22 +25,23 @@ class ControllerConnector {
         this.client.write(JSON.stringify(data));
     }
     onControllerConnected(){
-        this.broker.sendControllerInitialData();
+        this.server.sendControllerInitialData();
         this.logger.onControllerConectionEstablish(PORT, ADDRESS);
     }
     onControllerDisconnected(){
-        this.logger.onControllerDisconnected()
+        this.logger.onControllerDisconnected();
+        setTimeout(this._connect.bind(this, PORT, ADDRESS), 500);
         return this.client.destroy();
     }
     onControllerConnectionError(e){
-        this.broker.setDevicesOffline();
+        this.server.setDevicesOffline();
         this.logger.onControllerConnectionError()
     }
     onReciveDataFromController(data){
         if (data) {
             try {
                 let d = JSON.parse(data.toString());
-                this.broker.handleControllerData(d);
+                this.server.handleControllerData(d);
             } catch (e) {
                 this.logger.onControllerRecieveDataWithError(e);
             }

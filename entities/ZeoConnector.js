@@ -14,6 +14,10 @@ class ZeoConnector {
     constructor(opt){
         this.server = opt.server;
     }
+    connect(){
+        this.socket = io(`${ZEO_SERVER}:${ZEO_SERVER_PORT}`, {'query': 'auth_token=' + token});
+        this._bindEvents();
+    }
     _bindEvents() {
         this.socket.on('connect', this.onConnected.bind(this));
         this.socket.on('disconnect', this.onDisconnect.bind(this));
@@ -22,48 +26,6 @@ class ZeoConnector {
     }
     onConnected() {
         this.server.sendInitialData();
-/*        console.log('Connected to ZEO'.grey);
-        let sStatuses,
-            controllerStatus = ch.request('initial:controller:status'),
-            statuses = ch.request('initial:status'),
-            alarms = ch.request('initial:alarms'),
-            values = ch.request('initial:values');
-
-        alarms.then((alrs)=>{
-            alrs.forEach((alarm)=>{
-                let alarmMessage = {
-                    eventGroup: 'alarm',
-                    method: 'add',
-                    arguments: Object.assign({}, alarm),
-                };
-                this.socket.emit('controller', alarmMessage)
-            })
-        })
-        if (statuses) {
-            sStatuses = statuses.map((status) => {
-                return {
-                    deviceId: status.id,
-                    stat: status.stat
-                }
-            });
-            sStatuses.push({
-                controllerId: CONTROLLER_ID,
-                stat: 3
-            });
-        } else {
-            console.log(`Error while get initial statuses in Zeo Client`.red)
-        }
-
-        setTimeout(() => {
-            this.socket.emit('controller', {
-                eventGroup: 'status',
-                data: sStatuses
-            });
-            this.socket.emit('controller', {
-                eventGroup: 'values',
-                data: values
-            });
-        }, 1000);*/
     }
 
     onDisconnect() {
@@ -84,15 +46,11 @@ class ZeoConnector {
                 return;
         }
     }
-    connect(){
-        this.socket = io(`${ZEO_SERVER}:${ZEO_SERVER_PORT}`, {'query': 'auth_token=' + token});
-        this._bindEvents();
-    }
-    connectToZeo(){}
-    onZeoConnected(){}
     onZeoData(){}
     onConnectionError(){}
-    sendData(){}
+    sendData(data){
+        this.socket.emit('controller', data);
+    }
 }
 
 module.exports = ZeoConnector;
