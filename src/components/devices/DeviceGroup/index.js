@@ -23,7 +23,7 @@ export default View.extend({
         // nesting elements during re-render.
         this.$el.unwrap();
         this.setElement(this.$el);
-        if (this.model.get('devices').models[0].get('ctrl') !== app.devices.findWhere({ parent: 0 }).get('ctrl')) {
+        if (this.model.get('devices').models[0].get('ctrl') !== app.devices.findWhere({ parent: null }).get('ctrl')) {
             this.$el.hide();
         }
         this.updateGroupStatus.call(this);

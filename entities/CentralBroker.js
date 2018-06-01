@@ -269,8 +269,15 @@ class CentralBroker {
             .loadInitialData()
             .then(() => {
                 this.controllerConnector.connect();
+                this.zeoCon
             })
     }
 }
 
 module.exports = CentralBroker;
+
+/*
+<!--
+<div class="passport-scroller nano">
+    <iframe class="content" id="passport" src="docs/<%= app.controller.get('id')%>/passport.html" height="100%" width="100%"></iframe>
+    </div>-->*/

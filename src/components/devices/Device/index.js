@@ -86,9 +86,9 @@ export default View.extend({
         }
         if (this.model.get('ctrl') === 2 && this.model.get('parent') === 0) {
             this.destroy();
-        } else if (this.model.get('ctrl') === 5 && this.model.get('parent') === 0) {
+        } else if (this.model.get('ctrl') === 5 && this.model.get('parent') === null) {
             this.destroy();
-        } else if (this.model.get('ctrl') === 6 && this.model.get('parent') === 0) {
+        } else if (this.model.get('ctrl') === 6 && this.model.get('parent') === null) {
             this.destroy();
         } else {
             this.listenTo(this.model, 'change:stat', this.updateStatus.bind(this));

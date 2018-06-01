@@ -43,6 +43,9 @@ const Controller = Mn.Object.extend({
     },    
     showMessages() {
         this.layout.showMessages();
+    },
+    showTest() {
+        this.layout.showTest();
     }
 
 });
@@ -64,5 +67,6 @@ export const Router = Mn.AppRouter.extend({
         'service': 'showService',
         'system': 'showSystemControll',
         'devices': 'showDevices',
+        'testing': 'showTest',
     }
 });

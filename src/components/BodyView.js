@@ -13,6 +13,7 @@ import MiniVisual from './visual/MiniVisual';
 import JournalPage from './journal/JournalPage';
 import EquipmentPage from './equipment/EquipmentPage';
 import PassportPage from './passport/PassportPage';
+import TestPage from './testing/TestPage';
 import SystemControllPage from './system/SystemControllPage';
 import ServicePage from './service/ServicePage';
 import DevicesPage from './devices/DevicesPage';
@@ -94,10 +95,14 @@ export const BodyView = View.extend({
         this.showChildView('main', new ServicePage());
         history.navigate('service'); // Update the location bar
     },
+    showTest() {
+        this.showChildView('main', new TestPage());
+        history.navigate('testing'); // Update the location bar
+    },
     showDevices() {
         let grps = app.deviceGroups;
         let devicesCollection = new Backbone.Collection();
-        let parent = app.devices.findWhere({parent: 0});
+        let parent = app.devices.findWhere({parent: null});
         let bodyId = parent.get('body_id');
         let deviceSize = parent.get('devicesize');
         let deviceType = parent.get('typ');

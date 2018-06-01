@@ -45,7 +45,6 @@ export default View.extend({
          })
          this.$el.fadeIn('slow');*/
         this.showChildView('tabs', new DefaultPanel({ collection: this.tabsContent }));
-
     },
     initialize: function () {
         /*        this.tabPanel = new TabPanel({
