@@ -49,7 +49,7 @@ export default View.extend({
         this.collection = new Backbone.Collection();
         this.collection.url = function () {
             return '/to/servicejournal'
-        }
+        };
         serviceChannel.on('service:done', () => {
             this.collection.reset();
             this.collection.fetch();

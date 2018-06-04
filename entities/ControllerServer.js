@@ -5,6 +5,10 @@ class ControllerServer {
         this.broker = opt.broker;
         this.controllerConnector = new ControllerConnector({server: this});
     }
+    sendControllerInitialData(){
+        let queues = this.broker.getInitialQueues();
+        this.controllerConnector.sendDataToController(queues);
+    }
 
     onAlarmOrigin(alarm) {
         let message = {
@@ -50,8 +54,6 @@ class ControllerServer {
     changeSpeed(speed){}
     startDevice(){}
     stopDevice(){}
-    sendControllerInitialData(socket) {}
-
     handleControllerData(data) {
         let method = data.method;
         switch (method) {
@@ -86,4 +88,4 @@ class ControllerServer {
     }
 }
 
-module.exports = SocketServer;
+module.exports = ControllerServer;

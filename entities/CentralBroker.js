@@ -1,4 +1,4 @@
-const ControllerConnector = require('./ControllerConnector');
+const ControllerServer = require('./ControllerServer');
 const Logger = require('./Logger');
 const ZeoClient = require('./ZeoClient');
 const SocketServer = require('./SocketServer');
@@ -14,7 +14,7 @@ const CC = Radio.channel('ControllerConnector');
 class CentralBroker {
     constructor() {
         let broker = { broker: this };
-        this.controllerConnector = new ControllerConnector(broker);
+        this.controllerConnector = new ControllerServer(broker);
         this.dh = new DataHub(broker);
         this.zeoClient = new ZeoClient(broker);
         this.socketServer = new SocketServer(broker);
@@ -25,6 +25,9 @@ class CentralBroker {
     }
     getInitialSpeed(){
         return this.dh.getSpeed();
+    }
+    getInitialQueues(){
+        return this.dh.getQueues();
     }
     getUserInitialAlarms() {
         return this.dh.getAlarmsJSON();

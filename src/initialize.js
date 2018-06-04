@@ -8,26 +8,31 @@ import store from 'store';
 const backboneSync = Backbone.sync;
 
 
-Backbone.sync = function (method, model, options) {
-    console.log(options)
-    /*
+/*Backbone.sync = function (method, model, options) {
+    console.log(method, model)
+    /!*
      * The jQuery `ajax` method includes a 'headers' option
      * which lets you set any headers you like
-     */
+     *!/
     options.headers = {
-        /*
+        /!*
          * Set the 'Authorization' header and get the access
          * token from the `auth` module
-         */
+         *!/
         'Authorization': 'Bearer ' + store.get('token')
     };
     backboneSync('peer to peer', 'dasfd');
-    /*
+    /!*
      * Call the stored original Backbone.sync method with
      * extra headers argument added
-     */
+     *!/
     return backboneSync(method, model, options);
-};
+};*/
+$.ajaxSetup({
+    headers: {
+        'Authorization': 'Bearer ' + store.get('token')
+    }
+});
 document.addEventListener('DOMContentLoaded', () => {
 
     //store.clearAll();

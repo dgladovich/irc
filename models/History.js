@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
         timestamps: false,
-        tableName: 'smart_service_hists',
+        tableName: 'smart_device_service_journal',
         freezeTableName: true
     });
     History.associate = function(models) {

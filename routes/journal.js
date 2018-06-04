@@ -54,11 +54,11 @@ router
                 model: User,
                 as: 'user',
                 attributes: ['name']
-            }, {
+            }, /*{
                 model: ErrorCode,
                 as: 'ecode',
                 where: whereType
-            }]
+            }*/]
         }).then((alarms) => {
             res.json(alarms);
         })
