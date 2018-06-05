@@ -52,6 +52,10 @@ class CentralBroker {
         this.socketServer.sendStatus(id, stat);
         this.zeoClient.sendStatus(id, stat);
     }
+    handleChangedValue(value){}
+    handleChangedMode(mode){}
+    handleAlarmOrigin(data){}
+    handleExecutedCommand(data){}
 
     onAlarmOrigin(pack) {
         const alarm = pack.data;

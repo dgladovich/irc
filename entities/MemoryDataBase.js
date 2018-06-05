@@ -7,9 +7,7 @@ const _ = require('lodash');
 const config = require('../config.json');
 
 class MemoryDataBase {
-    constructor(){controller: {
-                    controllerId: +CONTROLLER_ID
-                }
+    constructor(){
         this.speed = 0;
         this.controller = new ControllerModel(config.ctrl);
         this.devices = new DevicesCollection(config.ctrl.devs);

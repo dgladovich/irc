@@ -17,6 +17,7 @@ export default View.extend({
 
     },
     initialize: function(){
+
         this.model = new Backbone.Model({
             cameras: app.controller.get('cameras')
         });

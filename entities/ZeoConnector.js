@@ -48,7 +48,6 @@ class ZeoConnector {
     onZeoData(){}
     onConnectionError(){}
     sendData(data){
-        console.log('sending shit to vasilij')
         this.socket.emit('controller', data);
     }
 }

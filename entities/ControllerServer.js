@@ -27,9 +27,11 @@ class ControllerServer {
            this.broker.handleChangedStatus(status);
        })
     }
-    onChangeValue() {}
+    onChangeValue(data){
+        console.log(data)
+    }
     onOriginAlarm(alarm) {}
-    onControllerCommandExecution(){}
+    onControllerCommandExecution(command){}
     onChangeSpeed(speed){}
     onChangeMode(){}
 
