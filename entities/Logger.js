@@ -11,9 +11,15 @@ class Logger {
         log.log('info', 'Connection to controller established');
         console.log(`Connect to controller on address: ${address}, port: ${port}`.cyan);
     }
+    onControllerConnectionAttempt(port, address){
+        let msg = `Trying connect to controller on port ${port} address ${address}`;
+        log.log('info', msg);
+        console.log(msg.cyan);
+    }
     onControllerDisconnected(){
-        console.log(`Controller disconnected`.red);
-        log.log('error', 'Controller disconnected');
+        let msg = `Controller disconnected`;
+        console.log(msg.red);
+        log.log('error', msg);
     }
     onControllerConnectionError(){
         console.log(`Error while connected to controller`.red);

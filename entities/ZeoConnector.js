@@ -4,11 +4,10 @@ const {
     ZEO_SERVER,
     ZEO_SERVER_PORT,
     AUTH_SECRET,
-    CONTROLLER_ID,
-    CONTROLLER_MAC
+    CONTROLLER_ID
 } = process.env;
+const CONTROLLER_MAC = '40:d6:3c:03:09:be';
 const token = jwt.sign({id: CONTROLLER_ID, mac: CONTROLLER_MAC}, AUTH_SECRET);
-
 
 class ZeoConnector {
     constructor(opt){
@@ -49,6 +48,7 @@ class ZeoConnector {
     onZeoData(){}
     onConnectionError(){}
     sendData(data){
+        console.log('sending shit to vasilij')
         this.socket.emit('controller', data);
     }
 }

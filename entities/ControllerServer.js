@@ -5,86 +5,67 @@ class ControllerServer {
         this.broker = opt.broker;
         this.controllerConnector = new ControllerConnector({server: this});
     }
+    connect(){
+        this.controllerConnector.connect();
+    }
+
     sendControllerInitialData(){
         let queues = this.broker.getInitialQueues();
         this.controllerConnector.sendDataToController(queues);
     }
 
-    onAlarmOrigin(alarm) {
-        let message = {
-            eventGroup: 'alarm',
-            method: 'add',
-            arguments: Object.assign(alarm, {date_confirm: null})
-        };
-        this.socketConnector.sendData(message)
-    }
+    ////////////////////////////
+    //DATA FROM CONTROLLER
+    ///////////////////////////
 
-    onAlarmConfirmation(ivan_id) {
-        let message = {
-            eventGroup: 'alarm',
-            method: 'confirm',
-            arguments: Object.assign({ivan_id: ivan_id}, {})
-        };
-        this.socketConnector.sendData(message)
+    onControllerOffline(){
+        this.broker.setDevicesOffline();
     }
+    onChangeStatus(data) {
+       let statuses = data.data;
+       statuses.forEach((status)=>{
+           this.broker.handleChangedStatus(status);
+       })
+    }
+    onChangeValue() {}
+    onOriginAlarm(alarm) {}
+    onControllerCommandExecution(){}
+    onChangeSpeed(speed){}
+    onChangeMode(){}
 
-    onChangeStatus(stat) {
-        let message = {
-            eventGroup: 'status',
-            data: [Object.assign({}, stat)]
-        };
-        this.socketConnector.sendData(message)
-    }
-
-    onChangeValue(value) {
-        let message = {
-            eventGroup: 'value',
-            data: [Object.assign({}, value)]
-        };
-        this.socketConnector.sendData(message)
-    }
-
-    onChangeSpeed(speed) {
-        let message = {
-            eventGroup: 'speed',
-            data: {speed: speed}
-        };
-        this.socketConnector.sendData(message);
-    }
+    ////////////////////////
+    //COMMANDS TO CONTROLLER
+    ////////////////////////
     changeSpeed(speed){}
-    startDevice(){}
-    stopDevice(){}
+    startController(){}
+    stopController(){}
+    confirmAlarm(){}
+
+
+    ////////////////////////
+    //MAIN HANDLER
+    ////////////////////////
     handleControllerData(data) {
-        let method = data.method;
-        switch (method) {
-            case 'confirm':
-                let args = data.arguments,
-                    pack = {
-                        ivan_id: args.ivan_id,
-                        user_id: 1
-                    };
-                this.onAlarmConfirmation.call(this);
+        const eventGroup = data.eventGroup;
+        switch (eventGroup) {
+            case 'status':
+                this.onChangeStatus(data);
                 break;
-            case 'repair':
-                this.broker.setRepair(data)
+            case 'values':
+                this.onChangeValue(data);
                 break;
-            case 'speed':
-                this.broker.changeSpeed(data)
+            case 'controll':
+                this.onControllerCommandExecution(data);
                 break;
-            case 'start':
-                this.broker.startController(data)
+            case 'alarm':
+                this.onOriginAlarm(data);
                 break;
-            case 'stop':
-                this.broker.stopController(data)
+            case 'mode':
+                this.onChangeMode(data);
                 break;
             default:
-                console.log(`Unknown controll command method type: ${method}`.red);
-                return;
+                console.log(`Uncorrect event type ${event}, ${data}`.red)
         }
-        this.broker.confirmAlarm();
-    }
-
-    validateData() {
     }
 }
 

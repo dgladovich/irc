@@ -14,44 +14,53 @@ class ZeoClient {
         let speed = this.broker.getInitialSpeed(),
             alarms = this.broker.getUserInitialAlarms(),
             statuses = this.broker.getUserInitialStatuses();
-        statuses.forEach(status=>{
+        statuses.forEach(status => {
             this.sendStatus(status);
         });
-        alarms.forEach((alarm)=>{
+        alarms.forEach((alarm) => {
             this.sendAlarmOrigin(alarm);
         });
         this.sendSpeed(speed);
         this.sendMode();
     }
-    sendStatus(status){
-        let apiStatus = {
-            eventGroup: 'status',
-            data: [status],
-            controller: {
-                controllerId: CONTROLLER_ID
-            }
-        }
+
+    sendStatus(devId, stat) {
+        let status = {deviceId: devId, stat: stat},
+            controllerStatus = this.broker.getControllerStatus,
+            apiStatus = {
+                eventGroup: 'status',
+                data: [status],
+                controller: {
+                    controllerId: +CONTROLLER_ID,
+                    stat
+                }
+            };
         this.zeoConnector.sendData(apiStatus)
     }
-    sendSpeed(speed){
+
+    sendSpeed(speed) {
         let apiSpeed = {};
         this.zeoConnector.sendData(apiSpeed);
     }
-    sendMode(pack){
+
+    sendMode(pack) {
         let apiMode = {};
         this.zeoConnector.sendData(apiMode);
     }
 
-    sendAlarmOrigin(pack){
+    sendAlarmOrigin(pack) {
         let apiAlarmOrigin = {};
         this.zeoConnector.sendData(apiAlarmOrigin);
 
     }
-    sendAlarmConfirmation(pack){
+
+    sendAlarmConfirmation(pack) {
         let apiAlarmConfirmation = {};
         this.zeoConnector.sendData(apiAlarmConfirmation);
     }
-    onOperatorCommand() {}
+
+    onOperatorCommand() {
+    }
 }
 
 module.exports = ZeoClient;

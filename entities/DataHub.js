@@ -50,6 +50,9 @@ class DataHub {
     getStatusesJSON() {
         return this.mdb.getStatusesJSON();
     }
+    getControllerStatus(){
+        return this.mdb.getControllerStatus();
+    }
 
     addAlarm(alarm) {
         return this.dbc
@@ -62,9 +65,8 @@ class DataHub {
             });
     }
 
-    updateStatus(status) {
-        let {id, stat} = status;
-        this.mdb.updateDeviceStatus(id, stat);
+    updateStatus(deviceId, status) {
+        this.mdb.updateDeviceStatus(deviceId, status);
     }
 
     updateValue(value) {

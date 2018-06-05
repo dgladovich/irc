@@ -13,8 +13,8 @@ const CC = Radio.channel('ControllerConnector');
 
 class CentralBroker {
     constructor() {
-        let broker = { broker: this };
-        this.controllerConnector = new ControllerServer(broker);
+        let broker = {broker: this};
+        this.controllerServer = new ControllerServer(broker);
         this.dh = new DataHub(broker);
         this.zeoClient = new ZeoClient(broker);
         this.socketServer = new SocketServer(broker);
@@ -23,12 +23,17 @@ class CentralBroker {
         this.writingBuffer = setInterval(this.uploadBuffer.bind(this), 15000)
 
     }
-    getInitialSpeed(){
+    getControllerStatus(){
+        return this.dh.getControllerStatus();
+    }
+    getInitialSpeed() {
         return this.dh.getSpeed();
     }
-    getInitialQueues(){
+
+    getInitialQueues() {
         return this.dh.getQueues();
     }
+
     getUserInitialAlarms() {
         return this.dh.getAlarmsJSON();
     }
@@ -41,7 +46,14 @@ class CentralBroker {
         return this.dh.getStatusesJSON();
     }
 
-    onOriginAlarm(pack) {
+    handleChangedStatus(status) {
+        let {id, stat} = status;
+        this.dh.updateStatus(id, stat);
+        this.socketServer.sendStatus(id, stat);
+        this.zeoClient.sendStatus(id, stat);
+    }
+
+    onAlarmOrigin(pack) {
         const alarm = pack.data;
 
         this.logger.onRecieveAlarm();
@@ -50,7 +62,8 @@ class CentralBroker {
             this.zeoClient.sendAlarmOrigin(alrm);
         });
     }
-    onControllerSpeedChange(queue){
+
+    onControllerSpeedChange(queue) {
         let speed = queue.get('argument');
         this.dh.updateSpeed(speed);
         this.socketServer.sendSpeed(speed);
@@ -66,6 +79,7 @@ class CentralBroker {
                 this.zeoClient.sendAlarmConfirmation(argument);
             });
     }
+
     onChangeDeviceStatus(pack) {
         const statuses = pack.data;
         statuses.forEach((status) => {
@@ -85,7 +99,8 @@ class CentralBroker {
         });
     }
 
-    onChangeDeviceMode(pack) {}
+    onChangeDeviceMode(pack) {
+    }
 
     onControllerCommandResponse(pack) {
         if (pack.data.executed) {
@@ -116,32 +131,15 @@ class CentralBroker {
 
     setDevicesOffline() {
         this.dh.getDevices().each((device) => {
+            let devId = device.get('id'),
+                stat = 6;
             console.log(`Setting device ${device.get('name')} offline`);
             device.set('stat', 6);
+            this.socketServer.sendStatus(devId, stat);
+            this.zeoClient.sendStatus(devId, stat);
         })
     }
-    handleControllerData(data) {
-        const eventGroup = data.eventGroup;
-        switch (eventGroup) {
-            case 'status':
-                this.onChangeDeviceStatus(data);
-                break;
-            case 'values':
-                this.onChangeDeviceValue(data);
-                break;
-            case 'controll':
-                this.onControllerCommandResponse(data);
-                break;
-            case 'alarm':
-                this.onOriginAlarm(data);
-                break;
-            case 'mode':
-                this.onChangeDeviceMode(data);
-                break;
-            default:
-                console.log(`Uncorrect event type ${event}, ${data}`.red)
-        }
-    }
+
 
     writeValueBuffer(value) {
         return this.BUFFER.push({
@@ -163,6 +161,7 @@ class CentralBroker {
 
         this.BUFFER = [];
     }
+
     afterExecutionAction(queue) {
 
         let method = queue.get('method');
@@ -210,13 +209,19 @@ class CentralBroker {
                 .addQueue(queueMessage)
                 .then((data) => {
                     console.log(confirmationMessage)
-                    this.controllerConnector.sendDataToController(confirmationMessage);
+                    this.controllerServer.sendDataToController(confirmationMessage);
                 });
         }
     }
-    setRepair() {}
-    startController() {}
-    stopController() {}
+
+    setRepair() {
+    }
+
+    startController() {
+    }
+
+    stopController() {
+    }
 
     changeSpeed(pack) {
         if (pack) {
@@ -237,19 +242,20 @@ class CentralBroker {
             this.dh
                 .addQueue(queueMessage)
                 .then((data) => {
-                    this.controllerConnector.sendDataToController(changeSpeedMessage);
+                    this.controllerServer.sendDataToController(changeSpeedMessage);
                 })
-                .catch((e)=>{
+                .catch((e) => {
                     console.error(e)
                 });
         }
 
     }
+
     init() {
         this.dh
             .loadInitialData()
             .then(() => {
-                this.controllerConnector.connect();
+                this.controllerServer.connect();
             })
     }
 }

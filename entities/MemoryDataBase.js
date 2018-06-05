@@ -7,7 +7,9 @@ const _ = require('lodash');
 const config = require('../config.json');
 
 class MemoryDataBase {
-    constructor(){
+    constructor(){controller: {
+                    controllerId: +CONTROLLER_ID
+                }
         this.speed = 0;
         this.controller = new ControllerModel(config.ctrl);
         this.devices = new DevicesCollection(config.ctrl.devs);
@@ -32,6 +34,9 @@ class MemoryDataBase {
     }
     getDevicesJSON(){
         return this.devices;
+    }
+    getControllerStatus(){
+        return this.controller.get('stat');
     }
     getStatusesJSON(){
         return this.devices.map((device) => { return  {id: device.get('id'), stat: device.get('stat')}});

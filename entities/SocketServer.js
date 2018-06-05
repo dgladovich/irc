@@ -25,10 +25,11 @@ class SocketServer {
         this.socketConnector.sendData(message)
     }
 
-    sendStatus(stat) {
-        let message = {
+    sendStatus(devId, stat) {
+        let status = {id: devId, stat: stat},
+            message = {
             eventGroup: 'status',
-            data: [Object.assign({}, stat)]
+            data: [Object.assign({}, status)]
         };
         this.socketConnector.sendData(message)
     }

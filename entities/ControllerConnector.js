@@ -6,14 +6,16 @@ const ADDRESS = process.env.TEST_CONTROLLER_IP;
 
 class ControllerConnector {
     constructor(opt){
+        this.isConnected = false;
         this.server = opt.server;
         this.client = new net.Socket();
         this.logger = new Logger();
+        this._bindEvents();
 
     }
     connect(){
+        this.logger.onControllerConnectionAttempt(PORT, ADDRESS);
         this.client.connect(PORT, ADDRESS);
-        this._bindEvents();
     }
     _bindEvents(){
         this.client.on('data', this.onReciveDataFromController.bind(this));
@@ -25,16 +27,20 @@ class ControllerConnector {
         this.client.write(JSON.stringify(data));
     }
     onControllerConnected(){
-        this.server.sendControllerInitialData();
+        this.isConnected = true;
+        //this.server.sendControllerInitialData();
         this.logger.onControllerConectionEstablish(PORT, ADDRESS);
     }
     onControllerDisconnected(){
         this.logger.onControllerDisconnected();
-        setTimeout(this._connect.bind(this, PORT, ADDRESS), 500);
+        setTimeout(this.connect.bind(this, PORT, ADDRESS), 1000);
         return this.client.destroy();
     }
     onControllerConnectionError(e){
-        this.server.setDevicesOffline();
+        if(this.isConnected){
+            this.server.onControllerOffline();
+        }
+        this.isConnected = false;
         this.logger.onControllerConnectionError()
     }
     onReciveDataFromController(data){
