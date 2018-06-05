@@ -6,7 +6,8 @@ const config = require('../config/individual');
 const _ = require('underscore');
 const moment = require('moment');
 const db = require('../models');
-const { History } = db;
+const {History, Service, ServiceWork, Device, DeviceService, Language, DeviceServiceWork, DeviceTMC, Type, Work, WorkMaterial, Material } = db;
+const {CONTROLLER_ID} = process.env;
 /* GET home page. */
 router
     .get('/', function (req, res, next) {
@@ -90,6 +91,36 @@ router
             })
         })
     })
+    .get('/services', function (req, res, next) {
+        DeviceService.findAll({
+            where: {
+                ctrl: CONTROLLER_ID
+            },
+            order: [['ser_num', 'ASC']],
+            include: [
+                {
+                    model: DeviceServiceWork,
+                    as: 'service_work',
+                    include: [
+                        {
+                            model: Work,
+                            as: 'works',
+                            include: [{
+                                model: WorkMaterial,
+                                as: 'materials',
+                                include: [{
+                                    model: Material,
+                                    as: 'mat'
+                                }]
+                            }]
+                        }
+                    ]
+                }
+            ]
+        }).then((services) => {
+            res.json(services)
+        })
+    })
     .get('/dev', (req, res, next) => {
         Device.findAll({
             where: {
@@ -151,19 +182,19 @@ router
                         date = moment().format('d.MM.YYYY HH:MM:ss'),
                         ser_num = req.body.ser_num,
                         works = ser.performed.length === 0 ? 'Работ не выполнено' : (() => {
-                                let performText = `Выполнены работы по следующему оборудованию: `
-                                ser.performed.map((work, index) => {
-                                    let sign = '';
-                                    if (index + 1 < ser.performed.length) {
-                                        sign = ', '
-                                    } else {
-                                        sign = ''
-                                    }
-                                    performText += work.deviceName + `${sign}`;
+                            let performText = `Выполнены работы по следующему оборудованию: `
+                            ser.performed.map((work, index) => {
+                                let sign = '';
+                                if (index + 1 < ser.performed.length) {
+                                    sign = ', '
+                                } else {
+                                    sign = ''
+                                }
+                                performText += work.deviceName + `${sign}`;
 
-                                })
-                                return performText;
-                            })()
+                            })
+                            return performText;
+                        })()
                     let description = `${dname}<br> <p class='service-aligner'>${date}<br> Выполнено ТО${ser_num}<br> ${works}</p>`;
                     let historyRow = {
                         service_id: id,

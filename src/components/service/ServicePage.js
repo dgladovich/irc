@@ -26,23 +26,12 @@ export default View.extend({
         tabpanel: '.panel-container'
     },
     onRender: function () {
-        /*        this.Works = new Works();
-         this.Calendars = new Calendars({
-         collection: app.devices
-         });
-         this.DevicesServicePage = new DevicesServicePage({
-         collection: app.devices
-         });
-         this.ServiceJournal = new ServiceJournal();
-         this.showChildView('visualbody', new TabPanel({collection: collection}));
-         this.$('#devser').append(this.DevicesServicePage.render().el);
-         this.$('#journal').append(this.ServiceJournal.render().el);
-         this.$('#works').append(this.Works.render().el);
-         this.$('#calendar').append(this.Calendars.render().el);*/
         this.showChildView('tabpanel', new DefaultPanel({collection: this.tabsContent}));
         this.$el.fadeIn('slow');
     },
     initialize: function () {
+        let deviceServices = new Backbone.Collection();
+        deviceServices.url = '/'
         this.tabsContent = new Backbone.Collection([
             {
                 id: "calendar",
