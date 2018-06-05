@@ -2980,3 +2980,16 @@ input[type='text'].chart-datepicker {
   padding-left: 40px;
   text-indent: 20px;
 }
+.system-page-buttons{
+  float: right;
+  margin-bottom: 5px;
+}
+
+.controller-mode{
+  font-size: 1.4em;
+  font-weight: 700;
+  padding-top: 10px;
+}
+.controller-mode #work-type{
+  text-transform: uppercase;
+}

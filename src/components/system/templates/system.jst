@@ -1,17 +1,12 @@
-<h3>Режим работы</h3>
 <div class="row">
-    <div class="col-xs-12">
-        <div class="pull-right switch">
-            <div class="" style="display:none;">
-                <input type="radio" class="switch-input" name="rezhim" value="" id="remote" checked="">
-                <label class="switch-label switch-label-off" for="remote">Дистанционный</label>
-                <input type="radio" class="switch-input" name="rezhim" value="local" id="local">
-                <label class="switch-label switch-label-on" for="local">Местный</label>
-                <span class="switch-selection">&nbsp;</span>
-            </div>
-            <div id="work-type"></div>
+    <div class="col-xs-6">
+        <div class="controller-mode">
+            <span>Режим работы: </span>
+            <span id="work-type"></span>
         </div>
-        <div>
+    </div>
+    <div class="col-xs-6">
+        <div class="system-page-buttons">
             <button class="btn btn-stop">СТОП</button>
             <button class="btn btn-start">СТАРТ</button>
         </div>

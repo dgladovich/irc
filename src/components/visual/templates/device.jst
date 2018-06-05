@@ -1,5 +1,5 @@
 <div class="innerh100">
-    <div class="observe"><img src="images/<%= app.controller.get('id') %>_0.png" style="height:80vh" class="fr-fic fr-dii">
+    <div class="observe"><img src="images/<%= app.devices.findWhere({parent: null}).get('typ') %>_0.png" style="height:80vh" class="fr-fic fr-dii">
         <a class="btn-video" style="margin-top: <%= cameras.findWhere({pos: 'top'}).get('posy') %>px; margin-left: <%= cameras.findWhere({pos: 'top'}).get('posx') %>px;" id="<%= cameras.findWhere({pos: 'top'}).get('id') %>"><img src="cam2.png" class="fr-fic fr-dii"></a>
         <a class="btn-video" style="margin-top: <%= cameras.findWhere({pos: 'bottom'}).get('posy') %>px; margin-left: <%= cameras.findWhere({pos: 'bottom'}).get('posx') %>px;" id="<%= cameras.findWhere({pos: 'bottom'}).get('id') %>"><img src="cam2.png" class="fr-fic fr-dii"></a>
     </div>
