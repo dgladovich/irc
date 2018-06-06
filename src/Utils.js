@@ -24,7 +24,7 @@ let collectionToFetch = [
     errors,
     controller,
     infos,
-];
+]; 
 
 const status = Radio.channel('controll');
 const network = Radio.channel('network');
