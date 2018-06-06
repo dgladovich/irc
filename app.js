@@ -4,7 +4,7 @@ const colors = require('colors');
 const express = require('express');
 const app = express();
 require('./controller')(app); //CONTROLLER server app
-require('./support')(app);//SUPPORT server app
+//require('./support')(app);//SUPPORT server app
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');

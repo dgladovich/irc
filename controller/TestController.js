@@ -14,13 +14,19 @@ const FacesCollection = require('./collections/FacesCollection');
 
 const controller = new ControllerModel(config.ctrl);
 const devices = new DevicesCollection(config.ctrl.devs);
-const faces = new FacesCollection(_.toArray(config.ctrl.cfaces));
+const faces = new FacesCollection((config.ctrl.cfaces));
 
 controller.set({
     devices: devices,
     faces: faces
 });
-
+function prepareFaces(devs){
+    let faces = [];
+    devs.each((d)=>{
+        faces.concat(_.toArray(d.get('dfaces')))
+    });
+    return faces;
+}
 server.on('connection', handleConnection);
 server.listen(PORT, function () {
     console.log('Testing controller server listening to %j', server.address());

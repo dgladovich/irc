@@ -16,6 +16,9 @@ export default View.extend({
           el: '.datepicker-field'
       }
     },
+    onDestroy: function(){
+        clearInterval(this.updatingChart);
+    },
     updateChart: function () {
         let {labels, datasets} = this.chart.data;
 
@@ -62,9 +65,6 @@ export default View.extend({
     _completeUpdate: function () {
         this.updateStore.call(this);
         this.updateChart.call(this);
-    },
-    onDestroy: function () {
-        clearInterval(this.updatingChart);
     },
 
     onPanLeft: function (e) {

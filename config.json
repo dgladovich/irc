@@ -4,10 +4,10 @@
     "typ": 2,
     "ip": "192.168.15.102",
     "port": 3001,
-    "name": "Конвейер мазковый",
+    "name": "Конвейер скребковый",
     "cla": 3,
     "plist": null,
-    "stat": 6,
+    "stat": 0,
     "mode_grp": 2,
     "mode": 3,
     "active": 1,
@@ -28,14 +28,46 @@
         "x": 0,
         "y": 1,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 1,
         "ecode": 0,
         "repairable": 0,
         "visible": 1,
         "spec_act": 0,
         "active": 1,
         "dports": [],
-        "dfaces": {},
+        "dfaces": {
+          "19": {
+            "id": 19,
+            "dev": 46,
+            "tardev": 49,
+            "name": "Подпор",
+            "viewgrp": 8,
+            "viewtype": 1,
+            "stat_grp": 1,
+            "meas": 7,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": 17,
+            "lim_danger": 100,
+            "lim_danger_code": 14,
+            "history_fix": 1,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 156,
+            "show_scat": 1,
+            "visible": 1,
+            "dvars": []
+          }
+        },
         "nominals": [],
         "stats": {
           "0": {
@@ -108,7 +140,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 49,
@@ -126,7 +159,7 @@
         "x": 21,
         "y": 42,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 4,
         "ecode": 0,
         "repairable": 1,
         "visible": 1,
@@ -206,7 +239,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 52,
@@ -224,7 +258,7 @@
         "x": 79,
         "y": 42,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 1,
         "ecode": 0,
         "repairable": 1,
         "visible": 1,
@@ -304,7 +338,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 53,
@@ -322,7 +357,7 @@
         "x": 77,
         "y": 70,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 4,
         "ecode": 0,
         "repairable": 1,
         "visible": 1,
@@ -338,7 +373,39 @@
             "name": "status"
           }
         ],
-        "dfaces": {},
+        "dfaces": {
+          "20": {
+            "id": 20,
+            "dev": 53,
+            "tardev": 52,
+            "name": "Обрыв",
+            "viewgrp": 8,
+            "viewtype": 1,
+            "stat_grp": 1,
+            "meas": 3,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 11,
+            "lim_warning_code": 2,
+            "lim_danger": 100,
+            "lim_danger_code": 6,
+            "history_fix": 1,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 2,
+            "show_scat": 1,
+            "visible": 1,
+            "dvars": []
+          }
+        },
         "nominals": [
           {
             "keyn": "r_wait",
@@ -424,7 +491,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 56,
@@ -442,7 +510,7 @@
         "x": 28,
         "y": 36,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 4,
         "ecode": 0,
         "repairable": 1,
         "visible": 1,
@@ -522,7 +590,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 57,
@@ -540,7 +609,7 @@
         "x": 22,
         "y": 51,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 5,
         "ecode": 0,
         "repairable": 1,
         "visible": 1,
@@ -620,7 +689,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 58,
@@ -638,7 +708,7 @@
         "x": 46,
         "y": 80,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 4,
         "ecode": 0,
         "repairable": 1,
         "visible": 1,
@@ -718,7 +788,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 59,
@@ -736,7 +807,7 @@
         "x": 72,
         "y": 66,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 1,
         "ecode": 0,
         "repairable": 1,
         "visible": 1,
@@ -816,7 +887,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 61,
@@ -834,7 +906,7 @@
         "x": 61,
         "y": 80,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 1,
         "ecode": 0,
         "repairable": 0,
         "visible": 1,
@@ -923,7 +995,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 62,
@@ -941,14 +1014,46 @@
         "x": 50,
         "y": 15,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 1,
         "ecode": 0,
         "repairable": 0,
         "visible": 1,
         "spec_act": 0,
         "active": 1,
         "dports": [],
-        "dfaces": {},
+        "dfaces": {
+          "21": {
+            "id": 21,
+            "dev": 62,
+            "tardev": 62,
+            "name": "Privod",
+            "viewgrp": 10,
+            "viewtype": 2,
+            "stat_grp": 1,
+            "meas": 1,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": null,
+            "lim_danger": 0,
+            "lim_danger_code": null,
+            "history_fix": 1,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 0,
+            "show_scat": 1,
+            "visible": 1,
+            "dvars": []
+          }
+        },
         "nominals": [],
         "stats": {
           "0": {
@@ -1021,7 +1126,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 63,
@@ -1119,7 +1225,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 66,
@@ -1137,7 +1244,7 @@
         "x": 50,
         "y": 46,
         "sgrp": 1,
-        "stat": 6,
+        "stat": 2,
         "ecode": 0,
         "repairable": 0,
         "visible": 1,
@@ -1217,7 +1324,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 67,
@@ -1315,7 +1423,8 @@
             "active": 1,
             "dclass": "die"
           }
-        }
+        },
+        "mode": 0
       },
       {
         "id": 68,
@@ -1567,7 +1676,7 @@
       }
     },
     "alive": 1,
-    "online": 0,
+    "online": 1,
     "speed": 0,
     "host": "",
     "grps": [
@@ -1628,7 +1737,7 @@
         "id": 6,
         "ip": "192.168.15.102",
         "port": 3001,
-        "name": "Конвейер мазковый",
+        "name": "Конвейер скребковый",
         "img": 46
       }
     ]

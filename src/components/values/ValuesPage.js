@@ -25,6 +25,9 @@ export default View.extend({
         let modal = new ChartModal();
         modal.render().$el.modal('show');
         $('body').append(modal.el);
+        modal.$el.on('hidden.bs.modal', ()=>{
+            modal.destroy();
+        })
     },
 /*    onDestroy: function() {
         this.measurments.forEach((measurement) => {
@@ -40,7 +43,8 @@ export default View.extend({
     },
     onRender: function() {
         this.showChildView('tabpanel', new CustomPanel({ collection: this.viewGroups, view: Measurments, viewKey: 'faces' }));
-        this.getChildView('tabpanel').$el.append(`<button class="btn btn-start btn-charts">Графики</button>`).on('click', this.showChartModal.bind(this));
+        this.getChildView('tabpanel').$el.append(`<button class="btn btn-start btn-charts">Графики</button>`);
+        this.$('.btn-charts').on('click', this.showChartModal.bind(this));
        /* this.measurments = [];
         this.showChildView('tabpanel', this.tabPanel);
 

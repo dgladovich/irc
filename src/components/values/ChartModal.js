@@ -23,9 +23,6 @@ export default View.extend({
         this.$el.unwrap();
         this.setElement(this.$el);
         this.showChildView('content', new ChartsCollection({collection: app.faces}));
-        this.$('.modal.fade').on('hidden.bs.modal', ()=>{
-            this.destroy();
-        })
     },
 
 });
