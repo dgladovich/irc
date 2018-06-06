@@ -46,6 +46,7 @@ export default View.extend({
     },
     initialize: function () {
         let name;
+        let hui;
         let type = this.model.get('devicetype');
         console.log(this.model)
         serviceChannel.on(`work:perform:${this.model.get('id')}`, ()=>{
