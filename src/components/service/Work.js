@@ -47,6 +47,7 @@ export default View.extend({
     initialize: function () {
         let name;
         let type = this.model.get('devicetype');
+        console.log(this.model)
         serviceChannel.on(`work:perform:${this.model.get('id')}`, ()=>{
             this.model.set({
                 perform: 1,
@@ -70,6 +71,7 @@ export default View.extend({
 */
 
         if (!_.isNull(type)) {
+            console.log(type)
             if (_.isNull(type.translate)) {
                 name = type.name;
 

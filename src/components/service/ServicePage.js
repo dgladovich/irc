@@ -30,8 +30,10 @@ export default View.extend({
         this.$el.fadeIn('slow');
     },
     initialize: function () {
-        let deviceServices = new Backbone.Collection();
-        deviceServices.url = '/'
+        app.services.url = '/to/services';
+        if (app.services.length === 0) {
+            app.services.fetch();
+        }
         this.tabsContent = new Backbone.Collection([
             {
                 id: "calendar",

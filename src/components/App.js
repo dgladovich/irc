@@ -27,6 +27,7 @@ export default Marionette.Application.extend({
         this.viewgrps = new ViewGroupCollection(prepareViewGroups(data.options[0].viewgrps, this.faces));
         this.controllerConnection = new ControllerConnection();
         this.modes = new Backbone.Collection(_.toArray(this.controller.get('modes')));
+        this.services = new Backbone.Collection();
         this.alarms = new AlarmsCollection();
     },
     onStart(app, options) {

@@ -24,7 +24,7 @@ export default View.extend({
     },
 
     onRender: function () {
-        /*this.$('#calendar-from').fullCalendar({
+        this.$('#calendar-from').fullCalendar({
             events: this.calendarService,
             height: 'auto',
             eventRender: (event, element, view) => {
@@ -91,12 +91,13 @@ export default View.extend({
                 }
 
             }
-        });*/
+        });
     },
     initialize: function () {
         this.calendarService = [];
-        /*this.collection.each((device) => {
-            let service = device.get('service'),
+
+        app.devices.each((device) => {
+            let service = app.services.where({dev: device.get('id')}),
                 devName = device.get('name'),
                 moto = device.get('moto');
             if (service.length > 0) {
@@ -129,6 +130,6 @@ export default View.extend({
                     }
                 })
             }
-        });*/
+        });
     }
 });

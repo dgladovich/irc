@@ -14,6 +14,7 @@ export default View.extend({
     },
 
     onRender: function() {
+        this.collection = app.devices;
         this.showChildView('devicesservice', new DevicesService({
             collection: this.collection
         }));

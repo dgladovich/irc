@@ -120,7 +120,7 @@ export default View.extend({
     },
     initialize: function() {
         this.works = new Backbone.Collection();
-        this.model.get('serviceWorks').map((work) => {
+        this.model.get('service_work').map((work) => {
             this.works.add(Object.assign({ devc: this.model.get('dev') }, work))
         });
         this.performed = new Backbone.Collection();
