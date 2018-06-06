@@ -1,4 +1,6 @@
 const SocketConnector = require('./SocketConnector');
+const jwt = require('jsonwebtoken');
+const SECRET = process.env.AUTH_SECRET;
 
 class SocketServer {
     constructor(opt) {
@@ -28,16 +30,16 @@ class SocketServer {
     sendStatus(devId, stat) {
         let status = {id: devId, stat: stat},
             message = {
-            eventGroup: 'status',
-            data: [Object.assign({}, status)]
-        };
+                eventGroup: 'status',
+                data: [Object.assign({}, status)]
+            };
         this.socketConnector.sendData(message)
     }
 
     sendValue(faceId, def) {
         let message = {
             eventGroup: 'value',
-            data: [{ id: faceId, def: def}]
+            data: [{id: faceId, def: def}]
         };
         this.socketConnector.sendData(message)
     }
@@ -82,14 +84,16 @@ class SocketServer {
     }
 
     handleUserData(data) {
-        let method = data.method;
+        let pack,
+            {method, token, arguments} = data,
+            verified = jwt.verify(token, SECRET),
+            {id} = verified;
         switch (method) {
             case 'confirm':
-                let args = data.arguments,
-                    pack = {
-                        ivan_id: args.ivan_id,
-                        user_id: 1
-                    };
+                pack = {
+                    ivan_id: arguments.ivan_id,
+                    user_id: id
+                };
                 this.broker.confirmAlarm(pack);
                 break;
             case 'repair':
@@ -97,21 +101,28 @@ class SocketServer {
                 break;
             case 'speed':
                 console.log(data)
-                this.broker.changeSpeed(data)
+                pack = {
+                    user_id: id,
+
+                };
+                this.broker.changeSpeed(pack)
                 break;
             case 'start':
-                console.log(data)
-                this.broker.startController(data)
+                pack = {
+                    user_id: id
+                };
+                this.broker.startController(pack);
                 break;
             case 'stop':
-                console.log(data)
-                this.broker.stopController(data)
+                pack = {
+                    user_id: id,
+                };
+                this.broker.stopController(pack)
                 break;
             default:
                 console.log(`Unknown controll command method type: ${method}`.red);
                 return;
         }
-        this.broker.confirmAlarm();
     }
 
     validateData() {

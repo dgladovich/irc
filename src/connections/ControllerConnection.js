@@ -35,7 +35,8 @@ export default class ControllerConnection {
     onControllerStop() {
         let pack = {
             eventGroup: 'controll',
-            method: 'stop'
+            method: 'stop',
+            token: store.get('token')
         };
         this.socket.emit('controller', pack);
     }
@@ -43,7 +44,8 @@ export default class ControllerConnection {
     onControllerStart() {
         let pack = {
             eventGroup: 'controll',
-            method: 'start'
+            method: 'start',
+            token: store.get('token')
         };
         this.socket.emit('controller', pack);
     }
@@ -53,7 +55,8 @@ export default class ControllerConnection {
         let pack = {
             eventGroup: 'controll',
             method: 'speed',
-            arguments: {speed: speed}
+            arguments: {speed: speed},
+            token: store.get('token')
 
         };
         this.socket.emit('controller', pack);

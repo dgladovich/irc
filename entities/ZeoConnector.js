@@ -34,6 +34,9 @@ class ZeoConnector {
     onConnectFail() {
         console.log('Connection Failed'.grey);
     }
+    onZeoControllEvent(cmnd){
+        console.log(cmnd)
+    }
 
     onZeoEvent(cmnd) {
         let eventGroup = cmnd.eventGroup;

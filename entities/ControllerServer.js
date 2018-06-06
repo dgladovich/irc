@@ -41,7 +41,9 @@ class ControllerServer {
     ////////////////////////
     //COMMANDS TO CONTROLLER
     ////////////////////////
-    changeSpeed(speed){}
+    changeSpeed(speed){
+        console.log(speed)
+    }
     startController(){}
     stopController(){}
     confirmAlarm(){}

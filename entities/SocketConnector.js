@@ -1,4 +1,5 @@
 const server = require('http').Server();
+
 const io = require('socket.io')(server);
 const socketioJwt = require('socketio-jwt');
 const PORT = process.env.CONTROLLER_PORT,
@@ -35,7 +36,9 @@ class SocketConnector {
         console.log('Connection Failed'.grey);
     }
     onUserData(socket, data){
-        this.server.handleUserData(data);
+        if(data.token){
+            this.server.handleUserData(data);
+        }
     }
 }
 module.exports = SocketConnector;

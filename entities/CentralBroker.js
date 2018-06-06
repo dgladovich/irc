@@ -23,9 +23,11 @@ class CentralBroker {
         this.writingBuffer = setInterval(this.uploadBuffer.bind(this), 15000)
 
     }
-    getControllerStatus(){
+
+    getControllerStatus() {
         return this.dh.getControllerStatus();
     }
+
     getInitialSpeed() {
         return this.dh.getSpeed();
     }
@@ -52,15 +54,22 @@ class CentralBroker {
         this.socketServer.sendStatus(id, stat);
         this.zeoClient.sendStatus(id, stat);
     }
-    handleChangedValue(value){
+
+    handleChangedValue(value) {
         let {id, def} = value;
         this.dh.updateValue(id, def);
         this.socketServer.sendValue(id, def);
         this.zeoClient.sendValue(id, def);
     }
-    handleChangedMode(mode){}
-    handleAlarmOrigin(data){}
-    handleExecutedCommand(data){}
+
+    handleChangedMode(mode) {
+    }
+
+    handleAlarmOrigin(data) {
+    }
+
+    handleExecutedCommand(data) {
+    }
 
     onAlarmOrigin(pack) {
         const alarm = pack.data;
@@ -216,37 +225,39 @@ class CentralBroker {
     setRepair() {
     }
 
-    startController() {
+    startController(pack) {
+        console.log(pack)
     }
 
-    stopController() {
+    stopController(pack) {
+        console.log(pack)
     }
 
     changeSpeed(pack) {
-        if (pack) {
-            let uuid = uuidv1(),
-                changeSpeedMessage = {
-                    eventGroup: 'controll',
-                    method: 'speed',
-                    arguments: {
-                        uuid: uuid
-                    }
-                },
-                queueMessage = {
-                    method: 'speed',
-                    argument: +pack.arguments.speed,
-                    user_id: pack.user_id,
+        console.log(pack)
+        let uuid = uuidv1(),
+            changeSpeedMessage = {
+                eventGroup: 'controll',
+                method: 'speed',
+                arguments: {
                     uuid: uuid
-                };
-            this.dh
-                .addQueue(queueMessage)
-                .then((data) => {
-                    this.controllerServer.sendDataToController(changeSpeedMessage);
-                })
-                .catch((e) => {
-                    console.error(e)
-                });
-        }
+                }
+            },
+            queueMessage = {
+/*                method: 'speed',
+                argument: +pack.arguments.speed,
+                user_id: pack.user_id,
+                uuid: uuid*/
+            };
+        this.dh
+            .addQueue(queueMessage)
+            .then((data) => {
+                this.controllerServer.changeSpeed(args);
+            })
+            .catch((e) => {
+                console.error(e)
+            });
+
 
     }
 
