@@ -6,12 +6,19 @@ const AlarmsCollection = require('./collections/AlarmsCollection');
 const _ = require('lodash');
 const config = require('../config.json');
 
+function prepareFaces(devs){
+    let faces = [];
+    devs.each((d)=>{
+        faces = faces.concat(_.toArray(d.get('dfaces')))
+    });
+    return faces;
+}
 class MemoryDataBase {
     constructor(){
         this.speed = 0;
         this.controller = new ControllerModel(config.ctrl);
         this.devices = new DevicesCollection(config.ctrl.devs);
-        this.faces = new FacesCollection(_.toArray(config.ctrl.cfaces));
+        this.faces = new FacesCollection(prepareFaces(this.devices));
         this.queues = new QueueCollection();
         this.alarms = new AlarmsCollection();
     }
@@ -52,7 +59,7 @@ class MemoryDataBase {
         this.devices.findWhere({id: +id}).set({stat: +status});
     }
     updateFaceValue(id, value){
-        this.faces.findWhere({id: +id}).set('def', value);
+        this.faces.findWhere({id: +id}).set('def', +value);
     }
     updateQueue(uuid, status){
         let executedQueue = this.queues.findWhere({uuid: uuid});

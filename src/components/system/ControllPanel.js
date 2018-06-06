@@ -7,9 +7,7 @@ import Radio from 'backbone.radio';
 import Noty from 'noty';
 import { View, Model, CollectionView } from 'backbone.marionette';
 
-
-const ch = Radio.channel('controller');
-let channel = Radio.channel('controll');
+let ch = Radio.channel('controll');
 
 const ControllPanelModel = Backbone.Model.extend({
     initialize: function() {
@@ -162,31 +160,16 @@ export default View.extend({
         e.preventDefault();
     },
     startDevice: function() {
-        channel.trigger('send:status', {
-            ctrl: this.model.get('ctrl'),
-            dev: this.model.get('lid'),
-            cmd: '_start',
-        })
+        ch.trigger('command:start')
+        console.log('starting device')
     },
     stopDevice: function() {
-        channel.trigger('send:status', {
-            ctrl: this.model.get('ctrl'),
-            dev: this.model.get('lid'),
-            cmd: '_stop',
-        })
+        ch.trigger('command:stop')
+        console.log('stop device')
     },
     changeSpeed: function() {
-        channel.trigger('send:status', {
-            ctrl: this.model.get('ctrl'),
-            cmd: '_speed',
-            val: this.previousSpeed
-        });
-        ch.trigger('controller', {
-            action: 'speed',
-            arguments: {
-                speed: this.previousSpeed
-            }
-        })
+        console.log('changing speed')
+        ch.trigger('command:speed', this.previousSpeed);
     },
     updateMode: function(){
         let mode = this.controller.get('mode');

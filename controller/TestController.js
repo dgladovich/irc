@@ -14,16 +14,17 @@ const FacesCollection = require('./collections/FacesCollection');
 
 const controller = new ControllerModel(config.ctrl);
 const devices = new DevicesCollection(config.ctrl.devs);
-const faces = new FacesCollection((config.ctrl.cfaces));
+const faces = new FacesCollection(prepareFaces(devices));
 
 controller.set({
     devices: devices,
     faces: faces
 });
+
 function prepareFaces(devs){
     let faces = [];
     devs.each((d)=>{
-        faces.concat(_.toArray(d.get('dfaces')))
+        faces = faces.concat(_.toArray(d.get('dfaces')))
     });
     return faces;
 }

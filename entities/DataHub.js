@@ -69,9 +69,8 @@ class DataHub {
         this.mdb.updateDeviceStatus(deviceId, status);
     }
 
-    updateValue(value) {
-        let {id, def} = value;
-        this.mdb.updateFaceValue(id, def);
+    updateValue(faceId, def) {
+        this.mdb.updateFaceValue(faceId, def);
     }
 
     removeAlarm(uuid) {

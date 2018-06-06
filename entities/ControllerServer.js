@@ -27,8 +27,11 @@ class ControllerServer {
            this.broker.handleChangedStatus(status);
        })
     }
-    onChangeValue(data){
-        console.log(data)
+    onChangeValue(data) {
+        let values = data.data;
+        values.forEach((value)=>{
+            this.broker.handleChangedValue(value)
+        });
     }
     onOriginAlarm(alarm) {}
     onControllerCommandExecution(command){}

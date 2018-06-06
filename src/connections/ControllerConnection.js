@@ -3,6 +3,7 @@ import store from 'store';
 import Radio from 'backbone.radio';
 
 const ch = Radio.channel('controller');
+const channel = Radio.channel('controll');
 
 export default class ControllerConnection {
     constructor() {
@@ -26,6 +27,36 @@ export default class ControllerConnection {
 
     _bindUserEvents() {
         ch.on('controller', this.onUserAction.bind(this));
+        channel.on('command:stop', this.onControllerStop.bind(this));
+        channel.on('command:start', this.onControllerStart.bind(this));
+        channel.on('command:speed', this.onControllerSpeedChange.bind(this));
+    }
+
+    onControllerStop() {
+        let pack = {
+            eventGroup: 'controll',
+            method: 'stop'
+        };
+        this.socket.emit('controller', pack);
+    }
+
+    onControllerStart() {
+        let pack = {
+            eventGroup: 'controll',
+            method: 'start'
+        };
+        this.socket.emit('controller', pack);
+    }
+
+    onControllerSpeedChange(speed) {
+
+        let pack = {
+            eventGroup: 'controll',
+            method: 'speed',
+            arguments: {speed: speed}
+
+        };
+        this.socket.emit('controller', pack);
     }
 
     onUserAction(data) {

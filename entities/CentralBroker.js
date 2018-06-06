@@ -52,7 +52,12 @@ class CentralBroker {
         this.socketServer.sendStatus(id, stat);
         this.zeoClient.sendStatus(id, stat);
     }
-    handleChangedValue(value){}
+    handleChangedValue(value){
+        let {id, def} = value;
+        this.dh.updateValue(id, def);
+        this.socketServer.sendValue(id, def);
+        this.zeoClient.sendValue(id, def);
+    }
     handleChangedMode(mode){}
     handleAlarmOrigin(data){}
     handleExecutedCommand(data){}
@@ -91,16 +96,6 @@ class CentralBroker {
             this.socketServer.sendStatus(status);
             this.zeoClient.sendStatus(status);
         })
-    }
-
-    onChangeDeviceValue(pack) {
-        const values = pack.data;
-        values.forEach((value) => {
-            this.dh.updateValue(value);
-            this.writeValueBuffer(value)
-            this.socketServer.sendValue(value);
-            this.zeoClient.sendValue(value)
-        });
     }
 
     onChangeDeviceMode(pack) {

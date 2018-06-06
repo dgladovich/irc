@@ -34,10 +34,10 @@ class SocketServer {
         this.socketConnector.sendData(message)
     }
 
-    sendValue(value) {
+    sendValue(faceId, def) {
         let message = {
             eventGroup: 'value',
-            data: [Object.assign({}, value)]
+            data: [{ id: faceId, def: def}]
         };
         this.socketConnector.sendData(message)
     }
@@ -96,12 +96,15 @@ class SocketServer {
                 this.broker.setRepair(data)
                 break;
             case 'speed':
+                console.log(data)
                 this.broker.changeSpeed(data)
                 break;
             case 'start':
+                console.log(data)
                 this.broker.startController(data)
                 break;
             case 'stop':
+                console.log(data)
                 this.broker.stopController(data)
                 break;
             default:

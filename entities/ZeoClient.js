@@ -37,6 +37,9 @@ class ZeoClient {
             };
         this.zeoConnector.sendData(apiStatus)
     }
+    sendValue(faceId, def){
+
+    }
 
     sendSpeed(speed) {
         let apiSpeed = {};
