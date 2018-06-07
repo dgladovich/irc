@@ -34,18 +34,52 @@ class ControllerServer {
         });
     }
     onOriginAlarm(alarm) {}
-    onControllerCommandExecution(command){}
-    onChangeSpeed(speed){}
-    onChangeMode(){}
+    onControllerCommandExecution(command){
+        console.log(command)
+    }
+    onChangeSpeed(speed){
+        console.log(speed)
+    }
+    onChangeMode(mode){
+        console.log(mode)
+    }
 
     ////////////////////////
     //COMMANDS TO CONTROLLER
     ////////////////////////
-    changeSpeed(speed){
-        console.log(speed)
+    _prepareCommand(uuid, method, ){
+        
     }
-    startController(){}
-    stopController(){}
+    changeSpeed(speed, uuid){
+        let changeSpeedMessage = {
+            eventGroup: 'controll',
+            method: 'speed',
+            arguments: {
+                uuid: uuid
+            }
+        };
+        this.controllerConnector.sendDataToController(changeSpeedMessage);
+    }
+    startController(uuid){
+        let stopCommand = {
+            eventGroup: 'controll',
+            method: 'stop',
+            arguments: {
+                uuid: uuid   
+            }
+        };
+        this.controllerConnector.sendDataToController(stopCommand);
+    }
+    stopController(uuid){
+        let startCommand = {
+            eventGroup: 'controll',
+            method: 'start',
+            arguments: {
+                uuid: uuid
+            }
+        };
+        this.controllerConnector.sendDataToController(startCommand);
+    }
     confirmAlarm(){}
 
 

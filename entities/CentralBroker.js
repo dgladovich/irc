@@ -234,25 +234,20 @@ class CentralBroker {
     }
 
     changeSpeed(pack) {
-        console.log(pack)
+        console.log(pack);
+
         let uuid = uuidv1(),
-            changeSpeedMessage = {
-                eventGroup: 'controll',
-                method: 'speed',
-                arguments: {
-                    uuid: uuid
-                }
-            },
+            {speed, user_id} = pack,
             queueMessage = {
                 method: 'speed',
-                argument: +pack.speed,
-                user_id: +pack.user_id,
+                argument: +speed,
+                user_id: +user_id,
                 uuid: uuid
             };
         this.dh
             .addQueue(queueMessage)
             .then((data) => {
-                this.controllerServer.changeSpeed(args);
+                this.controllerServer.changeSpeed(speed, uuid);
             })
             .catch((e) => {
                 console.error(e)
