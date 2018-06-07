@@ -245,8 +245,8 @@ class CentralBroker {
             },
             queueMessage = {
                 method: 'speed',
-                argument: +pack.arguments.speed,
-                user_id: pack.user_id,
+                argument: +pack.speed,
+                user_id: +pack.user_id,
                 uuid: uuid
             };
         this.dh

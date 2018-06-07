@@ -87,7 +87,7 @@ class SocketServer {
         console.log(data)
         let pack,
             {method, token} = data,
-            args = data.argunents,
+            args = data.arguments,
             verified = jwt.verify(token, SECRET),
             { id } = verified;
         switch (method) {
