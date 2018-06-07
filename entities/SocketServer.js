@@ -84,14 +84,16 @@ class SocketServer {
     }
 
     handleUserData(data) {
+        console.log(data)
         let pack,
-            {method, token, arguments} = data,
+            {method, token} = data,
+            args = data.argunents,
             verified = jwt.verify(token, SECRET),
-            {id} = verified;
+            { id } = verified;
         switch (method) {
             case 'confirm':
                 pack = {
-                    ivan_id: arguments.ivan_id,
+                    ivan_id: args.ivan_id,
                     user_id: id
                 };
                 this.broker.confirmAlarm(pack);
@@ -100,8 +102,8 @@ class SocketServer {
                 this.broker.setRepair(data)
                 break;
             case 'speed':
-                console.log(data)
                 pack = {
+                    speed: args.speed,
                     user_id: id,
 
                 };
