@@ -18,8 +18,8 @@ const BodyRowView = View.extend({
     tagName: 'tr',
     template: body_row,
     updateStatus: function(){
-        console.log('I am updating status');
-        console.log(this.model.toJSON())
+       // console.log('I am updating status');
+       // console.log(this.model.toJSON())
     },
     onRender: function(){
         this.updateStatus.call(this);
