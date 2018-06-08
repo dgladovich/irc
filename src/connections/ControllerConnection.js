@@ -1,9 +1,10 @@
 import io from 'socket.io-client';
-import store from 'store';
 import Radio from 'backbone.radio';
+import store from 'store';
 
 const ch = Radio.channel('controller');
 const channel = Radio.channel('controll');
+const authChannel = Radio.channel('auth');
 
 export default class ControllerConnection {
     constructor() {
@@ -23,6 +24,7 @@ export default class ControllerConnection {
 
     _bindEvents() {
         this.socket.on('controller', this.onReciveDataFromController.bind(this))
+        this.socket.on('auth', this.onControllerRequireAuth.bind(this))
     }
 
     _bindUserEvents() {
@@ -81,7 +83,11 @@ export default class ControllerConnection {
 
         }
     }
-
+    onControllerRequireAuth(){
+        store.remove('user');
+        store.remove('token');
+        authChannel.trigger('change:auth');
+    }
     onUserAlarmConfirmation(data) {
         let userConfirmation = {
             eventGroup: 'controll',

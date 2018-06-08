@@ -37,8 +37,11 @@ class SocketConnector {
     }
     onUserData(socket, data){
         if(data.token){
-            this.server.handleUserData(data);
+            this.server.handleUserData(data, socket);
         }
+    }
+    requireAuth(socket){
+        socket.emit('auth')
     }
 }
 module.exports = SocketConnector;

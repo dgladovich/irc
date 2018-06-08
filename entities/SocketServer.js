@@ -1,6 +1,7 @@
 const SocketConnector = require('./SocketConnector');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.AUTH_SECRET;
+const _ = require('lodash');
 
 class SocketServer {
     constructor(opt) {
@@ -51,6 +52,7 @@ class SocketServer {
         };
         this.socketConnector.sendData(message);
     }
+    sendAuthRequired(){}
 
     sendInitialData(socket) {
         let alarms = this.broker.getUserInitialAlarms(),
@@ -82,48 +84,59 @@ class SocketServer {
             });
         }, 750);
     }
+    _onTokenVerifyError(socket, err, data){
+        if(err){
+            this.socketConnector.requireAuth(socket);
+        }
+    }
 
-    handleUserData(data) {
-        console.log(data)
-        let pack,
+    handleUserData(data, socket) {
+        //console.log(data)
+        let pack, userId,
             {method, token} = data,
             args = data.arguments,
-            verified = jwt.verify(token, SECRET),
-            { id } = verified;
-        switch (method) {
-            case 'confirm':
-                pack = {
-                    ivan_id: args.ivan_id,
-                    user_id: id
-                };
-                this.broker.confirmAlarm(pack);
-                break;
-            case 'repair':
-                this.broker.setRepair(data)
-                break;
-            case 'speed':
-                pack = {
-                    speed: args.speed,
-                    user_id: id,
+            verified = jwt.verify(token, SECRET, this._onTokenVerifyError.bind(this, socket));
+        if(verified){
+            console.log('Everything is all right with token', verified)
+            userId = verified.id;
+            switch (method) {
+                case 'confirm':
+                    pack = {
+                        ivan_id: args.ivan_id,
+                        user_id: userId
+                    };
+                    this.broker.confirmAlarm(pack);
+                    break;
+                case 'repair':
+                    this.broker.setRepair(data)
+                    break;
+                case 'speed':
+                    pack = {
+                        speed: args.speed,
+                        user_id: userId,
 
-                };
-                this.broker.changeSpeed(pack)
-                break;
-            case 'start':
-                pack = {
-                    user_id: id
-                };
-                this.broker.startController(pack);
-                break;
-            case 'stop':
-                pack = {
-                    user_id: id,
-                };
-                this.broker.stopController(pack)
-                break;
-            default:
-                console.log(`Unknown controll command method type: ${method}`.red);
-                return;
+                    };
+                    this.broker.changeSpeed(pack)
+                    break;
+                case 'start':
+                    pack = {
+                        user_id: userId
+                    };
+                    this.broker.startController(pack);
+                    break;
+                case 'stop':
+                    pack = {
+                        user_id: userId,
+                    };
+                    this.broker.stopController(pack)
+                    break;
+                default:
+                    console.log(`Unknown controll command method type: ${method}`.red);
+                    return;
+            }
+
+        } else {
+            //console.error('Something wrong with Token')
         }
     }
 
