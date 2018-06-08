@@ -144,7 +144,7 @@ const BrokesTable = View.extend({
     }
 });
 
-export default  View.extend({
+export default View.extend({
     template: broke_tab,
     regions: {
         table: '#brokes-table'
