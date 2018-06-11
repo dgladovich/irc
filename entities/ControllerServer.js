@@ -5,11 +5,12 @@ class ControllerServer {
         this.broker = opt.broker;
         this.controllerConnector = new ControllerConnector({server: this});
     }
-    connect(){
+
+    connect() {
         this.controllerConnector.connect();
     }
 
-    sendControllerInitialData(){
+    sendControllerInitialData() {
         let queues = this.broker.getInitialQueues();
         this.controllerConnector.sendDataToController(queues);
     }
@@ -18,39 +19,47 @@ class ControllerServer {
     //DATA FROM CONTROLLER
     ///////////////////////////
 
-    onControllerOffline(){
+    onControllerOffline() {
         this.broker.setDevicesOffline();
     }
+
     onChangeStatus(data) {
-       let statuses = data.data;
-       statuses.forEach((status)=>{
-           this.broker.handleChangedStatus(status);
-       })
+        let statuses = data.data;
+        statuses.forEach((status) => {
+            this.broker.handleChangedStatus(status);
+        })
     }
+
     onChangeValue(data) {
         let values = data.data;
-        values.forEach((value)=>{
+        values.forEach((value) => {
             this.broker.handleChangedValue(value)
         });
     }
-    onOriginAlarm(alarm) {}
-    onControllerCommandExecution(command){
+
+    onOriginAlarm(alarm) {
+    }
+
+    onControllerCommandExecution(command) {
         console.log(command)
     }
-    onChangeSpeed(speed){
+
+    onChangeSpeed(speed) {
         console.log(speed)
     }
-    onChangeMode(mode){
+
+    onChangeMode(mode) {
         console.log(mode)
     }
 
     ////////////////////////
     //COMMANDS TO CONTROLLER
     ////////////////////////
-    _prepareCommand(uuid, method, ){
-        
+    _prepareCommand(uuid, method,) {
+
     }
-    changeSpeed(speed, uuid){
+
+    changeSpeed(speed, uuid) {
         let changeSpeedMessage = {
             eventGroup: 'controll',
             method: 'speed',
@@ -60,17 +69,19 @@ class ControllerServer {
         };
         this.controllerConnector.sendDataToController(changeSpeedMessage);
     }
-    startController(uuid){
+
+    startController(uuid) {
         let stopCommand = {
             eventGroup: 'controll',
             method: 'stop',
             arguments: {
-                uuid: uuid   
+                uuid: uuid
             }
         };
         this.controllerConnector.sendDataToController(stopCommand);
     }
-    stopController(uuid){
+
+    stopController(uuid) {
         let startCommand = {
             eventGroup: 'controll',
             method: 'start',
@@ -80,7 +91,18 @@ class ControllerServer {
         };
         this.controllerConnector.sendDataToController(startCommand);
     }
-    confirmAlarm(){}
+
+    confirmAlarm() {
+        let startCommand = {
+            eventGroup: 'controll',
+            method: 'confirm',
+            arguments: {
+                uuid: uuid,
+                alarmId: alarmId
+            }
+        };
+        this.controllerConnector.sendDataToController(startCommand);
+    }
 
 
     ////////////////////////
@@ -103,6 +125,9 @@ class ControllerServer {
                 break;
             case 'mode':
                 this.onChangeMode(data);
+                break;
+            case 'state':
+                this.onChangeState(data);
                 break;
             default:
                 console.log(`Uncorrect event type ${event}, ${data}`.red)

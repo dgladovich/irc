@@ -21,13 +21,14 @@ controller.set({
     faces: faces
 });
 
-function prepareFaces(devs){
+function prepareFaces(devs) {
     let faces = [];
-    devs.each((d)=>{
+    devs.each((d) => {
         faces = faces.concat(_.toArray(d.get('dfaces')))
     });
     return faces;
 }
+
 server.on('connection', handleConnection);
 server.listen(PORT, function () {
     console.log('Testing controller server listening to %j', server.address());
@@ -96,6 +97,9 @@ function generateData(action) {
         case 'values':
             return generateValues();
             break;
+        case 'state':
+            return generateValues();
+            break;
         case 'alarm':
             return generateAlarm();
             break;
@@ -135,7 +139,7 @@ function handleConnection(conn) {
             console.log(e);
         }
         console.log(body)
-        let message = {eventGroup: 'controll', data: {uuid: body.arguments.uuid, executed: true}};
+        let message = {eventGroup: 'controll', data: {uuid: body.arguments.uuid, executed: false}};
         setTimeout(() => {
             conn.write(JSON.stringify(message))
         }, 1000);
@@ -150,3 +154,14 @@ function handleConnection(conn) {
         console.log('Connection %s error: %s', remoteAddress, err.message);
     }
 }
+
+
+let shit = [
+    {
+        eventGroup: 'status',
+        data: {
+            id: 123,
+
+        }
+    }
+]
