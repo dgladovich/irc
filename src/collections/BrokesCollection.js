@@ -8,7 +8,7 @@ export default Backbone.Collection.extend({
         app.devices.each((device) => {
             if (device.get('stat') === 2 || device.get('stat') === 3 || device.get('stat') === 5) {
                 let valveStatus = app.statuses.findWhere({
-                    grp: device.get('sgrp'),
+                    s_grp: device.get('sgrp'),
                     num: device.get('stat')
                 });
                 let error = app.errors.findWhere({
