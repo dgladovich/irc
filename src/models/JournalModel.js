@@ -1,4 +1,4 @@
-export default Backbone.RelationalModel.extend({
+export default Backbone.Model.extend({
     initialize: function(){
     }
 });

@@ -1,7 +1,6 @@
 import Backbone from 'backbone';
-import 'backbone-relational';
 
-export default Backbone.RelationalModel.extend({
+export default Backbone.Model.extend({
     initialize: function(){
         console.log('its init')
         this.on('change:stat', ()=>{

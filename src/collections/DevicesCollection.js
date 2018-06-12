@@ -1,5 +1,4 @@
 import Device from '../models/Device';
-import store from 'store';
 
 export default Backbone.Collection.extend({
     model: Device,

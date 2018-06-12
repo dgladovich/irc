@@ -1,3 +1,1 @@
-export default Backbone.RelationalModel.extend({
-    relations: []
-});
+export default Backbone.Model.extend({});
