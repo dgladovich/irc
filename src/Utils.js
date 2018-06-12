@@ -48,6 +48,10 @@ export function loadJSONData(data) {
     }));
 
 }
+export function preparePickList(obj) {
+    let arr = _.toArray(obj);
+    return arr
+}
 
 export function prepareViewGroups(groups, faces) {
     return _.filter(_.toArray(groups), (group) => {

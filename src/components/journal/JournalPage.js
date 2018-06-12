@@ -7,14 +7,10 @@ import Radio from 'backbone.radio';
 
 const channel = Radio.channel('network');
 const alarm = Radio.channel('confirm');
-
-const model = new Backbone.Model({
-    title: 'Журнал событий'
-});
+const menu_event_journal = 'menu_event_journal', menu_brokes_journal = 'menu_brokes_journal';
 
 export default View.extend({
     template: template,
-    model: model,
     events: {
         'click #close-page': 'hidePage'
     },
@@ -31,16 +27,19 @@ export default View.extend({
         this.$el.fadeIn('slow');
     },
     initialize: function () {
+        this.model = new Backbone.Model({
+            title: app.language[menu_event_journal] || menu_event_journal
+        });
         this.tabsContent = new Backbone.Collection([
             {
                 id: "brokes",
                 view: BrokesPage,
-                translate: app.language['current_brokes'] || `Текущие неисправности`
+                translate: app.language[menu_brokes_journal] || menu_brokes_journal
             },
             {
                 id: "events",
                 view: JournalTab,
-                translate: app.language['events_journal'] || 'Журнал событий'
+                translate: app.language[menu_event_journal] || menu_event_journal
             }
         ]);
     }

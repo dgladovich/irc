@@ -1,3 +1,4 @@
+<%let enter = 'btn_enter', login='login_name', password='login_password';%>
 <div class="t-wrap">
     <div class="t-c-m">
         <div class="authorize-logo">
@@ -10,7 +11,7 @@
                         <div class="input-group-addon"><span class="icon-user-o">&nbsp;</span></div>
                         <select class="form-control" id="username">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                             &nbsp; &nbsp;&nbsp;
-                            <option disabled="" selected="" value="">Логин</option>
+                            <option disabled="" selected="" value=""><%= app.language[login] || login %></option>
                             &nbsp;</select>
                     </div>
                 </div>
@@ -18,11 +19,11 @@
                     <div class="input-group">
                         <div class="input-group-addon"><span class="icon-key">&nbsp;</span></div>
                         <input type="password" class="form-control" id="password"
-                               placeholder="Пароль">
+                               placeholder="<%= app.language[password] || password %>">
                     </div>
                 </div>
                 <p class="text-center">
-                    <button class="btn btn-primary" id="login" type="submit" disabled>Войти</button>
+                    <button class="btn btn-primary" id="login" type="submit" disabled><%= app.language[enter] || enter %></button>
                 </p>
             </div>
         </div>

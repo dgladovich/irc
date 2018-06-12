@@ -2,13 +2,10 @@ import ControllPanel from './ControllPanel';
 import template from '../general/templates/page.jst';
 import { View, Model } from 'backbone.marionette';
 
-const model = new Backbone.Model({
-    title: 'Управление системой'
-});
+const tit_ctr  = 'tit_ctr';
  
 export default View.extend({
     template: template,
-    model: model,
     events: {
         'click #close-page': 'hidePage'
     },
@@ -25,6 +22,10 @@ export default View.extend({
         this.$el.fadeIn('slow');
 
     },
-    initialize: function() {}
+    initialize: function() {
+        this.model = new Backbone.Model({
+            title: app.language[tit_ctr] || tit_ctr
+        });
+    }
 
 });

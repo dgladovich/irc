@@ -8,14 +8,10 @@ import Passport from './Passport';
 import PickingList from './PickingList';
 import Instruction from './Instruction';
 
-const model = new Backbone.Model({
-    title: 'Паспорт оборудования'
-});
-
+const menu_device_passport = 'menu_device_passport', tit_plists = 'tit_plists', tit_shield = 'tit_shield', tit_passport = 'tit_passport', tit_instruction = 'tit_instruction';
 
 export default View.extend({
     template: template,
-    model: model,
     events: {
         'click #close-page': 'hidePage'
     },
@@ -50,26 +46,29 @@ export default View.extend({
         /*        this.tabPanel = new TabPanel({
          collection: this.viewGroups,
          });*/
+        this.model = new Backbone.Model({
+            title: app.language[menu_device_passport] || menu_device_passport
+        });
         this.tabsContent = new Backbone.Collection([
             {
                 id: "shield",
                 view: Shield,
-                translate: app.language['passport_shield'] || `Шильдик`
+                translate: app.language[tit_shield] || tit_shield
             },
             {
                 id: "passport",
                 view: Passport,
-                translate: app.language['passport_page'] || 'Паспорт'
+                translate: app.language[tit_passport] || tit_passport
             },
             {
                 id: "picking_list",
                 view: PickingList,
-                translate: app.language['picking_list_page'] || 'Комплектовочная ведомость'
+                translate: app.language[tit_plists] || tit_plists
             },
             {
                 id: "instruction_page",
                 view: Instruction,
-                translate: app.language['instruction_page_'] || 'Инструкция по эксплуатации'
+                translate: app.language[tit_instruction] || tit_instruction
             },
         ]);
     }

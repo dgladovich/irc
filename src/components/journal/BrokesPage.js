@@ -8,6 +8,7 @@ import body_row from './templates/brokes/body_row.jst';
 import table_template from '../general/templates/table_template.jst';
 import empty_brokes from './templates/brokes/empty_brokes.jst';
 
+const empty_brokes_mess = 'empty_brokes_mess';
 
 const EmptyBrokes = View.extend({
     template: empty_brokes,
@@ -154,7 +155,7 @@ export default View.extend({
             this.$('#brokes-table').empty();
             this.showChildView('table', new BrokesTable({collection: this.collection}));
         } else {
-            this.$('#brokes-table').html('<div style="text-align: center; margin: 150px;"><h3>Неисправностей нет</h3></div>');
+            this.$('#brokes-table').html(`<div style="text-align: center; margin: 150px;"><h3>${app.language[empty_brokes_mess] || empty_brokes_mess}</h3></div>`);
         }
 
     },

@@ -7,7 +7,7 @@ import Noty from 'noty';
 import aja from 'aja';
 
 const authChannel = Radio.channel('auth');
-
+const error_while_auth = 'error_while_auth';
 const UserModel = Model.extend({
     urlRoot: function () {
         return 'login';
@@ -51,7 +51,7 @@ export default View.extend({
             .on('500', (response)=>{
                 console.log('some server errors');
                 new Noty({
-                    text: 'Ошибка при авторизации',
+                    text: app.language[error_while_auth] || error_while_auth,
                     theme: 'metroui',
                     type: 'error',
                     layout: 'topCenter',

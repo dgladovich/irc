@@ -1,2 +1,3 @@
-<h4>Возникли неполадки при подключении к камере</h4>
-<button class="btn btn-default">Попробовать снова</button>
+<%let error_while_camera_connect = 'error_while_camera_connect', button_try_again = 'button_try_again';%>
+<h4><%= app.language[error_while_camera_connect] || error_while_camera_connect %></h4>
+<button class="btn btn-default"><%= app.language[button_try_again] || button_try_again %></button>

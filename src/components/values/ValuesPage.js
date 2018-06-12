@@ -6,13 +6,10 @@ import ValvesView from './ValvesView';
 import template from '../general/templates/page.jst';
 import ChartModal from './ChartModal';
 
-const model = new Backbone.Model({
-    title: 'Текущие показатели'
-});
+const button_charts = 'button_charts', menu_current_values = 'menu_current_values';
 
 export default View.extend({
     template: template,
-    model: model,
     events: {
         'click #close-page': 'hidePage'
     },
@@ -43,7 +40,7 @@ export default View.extend({
     },
     onRender: function() {
         this.showChildView('tabpanel', new CustomPanel({ collection: this.viewGroups, view: Measurments, viewKey: 'faces' }));
-        this.getChildView('tabpanel').$el.append(`<button class="btn btn-start btn-charts">Графики</button>`);
+        this.getChildView('tabpanel').$el.append(`<button class="btn btn-start btn-charts">${app.language[button_charts] || button_charts}</button>`);
         this.$('.btn-charts').on('click', this.showChartModal.bind(this));
        /* this.measurments = [];
         this.showChildView('tabpanel', this.tabPanel);
@@ -99,6 +96,10 @@ export default View.extend({
 
     },
     initialize: function() {
+        this.model = new Backbone.Model({
+            title: app.language[menu_current_values] || menu_current_values
+        });
+
         this.viewGroups = app.viewgrps;
     }
 

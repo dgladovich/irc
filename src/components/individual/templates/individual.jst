@@ -1,3 +1,4 @@
+<%let smart_asu = 'smart_asu', smart_lab='smart_lab', smart_logistics = 'smart_logistics'%>
 <div class="container">
     <div class="header-wrap">
         <a type="button" id="close-page" class="btn btn-default btn-back"><span></span></a>
@@ -12,7 +13,7 @@
                     <div class="circle-item">
                         <a href="http://192.168.3.188:80">
                             <div class="circle-image"><img src="i-ind1.png"></div>
-                            <div class="circle-title">SMART-АСУ</div>
+                            <div class="circle-title"><%= app.language[smart_asu] || smart_asu %></div>
                         </a>
                     </div>
                 </div> 
@@ -20,7 +21,7 @@
                     <div class="circle-item notActive">
                         <div>   <!--a href="http://zeo.ua"-->
                             <div class="circle-image"><img src="i-ind2.png"></div>
-                            <div class="circle-title">SMART-Лаборатория</div>
+                            <div class="circle-title"><%= app.language[smart_lab] || smart_lab %></div>
                         </div>
                     </div>
                 </div>
@@ -28,7 +29,7 @@
                     <div class="circle-item notActive">
                         <div>   <!--a href="http://zeo.ua"-->
                             <div class="circle-image"><img src="i-ind3.png"></div>
-                            <div class="circle-title">SMART-Логистика</div>
+                            <div class="circle-title"><%= app.language[smart_logistics] || smart_logistics %></div>
                         </div>
                     </div>
                 </div>

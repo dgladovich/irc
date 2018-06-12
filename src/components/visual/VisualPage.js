@@ -5,13 +5,10 @@ import Conv from './VisualPageConv';
 import Device from './Device';
 import { View, Model } from 'backbone.marionette';
 
-const model = new Backbone.Model({
-	title: 'Визуальное наблюдение'
-});
+const menu_visual_observ = 'menu_visual_observ';
 
 export default View.extend({
     template: template,
-    model: model,
     regions: {
         device: '.panel-container'
     },
@@ -28,6 +25,9 @@ export default View.extend({
         this.$el.fadeIn('slow');
     },
     initialize: function(){
+        this.model = new Backbone.Model({
+            title: app.language[menu_visual_observ] || menu_visual_observ
+        });
         this.device = new Device();
     }
 

@@ -3,16 +3,10 @@ import { View, Model } from 'backbone.marionette';
 //import EquipItem from './EquipItem';
 import EquipList from './EquipList';
 import {setWrapHeight} from '../../Utils';
-
-
-const model = new Backbone.Model({
-    title: 'Выбор оборудования'
-});
-
+const menu_select_device = 'menu_select_device';
 
 export default View.extend({
     template: template,
-    model: model,
     events: {
         'click #close-page': 'hidePage'
     },
@@ -25,10 +19,13 @@ export default View.extend({
         });
     },
     onRender: function(){
+
         this.showChildView('content', new EquipList({collection: app.controllers}));
-/*        setInterval(()=>{
 
-        },400)*/
-
+    },
+    initialize: function () {
+        this.model = new Backbone.Model({
+            title: app.language[menu_select_device] || menu_select_device
+        });
     }
 });

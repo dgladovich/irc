@@ -8,7 +8,7 @@ import {View, Model, CollectionView} from 'backbone.marionette';
 import JournalCollection from '../../collections/JournalCollection';
 
 let alarm = Radio.channel('confirm');
-
+const error_code = 'tit_code';
 
 const NotFoundQuery = View.extend({
     template: not_found
@@ -32,7 +32,8 @@ const ErrorCodes = CollectionView.extend({
         id: 'code'
     },
     onRender: function () {
-        this.$el.prepend(`<option value='all'>- Код сообщения -</option>`).val('all');
+        let text = `<option value='all'>- ${app.language[error_code] || error_code} -</option>`;
+        this.$el.prepend(text).val('all');
     }
 });
 export default View.extend({

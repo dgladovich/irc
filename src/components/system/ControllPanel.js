@@ -62,10 +62,7 @@ const DeviceItem = View.extend({
         let statName = this.$('.status-name');
         let btnRepair = this.$('#repair');
         let btnOutRepair = this.$('#outrepair');
-        let status = app.statuses.findWhere({
-            grp: this.model.get('sgrp'),
-            num: this.model.get('stat'),
-        });
+        let status = app.statuses.findWhere({ grp: this.model.get('sgrp') }).get('sgrps_opts').findWhere({num: this.model.get('stat')});
 
         stat.removeClass(this.previousClass);
         btnRepair.removeClass(this.previousBtn);
@@ -75,7 +72,7 @@ const DeviceItem = View.extend({
             btnOutRepair.prop('disabled', false);
             btnOutRepair.removeClass('off');
         } else if(this.model.get('stat') === 9){
-            this.previousBtn = 'off';
+            this.previousBtn = 'off';'Управление системой'
             btnRepair.prop('disabled', true);
             btnRepair.addClass(this.previousBtn) ;
             btnOutRepair.prop('disabled', true);
@@ -191,7 +188,7 @@ export default View.extend({
         this.$('.ui-slider-handle').html(speed);
         this.$('.ui-slider-range').width(100 * speed / 120 + '%');
         new Noty({
-            text: `Скорость изменена до значения: ${speed}`,
+            text: `${app.language[info_speed_changed] || info_speed_changed}: ${speed}`,
             theme: 'metroui',
             type: 'error',
             layout: 'topCenter',
@@ -249,7 +246,7 @@ export default View.extend({
                 this.previousSpeed = ui.value;
             },
             stop: (e, ui) => {
-                let confirmation = confirm('Вы уверены что хотите изменить скорость на ' + ui.value);
+                let confirmation = confirm(`${app.language[info_speed_change_confirm] || info_speed_change_confirm}` + ui.value);
                 if (!confirmation) {
                     this.getUI('slider').slider({
                         value: this.previousSpeed

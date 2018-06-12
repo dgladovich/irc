@@ -1,7 +1,7 @@
 import Marionette from 'backbone.marionette';
 import {Router} from './Router';
 import {history} from 'backbone';
-import {DevicesDispatcher, prepareViewGroups, prepareFaces, prepareStatuses} from '../Utils';
+import {DevicesDispatcher, prepareViewGroups, prepareFaces, prepareStatuses, preparePickList} from '../Utils';
 import Controller from '../models/Controller';
 import FacesCollection from '../collections/FacesCollection';
 import ControllersCollection from '../collections/ControllersCollection';
@@ -16,6 +16,7 @@ export default Marionette.Application.extend({
     onBeforeStart: function (data) {
         this.language = data.options[1];
         this.controller = new Controller(data.options[0].ctrl);
+        this.picklist = new Backbone.Collection(preparePickList(this.controller.get('pickshit')));
         this.controllers = new ControllersCollection(data.options[0].ctrls);
         this.devices = this.controller.get('devs');
         this.deviceGroups = new Backbone.Collection(this.controller.get('dev_grps'));
@@ -37,5 +38,6 @@ export default Marionette.Application.extend({
         });
         //this.controllerConnection = new ControllerConnection();
         history.start();
-    }
+    },
+    initialize: function(){}
 });

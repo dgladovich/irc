@@ -1,10 +1,11 @@
+<%let message = 'you_auth';%>
 <div class="text-center">
     <div class="authorize-logo">
         <img src="auth_logo.png" alt="" class="img-responsive">
     </div>
-    <p>Вы авторизованы как <b><%= name %></b></p>
+    <p><%= app.language[message] || message %><b><%= name %></b></p>
     <p>
-        <button style="margin-top: 50px;" class="btn btn-default" id="btn-logout">Выйти</button>
+        <button style="margin-top: 50px;" class="btn btn-default" id="btn-logout"><%= app.language[message] || message %></button>
     </p>
     <br>
 </div>

@@ -2,6 +2,8 @@ import template from './templates/modal.jst';
 import { View } from 'backbone.marionette';
 import MessagesTable from './MessagesTable';
 
+const info_no_mess = 'indo_no_mess';
+
 export default View.extend({
     template: template,
     events: {
@@ -27,7 +29,7 @@ export default View.extend({
         if (this.collection.length > 0) {
             this.showChildView('table', new MessagesTable({ collection: this.collection }))
         } else {
-            this.$(`.modal-body`).html(`<h4 class="messages-body">Сообщений нет</h4>`)
+            this.$(`.modal-body`).html(`<h4 class="messages-body">${app.language[info_no_mess] || info_no_mess}</h4>`)
         }
 
     },

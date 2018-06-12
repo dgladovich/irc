@@ -1,3 +1,4 @@
+<%let youEnteredAs = 'you_entered_as';%>
 <header>
     <div style="display:inline-flex; float:left; margin-left: -15px;">
         <div class="logo" style="margin-right: 15px;">
@@ -7,7 +8,7 @@
             <a href="/"><img src="./logo_text.png"></a>
         </div>
         <div style="margin-top: 5px; margin-right: 15px">
-            <span class="user-name">Вы вошли как:</span>
+            <span class="user-name"><%= app.language[youEnteredAs] || youEnteredAs%></span>
         </div>
         <div style="margin-top: 5px; margin-right: 5px">
             <span class="glyphicon glyphicon-user user-name"></span>

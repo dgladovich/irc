@@ -14,10 +14,12 @@
  ```json
     {
         "eventGroup": "status",
-        "data": {
-            "id": 12, //device id 
-            "stat": 23 //device status
-        }
+        "data": [
+                {
+                    "id": 12, //device id 
+                    "stat": 23 //device status
+                }
+        ]
     }
  ```
  
@@ -66,7 +68,7 @@
         "eventGroup": "controll",
         "data": {
             "uuid": "f64f2940-fae4-11e7-8c5f-ef356f279131", //UUIDV1 - unique id assigned to command
-            "executed": true 
+            "executed": false 
         }
     }
  ```

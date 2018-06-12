@@ -19,7 +19,6 @@ import ServicePage from './service/ServicePage';
 import DevicesPage from './devices/DevicesPage';
 import ServiceChat from './remote_service/ServiceChat';
 import Radio from 'backbone.radio';
-
 const visualChannel = Radio.channel('visual');
 const authChannel = Radio.channel('auth');
 
@@ -53,7 +52,6 @@ export const BodyView = View.extend({
         // nesting elements during re-render.
         this.$el.unwrap();
         this.setElement(this.$el);
-
         this.showChildView('navbar', new Navbar());
     },
 

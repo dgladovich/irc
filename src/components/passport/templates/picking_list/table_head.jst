@@ -1,7 +1,8 @@
+<% let tit_name = 'tit_name', tit_cnt='tit_cnt', tit_marks='tit_marks'  %>
 <tr>
     <th style="width:1px">№
     </th>
-    <th style="width:1px">Название </th>
-    <th style="width:1px">Количество </th>
-    <th style="width:1px">Примечание </th>
+    <th style="width:1px"><%= app.language[tit_name] || tit_name %></th>
+    <th style="width:1px"><%= app.language[tit_cnt] || tit_cnt %></th>
+    <th style="width:1px"><%= app.language[tit_marks] || tit_marks %></th>
 </tr>
