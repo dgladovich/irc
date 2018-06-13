@@ -34,7 +34,7 @@ export default Backbone.Collection.extend({
             }
             this.listenTo(device, 'change:stat', (device) => {
                 if (device.get('stat') === 2 || device.get('stat') === 3 || device.get('stat') === 5) {
-                    let valveStatus = app.statuses.findWhere({grp: device.get('sgrp')}).get('sgrps_opts').findWhere({num: device.get('stat')});
+                    let valveStatus = app.statuses.findWhere({id: device.get('sgrp')}).get('sgrps_opts').findWhere({num: device.get('stat')});
                     let error = app.errors.findWhere({
                         id: device.get('ecode')
                     });
