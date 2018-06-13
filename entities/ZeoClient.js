@@ -64,6 +64,10 @@ class ZeoClient {
 
     onOperatorCommand() {
     }
+    handleOperatorCommand(command){
+        console.log('ZeoClient: handling operator command', command)
+        //switch(){}
+    }
 }
 
 module.exports = ZeoClient;

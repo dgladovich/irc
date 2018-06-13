@@ -39,6 +39,7 @@ class ZeoConnector {
     }
 
     onZeoEvent(cmnd) {
+        this.server.handleOperatorCommand(c);
         let eventGroup = cmnd.eventGroup;
         switch (eventGroup) {
             case 'controll':

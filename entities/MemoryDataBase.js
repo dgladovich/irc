@@ -79,6 +79,9 @@ class MemoryDataBase {
     addAlarms(alarms){
         this.alarms.add(alarms);
     }
+    updateControllerStatus(stat){
+        this.controller.set('stat', stat)
+    }
     addDevices(){}
     addFaces(){}
     removeQueue(){}

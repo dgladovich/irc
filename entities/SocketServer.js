@@ -84,23 +84,18 @@ class SocketServer {
             });
         }, 750);
     }
-    _onTokenVerifyError(socket, err, data){
-        if(err){
-            this.socketConnector.requireAuth(socket);
-        }
-    }
 
     handleUserData(data, socket) {
-        //console.log(data)
         let pack, userId,
             {method, token} = data,
             args = data.arguments,
-            verified = jwt.verify(token, SECRET, this._onTokenVerifyError.bind(this, socket));
+            verified = jwt.verify(token, SECRET);
         if(verified){
-            console.log('Everything is all right with token', verified)
+            console.log('Everything is all right with token')
             userId = verified.id;
             switch (method) {
                 case 'confirm':
+                    console.log('Socket server: calling alarm confirmation method');
                     pack = {
                         ivan_id: args.ivan_id,
                         user_id: userId
@@ -108,9 +103,13 @@ class SocketServer {
                     this.broker.confirmAlarm(pack);
                     break;
                 case 'repair':
+                    console.log('Socket server: calling repair method');
+
                     this.broker.setRepair(data)
                     break;
                 case 'speed':
+                    console.log('Socket server: calling speed change method');
+
                     pack = {
                         speed: args.speed,
                         user_id: userId,
@@ -119,12 +118,15 @@ class SocketServer {
                     this.broker.changeSpeed(pack)
                     break;
                 case 'start':
+                    console.log('Socket server: calling start method');
+
                     pack = {
                         user_id: userId
                     };
                     this.broker.startController(pack);
                     break;
                 case 'stop':
+                    console.log('Socket server: calling stop method');
                     pack = {
                         user_id: userId,
                     };
@@ -136,7 +138,8 @@ class SocketServer {
             }
 
         } else {
-            //console.error('Something wrong with Token')
+            console.error('Something wrong with Token')
+            this.socketConnector.requireAuth(socket);
         }
     }
 

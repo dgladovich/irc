@@ -1,6 +1,5 @@
 import filter from './templates/test.jst';
 import {View, Model} from 'backbone.marionette';
-import 'jquery-slimscroll';
 export default View.extend({
     template: filter,
 

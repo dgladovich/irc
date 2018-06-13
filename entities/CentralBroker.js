@@ -137,6 +137,7 @@ class CentralBroker {
         let queues = this.dh.getQueues();
     }
 
+
     setDevicesOffline() {
         this.dh.getDevices().each((device) => {
             let devId = device.get('id'),
@@ -146,6 +147,9 @@ class CentralBroker {
             this.socketServer.sendStatus(devId, stat);
             this.zeoClient.sendStatus(devId, stat);
         })
+    }
+    setControllerOffline() {
+        this.dh.updateControllerStatus(stat);
     }
 
 
@@ -222,20 +226,25 @@ class CentralBroker {
         }
     }
 
-    setRepair() {
+    setRepair(pack) {
+        console.log('Central Broker: sending stop command to controller');
+
     }
 
     startController(pack) {
-        console.log(pack)
+        let uuid = uuidv1();
+        console.log('Central Broker: sending start command to controller');
+        this.controllerServer.startController(uuid);
     }
 
     stopController(pack) {
-        console.log(pack)
+        let uuid = uuidv1();
+        console.log('Central Broker: sending stop command to controller');
+        this.controllerServer.stopController(uuid);
     }
 
     changeSpeed(pack) {
-        console.log(pack);
-
+        console.log('Central Broker: sending change speed command to controller');
         let uuid = uuidv1(),
             {speed, user_id} = pack,
             queueMessage = {

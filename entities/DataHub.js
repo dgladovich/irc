@@ -94,6 +94,9 @@ class DataHub {
                 this.mdb.addQueues(queue);
             });
     }
+    updateControllerStatus(stat){
+        this.mdb.updateControllerStatus(stat);
+    }
 
     removeQueue() {
     }

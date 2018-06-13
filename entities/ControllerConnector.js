@@ -1,14 +1,14 @@
 const net = require('net');
 const Logger = require('./Logger');
 const SECRET = process.env.AUTH_SECRET;
-const PORT = process.env.TEST_CONTROLLER_PORT;
-const ADDRESS = process.env.TEST_CONTROLLER_IP;
+const PORT = process.env.REAL_CONTROLLER_PORT;
+const ADDRESS = process.env.REAL_CONTROLLER_IP;
 
 class ControllerConnector {
     constructor(opt){
         this.isConnected = false;
         this.server = opt.server;
-        this.client = new net.Socket();
+        this.client = new net.createConnection();
         this.logger = new Logger();
         this._bindEvents();
 
@@ -34,6 +34,7 @@ class ControllerConnector {
     onControllerDisconnected(){
         this.logger.onControllerDisconnected();
         setTimeout(this.connect.bind(this, PORT, ADDRESS), 1000);
+        //this.server.onControllerOffline();
         return this.client.destroy();
     }
     onControllerConnectionError(e){
@@ -47,7 +48,9 @@ class ControllerConnector {
         if (data) {
             try {
                 let d = JSON.parse(data.toString());
-                this.server.handleControllerData(d);
+                for(key in d){
+                    this.server.handleControllerData(d[key], key);
+                }
             } catch (e) {
                 this.logger.onControllerRecieveDataWithError(e);
             }

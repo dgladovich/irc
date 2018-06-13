@@ -20,7 +20,7 @@ class ControllerServer {
     ///////////////////////////
 
     onControllerOffline() {
-        this.broker.setDevicesOffline();
+        this.broker.setControllerOffline();
     }
 
     onChangeStatus(data) {
@@ -60,36 +60,34 @@ class ControllerServer {
     }
 
     changeSpeed(speed, uuid) {
-        let changeSpeedMessage = {
-            eventGroup: 'controll',
-            method: 'speed',
-            arguments: {
-                uuid: uuid
-            }
-        };
-        this.controllerConnector.sendDataToController(changeSpeedMessage);
+        console.log('Controller Server: sending ivan to change speed command')
+        let speedCommand = {
+            control: "speed",
+            uuid: uuid,
+            value: speed
+
+        }
+        this.controllerConnector.sendDataToController(speedCommand);
     }
 
     startController(uuid) {
-        let stopCommand = {
-            eventGroup: 'controll',
-            method: 'stop',
-            arguments: {
-                uuid: uuid
-            }
-        };
-        this.controllerConnector.sendDataToController(stopCommand);
+        console.log('Controller Server: sending ivan start command')
+        let startCommand = {
+            control: "start",
+            uuid: uuid
+
+        }
+        this.controllerConnector.sendDataToController(startCommand);
     }
 
     stopController(uuid) {
-        let startCommand = {
-            eventGroup: 'controll',
-            method: 'start',
-            arguments: {
-                uuid: uuid
-            }
-        };
-        this.controllerConnector.sendDataToController(startCommand);
+        console.log('Controller Server: sending ivan stop command')
+        let stopCommand = {
+            control: "start",
+            uuid: uuid
+
+        }
+        this.controllerConnector.sendDataToController(stopCommand);
     }
 
     confirmAlarm() {
@@ -108,8 +106,8 @@ class ControllerServer {
     ////////////////////////
     //MAIN HANDLER
     ////////////////////////
-    handleControllerData(data) {
-        const eventGroup = data.eventGroup;
+    handleControllerData(data, key) {
+        console.log(data, key)
         switch (eventGroup) {
             case 'status':
                 this.onChangeStatus(data);
