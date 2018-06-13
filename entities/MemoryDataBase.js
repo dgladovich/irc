@@ -56,9 +56,11 @@ class MemoryDataBase {
         return this.faces.toJSON();
     }
     updateDeviceStatus(id, status){
+        console.log(`Memory database: changing status, ID: ${id}, status: ${status}`)
         this.devices.findWhere({id: +id}).set({stat: +status});
     }
     updateFaceValue(id, value){
+        console.log(`Memory database: changing face, ID: ${id}, faceId: ${value}`)
         this.faces.findWhere({id: +id}).set('def', +value);
     }
     updateQueue(uuid, status){

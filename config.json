@@ -1,31 +1,31 @@
 {
   "ctrl": {
-    "id": 6,
+    "id": 2,
     "typ": 2,
-    "ip": "192.168.15.102",
+    "ip": "192.168.15.103",
     "port": 3001,
-    "name": "Конвейер скребковый",
-    "cla": 3,
-    "plist": 3,
-    "stat": 0,
+    "name": "Фильтр",
+    "cla": 1,
+    "plist": 1,
+    "stat": 6,
     "mode_grp": 2,
     "mode": 3,
     "active": 1,
     "devs": [
       {
-        "id": 46,
-        "ctrl": 6,
-        "typ": 5,
+        "id": 1,
+        "ctrl": 2,
+        "typ": 2,
         "contyp": null,
         "grp": null,
-        "name": "Конвейер скребковый ZEO-DC-150 ",
-        "modif": 57,
+        "name": "Фильтр цилиндрический ZEO-FCS-10.12",
+        "modif": 56,
         "moto": 0,
-        "body_id": 66,
+        "body_id": 2,
         "parent": null,
-        "nomi": null,
+        "nomi": 7,
         "cur": null,
-        "x": 0,
+        "x": 1,
         "y": 1,
         "sgrp": 1,
         "stat": 6,
@@ -36,41 +36,103 @@
         "visible": 1,
         "spec_act": 0,
         "active": 1,
-        "dports": [],
-        "dfaces": {
-          "19": {
-            "id": 19,
-            "dev": 46,
-            "tardev": 49,
-            "name": "Подпор",
-            "viewgrp": 8,
-            "viewtype": 1,
-            "stat_grp": 1,
-            "meas": 7,
-            "min_val": 0,
-            "max_val": 0,
-            "def": 0,
-            "lim_warning": 0,
-            "lim_warning_code": 17,
-            "lim_danger": 100,
-            "lim_danger_code": 14,
-            "history_fix": 1,
-            "use_range": 0,
-            "range_warn_min": 0,
-            "range_warn_min_code": null,
-            "range_crit_min": 0,
-            "range_crit_min_code": null,
-            "range_warn_max": 0,
-            "range_warn_max_code": null,
-            "range_crit_max": 0,
-            "range_crit_max_code": null,
-            "orde": 156,
-            "show_scat": 1,
-            "visible": 1,
-            "dvars": []
+        "dports": [
+          {
+            "id": 1,
+            "dev": 1,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 0,
+            "name": "Индикатор Работы"
+          },
+          {
+            "id": 2,
+            "dev": 1,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 1,
+            "name": "Индикатор Предупр"
+          },
+          {
+            "id": 3,
+            "dev": 1,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 2,
+            "name": "Индикатор Аварии"
+          },
+          {
+            "id": 4,
+            "dev": 1,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 3,
+            "name": "Сирена"
+          },
+          {
+            "id": 5,
+            "dev": 1,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 4,
+            "name": "Режим Местный"
+          },
+          {
+            "id": 6,
+            "dev": 1,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 5,
+            "name": "Режим Дистанция"
+          },
+          {
+            "id": 7,
+            "dev": 1,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 6,
+            "name": "Сервисная Кнопка"
           }
-        },
-        "nominals": [],
+        ],
+        "dfaces": {},
+        "nominals": [
+          {
+            "keyn": "valve_cnt",
+            "name": "Количество клапанов",
+            "meas": 15,
+            "val": "0"
+          },
+          {
+            "keyn": "sleeve_cnt",
+            "name": "Количество рукавов",
+            "meas": 15,
+            "val": "0"
+          },
+          {
+            "keyn": "nozzle_ispresend",
+            "name": "Наличие форсунки",
+            "meas": 25,
+            "val": "0"
+          },
+          {
+            "keyn": "imp_len",
+            "name": "Длительность срабатывания клапана",
+            "meas": 8,
+            "val": "300"
+          },
+          {
+            "keyn": "imp_period",
+            "name": "Длительность между импульсами",
+            "meas": 8,
+            "val": "1000"
+          },
+          {
+            "keyn": "numof_cicles",
+            "name": "Количество завершающих циклов",
+            "meas": 15,
+            "val": "2"
+          }
+        ],
         "stats": {
           "0": {
             "id": 1,
@@ -145,32 +207,114 @@
         }
       },
       {
-        "id": 49,
-        "ctrl": 6,
-        "typ": 27,
+        "id": 2,
+        "ctrl": 2,
+        "typ": 3,
         "contyp": null,
         "grp": null,
-        "name": "Датчик подпора",
+        "name": "Корпус фильтра",
         "modif": null,
         "moto": 0,
         "body_id": null,
-        "parent": 46,
-        "nomi": 43,
+        "parent": 1,
+        "nomi": 61,
         "cur": null,
-        "x": 21,
-        "y": 42,
+        "x": 52,
+        "y": 46,
         "sgrp": 1,
         "stat": 6,
         "state_grp": null,
         "state": 0,
         "ecode": 0,
-        "repairable": 1,
+        "repairable": 0,
         "visible": 1,
         "spec_act": 0,
         "active": 1,
-        "dports": [],
+        "dports": [
+          {
+            "id": 50,
+            "dev": 2,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 0,
+            "name": "port_green"
+          },
+          {
+            "id": 51,
+            "dev": 2,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 1,
+            "name": "port_yellow"
+          },
+          {
+            "id": 52,
+            "dev": 2,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 2,
+            "name": "port_red"
+          },
+          {
+            "id": 53,
+            "dev": 2,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 3,
+            "name": "port_horn"
+          },
+          {
+            "id": 54,
+            "dev": 2,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 4,
+            "name": "port_runf"
+          },
+          {
+            "id": 55,
+            "dev": 2,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 5,
+            "name": "portbt_serv"
+          },
+          {
+            "id": 56,
+            "dev": 2,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 6,
+            "name": "portbt_run"
+          }
+        ],
         "dfaces": {},
-        "nominals": [],
+        "nominals": [
+          {
+            "keyn": "imp_len",
+            "name": "Длительность импульса",
+            "meas": 8,
+            "val": "500"
+          },
+          {
+            "keyn": "imp_period",
+            "name": "Длительность между импульсами",
+            "meas": 8,
+            "val": "1000"
+          },
+          {
+            "keyn": "num_endcicles",
+            "name": "Количество завершающих циклов",
+            "meas": 15,
+            "val": "0"
+          },
+          {
+            "keyn": "valve_chdelay",
+            "name": "Задержка измерения состояния клапана",
+            "meas": 8,
+            "val": "100"
+          }
+        ],
         "stats": {
           "0": {
             "id": 1,
@@ -245,120 +389,20 @@
         }
       },
       {
-        "id": 52,
-        "ctrl": 6,
-        "typ": 29,
-        "contyp": null,
+        "id": 3,
+        "ctrl": 2,
+        "typ": 12,
+        "contyp": 6,
         "grp": null,
-        "name": "Датчик обрыва цепи",
+        "name": "Датчик люка ревизионного",
         "modif": null,
         "moto": 0,
         "body_id": null,
-        "parent": 46,
+        "parent": 1,
         "nomi": null,
         "cur": null,
-        "x": 79,
-        "y": 42,
-        "sgrp": 1,
-        "stat": 6,
-        "state_grp": null,
-        "state": 0,
-        "ecode": 0,
-        "repairable": 1,
-        "visible": 1,
-        "spec_act": 0,
-        "active": 1,
-        "dports": [],
-        "dfaces": {},
-        "nominals": [],
-        "stats": {
-          "0": {
-            "id": 1,
-            "num": 0,
-            "grp": 1,
-            "name": "stat_ready",
-            "clr": "#c7c7c9",
-            "bgclr": "#545454",
-            "active": 1,
-            "dclass": ""
-          },
-          "1": {
-            "id": 2,
-            "num": 1,
-            "grp": 1,
-            "name": "stat_inwork",
-            "clr": "#0db800",
-            "bgclr": "#043001",
-            "active": 1,
-            "dclass": "active"
-          },
-          "2": {
-            "id": 3,
-            "num": 2,
-            "grp": 1,
-            "name": "stat_crash",
-            "clr": "#e12c0d",
-            "bgclr": "#330a03",
-            "active": 1,
-            "dclass": "danger"
-          },
-          "3": {
-            "id": 4,
-            "num": 3,
-            "grp": 1,
-            "name": "stat_serv",
-            "clr": "#ffa200",
-            "bgclr": "#472d00",
-            "active": 1,
-            "dclass": "service"
-          },
-          "4": {
-            "id": 5,
-            "num": 4,
-            "grp": 1,
-            "name": "stat_manu",
-            "clr": "#00ddda",
-            "bgclr": "#004c4b",
-            "active": 1,
-            "dclass": "manual"
-          },
-          "5": {
-            "id": 6,
-            "num": 5,
-            "grp": 1,
-            "name": "stat_repa",
-            "clr": "#0072ff",
-            "bgclr": "#001f47",
-            "active": 1,
-            "dclass": "repair"
-          },
-          "6": {
-            "id": 7,
-            "num": 6,
-            "grp": 1,
-            "name": "stat_nocon",
-            "clr": "black",
-            "bgclr": "white",
-            "active": 1,
-            "dclass": "die"
-          }
-        }
-      },
-      {
-        "id": 53,
-        "ctrl": 6,
-        "typ": 20,
-        "contyp": null,
-        "grp": null,
-        "name": "Датчик скорости",
-        "modif": null,
-        "moto": 0,
-        "body_id": null,
-        "parent": 46,
-        "nomi": 15,
-        "cur": null,
-        "x": 77,
-        "y": 70,
+        "x": 17,
+        "y": 25,
         "sgrp": 1,
         "stat": 6,
         "state_grp": null,
@@ -370,47 +414,1454 @@
         "active": 1,
         "dports": [
           {
-            "id": 40,
-            "dev": 53,
-            "port_type": 2,
+            "id": 8,
+            "dev": 3,
+            "port_type": 1,
             "port_dir": 1,
             "port": 0,
-            "name": "status"
+            "name": "state"
           }
         ],
-        "dfaces": {
-          "20": {
-            "id": 20,
-            "dev": 53,
-            "tardev": 52,
-            "name": "Обрыв",
-            "viewgrp": 8,
-            "viewtype": 1,
-            "stat_grp": 1,
-            "meas": 3,
-            "min_val": 0,
-            "max_val": 0,
-            "def": 0,
-            "lim_warning": 11,
-            "lim_warning_code": 2,
-            "lim_danger": 100,
-            "lim_danger_code": 6,
-            "history_fix": 1,
-            "use_range": 0,
-            "range_warn_min": 0,
-            "range_warn_min_code": null,
-            "range_crit_min": 0,
-            "range_crit_min_code": null,
-            "range_warn_max": 0,
-            "range_warn_max_code": null,
-            "range_crit_max": 0,
-            "range_crit_max_code": null,
-            "orde": 2,
-            "show_scat": 1,
-            "visible": 1,
-            "dvars": []
+        "dfaces": {},
+        "nominals": [],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
           }
-        },
+        }
+      },
+      {
+        "id": 4,
+        "ctrl": 2,
+        "typ": 9,
+        "contyp": null,
+        "grp": null,
+        "name": "Привод вентилятора",
+        "modif": 1,
+        "moto": 0,
+        "body_id": null,
+        "parent": 5,
+        "nomi": 11,
+        "cur": null,
+        "x": 57,
+        "y": 14,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 0,
+        "visible": 0,
+        "spec_act": 1,
+        "active": 0,
+        "dports": [
+          {
+            "id": 9,
+            "dev": 4,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 0,
+            "name": "Контр Пускателя"
+          },
+          {
+            "id": 10,
+            "dev": 4,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 1,
+            "name": "Контр Опер Напр"
+          },
+          {
+            "id": 11,
+            "dev": 4,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 2,
+            "name": "Включ Пускателя"
+          }
+        ],
+        "dfaces": {},
+        "nominals": [
+          {
+            "keyn": "voltage",
+            "name": "Напряжение",
+            "meas": 1,
+            "val": "0"
+          },
+          {
+            "keyn": "rate",
+            "name": "Обороты",
+            "meas": 14,
+            "val": "0"
+          },
+          {
+            "keyn": "start_type",
+            "name": "Тип пуска",
+            "meas": null,
+            "val": "0"
+          },
+          {
+            "keyn": "ip",
+            "name": "IP",
+            "meas": null,
+            "val": "192.168.15.140"
+          }
+        ],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 5,
+        "ctrl": 2,
+        "typ": 1,
+        "contyp": 2,
+        "grp": null,
+        "name": "Вентилятор",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": null,
+        "cur": null,
+        "x": 43,
+        "y": 26,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 0,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 57,
+            "dev": 5,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 0,
+            "name": "state"
+          },
+          {
+            "id": 58,
+            "dev": 5,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 1,
+            "name": "state_ctrl"
+          }
+        ],
+        "dfaces": {},
+        "nominals": [],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "ctrl": 2,
+        "typ": 9,
+        "contyp": null,
+        "grp": null,
+        "name": "Привод затвора шлюзового",
+        "modif": 3,
+        "moto": 0,
+        "body_id": null,
+        "parent": 7,
+        "nomi": 11,
+        "cur": null,
+        "x": 41,
+        "y": 83,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 0,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 0,
+        "dports": [
+          {
+            "id": 12,
+            "dev": 6,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 0,
+            "name": "Контроль пускателя"
+          },
+          {
+            "id": 13,
+            "dev": 6,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 1,
+            "name": "Контр Опер Напр"
+          },
+          {
+            "id": 14,
+            "dev": 6,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 2,
+            "name": "Включ Пускателя"
+          }
+        ],
+        "dfaces": {},
+        "nominals": [
+          {
+            "keyn": "voltage",
+            "name": "Напряжение",
+            "meas": 1,
+            "val": "0"
+          },
+          {
+            "keyn": "rate",
+            "name": "Обороты",
+            "meas": 14,
+            "val": "0"
+          },
+          {
+            "keyn": "start_type",
+            "name": "Тип пуска",
+            "meas": null,
+            "val": "0"
+          },
+          {
+            "keyn": "ip",
+            "name": "IP",
+            "meas": null,
+            "val": "192.168.15.140"
+          }
+        ],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 7,
+        "ctrl": 2,
+        "typ": 11,
+        "contyp": 2,
+        "grp": null,
+        "name": "Затвор шлюзовой",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": null,
+        "cur": null,
+        "x": 56,
+        "y": 84,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 0,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 59,
+            "dev": 7,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 0,
+            "name": "state"
+          },
+          {
+            "id": 60,
+            "dev": 7,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 1,
+            "name": "state_ctrl"
+          }
+        ],
+        "dfaces": {},
+        "nominals": [],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 8,
+        "ctrl": 2,
+        "typ": 16,
+        "contyp": 4,
+        "grp": null,
+        "name": "Датчик пыли на выходе",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": 27,
+        "cur": null,
+        "x": 30,
+        "y": 19,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 0,
+        "dports": [],
+        "dfaces": {},
+        "nominals": [
+          {
+            "keyn": "mindust",
+            "name": "Калиб Мин Концентр",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "minots",
+            "name": "Калиб Мин Отсчет",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "maxdust",
+            "name": "Калиб макс Коцентр",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "maxots",
+            "name": "Калиб Макс отсчет",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "nulltype",
+            "name": "Калиб знач нуля",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "activfan",
+            "name": "Порог активации вент",
+            "meas": 0,
+            "val": "0"
+          }
+        ],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 9,
+        "ctrl": 2,
+        "typ": 13,
+        "contyp": 6,
+        "grp": null,
+        "name": "Конденсатоотводчик",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": null,
+        "cur": null,
+        "x": 93,
+        "y": 40,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 0,
+        "dports": [
+          {
+            "id": 16,
+            "dev": 9,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 1,
+            "name": "state"
+          }
+        ],
+        "dfaces": {},
+        "nominals": [],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 10,
+        "ctrl": 2,
+        "typ": 14,
+        "contyp": 6,
+        "grp": null,
+        "name": "Датчик сжатого воздуха",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": 25,
+        "cur": null,
+        "x": 84,
+        "y": 24,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 17,
+            "dev": 10,
+            "port_type": 3,
+            "port_dir": 1,
+            "port": 0,
+            "name": "state"
+          }
+        ],
+        "dfaces": {},
+        "nominals": [
+          {
+            "keyn": "presmax",
+            "name": "Калиб Давление макс",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "otsmax",
+            "name": "Калиб отсчет Макс",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "presmin",
+            "name": "Калиб Давление мин",
+            "meas": null,
+            "val": "0"
+          },
+          {
+            "keyn": "otsmin",
+            "name": "Калиб Отсчет мин",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "nullstat",
+            "name": "Калиб значение нуля",
+            "meas": 0,
+            "val": "0"
+          }
+        ],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 11,
+        "ctrl": 2,
+        "typ": 19,
+        "contyp": 6,
+        "grp": null,
+        "name": "Датчик панели взрыворазрядителя",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": null,
+        "cur": null,
+        "x": 11,
+        "y": 77,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 18,
+            "dev": 11,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 0,
+            "name": "state"
+          }
+        ],
+        "dfaces": {},
+        "nominals": [],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 12,
+        "ctrl": 2,
+        "typ": 15,
+        "contyp": 3,
+        "grp": null,
+        "name": "Датчик дифференциального давления",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": 23,
+        "cur": null,
+        "x": 71,
+        "y": 16,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 19,
+            "dev": 12,
+            "port_type": 3,
+            "port_dir": 1,
+            "port": 0,
+            "name": "Диф Давление"
+          }
+        ],
+        "dfaces": {},
+        "nominals": [
+          {
+            "keyn": "minots",
+            "name": "Калибр Мин отсчет",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "kalibminper",
+            "name": "Калибр Мин перепад",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "cmaxots",
+            "name": "Калибр Макс отсчет",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "cmaxper",
+            "name": "Калибр Макс перепад",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "nullstat",
+            "name": "Калибр Значение нуля",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "stepregsta",
+            "name": "Порог начала регенер",
+            "meas": 25,
+            "val": "0"
+          },
+          {
+            "keyn": "stepregend",
+            "name": "Порог оконч регенер",
+            "meas": 25,
+            "val": "0"
+          },
+          {
+            "keyn": "maxper",
+            "name": "Макс перепад",
+            "meas": 25,
+            "val": "0"
+          },
+          {
+            "keyn": "minper",
+            "name": "Мин перепад",
+            "meas": 25,
+            "val": "0"
+          }
+        ],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 13,
+        "ctrl": 2,
+        "typ": 16,
+        "contyp": 4,
+        "grp": null,
+        "name": "Датчик пыли на входе",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": 27,
+        "cur": null,
+        "x": 26,
+        "y": 82,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 0,
+        "dports": [],
+        "dfaces": {},
+        "nominals": [
+          {
+            "keyn": "mindust",
+            "name": "Калиб Мин Концентр",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "minots",
+            "name": "Калиб Мин Отсчет",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "maxdust",
+            "name": "Калиб макс Коцентр",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "maxots",
+            "name": "Калиб Макс отсчет",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "nulltype",
+            "name": "Калиб знач нуля",
+            "meas": 0,
+            "val": "0"
+          },
+          {
+            "keyn": "activfan",
+            "name": "Порог активации вент",
+            "meas": 0,
+            "val": "0"
+          }
+        ],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 14,
+        "ctrl": 2,
+        "typ": 20,
+        "contyp": 6,
+        "grp": null,
+        "name": "Датчик вращения",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": 15,
+        "cur": null,
+        "x": 69,
+        "y": 84,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 20,
+            "dev": 14,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 0,
+            "name": "state"
+          }
+        ],
+        "dfaces": {},
         "nominals": [
           {
             "keyn": "r_wait",
@@ -499,549 +1950,49 @@
         }
       },
       {
-        "id": 56,
-        "ctrl": 6,
-        "typ": 30,
-        "contyp": null,
-        "grp": 3,
-        "name": "Подшипниковый узел №1 (Приводная)",
+        "id": 15,
+        "ctrl": 2,
+        "typ": 10,
+        "contyp": 6,
+        "grp": 1,
+        "name": "Электроклапан №1",
         "modif": null,
         "moto": 0,
         "body_id": null,
-        "parent": 46,
+        "parent": 1,
         "nomi": null,
         "cur": null,
-        "x": 28,
-        "y": 36,
+        "x": 88,
+        "y": 76,
         "sgrp": 1,
         "stat": 6,
         "state_grp": null,
         "state": 0,
         "ecode": 0,
         "repairable": 1,
-        "visible": 1,
-        "spec_act": 0,
-        "active": 1,
-        "dports": [],
-        "dfaces": {},
-        "nominals": [],
-        "stats": {
-          "0": {
-            "id": 1,
-            "num": 0,
-            "grp": 1,
-            "name": "stat_ready",
-            "clr": "#c7c7c9",
-            "bgclr": "#545454",
-            "active": 1,
-            "dclass": ""
-          },
-          "1": {
-            "id": 2,
-            "num": 1,
-            "grp": 1,
-            "name": "stat_inwork",
-            "clr": "#0db800",
-            "bgclr": "#043001",
-            "active": 1,
-            "dclass": "active"
-          },
-          "2": {
-            "id": 3,
-            "num": 2,
-            "grp": 1,
-            "name": "stat_crash",
-            "clr": "#e12c0d",
-            "bgclr": "#330a03",
-            "active": 1,
-            "dclass": "danger"
-          },
-          "3": {
-            "id": 4,
-            "num": 3,
-            "grp": 1,
-            "name": "stat_serv",
-            "clr": "#ffa200",
-            "bgclr": "#472d00",
-            "active": 1,
-            "dclass": "service"
-          },
-          "4": {
-            "id": 5,
-            "num": 4,
-            "grp": 1,
-            "name": "stat_manu",
-            "clr": "#00ddda",
-            "bgclr": "#004c4b",
-            "active": 1,
-            "dclass": "manual"
-          },
-          "5": {
-            "id": 6,
-            "num": 5,
-            "grp": 1,
-            "name": "stat_repa",
-            "clr": "#0072ff",
-            "bgclr": "#001f47",
-            "active": 1,
-            "dclass": "repair"
-          },
-          "6": {
-            "id": 7,
-            "num": 6,
-            "grp": 1,
-            "name": "stat_nocon",
-            "clr": "black",
-            "bgclr": "white",
-            "active": 1,
-            "dclass": "die"
-          }
-        }
-      },
-      {
-        "id": 57,
-        "ctrl": 6,
-        "typ": 30,
-        "contyp": null,
-        "grp": 3,
-        "name": "Подшипниковый узел №2 (Приводная)",
-        "modif": null,
-        "moto": 0,
-        "body_id": null,
-        "parent": 46,
-        "nomi": null,
-        "cur": null,
-        "x": 22,
-        "y": 51,
-        "sgrp": 1,
-        "stat": 6,
-        "state_grp": null,
-        "state": 0,
-        "ecode": 0,
-        "repairable": 1,
-        "visible": 1,
-        "spec_act": 0,
-        "active": 1,
-        "dports": [],
-        "dfaces": {},
-        "nominals": [],
-        "stats": {
-          "0": {
-            "id": 1,
-            "num": 0,
-            "grp": 1,
-            "name": "stat_ready",
-            "clr": "#c7c7c9",
-            "bgclr": "#545454",
-            "active": 1,
-            "dclass": ""
-          },
-          "1": {
-            "id": 2,
-            "num": 1,
-            "grp": 1,
-            "name": "stat_inwork",
-            "clr": "#0db800",
-            "bgclr": "#043001",
-            "active": 1,
-            "dclass": "active"
-          },
-          "2": {
-            "id": 3,
-            "num": 2,
-            "grp": 1,
-            "name": "stat_crash",
-            "clr": "#e12c0d",
-            "bgclr": "#330a03",
-            "active": 1,
-            "dclass": "danger"
-          },
-          "3": {
-            "id": 4,
-            "num": 3,
-            "grp": 1,
-            "name": "stat_serv",
-            "clr": "#ffa200",
-            "bgclr": "#472d00",
-            "active": 1,
-            "dclass": "service"
-          },
-          "4": {
-            "id": 5,
-            "num": 4,
-            "grp": 1,
-            "name": "stat_manu",
-            "clr": "#00ddda",
-            "bgclr": "#004c4b",
-            "active": 1,
-            "dclass": "manual"
-          },
-          "5": {
-            "id": 6,
-            "num": 5,
-            "grp": 1,
-            "name": "stat_repa",
-            "clr": "#0072ff",
-            "bgclr": "#001f47",
-            "active": 1,
-            "dclass": "repair"
-          },
-          "6": {
-            "id": 7,
-            "num": 6,
-            "grp": 1,
-            "name": "stat_nocon",
-            "clr": "black",
-            "bgclr": "white",
-            "active": 1,
-            "dclass": "die"
-          }
-        }
-      },
-      {
-        "id": 58,
-        "ctrl": 6,
-        "typ": 30,
-        "contyp": null,
-        "grp": 3,
-        "name": "Подшипниковый узел №1 (Натяжная)",
-        "modif": null,
-        "moto": 0,
-        "body_id": null,
-        "parent": 46,
-        "nomi": null,
-        "cur": null,
-        "x": 46,
-        "y": 80,
-        "sgrp": 1,
-        "stat": 6,
-        "state_grp": null,
-        "state": 0,
-        "ecode": 0,
-        "repairable": 1,
-        "visible": 1,
-        "spec_act": 0,
-        "active": 1,
-        "dports": [],
-        "dfaces": {},
-        "nominals": [],
-        "stats": {
-          "0": {
-            "id": 1,
-            "num": 0,
-            "grp": 1,
-            "name": "stat_ready",
-            "clr": "#c7c7c9",
-            "bgclr": "#545454",
-            "active": 1,
-            "dclass": ""
-          },
-          "1": {
-            "id": 2,
-            "num": 1,
-            "grp": 1,
-            "name": "stat_inwork",
-            "clr": "#0db800",
-            "bgclr": "#043001",
-            "active": 1,
-            "dclass": "active"
-          },
-          "2": {
-            "id": 3,
-            "num": 2,
-            "grp": 1,
-            "name": "stat_crash",
-            "clr": "#e12c0d",
-            "bgclr": "#330a03",
-            "active": 1,
-            "dclass": "danger"
-          },
-          "3": {
-            "id": 4,
-            "num": 3,
-            "grp": 1,
-            "name": "stat_serv",
-            "clr": "#ffa200",
-            "bgclr": "#472d00",
-            "active": 1,
-            "dclass": "service"
-          },
-          "4": {
-            "id": 5,
-            "num": 4,
-            "grp": 1,
-            "name": "stat_manu",
-            "clr": "#00ddda",
-            "bgclr": "#004c4b",
-            "active": 1,
-            "dclass": "manual"
-          },
-          "5": {
-            "id": 6,
-            "num": 5,
-            "grp": 1,
-            "name": "stat_repa",
-            "clr": "#0072ff",
-            "bgclr": "#001f47",
-            "active": 1,
-            "dclass": "repair"
-          },
-          "6": {
-            "id": 7,
-            "num": 6,
-            "grp": 1,
-            "name": "stat_nocon",
-            "clr": "black",
-            "bgclr": "white",
-            "active": 1,
-            "dclass": "die"
-          }
-        }
-      },
-      {
-        "id": 59,
-        "ctrl": 6,
-        "typ": 30,
-        "contyp": null,
-        "grp": 3,
-        "name": "Подшипниковый узел №2 (Натяжная)",
-        "modif": null,
-        "moto": 0,
-        "body_id": null,
-        "parent": 46,
-        "nomi": null,
-        "cur": null,
-        "x": 72,
-        "y": 66,
-        "sgrp": 1,
-        "stat": 6,
-        "state_grp": null,
-        "state": 0,
-        "ecode": 0,
-        "repairable": 1,
-        "visible": 1,
-        "spec_act": 0,
-        "active": 1,
-        "dports": [],
-        "dfaces": {},
-        "nominals": [],
-        "stats": {
-          "0": {
-            "id": 1,
-            "num": 0,
-            "grp": 1,
-            "name": "stat_ready",
-            "clr": "#c7c7c9",
-            "bgclr": "#545454",
-            "active": 1,
-            "dclass": ""
-          },
-          "1": {
-            "id": 2,
-            "num": 1,
-            "grp": 1,
-            "name": "stat_inwork",
-            "clr": "#0db800",
-            "bgclr": "#043001",
-            "active": 1,
-            "dclass": "active"
-          },
-          "2": {
-            "id": 3,
-            "num": 2,
-            "grp": 1,
-            "name": "stat_crash",
-            "clr": "#e12c0d",
-            "bgclr": "#330a03",
-            "active": 1,
-            "dclass": "danger"
-          },
-          "3": {
-            "id": 4,
-            "num": 3,
-            "grp": 1,
-            "name": "stat_serv",
-            "clr": "#ffa200",
-            "bgclr": "#472d00",
-            "active": 1,
-            "dclass": "service"
-          },
-          "4": {
-            "id": 5,
-            "num": 4,
-            "grp": 1,
-            "name": "stat_manu",
-            "clr": "#00ddda",
-            "bgclr": "#004c4b",
-            "active": 1,
-            "dclass": "manual"
-          },
-          "5": {
-            "id": 6,
-            "num": 5,
-            "grp": 1,
-            "name": "stat_repa",
-            "clr": "#0072ff",
-            "bgclr": "#001f47",
-            "active": 1,
-            "dclass": "repair"
-          },
-          "6": {
-            "id": 7,
-            "num": 6,
-            "grp": 1,
-            "name": "stat_nocon",
-            "clr": "black",
-            "bgclr": "white",
-            "active": 1,
-            "dclass": "die"
-          }
-        }
-      },
-      {
-        "id": 61,
-        "ctrl": 6,
-        "typ": 23,
-        "contyp": null,
-        "grp": null,
-        "name": "Кнопка Аварийный Стоп",
-        "modif": null,
-        "moto": 0,
-        "body_id": null,
-        "parent": 46,
-        "nomi": null,
-        "cur": null,
-        "x": 61,
-        "y": 80,
-        "sgrp": 1,
-        "stat": 6,
-        "state_grp": null,
-        "state": 0,
-        "ecode": 0,
-        "repairable": 0,
         "visible": 1,
         "spec_act": 0,
         "active": 1,
         "dports": [
           {
-            "id": 45,
-            "dev": 61,
-            "port_type": 0,
-            "port_dir": 0,
-            "port": 0,
-            "name": "Порт"
+            "id": 22,
+            "dev": 15,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 1,
+            "name": "state"
           }
         ],
-        "dfaces": {},
-        "nominals": [],
-        "stats": {
-          "0": {
-            "id": 1,
-            "num": 0,
-            "grp": 1,
-            "name": "stat_ready",
-            "clr": "#c7c7c9",
-            "bgclr": "#545454",
-            "active": 1,
-            "dclass": ""
-          },
-          "1": {
-            "id": 2,
-            "num": 1,
-            "grp": 1,
-            "name": "stat_inwork",
-            "clr": "#0db800",
-            "bgclr": "#043001",
-            "active": 1,
-            "dclass": "active"
-          },
-          "2": {
-            "id": 3,
-            "num": 2,
-            "grp": 1,
-            "name": "stat_crash",
-            "clr": "#e12c0d",
-            "bgclr": "#330a03",
-            "active": 1,
-            "dclass": "danger"
-          },
-          "3": {
-            "id": 4,
-            "num": 3,
-            "grp": 1,
-            "name": "stat_serv",
-            "clr": "#ffa200",
-            "bgclr": "#472d00",
-            "active": 1,
-            "dclass": "service"
-          },
-          "4": {
-            "id": 5,
-            "num": 4,
-            "grp": 1,
-            "name": "stat_manu",
-            "clr": "#00ddda",
-            "bgclr": "#004c4b",
-            "active": 1,
-            "dclass": "manual"
-          },
-          "5": {
-            "id": 6,
-            "num": 5,
-            "grp": 1,
-            "name": "stat_repa",
-            "clr": "#0072ff",
-            "bgclr": "#001f47",
-            "active": 1,
-            "dclass": "repair"
-          },
-          "6": {
-            "id": 7,
-            "num": 6,
-            "grp": 1,
-            "name": "stat_nocon",
-            "clr": "black",
-            "bgclr": "white",
-            "active": 1,
-            "dclass": "die"
-          }
-        }
-      },
-      {
-        "id": 62,
-        "ctrl": 6,
-        "typ": 9,
-        "contyp": null,
-        "grp": null,
-        "name": "Привод",
-        "modif": 1,
-        "moto": 0,
-        "body_id": null,
-        "parent": 46,
-        "nomi": 11,
-        "cur": null,
-        "x": 50,
-        "y": 15,
-        "sgrp": 1,
-        "stat": 6,
-        "state_grp": null,
-        "state": 0,
-        "ecode": 0,
-        "repairable": 0,
-        "visible": 1,
-        "spec_act": 0,
-        "active": 1,
-        "dports": [],
         "dfaces": {
-          "21": {
-            "id": 21,
-            "dev": 62,
-            "tardev": 62,
-            "name": "Privod",
-            "viewgrp": 10,
-            "viewtype": 2,
-            "stat_grp": 1,
-            "meas": 1,
+          "15": {
+            "id": 15,
+            "dev": 15,
+            "tardev": null,
+            "name": "Статус",
+            "viewgrp": null,
+            "viewtype": 4,
+            "stat_grp": 2,
+            "meas": null,
             "min_val": 0,
             "max_val": 0,
             "def": 0,
@@ -1049,7 +2000,7 @@
             "lim_warning_code": null,
             "lim_danger": 0,
             "lim_danger_code": null,
-            "history_fix": 1,
+            "history_fix": 0,
             "use_range": 0,
             "range_warn_min": 0,
             "range_warn_min_code": null,
@@ -1060,9 +2011,19 @@
             "range_crit_max": 0,
             "range_crit_max_code": null,
             "orde": 0,
-            "show_scat": 1,
+            "show_scat": 0,
             "visible": 1,
-            "dvars": []
+            "dvars": [
+              {
+                "id": 61,
+                "dev": 15,
+                "dface": 15,
+                "var_id": 2,
+                "val": "",
+                "name": "status",
+                "type": ""
+              }
+            ]
           }
         },
         "nominals": [],
@@ -1140,220 +2101,20 @@
         }
       },
       {
-        "id": 63,
-        "ctrl": 6,
-        "typ": 25,
-        "contyp": null,
-        "grp": null,
-        "name": "Редуктор",
+        "id": 16,
+        "ctrl": 2,
+        "typ": 10,
+        "contyp": 6,
+        "grp": 1,
+        "name": "Электроклапан №2",
         "modif": null,
         "moto": 0,
         "body_id": null,
-        "parent": 46,
-        "nomi": 41,
-        "cur": null,
-        "x": 68,
-        "y": 22,
-        "sgrp": 1,
-        "stat": 6,
-        "state_grp": null,
-        "state": 0,
-        "ecode": 0,
-        "repairable": 0,
-        "visible": 1,
-        "spec_act": 0,
-        "active": 1,
-        "dports": [],
-        "dfaces": {},
-        "nominals": [],
-        "stats": {
-          "0": {
-            "id": 1,
-            "num": 0,
-            "grp": 1,
-            "name": "stat_ready",
-            "clr": "#c7c7c9",
-            "bgclr": "#545454",
-            "active": 1,
-            "dclass": ""
-          },
-          "1": {
-            "id": 2,
-            "num": 1,
-            "grp": 1,
-            "name": "stat_inwork",
-            "clr": "#0db800",
-            "bgclr": "#043001",
-            "active": 1,
-            "dclass": "active"
-          },
-          "2": {
-            "id": 3,
-            "num": 2,
-            "grp": 1,
-            "name": "stat_crash",
-            "clr": "#e12c0d",
-            "bgclr": "#330a03",
-            "active": 1,
-            "dclass": "danger"
-          },
-          "3": {
-            "id": 4,
-            "num": 3,
-            "grp": 1,
-            "name": "stat_serv",
-            "clr": "#ffa200",
-            "bgclr": "#472d00",
-            "active": 1,
-            "dclass": "service"
-          },
-          "4": {
-            "id": 5,
-            "num": 4,
-            "grp": 1,
-            "name": "stat_manu",
-            "clr": "#00ddda",
-            "bgclr": "#004c4b",
-            "active": 1,
-            "dclass": "manual"
-          },
-          "5": {
-            "id": 6,
-            "num": 5,
-            "grp": 1,
-            "name": "stat_repa",
-            "clr": "#0072ff",
-            "bgclr": "#001f47",
-            "active": 1,
-            "dclass": "repair"
-          },
-          "6": {
-            "id": 7,
-            "num": 6,
-            "grp": 1,
-            "name": "stat_nocon",
-            "clr": "black",
-            "bgclr": "white",
-            "active": 1,
-            "dclass": "die"
-          }
-        }
-      },
-      {
-        "id": 66,
-        "ctrl": 6,
-        "typ": 33,
-        "contyp": null,
-        "grp": null,
-        "name": "Корпус",
-        "modif": null,
-        "moto": 0,
-        "body_id": null,
-        "parent": 46,
+        "parent": 1,
         "nomi": null,
         "cur": null,
-        "x": 50,
-        "y": 46,
-        "sgrp": 1,
-        "stat": 6,
-        "state_grp": null,
-        "state": 0,
-        "ecode": 0,
-        "repairable": 0,
-        "visible": 1,
-        "spec_act": 0,
-        "active": 1,
-        "dports": [],
-        "dfaces": {},
-        "nominals": [],
-        "stats": {
-          "0": {
-            "id": 1,
-            "num": 0,
-            "grp": 1,
-            "name": "stat_ready",
-            "clr": "#c7c7c9",
-            "bgclr": "#545454",
-            "active": 1,
-            "dclass": ""
-          },
-          "1": {
-            "id": 2,
-            "num": 1,
-            "grp": 1,
-            "name": "stat_inwork",
-            "clr": "#0db800",
-            "bgclr": "#043001",
-            "active": 1,
-            "dclass": "active"
-          },
-          "2": {
-            "id": 3,
-            "num": 2,
-            "grp": 1,
-            "name": "stat_crash",
-            "clr": "#e12c0d",
-            "bgclr": "#330a03",
-            "active": 1,
-            "dclass": "danger"
-          },
-          "3": {
-            "id": 4,
-            "num": 3,
-            "grp": 1,
-            "name": "stat_serv",
-            "clr": "#ffa200",
-            "bgclr": "#472d00",
-            "active": 1,
-            "dclass": "service"
-          },
-          "4": {
-            "id": 5,
-            "num": 4,
-            "grp": 1,
-            "name": "stat_manu",
-            "clr": "#00ddda",
-            "bgclr": "#004c4b",
-            "active": 1,
-            "dclass": "manual"
-          },
-          "5": {
-            "id": 6,
-            "num": 5,
-            "grp": 1,
-            "name": "stat_repa",
-            "clr": "#0072ff",
-            "bgclr": "#001f47",
-            "active": 1,
-            "dclass": "repair"
-          },
-          "6": {
-            "id": 7,
-            "num": 6,
-            "grp": 1,
-            "name": "stat_nocon",
-            "clr": "black",
-            "bgclr": "white",
-            "active": 1,
-            "dclass": "die"
-          }
-        }
-      },
-      {
-        "id": 67,
-        "ctrl": 6,
-        "typ": 18,
-        "contyp": null,
-        "grp": null,
-        "name": "Датчик вибрации (Приводная)",
-        "modif": null,
-        "moto": 0,
-        "body_id": null,
-        "parent": 46,
-        "nomi": null,
-        "cur": null,
-        "x": 23,
-        "y": 69,
+        "x": 92,
+        "y": 87,
         "sgrp": 1,
         "stat": 6,
         "state_grp": null,
@@ -1363,6 +2124,590 @@
         "visible": 1,
         "spec_act": 0,
         "active": 1,
+        "dports": [
+          {
+            "id": 24,
+            "dev": 16,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 1,
+            "name": "state"
+          }
+        ],
+        "dfaces": {
+          "16": {
+            "id": 16,
+            "dev": 16,
+            "tardev": null,
+            "name": "Статус",
+            "viewgrp": null,
+            "viewtype": 4,
+            "stat_grp": 2,
+            "meas": null,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": null,
+            "lim_danger": 0,
+            "lim_danger_code": null,
+            "history_fix": 0,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 0,
+            "show_scat": 0,
+            "visible": 1,
+            "dvars": [
+              {
+                "id": 2,
+                "contyp": 6,
+                "name": "status",
+                "val": "0",
+                "active": 1,
+                "type": ""
+              }
+            ]
+          }
+        },
+        "nominals": [],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 17,
+        "ctrl": 2,
+        "typ": 10,
+        "contyp": 6,
+        "grp": 1,
+        "name": "Электроклапан №3",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": null,
+        "cur": null,
+        "x": 85,
+        "y": 87,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 26,
+            "dev": 17,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 1,
+            "name": "state"
+          }
+        ],
+        "dfaces": {
+          "17": {
+            "id": 17,
+            "dev": 17,
+            "tardev": null,
+            "name": "Статус",
+            "viewgrp": null,
+            "viewtype": null,
+            "stat_grp": 2,
+            "meas": null,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": null,
+            "lim_danger": 0,
+            "lim_danger_code": null,
+            "history_fix": 0,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 0,
+            "show_scat": 0,
+            "visible": 1,
+            "dvars": [
+              {
+                "id": 2,
+                "contyp": 6,
+                "name": "status",
+                "val": "0",
+                "active": 1,
+                "type": ""
+              }
+            ]
+          }
+        },
+        "nominals": [],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 18,
+        "ctrl": 2,
+        "typ": 10,
+        "contyp": 6,
+        "grp": null,
+        "name": "Форсунка",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": 60,
+        "cur": null,
+        "x": 82,
+        "y": 81,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 1,
+        "spec_act": 1,
+        "active": 1,
+        "dports": [
+          {
+            "id": 27,
+            "dev": 18,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 0,
+            "name": "state"
+          }
+        ],
+        "dfaces": {},
+        "nominals": [
+          {
+            "keyn": "fors",
+            "name": "fors_",
+            "meas": null,
+            "val": "1"
+          },
+          {
+            "keyn": "imp_len_nzl",
+            "name": "Длительность импульса",
+            "meas": 8,
+            "val": "1000"
+          },
+          {
+            "keyn": "cycle_time_nzl",
+            "name": "Продув каждые",
+            "meas": 8,
+            "val": "1"
+          },
+          {
+            "keyn": "nozzle_chdelay",
+            "name": "Задержка измерения состояния",
+            "meas": 6,
+            "val": "200"
+          }
+        ],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 19,
+        "ctrl": 2,
+        "typ": 23,
+        "contyp": 6,
+        "grp": null,
+        "name": "Кнопка Аварийный Стоп",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": null,
+        "cur": null,
+        "x": 8,
+        "y": 48,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 0,
+        "visible": 1,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 29,
+            "dev": 19,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 0,
+            "name": "state"
+          }
+        ],
+        "dfaces": {
+          "18": {
+            "id": 18,
+            "dev": 19,
+            "tardev": null,
+            "name": "Состояние",
+            "viewgrp": null,
+            "viewtype": null,
+            "stat_grp": null,
+            "meas": null,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": null,
+            "lim_danger": 0,
+            "lim_danger_code": null,
+            "history_fix": 0,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 0,
+            "show_scat": 0,
+            "visible": 1,
+            "dvars": [
+              {
+                "id": 2,
+                "contyp": 6,
+                "name": "status",
+                "val": "0",
+                "active": 1,
+                "type": ""
+              }
+            ]
+          }
+        },
+        "nominals": [],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 69,
+        "ctrl": 2,
+        "typ": 34,
+        "contyp": null,
+        "grp": null,
+        "name": "Фильтр-регулятор",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": null,
+        "cur": null,
+        "x": 0,
+        "y": 0,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 0,
+        "spec_act": 0,
+        "active": 0,
         "dports": [],
         "dfaces": {},
         "nominals": [],
@@ -1440,29 +2785,129 @@
         }
       },
       {
-        "id": 68,
-        "ctrl": 6,
-        "typ": 18,
+        "id": 71,
+        "ctrl": 2,
+        "typ": 36,
         "contyp": null,
         "grp": null,
-        "name": "Датчик вибрации (Натяжная)",
+        "name": "Предохранительный пневмоклапан",
         "modif": null,
         "moto": 0,
         "body_id": null,
-        "parent": 46,
+        "parent": 1,
         "nomi": null,
         "cur": null,
-        "x": 42,
-        "y": 79,
+        "x": 0,
+        "y": 0,
         "sgrp": 1,
         "stat": 6,
         "state_grp": null,
         "state": 0,
         "ecode": 0,
         "repairable": 1,
-        "visible": 1,
+        "visible": 0,
         "spec_act": 0,
-        "active": 1,
+        "active": 0,
+        "dports": [],
+        "dfaces": {},
+        "nominals": [],
+        "stats": {
+          "0": {
+            "id": 1,
+            "num": 0,
+            "grp": 1,
+            "name": "stat_ready",
+            "clr": "#c7c7c9",
+            "bgclr": "#545454",
+            "active": 1,
+            "dclass": ""
+          },
+          "1": {
+            "id": 2,
+            "num": 1,
+            "grp": 1,
+            "name": "stat_inwork",
+            "clr": "#0db800",
+            "bgclr": "#043001",
+            "active": 1,
+            "dclass": "active"
+          },
+          "2": {
+            "id": 3,
+            "num": 2,
+            "grp": 1,
+            "name": "stat_crash",
+            "clr": "#e12c0d",
+            "bgclr": "#330a03",
+            "active": 1,
+            "dclass": "danger"
+          },
+          "3": {
+            "id": 4,
+            "num": 3,
+            "grp": 1,
+            "name": "stat_serv",
+            "clr": "#ffa200",
+            "bgclr": "#472d00",
+            "active": 1,
+            "dclass": "service"
+          },
+          "4": {
+            "id": 5,
+            "num": 4,
+            "grp": 1,
+            "name": "stat_manu",
+            "clr": "#00ddda",
+            "bgclr": "#004c4b",
+            "active": 1,
+            "dclass": "manual"
+          },
+          "5": {
+            "id": 6,
+            "num": 5,
+            "grp": 1,
+            "name": "stat_repa",
+            "clr": "#0072ff",
+            "bgclr": "#001f47",
+            "active": 1,
+            "dclass": "repair"
+          },
+          "6": {
+            "id": 7,
+            "num": 6,
+            "grp": 1,
+            "name": "stat_nocon",
+            "clr": "black",
+            "bgclr": "white",
+            "active": 1,
+            "dclass": "die"
+          }
+        }
+      },
+      {
+        "id": 72,
+        "ctrl": 2,
+        "typ": 37,
+        "contyp": null,
+        "grp": null,
+        "name": "Ресивер",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": 1,
+        "nomi": null,
+        "cur": null,
+        "x": 0,
+        "y": 0,
+        "sgrp": 1,
+        "stat": 6,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 0,
+        "spec_act": 0,
+        "active": 0,
         "dports": [],
         "dfaces": {},
         "nominals": [],
@@ -1541,50 +2986,512 @@
       }
     ],
     "cmodules": {
-      "97": {
-        "id": 97,
-        "ctrl": 6,
-        "module": 5,
-        "i2c": 0,
-        "port": 0,
-        "in_type": null,
-        "port_dir": null,
-        "cmodule_opts": []
+      "100": {
+        "id": 100,
+        "ctrl": 2,
+        "module": 10,
+        "i2c": 33,
+        "port": 2,
+        "in_type": 1,
+        "port_dir": 2,
+        "cmodule_opts": [
+          {
+            "id": 163,
+            "ctrl_module": 100,
+            "opt": 72,
+            "name": "Q1",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 0,
+            "in_type": 1,
+            "dev_port": 50,
+            "port_dir": 2,
+            "port_num": 7,
+            "port_type": 1,
+            "dev_port_name": "port_green",
+            "dev": 2
+          },
+          {
+            "id": 164,
+            "ctrl_module": 100,
+            "opt": 73,
+            "name": "Q2",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 0,
+            "in_type": 1,
+            "dev_port": 51,
+            "port_dir": 2,
+            "port_num": 6,
+            "port_type": 1,
+            "dev_port_name": "port_yellow",
+            "dev": 2
+          },
+          {
+            "id": 165,
+            "ctrl_module": 100,
+            "opt": 74,
+            "name": "Q3",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 0,
+            "in_type": 1,
+            "dev_port": 52,
+            "port_dir": 2,
+            "port_num": 5,
+            "port_type": 1,
+            "dev_port_name": "port_red",
+            "dev": 2
+          },
+          {
+            "id": 166,
+            "ctrl_module": 100,
+            "opt": 75,
+            "name": "Q4",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 0,
+            "in_type": 1,
+            "dev_port": 53,
+            "port_dir": 2,
+            "port_num": 4,
+            "port_type": 1,
+            "dev_port_name": "port_horn",
+            "dev": 2
+          },
+          {
+            "id": 167,
+            "ctrl_module": 100,
+            "opt": 76,
+            "name": "Q5",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 0,
+            "in_type": 1,
+            "dev_port": 54,
+            "port_dir": 2,
+            "port_num": 3,
+            "port_type": 1,
+            "dev_port_name": "port_runf",
+            "dev": 2
+          },
+          {
+            "id": 168,
+            "ctrl_module": 100,
+            "opt": 77,
+            "name": "Q6",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 0,
+            "in_type": 1,
+            "dev_port": 57,
+            "port_dir": 2,
+            "port_num": 2,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 5
+          },
+          {
+            "id": 169,
+            "ctrl_module": 100,
+            "opt": 78,
+            "name": "Q7",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 0,
+            "in_type": 1,
+            "dev_port": 58,
+            "port_dir": 2,
+            "port_num": 1,
+            "port_type": 1,
+            "dev_port_name": "state_ctrl",
+            "dev": 5
+          }
+        ]
       },
-      "98": {
-        "id": 98,
-        "ctrl": 6,
-        "module": 5,
-        "i2c": 0,
-        "port": 0,
-        "in_type": null,
-        "port_dir": null,
-        "cmodule_opts": []
+      "101": {
+        "id": 101,
+        "ctrl": 2,
+        "module": 11,
+        "i2c": 38,
+        "port": 2,
+        "in_type": 1,
+        "port_dir": 2,
+        "cmodule_opts": [
+          {
+            "id": 170,
+            "ctrl_module": 101,
+            "opt": 79,
+            "name": "Q9",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 7,
+            "in_type": 1,
+            "dev_port": 22,
+            "port_dir": 2,
+            "port_num": 0,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 15
+          },
+          {
+            "id": 171,
+            "ctrl_module": 101,
+            "opt": 80,
+            "name": "Q10",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 7,
+            "in_type": 1,
+            "dev_port": 24,
+            "port_dir": 2,
+            "port_num": 1,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 16
+          },
+          {
+            "id": 172,
+            "ctrl_module": 101,
+            "opt": 81,
+            "name": "Q11",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 7,
+            "in_type": 1,
+            "dev_port": 26,
+            "port_dir": 2,
+            "port_num": 2,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 17
+          },
+          {
+            "id": 173,
+            "ctrl_module": 101,
+            "opt": 82,
+            "name": "Q12",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 7,
+            "in_type": 1,
+            "dev_port": null,
+            "port_dir": 2,
+            "port_num": 3,
+            "port_type": 1,
+            "dev_port_name": "",
+            "dev": 0
+          },
+          {
+            "id": 174,
+            "ctrl_module": 101,
+            "opt": 83,
+            "name": "Q13",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 7,
+            "in_type": 1,
+            "dev_port": 27,
+            "port_dir": 2,
+            "port_num": 4,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 18
+          },
+          {
+            "id": 175,
+            "ctrl_module": 101,
+            "opt": 84,
+            "name": "Q14",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 7,
+            "in_type": 1,
+            "dev_port": 59,
+            "port_dir": 2,
+            "port_num": 5,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 7
+          },
+          {
+            "id": 176,
+            "ctrl_module": 101,
+            "opt": 85,
+            "name": "Q15",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 7,
+            "in_type": 1,
+            "dev_port": 60,
+            "port_dir": 2,
+            "port_num": 6,
+            "port_type": 1,
+            "dev_port_name": "state_ctrl",
+            "dev": 7
+          }
+        ]
       },
-      "99": {
-        "id": 99,
-        "ctrl": 6,
-        "module": 5,
-        "i2c": 0,
+      "104": {
+        "id": 104,
+        "ctrl": 2,
+        "module": 12,
+        "i2c": 32,
         "port": 0,
-        "in_type": null,
-        "port_dir": null,
-        "cmodule_opts": []
+        "in_type": 1,
+        "port_dir": 1,
+        "cmodule_opts": [
+          {
+            "id": 191,
+            "ctrl_module": 104,
+            "opt": 86,
+            "name": "I1",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 2,
+            "in_type": 1,
+            "dev_port": 5,
+            "port_dir": 1,
+            "port_num": 0,
+            "port_type": 1,
+            "dev_port_name": "Режим Местный",
+            "dev": 1
+          },
+          {
+            "id": 192,
+            "ctrl_module": 104,
+            "opt": 87,
+            "name": "I2",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 2,
+            "in_type": 1,
+            "dev_port": 6,
+            "port_dir": 1,
+            "port_num": 1,
+            "port_type": 1,
+            "dev_port_name": "Режим Дистанция",
+            "dev": 1
+          },
+          {
+            "id": 193,
+            "ctrl_module": 104,
+            "opt": 88,
+            "name": "I3",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 2,
+            "in_type": 1,
+            "dev_port": 55,
+            "port_dir": 1,
+            "port_num": 2,
+            "port_type": 1,
+            "dev_port_name": "portbt_serv",
+            "dev": 2
+          },
+          {
+            "id": 194,
+            "ctrl_module": 104,
+            "opt": 89,
+            "name": "I4",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 2,
+            "in_type": 1,
+            "dev_port": 8,
+            "port_dir": 1,
+            "port_num": 3,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 3
+          },
+          {
+            "id": 195,
+            "ctrl_module": 104,
+            "opt": 90,
+            "name": "I5",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 2,
+            "in_type": 1,
+            "dev_port": 9,
+            "port_dir": 1,
+            "port_num": 4,
+            "port_type": 1,
+            "dev_port_name": "Контр Пускателя",
+            "dev": 4
+          },
+          {
+            "id": 196,
+            "ctrl_module": 104,
+            "opt": 91,
+            "name": "I6",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 2,
+            "in_type": 1,
+            "dev_port": 10,
+            "port_dir": 1,
+            "port_num": 5,
+            "port_type": 1,
+            "dev_port_name": "Контр Опер Напр",
+            "dev": 4
+          },
+          {
+            "id": 197,
+            "ctrl_module": 104,
+            "opt": 92,
+            "name": "I7",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 2,
+            "in_type": 1,
+            "dev_port": 12,
+            "port_dir": 1,
+            "port_num": 6,
+            "port_type": 1,
+            "dev_port_name": "Контроль пускателя",
+            "dev": 6
+          },
+          {
+            "id": 198,
+            "ctrl_module": 104,
+            "opt": 100,
+            "name": "I8",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 2,
+            "in_type": 1,
+            "dev_port": 13,
+            "port_dir": 1,
+            "port_num": 7,
+            "port_type": 1,
+            "dev_port_name": "Контр Опер Напр",
+            "dev": 6
+          }
+        ]
+      },
+      "106": {
+        "id": 106,
+        "ctrl": 2,
+        "module": 13,
+        "i2c": 32,
+        "port": 1,
+        "in_type": 1,
+        "port_dir": 1,
+        "cmodule_opts": [
+          {
+            "id": 206,
+            "ctrl_module": 106,
+            "opt": 93,
+            "name": "I9",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 3,
+            "in_type": 1,
+            "dev_port": null,
+            "port_dir": 1,
+            "port_num": 0,
+            "port_type": 1,
+            "dev_port_name": "",
+            "dev": 0
+          },
+          {
+            "id": 207,
+            "ctrl_module": 106,
+            "opt": 94,
+            "name": "I10",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 3,
+            "in_type": 1,
+            "dev_port": 16,
+            "port_dir": 1,
+            "port_num": 1,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 9
+          },
+          {
+            "id": 208,
+            "ctrl_module": 106,
+            "opt": 95,
+            "name": "I11",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 3,
+            "in_type": 1,
+            "dev_port": 18,
+            "port_dir": 1,
+            "port_num": 2,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 11
+          },
+          {
+            "id": 209,
+            "ctrl_module": 106,
+            "opt": 96,
+            "name": "I12",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 3,
+            "in_type": 1,
+            "dev_port": 20,
+            "port_dir": 1,
+            "port_num": 3,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 14
+          },
+          {
+            "id": 210,
+            "ctrl_module": 106,
+            "opt": 97,
+            "name": "I13",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 3,
+            "in_type": 1,
+            "dev_port": 56,
+            "port_dir": 1,
+            "port_num": 4,
+            "port_type": 1,
+            "dev_port_name": "portbt_run",
+            "dev": 2
+          },
+          {
+            "id": 211,
+            "ctrl_module": 106,
+            "opt": 98,
+            "name": "I14",
+            "invers": 1,
+            "antidreb": 0,
+            "i2c_addr": 3,
+            "in_type": 1,
+            "dev_port": 29,
+            "port_dir": 1,
+            "port_num": 5,
+            "port_type": 1,
+            "dev_port_name": "state",
+            "dev": 19
+          }
+        ]
       }
     },
     "ccams": {
-      "5": {
-        "id": 5,
+      "1": {
+        "id": 1,
         "ip": "192.168.15.155",
-        "ctrl": 6,
+        "ctrl": 2,
         "pos": "top",
         "posx": 0,
         "posy": 0
       },
-      "6": {
-        "id": 6,
+      "2": {
+        "id": 2,
         "ip": "192.168.15.155",
-        "ctrl": 6,
+        "ctrl": 2,
         "pos": "bottom",
         "posx": 0,
         "posy": 0
@@ -1592,31 +3499,31 @@
     },
     "cameras": [
       {
-        "id": 5,
+        "id": 1,
         "ip": "192.168.15.155",
-        "ctrl": 6,
+        "ctrl": 2,
         "pos": "top",
         "posx": 0,
         "posy": 0
       },
       {
-        "id": 6,
+        "id": 2,
         "ip": "192.168.15.155",
-        "ctrl": 6,
+        "ctrl": 2,
         "pos": "bottom",
         "posx": 0,
         "posy": 0
       }
     ],
     "pass": {
-      "id": 2,
+      "id": 1,
       "controll_otk": "-",
-      "weight": 460,
+      "weight": 340,
       "release_date": "2017-12-01",
-      "name": "Конвейер",
-      "fact_number": 2,
-      "ctrl": 6,
-      "perfomance": "150 т/ч"
+      "name": "ZEO-FCS-21.20",
+      "fact_number": 1,
+      "ctrl": 2,
+      "perfomance": "1200–1600 м³/час"
     },
     "stats": {
       "0": {
@@ -1691,16 +3598,16 @@
       }
     },
     "alive": 1,
-    "online": 1,
+    "online": 0,
     "speed": 0,
     "host": "",
     "grps": [
       {
-        "id": 3,
-        "ctrl": 6,
-        "name": "Датчики температуры",
-        "x": 15,
-        "y": 10,
+        "id": 1,
+        "ctrl": 2,
+        "name": "Электроклапана",
+        "x": 5,
+        "y": 13,
         "active": 1
       }
     ],
@@ -1724,58 +3631,40 @@
     },
     "dev_grps": [
       {
-        "id": 3,
-        "ctrl": 6,
-        "name": "Датчики температуры",
-        "x": 15,
-        "y": 10,
+        "id": 1,
+        "ctrl": 2,
+        "name": "Электроклапана",
+        "x": 5,
+        "y": 13,
         "active": 1
       }
     ],
     "pickshit": {
-      "19": {
-        "id": 19,
-        "list": 3,
-        "des": "B083 UC39,60 T100LA4_B5 B3",
-        "name": "Паспорт",
-        "cnt": 1,
-        "marks": "(35,9об/мин 2,2кВт)",
-        "active": 1
-      },
-      "20": {
-        "id": 20,
-        "list": 3,
-        "des": "ZEO-DC-SP70-150-SD-00.000-01",
-        "name": "Станция приводная",
-        "cnt": 1,
-        "marks": "Правая",
-        "active": 1
-      },
-      "21": {
-        "id": 21,
-        "list": 3,
-        "des": "ZEO-DC-SP70-150-ST-00.000",
-        "name": "Станция натяжная",
+      "27": {
+        "id": 27,
+        "list": 1,
+        "des": "ZEO-FC",
+        "name": "Фильтр цилиндрический ZEO-FCS-10.12\t",
         "cnt": 1,
         "marks": "",
         "active": 1
       },
-      "22": {
-        "id": 22,
-        "list": 3,
-        "des": "ZEO-DC-SP70-150-IS-1.1-00.000",
-        "name": "Секция промежуточная 1.1м",
+      "28": {
+        "id": 28,
+        "list": 1,
+        "des": "ZEO-FC",
+        "name": "Затвор шлюзовый ZEO-RW-9",
         "cnt": 1,
-        "marks": "",
+        "marks": "0,25 кВт",
         "active": 1
       },
-      "23": {
-        "id": 23,
-        "list": 3,
-        "des": "М112-1-80-2-300-SP-2,4м",
-        "name": "Цепь",
+      "29": {
+        "id": 29,
+        "list": 1,
+        "des": "",
+        "name": "Патрубок переходной ZEO-TT-&empty;140-210x180",
         "cnt": 1,
-        "marks": "L = 6.08м",
+        "marks": "5.8 кг",
         "active": 1
       }
     },
@@ -1805,11 +3694,11 @@
   },
   "dev_grps": [
     {
-      "id": 3,
-      "ctrl": 6,
-      "name": "Датчики температуры",
-      "x": 15,
-      "y": 10,
+      "id": 1,
+      "ctrl": 2,
+      "name": "Электроклапана",
+      "x": 5,
+      "y": 13,
       "active": 1
     }
   ],

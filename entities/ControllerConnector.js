@@ -48,7 +48,7 @@ class ControllerConnector {
         if (data) {
             try {
                 let d = JSON.parse(data.toString());
-                for(key in d){
+                for(let key in d){
                     this.server.handleControllerData(d[key], key);
                 }
             } catch (e) {

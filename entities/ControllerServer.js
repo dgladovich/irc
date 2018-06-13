@@ -24,17 +24,19 @@ class ControllerServer {
     }
 
     onChangeStatus(data) {
-        let statuses = data.data;
-        statuses.forEach((status) => {
-            this.broker.handleChangedStatus(status);
-        })
+        for(let key in data){
+            let id = key,
+                stat = data[key];
+            this.broker.handleChangedStatus({id: id, stat: stat})
+        }
     }
 
     onChangeValue(data) {
-        let values = data.data;
-        values.forEach((value) => {
-            this.broker.handleChangedValue(value)
-        });
+        for(let key in data){
+            let id = key,
+                def = data[key];
+            this.broker.handleChangedValue({id: id, def: def})
+        }
     }
 
     onOriginAlarm(alarm) {
@@ -107,9 +109,9 @@ class ControllerServer {
     //MAIN HANDLER
     ////////////////////////
     handleControllerData(data, key) {
-        console.log(data, key)
-        switch (eventGroup) {
+        switch (key) {
             case 'status':
+
                 this.onChangeStatus(data);
                 break;
             case 'values':
