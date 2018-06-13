@@ -7,6 +7,7 @@ import Radio from 'backbone.radio';
 import Noty from 'noty';
 import { View, Model, CollectionView } from 'backbone.marionette';
 
+const info_speed_changed = 'info_speed_changed', info_speed_change = 'info_speed_change', info_speed_change_confirm = 'info_speed_change_confirm';
 let ch = Radio.channel('controll');
 
 const ControllPanelModel = Backbone.Model.extend({
@@ -62,7 +63,7 @@ const DeviceItem = View.extend({
         let statName = this.$('.status-name');
         let btnRepair = this.$('#repair');
         let btnOutRepair = this.$('#outrepair');
-        let status = app.statuses.findWhere({ grp: this.model.get('sgrp') }).get('sgrps_opts').findWhere({num: this.model.get('stat')});
+        let status = app.statuses.findWhere({ id: this.model.get('sgrp') }).get('sgrps_opts').findWhere({num: this.model.get('stat')});
 
         stat.removeClass(this.previousClass);
         btnRepair.removeClass(this.previousBtn);
@@ -165,7 +166,6 @@ export default View.extend({
         console.log('stop device')
     },
     changeSpeed: function() {
-        console.log('changing speed')
         ch.trigger('command:speed', this.previousSpeed);
     },
     updateMode: function(){

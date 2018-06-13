@@ -2733,6 +2733,16 @@ p .exitButton {
   text-align: center;
   white-space: nowrap;
 }
+#custom-handle{
+  border-radius: 50%;
+  background-color: #0db800;
+  border: 4px solid white;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  color: white;
+  font-weight: 700;
+}
 
 .custom-table-body {
   border-bottom: 1px solid #777;
