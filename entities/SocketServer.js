@@ -52,6 +52,14 @@ class SocketServer {
         };
         this.socketConnector.sendData(message);
     }
+    sendState(devId, state) {
+        let st = {id: devId, state: state},
+            message = {
+                eventGroup: 'state',
+                data: [Object.assign({}, st)]
+            };
+        this.socketConnector.sendData(message);
+    }
     sendAuthRequired(){}
 
     sendInitialData(socket) {

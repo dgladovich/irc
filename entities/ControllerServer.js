@@ -53,6 +53,13 @@ class ControllerServer {
     onChangeMode(mode) {
         console.log(mode)
     }
+    onChangeState(data) {
+        for(let key in data){
+            let id = key,
+                state = data[key];
+            this.broker.handleChangedState({id: id, state: state})
+        }
+    }
 
     ////////////////////////
     //COMMANDS TO CONTROLLER

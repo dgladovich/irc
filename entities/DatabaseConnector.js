@@ -1,4 +1,4 @@
-const {Alarm, Queue, User, SystemError, Registering} = require('../models/index');
+const {Alarm, Queue, User, SystemError, Registering} = require('../models');
 const Logger = require('./Logger');
 const moment = require('moment');
 const uuidv1 = require('uuid/v1');

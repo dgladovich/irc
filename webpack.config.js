@@ -10,6 +10,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const path = require('path');
 const merge = require('webpack-merge');
@@ -89,6 +90,22 @@ const webpackCommon = {
 };
 switch (process.env.npm_lifecycle_event) {
     case 'start':
+    case 'server':
+        console.log('Starting webpack server')
+        module.exports = {
+            entry: './app.js',
+            target: 'node',
+            watch: true,
+            externals: [
+                'ws',
+                nodeExternals(),
+            ],
+            output: {
+                path: path.join(__dirname, 'build'),
+                filename: 'server.js'
+            }
+        }
+        break;
     case 'dev':
         console.log('Running webpack in development mode');
         module.exports = merge(webpackCommon, {
@@ -97,7 +114,7 @@ switch (process.env.npm_lifecycle_event) {
             devServer: {
                 contentBase: [path.join(__dirname, "dist"), path.join(__dirname, "public")],
                 compress: true,
-		port: 8080,
+		        port: 8080,
                 proxy: [{
                     context: [
                         "/",

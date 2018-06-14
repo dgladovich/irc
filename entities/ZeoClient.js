@@ -37,6 +37,19 @@ class ZeoClient {
             };
         this.zeoConnector.sendData(apiStatus)
     }
+    sendState(devId, state) {
+        let st = {deviceId: devId, stat: state},
+            controllerStatus = this.broker.getControllerStatus,
+            apiStatus = {
+                eventGroup: 'state',
+                data: [st],
+                controller: {
+                    controllerId: +CONTROLLER_ID,
+                    state
+                }
+            };
+        this.zeoConnector.sendData(apiStatus)
+    }
     sendValue(faceId, def){
 
     }

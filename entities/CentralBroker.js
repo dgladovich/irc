@@ -64,6 +64,12 @@ class CentralBroker {
         this.zeoClient.sendValue(id, def);
     }
 
+    handleChangedState(data) {
+        let {id, state} = data;
+        this.socketServer.sendState(id, state);
+        this.zeoClient.sendState(id, state);
+    }
+
     handleChangedMode(mode) {
     }
 
@@ -150,6 +156,7 @@ class CentralBroker {
             this.zeoClient.sendStatus(devId, stat);
         })
     }
+
     setControllerOffline() {
         this.dh.updateControllerStatus(stat);
     }

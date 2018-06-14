@@ -5,7 +5,6 @@ const QueueCollection = require('./collections/QueueCollection');
 const AlarmsCollection = require('./collections/AlarmsCollection');
 const _ = require('lodash');
 const config = require('../config.json');
-
 function prepareFaces(devs){
     let faces = [];
     devs.each((d)=>{
