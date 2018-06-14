@@ -1,3 +1,5 @@
+// @flow
+
 const ControllerServer = require('./ControllerServer');
 const Logger = require('./Logger');
 const ZeoClient = require('./ZeoClient');

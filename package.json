@@ -5,7 +5,12 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "webpack-dev-server --open",
-    "st": "PORT=3001 node --max_old_space_size=32 ./bin/www"
+    "st": "PORT=3001 node --max_old_space_size=32 ./bin/www",
+    "build": "babel src/ -d lib/",
+    "flow": "flow"
+  },
+  "babel": {
+    "presets": ["flow"]
   },
   "dependencies": {
     "accounting": "^0.4.1",
@@ -79,6 +84,7 @@
     "eslint": "^2.11.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.2",
     "file-loader": "^1.1.6",
+    "flow-bin": "^0.74.0",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.4",
