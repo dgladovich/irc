@@ -4,7 +4,6 @@ import DeviceGroupCollection from './collections/DeviceGroupCollection';
 import ErrorsCollection from './collections/ErrorsCollection';
 import InformerCollection from './collections/InformerCollection';
 import Controller from './models/Controller';
-import config from '../config/individual';
 import Radio from 'backbone.radio';
 import io from 'socket.io-client';
 import Noty from 'noty';

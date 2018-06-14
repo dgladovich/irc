@@ -15,12 +15,11 @@ if (config.use_env_variable) {
 }
 
 fs
-  .readdirSync(path.resolve(__dirname))
+  .readdirSync(__dirname)
   .filter(file => {
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
-
     var model = sequelize['import'](path.join(__dirname, file));
     db[model.name] = model;
   });
@@ -30,14 +29,7 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
-sequelize
-    .authenticate()
-    .then(() => {
-        console.log(`Connected to database ${config.storage}.`);
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

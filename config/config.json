@@ -1,7 +1,7 @@
 {
   "development": {
-    "dialect": "sqlite",
-    "storage": "smart.db"
+    "storage": "smart.db",
+    "dialect": "sqlite"
   },
   "test": {
     "username": "root",

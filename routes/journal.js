@@ -3,7 +3,6 @@
 const express = require('express');
 const router = express.Router();
 const moment = require('moment');
-const context = require('../config/individual');
 const _ = require('lodash');
 const db = require('../models');
 const {Op} = db.Sequelize;

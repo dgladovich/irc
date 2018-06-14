@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path')
-const config = require('../config/individual');
 const _ = require('underscore');
 const moment = require('moment');
 const db = require('../models');

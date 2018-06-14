@@ -158,7 +158,8 @@ class CentralBroker {
     }
 
     setControllerOffline() {
-        this.dh.updateControllerStatus(stat);
+        const OFFLINE_STATUS = 6;
+        this.dh.updateControllerStatus(OFFLINE_STATUS);
     }
 
 
