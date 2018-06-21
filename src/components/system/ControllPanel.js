@@ -63,6 +63,7 @@ const DeviceItem = View.extend({
         let statName = this.$('.status-name');
         let btnRepair = this.$('#repair');
         let btnOutRepair = this.$('#outrepair');
+        if(_.isNull(this.model.get('sgrp'))) return;
         let status = app.statuses.findWhere({ id: this.model.get('sgrp') }).get('sgrps_opts').findWhere({num: this.model.get('stat')});
 
         stat.removeClass(this.previousClass);
