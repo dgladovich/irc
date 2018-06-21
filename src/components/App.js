@@ -1,7 +1,7 @@
 import Marionette from 'backbone.marionette';
 import {Router} from './Router';
 import {history} from 'backbone';
-import {DevicesDispatcher, prepareViewGroups, prepareFaces, prepareStatuses, preparePickList} from '../Utils';
+import {DevicesDispatcher, prepareViewGroups, prepareFaces, prepareStatuses, preparePickList, computeDeviceSize} from '../Utils';
 import Controller from '../models/Controller';
 import FacesCollection from '../collections/FacesCollection';
 import ControllersCollection from '../collections/ControllersCollection';
@@ -19,6 +19,7 @@ export default Marionette.Application.extend({
         this.picklist = new Backbone.Collection(preparePickList(this.controller.get('pickshit')));
         this.controllers = new ControllersCollection(data.options[0].ctrls);
         this.devices = this.controller.get('devs');
+        this.deviceSize = computeDeviceSize(this.devices.length);
         this.deviceGroups = new Backbone.Collection(this.controller.get('dev_grps'));
         this.measurments = new Backbone.Collection(_.toArray(data.options[0].meas));
         this.faces = new FacesCollection(prepareFaces(this.devices));

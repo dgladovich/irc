@@ -6,6 +6,7 @@ import Central from './Central'
 export default CollectionView.extend({
     className: 't-wrap objects afade',
     childView: function(item){
+        item.set('devicesize', app.deviceSize)
         switch(item.get('presentation')){
             case 'device':
                 return Device;
@@ -14,7 +15,7 @@ export default CollectionView.extend({
                 return DeviceGroup;
                 break;
             case 'central':
-                return Central
+                return Central;
                 break;
             default:
                 return Backbone.View;

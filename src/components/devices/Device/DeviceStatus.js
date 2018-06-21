@@ -1,23 +1,27 @@
 import template from './templates/status.jst';
 import errocode_template from './templates/errorcode_template.jst';
 
-import { View } from 'backbone.marionette';
+import {View} from 'backbone.marionette';
 
 const ErrorCodeView = View.extend({
     template: errocode_template,
-    initialize: function(){
+    initialize: function () {
         this.listenTo(this.model, 'change:id', this.render.bind(this))
     }
 })
 const ErrorCodeModel = Backbone.Model.extend({
-    initialize: function() {
+    initialize: function () {
         this.set(app.errors.findWhere({
             id: this.get('dev').get('ecode')
         }).toJSON());
         this.listenTo(this.get('dev'), 'change:ecode', (dev) => {
-            this.set(app.errors.findWhere({
-                id: this.get('dev').get('ecode')
-            }).toJSON());
+            console.log(this.get('dev').get('ecode'));
+            let errorCode = app
+                .errors
+                .findWhere({ id: this.get('dev').get('ecode')})
+                .toJSON();
+            console.log(errorCode)
+            this.set(errorCode);
         })
     }
 })
@@ -27,7 +31,7 @@ export default View.extend({
     regions: {
         errorMessage: '.panel-body'
     },
-    onRender: function() {
+    onRender: function () {
         // Get rid of that pesky wrapping-div.
         // Assumes 1 child element present in template.
         this.$el = this.$el.children();
@@ -38,10 +42,10 @@ export default View.extend({
         this.updateStatus.call(this);
         this.showChildView('errorMessage', this.errorCodeView);
     },
-    updateStatus: function() {
+    updateStatus: function () {
         let title = this.$('.panel-title');
         title.removeClass(this.previousClass);
-        let deviceStatus = app.statuses.findWhere({ id: this.model.get('sgrp')}).get('sgrps_opts').findWhere({num: this.model.get('stat')});
+        let deviceStatus = app.statuses.findWhere({id: this.model.get('sgrp')}).get('sgrps_opts').findWhere({num: this.model.get('stat')});
         if (deviceStatus !== undefined) {
             this.previousClass = deviceStatus.get('dclass');
             let statusTranslate = app.language[deviceStatus.get('name')]
@@ -53,11 +57,11 @@ export default View.extend({
 
         title.addClass(this.previousClass);
     },
-    onDestroy: function() {
+    onDestroy: function () {
         this.stopListening();
     },
-    initialize: function() {
-        this.errorCodeView = new ErrorCodeView({ model: new ErrorCodeModel({ dev: this.model }) });
+    initialize: function () {
+        this.errorCodeView = new ErrorCodeView({model: new ErrorCodeModel({dev: this.model})});
         this.listenTo(this.model, 'change:stat', this.updateStatus.bind(this))
         //this.errorCodeView.listenTo(this.model, 'change:ecode', this.errorCodeView.render.bind(this.errorCodeView));
 

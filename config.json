@@ -118,19 +118,25 @@
             "keyn": "imp_len",
             "name": "Длительность срабатывания клапана",
             "meas": 8,
-            "val": "300"
+            "val": "500"
           },
           {
             "keyn": "imp_period",
             "name": "Длительность между импульсами",
             "meas": 8,
-            "val": "1000"
+            "val": "500"
           },
           {
             "keyn": "numof_cicles",
             "name": "Количество завершающих циклов",
             "meas": 15,
             "val": "2"
+          },
+          {
+            "keyn": "valve_chdelay",
+            "name": "Задержка измерения состояния клапана",
+            "meas": 8,
+            "val": "100"
           }
         ],
         "stats": {
@@ -286,6 +292,22 @@
             "port_dir": 1,
             "port": 6,
             "name": "portbt_run"
+          },
+          {
+            "id": 65,
+            "dev": 2,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 7,
+            "name": "port_local"
+          },
+          {
+            "id": 66,
+            "dev": 2,
+            "port_type": 1,
+            "port_dir": 1,
+            "port": 8,
+            "name": "port_distance"
           }
         ],
         "dfaces": {},
@@ -411,7 +433,7 @@
         "repairable": 1,
         "visible": 1,
         "spec_act": 0,
-        "active": 1,
+        "active": 0,
         "dports": [
           {
             "id": 8,
@@ -1440,7 +1462,7 @@
         "repairable": 1,
         "visible": 1,
         "spec_act": 0,
-        "active": 1,
+        "active": 0,
         "dports": [
           {
             "id": 18,
@@ -1989,7 +2011,7 @@
             "dev": 15,
             "tardev": null,
             "name": "Статус",
-            "viewgrp": null,
+            "viewgrp": 9,
             "viewtype": 4,
             "stat_grp": 2,
             "meas": null,
@@ -2140,7 +2162,7 @@
             "dev": 16,
             "tardev": null,
             "name": "Статус",
-            "viewgrp": null,
+            "viewgrp": 3,
             "viewtype": 4,
             "stat_grp": 2,
             "meas": null,
@@ -2290,7 +2312,7 @@
             "dev": 17,
             "tardev": null,
             "name": "Статус",
-            "viewgrp": null,
+            "viewgrp": 3,
             "viewtype": null,
             "stat_grp": 2,
             "meas": null,
@@ -2983,6 +3005,164 @@
             "dclass": "die"
           }
         }
+      },
+      {
+        "id": 74,
+        "ctrl": 2,
+        "typ": 10,
+        "contyp": 6,
+        "grp": null,
+        "name": "Электроклапан №4",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": null,
+        "nomi": null,
+        "cur": null,
+        "x": 0,
+        "y": 0,
+        "sgrp": null,
+        "stat": 0,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 0,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 63,
+            "dev": 74,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 0,
+            "name": "state"
+          }
+        ],
+        "dfaces": {
+          "27": {
+            "id": 27,
+            "dev": 74,
+            "tardev": null,
+            "name": "Статус",
+            "viewgrp": 3,
+            "viewtype": 4,
+            "stat_grp": 2,
+            "meas": null,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": null,
+            "lim_danger": 0,
+            "lim_danger_code": null,
+            "history_fix": 0,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 0,
+            "show_scat": 0,
+            "visible": 1,
+            "dvars": [
+              {
+                "id": 2,
+                "contyp": 6,
+                "name": "status",
+                "val": "0",
+                "active": 1,
+                "type": ""
+              }
+            ]
+          }
+        },
+        "nominals": [],
+        "stats": {}
+      },
+      {
+        "id": 75,
+        "ctrl": 2,
+        "typ": 10,
+        "contyp": 6,
+        "grp": 1,
+        "name": "Электроклапан №5",
+        "modif": null,
+        "moto": 0,
+        "body_id": null,
+        "parent": null,
+        "nomi": null,
+        "cur": null,
+        "x": 0,
+        "y": 0,
+        "sgrp": null,
+        "stat": 0,
+        "state_grp": null,
+        "state": 0,
+        "ecode": 0,
+        "repairable": 1,
+        "visible": 0,
+        "spec_act": 0,
+        "active": 1,
+        "dports": [
+          {
+            "id": 64,
+            "dev": 75,
+            "port_type": 1,
+            "port_dir": 2,
+            "port": 0,
+            "name": "state"
+          }
+        ],
+        "dfaces": {
+          "28": {
+            "id": 28,
+            "dev": 75,
+            "tardev": null,
+            "name": "Статус",
+            "viewgrp": 3,
+            "viewtype": 4,
+            "stat_grp": null,
+            "meas": null,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": null,
+            "lim_danger": 0,
+            "lim_danger_code": null,
+            "history_fix": 0,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 0,
+            "show_scat": 0,
+            "visible": 1,
+            "dvars": [
+              {
+                "id": 2,
+                "contyp": 6,
+                "name": "status",
+                "val": "0",
+                "active": 1,
+                "type": ""
+              }
+            ]
+          }
+        },
+        "nominals": [],
+        "stats": {}
       }
     ],
     "cmodules": {
@@ -3052,12 +3232,12 @@
             "antidreb": 0,
             "i2c_addr": 0,
             "in_type": 1,
-            "dev_port": 53,
+            "dev_port": 59,
             "port_dir": 2,
             "port_num": 4,
             "port_type": 1,
-            "dev_port_name": "port_horn",
-            "dev": 2
+            "dev_port_name": "state",
+            "dev": 7
           },
           {
             "id": 167,
@@ -3068,12 +3248,12 @@
             "antidreb": 0,
             "i2c_addr": 0,
             "in_type": 1,
-            "dev_port": 54,
+            "dev_port": null,
             "port_dir": 2,
             "port_num": 3,
             "port_type": 1,
-            "dev_port_name": "port_runf",
-            "dev": 2
+            "dev_port_name": "",
+            "dev": 0
           },
           {
             "id": 168,
@@ -3084,12 +3264,12 @@
             "antidreb": 0,
             "i2c_addr": 0,
             "in_type": 1,
-            "dev_port": 57,
+            "dev_port": null,
             "port_dir": 2,
             "port_num": 2,
             "port_type": 1,
-            "dev_port_name": "state",
-            "dev": 5
+            "dev_port_name": "",
+            "dev": 0
           },
           {
             "id": 169,
@@ -3100,12 +3280,12 @@
             "antidreb": 0,
             "i2c_addr": 0,
             "in_type": 1,
-            "dev_port": 58,
+            "dev_port": null,
             "port_dir": 2,
             "port_num": 1,
             "port_type": 1,
-            "dev_port_name": "state_ctrl",
-            "dev": 5
+            "dev_port_name": "",
+            "dev": 0
           }
         ]
       },
@@ -3114,7 +3294,7 @@
         "ctrl": 2,
         "module": 11,
         "i2c": 38,
-        "port": 2,
+        "port": 3,
         "in_type": 1,
         "port_dir": 2,
         "cmodule_opts": [
@@ -3175,12 +3355,12 @@
             "antidreb": 0,
             "i2c_addr": 7,
             "in_type": 1,
-            "dev_port": null,
+            "dev_port": 63,
             "port_dir": 2,
             "port_num": 3,
             "port_type": 1,
-            "dev_port_name": "",
-            "dev": 0
+            "dev_port_name": "state",
+            "dev": 74
           },
           {
             "id": 174,
@@ -3191,12 +3371,12 @@
             "antidreb": 0,
             "i2c_addr": 7,
             "in_type": 1,
-            "dev_port": 27,
+            "dev_port": 64,
             "port_dir": 2,
             "port_num": 4,
             "port_type": 1,
             "dev_port_name": "state",
-            "dev": 18
+            "dev": 75
           },
           {
             "id": 175,
@@ -3207,12 +3387,12 @@
             "antidreb": 0,
             "i2c_addr": 7,
             "in_type": 1,
-            "dev_port": 59,
+            "dev_port": null,
             "port_dir": 2,
             "port_num": 5,
             "port_type": 1,
-            "dev_port_name": "state",
-            "dev": 7
+            "dev_port_name": "",
+            "dev": 0
           },
           {
             "id": 176,
@@ -3223,12 +3403,12 @@
             "antidreb": 0,
             "i2c_addr": 7,
             "in_type": 1,
-            "dev_port": 60,
+            "dev_port": null,
             "port_dir": 2,
             "port_num": 6,
             "port_type": 1,
-            "dev_port_name": "state_ctrl",
-            "dev": 7
+            "dev_port_name": "",
+            "dev": 0
           }
         ]
       },
@@ -3250,12 +3430,12 @@
             "antidreb": 0,
             "i2c_addr": 2,
             "in_type": 1,
-            "dev_port": 5,
+            "dev_port": 55,
             "port_dir": 1,
             "port_num": 0,
             "port_type": 1,
-            "dev_port_name": "Режим Местный",
-            "dev": 1
+            "dev_port_name": "portbt_serv",
+            "dev": 2
           },
           {
             "id": 192,
@@ -3266,12 +3446,12 @@
             "antidreb": 0,
             "i2c_addr": 2,
             "in_type": 1,
-            "dev_port": 6,
+            "dev_port": 29,
             "port_dir": 1,
             "port_num": 1,
             "port_type": 1,
-            "dev_port_name": "Режим Дистанция",
-            "dev": 1
+            "dev_port_name": "state",
+            "dev": 19
           },
           {
             "id": 193,
@@ -3282,11 +3462,11 @@
             "antidreb": 0,
             "i2c_addr": 2,
             "in_type": 1,
-            "dev_port": 55,
+            "dev_port": 65,
             "port_dir": 1,
             "port_num": 2,
             "port_type": 1,
-            "dev_port_name": "portbt_serv",
+            "dev_port_name": "port_local",
             "dev": 2
           },
           {
@@ -3298,12 +3478,12 @@
             "antidreb": 0,
             "i2c_addr": 2,
             "in_type": 1,
-            "dev_port": 8,
+            "dev_port": 66,
             "port_dir": 1,
             "port_num": 3,
             "port_type": 1,
-            "dev_port_name": "state",
-            "dev": 3
+            "dev_port_name": "port_distance",
+            "dev": 2
           },
           {
             "id": 195,
@@ -3314,12 +3494,12 @@
             "antidreb": 0,
             "i2c_addr": 2,
             "in_type": 1,
-            "dev_port": 9,
+            "dev_port": null,
             "port_dir": 1,
             "port_num": 4,
             "port_type": 1,
-            "dev_port_name": "Контр Пускателя",
-            "dev": 4
+            "dev_port_name": "",
+            "dev": 0
           },
           {
             "id": 196,
@@ -3330,12 +3510,12 @@
             "antidreb": 0,
             "i2c_addr": 2,
             "in_type": 1,
-            "dev_port": 10,
+            "dev_port": null,
             "port_dir": 1,
             "port_num": 5,
             "port_type": 1,
-            "dev_port_name": "Контр Опер Напр",
-            "dev": 4
+            "dev_port_name": "",
+            "dev": 0
           },
           {
             "id": 197,
@@ -3346,12 +3526,12 @@
             "antidreb": 0,
             "i2c_addr": 2,
             "in_type": 1,
-            "dev_port": 12,
+            "dev_port": 8,
             "port_dir": 1,
             "port_num": 6,
             "port_type": 1,
-            "dev_port_name": "Контроль пускателя",
-            "dev": 6
+            "dev_port_name": "state",
+            "dev": 3
           },
           {
             "id": 198,
@@ -3362,12 +3542,12 @@
             "antidreb": 0,
             "i2c_addr": 2,
             "in_type": 1,
-            "dev_port": 13,
+            "dev_port": 20,
             "port_dir": 1,
             "port_num": 7,
             "port_type": 1,
-            "dev_port_name": "Контр Опер Напр",
-            "dev": 6
+            "dev_port_name": "state",
+            "dev": 14
           }
         ]
       },
@@ -3405,12 +3585,12 @@
             "antidreb": 0,
             "i2c_addr": 3,
             "in_type": 1,
-            "dev_port": 16,
+            "dev_port": null,
             "port_dir": 1,
             "port_num": 1,
             "port_type": 1,
-            "dev_port_name": "state",
-            "dev": 9
+            "dev_port_name": "",
+            "dev": 0
           },
           {
             "id": 208,
@@ -3421,12 +3601,12 @@
             "antidreb": 0,
             "i2c_addr": 3,
             "in_type": 1,
-            "dev_port": 18,
+            "dev_port": null,
             "port_dir": 1,
             "port_num": 2,
             "port_type": 1,
-            "dev_port_name": "state",
-            "dev": 11
+            "dev_port_name": "",
+            "dev": 0
           },
           {
             "id": 209,
@@ -3437,12 +3617,12 @@
             "antidreb": 0,
             "i2c_addr": 3,
             "in_type": 1,
-            "dev_port": 20,
+            "dev_port": null,
             "port_dir": 1,
             "port_num": 3,
             "port_type": 1,
-            "dev_port_name": "state",
-            "dev": 14
+            "dev_port_name": "",
+            "dev": 0
           },
           {
             "id": 210,
@@ -3453,12 +3633,12 @@
             "antidreb": 0,
             "i2c_addr": 3,
             "in_type": 1,
-            "dev_port": 56,
+            "dev_port": null,
             "port_dir": 1,
             "port_num": 4,
             "port_type": 1,
-            "dev_port_name": "portbt_run",
-            "dev": 2
+            "dev_port_name": "",
+            "dev": 0
           },
           {
             "id": 211,
@@ -3469,32 +3649,153 @@
             "antidreb": 0,
             "i2c_addr": 3,
             "in_type": 1,
-            "dev_port": 29,
+            "dev_port": null,
             "port_dir": 1,
             "port_num": 5,
             "port_type": 1,
-            "dev_port_name": "state",
-            "dev": 19
+            "dev_port_name": "",
+            "dev": 0
           }
         ]
-      }
-    },
-    "ccams": {
-      "1": {
-        "id": 1,
-        "ip": "192.168.15.155",
-        "ctrl": 2,
-        "pos": "top",
-        "posx": 0,
-        "posy": 0
       },
-      "2": {
-        "id": 2,
-        "ip": "192.168.15.155",
+      "107": {
+        "id": 107,
         "ctrl": 2,
-        "pos": "bottom",
-        "posx": 0,
-        "posy": 0
+        "module": 14,
+        "i2c": 38,
+        "port": 2,
+        "in_type": null,
+        "port_dir": 2,
+        "cmodule_opts": [
+          {
+            "id": 212,
+            "ctrl_module": 107,
+            "opt": 101,
+            "name": "Q16",
+            "invers": 1,
+            "antidreb": 250,
+            "i2c_addr": 0,
+            "in_type": null,
+            "dev_port": null,
+            "port_dir": 2,
+            "port_num": 0,
+            "port_type": 0,
+            "dev_port_name": "",
+            "dev": 0
+          },
+          {
+            "id": 213,
+            "ctrl_module": 107,
+            "opt": 102,
+            "name": "Q17",
+            "invers": null,
+            "antidreb": 250,
+            "i2c_addr": 0,
+            "in_type": null,
+            "dev_port": null,
+            "port_dir": 2,
+            "port_num": 1,
+            "port_type": null,
+            "dev_port_name": "",
+            "dev": 0
+          },
+          {
+            "id": 214,
+            "ctrl_module": 107,
+            "opt": 103,
+            "name": "Q18",
+            "invers": 1,
+            "antidreb": 250,
+            "i2c_addr": 0,
+            "in_type": null,
+            "dev_port": null,
+            "port_dir": 2,
+            "port_num": 2,
+            "port_type": null,
+            "dev_port_name": "",
+            "dev": 0
+          },
+          {
+            "id": 215,
+            "ctrl_module": 107,
+            "opt": 104,
+            "name": "Q19",
+            "invers": 1,
+            "antidreb": 250,
+            "i2c_addr": 0,
+            "in_type": null,
+            "dev_port": null,
+            "port_dir": 2,
+            "port_num": 3,
+            "port_type": null,
+            "dev_port_name": "",
+            "dev": 0
+          },
+          {
+            "id": 216,
+            "ctrl_module": 107,
+            "opt": 105,
+            "name": "Q20",
+            "invers": 1,
+            "antidreb": 250,
+            "i2c_addr": 0,
+            "in_type": null,
+            "dev_port": null,
+            "port_dir": 2,
+            "port_num": 4,
+            "port_type": null,
+            "dev_port_name": "",
+            "dev": 0
+          },
+          {
+            "id": 217,
+            "ctrl_module": 107,
+            "opt": 106,
+            "name": "Q21",
+            "invers": 1,
+            "antidreb": 250,
+            "i2c_addr": 0,
+            "in_type": null,
+            "dev_port": null,
+            "port_dir": 2,
+            "port_num": 5,
+            "port_type": null,
+            "dev_port_name": "",
+            "dev": 0
+          },
+          {
+            "id": 218,
+            "ctrl_module": 107,
+            "opt": 107,
+            "name": "Q22",
+            "invers": 1,
+            "antidreb": 250,
+            "i2c_addr": 0,
+            "in_type": null,
+            "dev_port": null,
+            "port_dir": 2,
+            "port_num": 6,
+            "port_type": null,
+            "dev_port_name": "",
+            "dev": 0
+          },
+          {
+            "id": 219,
+            "ctrl_module": 107,
+            "opt": 108,
+            "name": "Q23",
+            "invers": 1,
+            "antidreb": 250,
+            "i2c_addr": 0,
+            "in_type": null,
+            "dev_port": 53,
+            "port_dir": 2,
+            "port_num": 7,
+            "port_type": null,
+            "dev_port_name": "port_horn",
+            "dev": 2
+          }
+        ]
       }
     },
     "cameras": [
@@ -3675,13 +3976,6 @@
         "port": 3001,
         "name": "Фильтр",
         "img": 1
-      },
-      {
-        "id": 5,
-        "ip": "192.168.15.101",
-        "port": 3001,
-        "name": "Нория",
-        "img": 24
       },
       {
         "id": 6,

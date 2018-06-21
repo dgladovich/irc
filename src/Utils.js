@@ -1,4 +1,3 @@
-import DevicesCollection from './collections/DevicesCollection';
 import StatusesCollection from './collections/StatusesCollection';
 import DeviceGroupCollection from './collections/DeviceGroupCollection';
 import ErrorsCollection from './collections/ErrorsCollection';
@@ -9,7 +8,6 @@ import io from 'socket.io-client';
 import Noty from 'noty';
 
 
-const devicesCollection = new DevicesCollection;
 const statusesCollection = new StatusesCollection;
 const devicesGroups = new DeviceGroupCollection;
 const errors = new ErrorsCollection;
@@ -17,7 +15,6 @@ const infos = new InformerCollection;
 const controller = new Controller;
 
 let collectionToFetch = [
-    devicesCollection,
     statusesCollection,
     devicesGroups,
     errors,
@@ -31,7 +28,13 @@ const individual = Radio.channel('individual');
 const alarm = Radio.channel('confirm');
 const bot = Radio.channel('bot');
 
-
+export function computeDeviceSize(devLength){
+    let defaultWidth = 120,
+        defaultCount = 12,
+        devicesCount = devLength,
+        devicesWidth = defaultCount / devicesCount * defaultWidth * 1.2;
+    return devicesWidth;
+}
 export function loadInitialData(x) {
     return Promise.all(collectionToFetch.map((collection) => {
         return collection.fetch().then(() => {
