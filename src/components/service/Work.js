@@ -72,13 +72,8 @@ export default View.extend({
 */
 
         if (!_.isNull(type)) {
-            console.log(type)
-            if (_.isNull(type.translate)) {
-                name = type.name;
-
-            } else {
-                name = type.translate.rus;
-            }
+            console.log(type);
+            name = app.language[type.name];
         }
         this.model.set({
             worksList: this.fixString(this.model.get('works').des),
