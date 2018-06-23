@@ -149,14 +149,18 @@ router
         })
     })
     .get('/servicejournal', (req, res, next) => {
+        console.log('Launch route', History)
         History.findAll({
             where: {
-                ctrl: config.controller
+                ctrl: CONTROLLER_ID
             },
             order: [['last_service', 'DESC']],
             limit: 20
         }).then((history) => {
             res.json(history)
+        }).catch((e)=>{
+            console.log(e)
+            res.send(e);
         })
     })
     .put('/', (req, res) => {

@@ -39,8 +39,9 @@ export default View.extend({
         tabpanel: '.panel-container'
     },
     onRender: function() {
-        this.showChildView('tabpanel', new CustomPanel({ collection: this.viewGroups, view: Measurments, viewKey: 'faces' }));
-        this.getChildView('tabpanel').$el.append(`<button class="btn btn-start btn-charts">${app.language[button_charts] || button_charts}</button>`);
+        let customPanel = new CustomPanel({ collection: this.viewGroups, view: Measurments, viewKey: 'faces' });
+        this.showChildView('tabpanel', customPanel);
+        this.$('.panel-container').append(`<button class="btn btn-start btn-charts">${app.language[button_charts] || button_charts}</button>`);
         this.$('.btn-charts').on('click', this.showChartModal.bind(this));
        /* this.measurments = [];
         this.showChildView('tabpanel', this.tabPanel);

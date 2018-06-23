@@ -7,7 +7,6 @@ export default View.extend({
         subview: {
             el: `.tab-pane`
         }
-
     },
     onRender: function() {
         this.showChildView('subview', this.subView );

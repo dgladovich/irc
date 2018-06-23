@@ -33,9 +33,9 @@
         "state": 0,
         "ecode": 0,
         "repairable": 0,
-        "visible": 1,
+        "visible": 0,
         "spec_act": 0,
-        "active": 1,
+        "active": 0,
         "dports": [
           {
             "id": 1,
@@ -2001,7 +2001,7 @@
             "dev": 15,
             "port_type": 1,
             "port_dir": 2,
-            "port": 1,
+            "port": 0,
             "name": "state"
           }
         ],
@@ -2152,7 +2152,7 @@
             "dev": 16,
             "port_type": 1,
             "port_dir": 2,
-            "port": 1,
+            "port": 0,
             "name": "state"
           }
         ],
@@ -3309,7 +3309,7 @@
             "in_type": 1,
             "dev_port": 22,
             "port_dir": 2,
-            "port_num": 0,
+            "port_num": 7,
             "port_type": 1,
             "dev_port_name": "state",
             "dev": 15
@@ -3325,7 +3325,7 @@
             "in_type": 1,
             "dev_port": 24,
             "port_dir": 2,
-            "port_num": 1,
+            "port_num": 6,
             "port_type": 1,
             "dev_port_name": "state",
             "dev": 16
@@ -3341,7 +3341,7 @@
             "in_type": 1,
             "dev_port": 26,
             "port_dir": 2,
-            "port_num": 2,
+            "port_num": 5,
             "port_type": 1,
             "dev_port_name": "state",
             "dev": 17
@@ -3357,7 +3357,7 @@
             "in_type": 1,
             "dev_port": 63,
             "port_dir": 2,
-            "port_num": 3,
+            "port_num": 4,
             "port_type": 1,
             "dev_port_name": "state",
             "dev": 74
@@ -3373,7 +3373,7 @@
             "in_type": 1,
             "dev_port": 64,
             "port_dir": 2,
-            "port_num": 4,
+            "port_num": 3,
             "port_type": 1,
             "dev_port_name": "state",
             "dev": 75
@@ -3389,7 +3389,7 @@
             "in_type": 1,
             "dev_port": null,
             "port_dir": 2,
-            "port_num": 5,
+            "port_num": 2,
             "port_type": 1,
             "dev_port_name": "",
             "dev": 0
@@ -3405,7 +3405,7 @@
             "in_type": 1,
             "dev_port": null,
             "port_dir": 2,
-            "port_num": 6,
+            "port_num": 1,
             "port_type": 1,
             "dev_port_name": "",
             "dev": 0
@@ -3679,7 +3679,7 @@
             "dev_port": null,
             "port_dir": 2,
             "port_num": 0,
-            "port_type": 0,
+            "port_type": null,
             "dev_port_name": "",
             "dev": 0
           },

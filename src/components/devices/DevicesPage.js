@@ -1,14 +1,10 @@
 import Devices from './Devices';
 import template from '../general/templates/page.jst';
 import { View, Model } from 'backbone.marionette';
-
-const model = new Backbone.Model({
-    title: 'Список устройств'
-});
+const page_device_list = 'page_device_list';
 
 export default View.extend({
     template: template,
-    model: model,
     events: {
         'click #close-page': 'hidePage'
     },
@@ -31,6 +27,9 @@ export default View.extend({
 
     },
     initialize: function(opt) {
+        this.model = new Backbone.Model({
+            title: app.language[page_device_list] || page_device_list
+        });
         this.devices = opt.data;
     }
 

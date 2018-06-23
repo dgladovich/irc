@@ -31,6 +31,8 @@ const Measurments = CollectionView.extend({
                 	return Radial;
                     break;
                 }
+            default:
+                return View.extend({template: _.noop});
         }
     }
 });

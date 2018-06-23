@@ -65,11 +65,10 @@ export default View.extend({
     },
     initialize: function() {
         this.model.set({
-            devicesize: this.model.get('devices').models[0].get('devicesize')
+            devicesize: app.deviceSize
         });
         this.model.get('devices').each((device) => {
             this.listenTo(device, 'change:stat', this.updateGroupStatus.bind(this))
         });
-        //this.listenTo(this.model, 'change')
     }
 });

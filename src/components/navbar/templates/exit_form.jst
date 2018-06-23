@@ -1,11 +1,11 @@
-<%let message = 'you_auth';%>
+<%let you_auth = 'you_entered_as', button_log_out = 'btn_logout';%>
 <div class="text-center">
     <div class="authorize-logo">
         <img src="auth_logo.png" alt="" class="img-responsive">
     </div>
-    <p><%= app.language[message] || message %><b><%= name %></b></p>
+    <p><%= app.language[you_auth] || you_auth %>: <b><%= name %></b></p>
     <p>
-        <button style="margin-top: 50px;" class="btn btn-default" id="btn-logout"><%= app.language[message] || message %></button>
+        <button style="margin-top: 50px;" class="btn btn-default" id="btn-logout"><%= app.language[button_log_out] || button_log_out %></button>
     </p>
     <br>
 </div>

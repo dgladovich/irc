@@ -14,14 +14,14 @@ const session = require('express-session');
 const passport = require('./middleware/passport');
 const routes = require('./routes');
 
+app.set('view engine', 'jade');
+
 app.use(express.static('./server/static/'));
 app.use(express.static('./client/dist/'));
 app.use(passport.initialize());
 
 
 app.disable('x-powered-by');
-
-app.set('views', path.join(__dirname, 'views'));
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

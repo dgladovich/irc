@@ -1,4 +1,5 @@
 import ru from 'fullcalendar/dist/locale/ru';
+import en from 'fullcalendar/dist/locale/en-gb';
 import template from './templates/calendars.jst';
 import {View, Model} from 'backbone.marionette';
 import moment from 'moment';

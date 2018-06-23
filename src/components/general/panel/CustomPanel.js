@@ -15,6 +15,7 @@ export default View.extend({
         }
     },
     onRender: function() {
+
         this.showChildView( 'tabs', this.tabs );
         this.showChildView( 'tabsContent', this.tabsContent );
         $(this.tabs.$el.children()[0]).addClass('active');
