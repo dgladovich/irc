@@ -32,6 +32,8 @@ export default class ControllerConnection {
         channel.on('command:stop', this.onControllerStop.bind(this));
         channel.on('command:start', this.onControllerStart.bind(this));
         channel.on('command:speed', this.onControllerSpeedChange.bind(this));
+        channel.on('command:repair:in', this.onRepairIn.bind(this));
+        channel.on('command:repair:out', this.onRepairOut.bind(this));
     }
 
     onControllerStop() {
@@ -53,6 +55,28 @@ export default class ControllerConnection {
     }
 
     onControllerSpeedChange(speed) {
+
+        let pack = {
+            eventGroup: 'controll',
+            method: 'speed',
+            arguments: {speed: speed},
+            token: store.get('token')
+
+        };
+        this.socket.emit('controller', pack);
+    }
+    onRepairIn(args) {
+
+        let pack = {
+            eventGroup: 'controll',
+            method: 'repair:in',
+            arguments: {id: args.id},
+            token: store.get('token')
+
+        };
+        this.socket.emit('controller', pack);
+    }
+    onRepairOut(args) {
 
         let pack = {
             eventGroup: 'controll',
@@ -87,6 +111,15 @@ export default class ControllerConnection {
         store.remove('user');
         store.remove('token');
         authChannel.trigger('change:auth');
+        new Noty({
+            text: `Срок сессии истек!!! Авторизуйтесь пожалуйста!`,
+            theme: 'metroui',
+            type: 'error',
+            layout: 'topCenter',
+            killer: true,
+            timeout: 3000,
+            progressBar: false
+        }).show();
     }
     onUserAlarmConfirmation(data) {
         let userConfirmation = {
@@ -130,12 +163,14 @@ export default class ControllerConnection {
                 _.each(data.data, (item) => {
                     let {id, def} = item;
                     if (id) {
+
                         let shit = app.faces.findWhere({id: id});
+                        console.log(app.faces, item, shit)
                         if (shit) {
 
                             shit.set('def', def);
                         } else {
-                            console.log(`%c Error while getting values from server`, 'blue');
+                            console.log(`%c Error while getting values from server. Face ID - ${id}, def - ${def} `, 'blue');
                         }
                     }
                 });

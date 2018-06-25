@@ -1,10 +1,12 @@
+<% let maintenance_title = 'maintenance_title'; %>
+
 <div class="service-padding">
     <div class="row">
         <div class="col-xs-9" id="heading<%= id %>">
             <h4 class="panel-title">
                 <a aria-controls="<%= id %>" data-toggle="collapse" href="#<%= id %>" class="collapsed" role="button"
                    data-toggle="collapse" data-parent="#accordion" aria-expanded="false">
-                    <span>Техническое обслуживание ТО<%= ser_num %></span>
+                    <span><%= app.language[maintenance_title] || maintenance_title %><%= ser_num %></span>
                     <span style="float:right;">
                         <span id="time-left"></span>
                     </span>&nbsp;

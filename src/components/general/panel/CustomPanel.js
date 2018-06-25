@@ -22,6 +22,7 @@ export default View.extend({
         $(this.tabsContent.$el.children()[0]).addClass('active');
     },
     initialize: function(opt){
+
         this.tabs = new Tabs({ collection: this.collection });
         this.tabsContent = new TabsContent({ collection: this.collection, view: opt.view, viewKey: opt.viewKey });
     }

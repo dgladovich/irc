@@ -132,7 +132,6 @@ export default View.extend({
         works.on('works:remove:' + this.model.get('id'), (work) => {
             this.model.get('performed').remove(work);
         });
-        console.log(this.model, this.model.get('service_work'))
         _.each(this.model.get('service_work'), (serviceWork) => {
             _.each(serviceWork.works.materials, (material) => {
                 console.log(material)

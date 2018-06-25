@@ -90,6 +90,7 @@ export default View.extend({
     },
     onRender: function () {
         let ctx = this.$('.canvas-chart')[0].getContext('2d');
+        console.log(this.model)
         let labelText = this.model.get('translate');
         let labels = [];
         labels.length = this.LABELS;

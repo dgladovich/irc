@@ -8,8 +8,8 @@ import Value from './Value';
 
 const Measurments = CollectionView.extend({
     childView: function(value){
-        switch (value.get('viewtype')) {
 
+        switch (value.get('viewtype')) {
             case null:
             case 0:
                 {

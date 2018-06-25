@@ -27,35 +27,17 @@ const DeviceItem = View.extend({
 
     },
     events: {
-        'click @ui.repair': 'sendStatus0',
-        'click @ui.outrepair': 'sendStatus1',
+        'click @ui.repair': 'setToRepair',
+        'click @ui.outrepair': 'setOutRepair',
     },
-    sendStatus0: function() {
-        let stat = '_repair'
-        if (this.model.get('stat') === 4) {
-            stat = '_out_repair';
-        } else {
-            stat = '_repair';
-        }
-        channel.trigger('send:status', {
-            cmd: stat,
-            val: 0,
-            ctrl: this.model.get('ctrl'),
-            dev: this.model.get('lid')
+    setToRepair: function() {
+        ch.trigger('command:repair:in', {
+            id: this.model.get('id')
         })
     },    
-    sendStatus1: function() {
-        let stat = '_repair'
-        if (this.model.get('stat') === 4) {
-            stat = '_out_repair';
-        } else {
-            stat = '_repair';
-        }
-        channel.trigger('send:status', {
-            cmd: stat,
-            val: 1,
-            ctrl: this.model.get('ctrl'),
-            dev: this.model.get('lid')
+    setOutRepair: function() {
+        ch.trigger('command:repair:out', {
+            id: this.model.get('id')
         })
     },
     updateStatus: function() {

@@ -78,12 +78,12 @@ const Valves = CollectionView.extend({
                 valveStatus: ''
             })
         });
-        for (let i = 0; i < 14; i++) {
+/*        for (let i = 0; i < 14; i++) {
             this.collection.add({
                 list_index: i + 5,
                 valveStatus: 'off'
             })
-        }
+        }*/
     },
     onRender: function() {
         // Get rid of that pesky wrapping-div.

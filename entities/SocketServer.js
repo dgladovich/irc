@@ -52,6 +52,7 @@ class SocketServer {
         };
         this.socketConnector.sendData(message);
     }
+
     sendState(devId, state) {
         let st = {id: devId, state: state},
             message = {
@@ -60,7 +61,9 @@ class SocketServer {
             };
         this.socketConnector.sendData(message);
     }
-    sendAuthRequired(){}
+
+    sendAuthRequired() {
+    }
 
     sendInitialData(socket) {
         let alarms = this.broker.getUserInitialAlarms(),
@@ -96,10 +99,14 @@ class SocketServer {
     handleUserData(data, socket) {
         let pack, userId,
             {method, token} = data,
-            args = data.arguments,
-            verified = jwt.verify(token, SECRET);
-        if(verified){
-            console.log('Everything is all right with token')
+            args = data.arguments;
+
+        jwt.verify(token, SECRET, (err, verified) => {
+            if (err) {
+                console.error('Something wrong with Token');
+                this.socketConnector.requireAuth(socket);
+                return;
+            }
             userId = verified.id;
             switch (method) {
                 case 'confirm':
@@ -110,10 +117,15 @@ class SocketServer {
                     };
                     this.broker.confirmAlarm(pack);
                     break;
-                case 'repair':
+                case 'repair:in':
                     console.log('Socket server: calling repair method');
 
-                    this.broker.setRepair(data)
+                    this.broker.setRepairIn(data)
+                    break;
+                case 'repair:out':
+                    console.log('Socket server: calling repair method');
+
+                    this.broker.setRepairOut(data)
                     break;
                 case 'speed':
                     console.log('Socket server: calling speed change method');
@@ -144,11 +156,7 @@ class SocketServer {
                     console.log(`Unknown controll command method type: ${method}`.red);
                     return;
             }
-
-        } else {
-            console.error('Something wrong with Token')
-            this.socketConnector.requireAuth(socket);
-        }
+        })
     }
 
     validateData() {

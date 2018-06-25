@@ -236,8 +236,12 @@ class CentralBroker {
         }
     }
 
-    setRepair(pack) {
-        console.log('Central Broker: sending stop command to controller');
+    setRepairIn(pack) {
+        console.log('Central Broker: setting device to repair', pack);
+
+    }
+    setRepairOut(pack) {
+        console.log('Central Broker: setting device out of repair', pack);
 
     }
 
