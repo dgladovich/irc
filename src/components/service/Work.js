@@ -48,7 +48,6 @@ export default View.extend({
         let name;
         let hui;
         let type = this.model.get('devicetype');
-        console.log(this.model)
         serviceChannel.on(`work:perform:${this.model.get('id')}`, ()=>{
             this.model.set({
                 perform: 1,
@@ -72,8 +71,7 @@ export default View.extend({
 */
 
         if (!_.isNull(type)) {
-            console.log(type);
-            name = app.language[type.name];
+            name = app.language[type.name] || type.name;
         }
         this.model.set({
             worksList: this.fixString(this.model.get('works').des),

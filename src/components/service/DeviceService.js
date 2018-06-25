@@ -31,9 +31,7 @@ export default View.extend({
     initialize: function(){
         app.services.on('sync', ()=>{
             this.model.set('service', app.services.where({dev: this.model.get('id')}));
-            if(this.model.get('service').length === 0){
-                this.destroy();
-            }
+
             this.render();
         })
     }

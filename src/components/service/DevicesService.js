@@ -3,5 +3,6 @@ import DeviceService from './DeviceService';
 
 
 export default CollectionView.extend({
-    childView: DeviceService
+    childView: DeviceService,
+
 });

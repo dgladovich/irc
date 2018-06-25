@@ -14,7 +14,8 @@ export default View.extend({
     },
 
     onRender: function() {
-        this.collection = app.devices;
+        this.collection = new Backbone.Collection(app.devices.findWhere({parent: null}));
+
         this.showChildView('devicesservice', new DevicesService({
             collection: this.collection
         }));

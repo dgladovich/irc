@@ -102,7 +102,7 @@ export default View.extend({
         }));
         this.updateTotalPrice();
         this.updateTime();
-/*        if (this.model.get('ser_num') !== 1) {
+        if (this.model.get('ser_num') !== 1) {
             this.showChildView('works', new WorksCollection({
                 collection: this.works
             }));
@@ -115,7 +115,6 @@ export default View.extend({
             this.$('.make-service').remove();
             this.$('#' + this.model.get('id') + ' .panel-body').html('ТО1 не является необходимым для smart системы');
         }
-*/
 
     },
     initialize: function() {
@@ -133,9 +132,10 @@ export default View.extend({
         works.on('works:remove:' + this.model.get('id'), (work) => {
             this.model.get('performed').remove(work);
         });
-        _.each(this.model.get('serviceWorks'), (serviceWork) => {
+        console.log(this.model, this.model.get('service_work'))
+        _.each(this.model.get('service_work'), (serviceWork) => {
             _.each(serviceWork.works.materials, (material) => {
-
+                console.log(material)
                 let mat = material.mat,
                     packingCost = mat.price,
                     packSize = mat.cnt,
