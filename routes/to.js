@@ -238,7 +238,7 @@ router
                 ]
             }).then((work) => {
                 let service = work.get('devser');
-                let type = work.get('devtype');
+                let type = work.get('devicetype');
                 let device = _.find(devices, {id: work.get('dev')});
                 let sernum = service.get('ser_num');
                 let typText = type.get('name');
