@@ -92,7 +92,7 @@ class ControllerServer {
     stopController(uuid) {
         console.log('Controller Server: sending ivan stop command')
         let stopCommand = {
-            control: "start",
+            control: "stop",
             uuid: uuid
 
         }
@@ -137,7 +137,7 @@ class ControllerServer {
                 this.onChangeState(data);
                 break;
             default:
-                console.log(`Uncorrect event type ${event}, ${data}`.red)
+                console.log(`Uncorrect event type ${data}`.red)
         }
     }
 }

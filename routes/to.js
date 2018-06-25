@@ -5,7 +5,8 @@ const path = require('path')
 const _ = require('underscore');
 const moment = require('moment');
 const db = require('../models');
-const {History, Service, ServiceWork, Device, DeviceService, Language, DeviceServiceWork, DeviceTMC, Type, Work, WorkMaterial, Material} = db;
+const {History, Service, ServiceWork, DeviceService, DeviceServiceWork, DeviceTMC, Type, Work, WorkMaterial, Material} = db;
+const devices = _.toArray(require('../config').ctrl.devs);
 const {CONTROLLER_ID} = process.env;
 /* GET home page. */
 router
@@ -173,22 +174,16 @@ router
     .put('/', (req, res) => {
         let id = req.body.id,
             ser = req.body;
-        DeviceService.findById(req.body.id, {
-            include: [
-                {
-                    model: Device,
-                    as: 'device'
-                }
-            ]
-        }).then((service) => {
-            let device = service.get('device');
+        DeviceService.findById(req.body.id).then((service) => {
+            let device = _.find(devices, {id: service.get('id')});
+
             let updatedField = {
-                _pre: device.get('moto')
+                _pre: device.moto
             }
             service
                 .update(updatedField)
                 .then((upService) => {
-                    let dname = device.get('name'),
+                    let dname = device.name,
                         date = moment().format('d.MM.YYYY HH:MM:ss'),
                         ser_num = req.body.ser_num,
                         works = ser.performed.length === 0 ? 'Работ не выполнено' : (() => {
@@ -235,37 +230,25 @@ router
                     {
                         model: DeviceService,
                         as: 'devser',
-                        include: [
-                            {
-                                model: Device,
-                                as: 'device',
-                                attributes: ['name', 'ctrl']
-                            },
-                        ]
                     }, {
                         model: Type,
-                        as: 'devtype',
-                        include: [
-                            {
-                                model: Language,
-                                as: 'translate'
-                            }
-                        ]
+                        as: 'devicetype',
+
                     },
                 ]
             }).then((work) => {
                 let service = work.get('devser');
                 let type = work.get('devtype');
-                let device = service.get('device');
+                let device = _.find(devices, {id: work.get('dev')});
                 let sernum = service.get('ser_num');
-                let typText = _.isNull(type.get('translate')) ? type.get('name') : type.get('translate').get('rus');
+                let typText = type.get('name');
                 let serText = `Выполнена работа по следующему устройству`;
-                let description = `${device.get('name')} <br><p class='service-aligner'> ТО${sernum} <br> ${serText}: ${typText}</p> `;
+                let description = `${device.name} <br><p class='service-aligner'> ТО${sernum} <br> ${serText}: ${typText}</p> `;
                 let historyRow = {
                     service_id: work.get('service_id'),
                     description: description,
                     last_service: moment(),
-                    ctrl: device.get('ctrl')
+                    ctrl: device.ctrl
                 }
                 History.create(historyRow);
                 return work.update({

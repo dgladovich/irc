@@ -45,11 +45,11 @@ export default View.extend({
                 this.$('.make-service').attr('disabled', false);
                 serviceChannel.trigger('service:done');
             })
-            .on('40x', function(response) {
+            .on('40x', (response) => {
                 console.log('service is not updated')
                 this.$('.make-service').attr('disabled', false);
             })
-            .on('500', function(response) {
+            .on('500', (response) => {
                 console.log('some another shit')
                 this.$('.make-service').attr('disabled', false);
             })

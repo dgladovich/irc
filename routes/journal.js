@@ -7,7 +7,7 @@ const _ = require('lodash');
 const db = require('../models');
 const {Op} = db.Sequelize;
 const {Alarm, User, ErrorCode} = db;
-
+const {CONTROLLER_ID} = process.env.CONTROLLER_ID;
 
 router
     .get('/', function (req, res, next) {
@@ -41,7 +41,7 @@ router
         if (req.query.page) {
             offset = items * (req.query.page - 1);
         }
-        where.ctrl = context.controller;
+        where.ctrl = CONTROLLER_ID;
         Alarm.findAll({
             limit: items,
             offset: offset,
