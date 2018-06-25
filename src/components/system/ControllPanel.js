@@ -109,6 +109,9 @@ const DeviceItem = View.extend({
 
 const DevicesList = CollectionView.extend({
     childView: DeviceItem,
+    filter: function(child){
+        return !!child.get('active');
+    },
     className: 'gruppa row'
 });
 
