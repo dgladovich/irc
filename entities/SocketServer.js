@@ -118,14 +118,21 @@ class SocketServer {
                     this.broker.confirmAlarm(pack);
                     break;
                 case 'repair:in':
-                    console.log('Socket server: calling repair method');
-
-                    this.broker.setRepairIn(data)
+                    console.log('Socket server: calling repair IN method');
+                    let {id} = data.arguments;
+                    pack = {
+                      user_id: userId,
+                      id: id
+                    };
+                    this.broker.setRepairIn(pack)
                     break;
                 case 'repair:out':
-                    console.log('Socket server: calling repair method');
-
-                    this.broker.setRepairOut(data)
+                    console.log('Socket server: calling repair OUT method');
+                    pack = {
+                        user_id: userId,
+                        id: id
+                    };
+                    this.broker.setRepairOut(pack)
                     break;
                 case 'speed':
                     console.log('Socket server: calling speed change method');

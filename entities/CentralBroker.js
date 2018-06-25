@@ -238,10 +238,16 @@ class CentralBroker {
 
     setRepairIn(pack) {
         console.log('Central Broker: setting device to repair', pack);
+        let uuid = uuidv1();
+        let { id } = pack;
+        this.controllerServer.repairIn(id, uuid);
 
     }
     setRepairOut(pack) {
         console.log('Central Broker: setting device out of repair', pack);
+        let uuid = uuidv1();
+        let { id } = pack;
+        this.controllerServer.repairOut(id, uuid);
 
     }
 

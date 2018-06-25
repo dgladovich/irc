@@ -24,7 +24,7 @@ class ControllerServer {
     }
 
     onChangeStatus(data) {
-        for(let key in data){
+        for (let key in data) {
             let id = key,
                 stat = data[key];
             this.broker.handleChangedStatus({id: id, stat: stat})
@@ -32,7 +32,7 @@ class ControllerServer {
     }
 
     onChangeValue(data) {
-        for(let key in data){
+        for (let key in data) {
             let id = key,
                 def = data[key];
             this.broker.handleChangedValue({id: id, def: def})
@@ -53,8 +53,9 @@ class ControllerServer {
     onChangeMode(mode) {
         console.log(mode)
     }
+
     onChangeState(data) {
-        for(let key in data){
+        for (let key in data) {
             let id = key,
                 state = data[key];
             this.broker.handleChangedState({id: id, state: state})
@@ -97,6 +98,30 @@ class ControllerServer {
 
         }
         this.controllerConnector.sendDataToController(stopCommand);
+    }
+
+    repairIn(deviceId, uuid) {
+        console.log('Controller Server: sending ivan repair IN command');
+        let repairInCommand = {
+            control: "repair:in",
+            uuid: uuid,
+            id: deviceId
+
+        };
+        this.controllerConnector.sendDataToController(repairInCommand);
+
+    }
+
+    repairOut(deviceId, uuid) {
+        console.log('Controller Server: sending ivan repair OUT command');
+        let repairInCommand = {
+            control: "repair:out",
+            uuid: uuid,
+            id: deviceId
+
+        };
+        this.controllerConnector.sendDataToController(repairInCommand);
+
     }
 
     confirmAlarm() {
