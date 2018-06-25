@@ -68,7 +68,8 @@
     "sqlite3": "^3.1.13",
     "store": "^2.0.12",
     "underscore": "^1.8.3",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "webpack-jquery-ui": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.7.6",
