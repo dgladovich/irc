@@ -5,8 +5,9 @@ idle_because_of_emergency = 'idle_because_of_emergency',
 quantity_of_crashes = 'quantity_of_crashes'
 aver_load_equipment = 'aver_load_equipment',
 closest = 'closest',
-through = 'through';
-%>
+through = 'through',
+maintenance_title = 'maintenance_title';
+%> 
 <div class="anal-block">
     <br>
     <br>
@@ -14,5 +15,5 @@ through = 'through';
     <p><%= app.language[work_for_last_day] || work_for_last_day %> <%= hours.work %> <%= app.language[hours_meas] || hours_meas %>.</p>
     <p><%= app.language[idle_because_of_emergency] || idle_because_of_emergency %>: <%= hours.eidle %> <%= app.language[hours_meas] || hours_meas %>.</p>
     <p><%= app.language[quantity_of_crashes] || quantity_of_crashes %>: <%= crashes %>.</p>
-    <p><%= app.language[closest] || closest %> <%= next_service.future_service %> <%= next_service.future_service %> <%= app.language[through] || through %>  <%= next_service.need_hours %> <%= app.language[hours_meas] || hours_meas %>.</p>
+    <p><%= app.language[closest] || closest %> <%= next_service.future_service %> <%= app.language[maintenance_title] || maintenance_title %> <%= app.language[through] || through %> <%= next_service.need_hours %> <%= app.language[hours_meas] || hours_meas %>.</p>
 </div>
