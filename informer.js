@@ -57,13 +57,14 @@ module.exports = {
                         });
                         callback(res);
                     } else {
-                        callback(null);
+                        callback("SERVICES NOT FOUND");
                     }
                 });
             } else {
-                callback(null);
+                callback("Device not found");
             }
         });
+
     },
     get_motohours: function() {
         return process.env.motohours || 0;
