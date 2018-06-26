@@ -1,0 +1,456 @@
+* {
+  box-sizing: border-box;
+}
+
+.row {
+    margin-right: -5px;
+    margin-left: -5px;
+}
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+
+/* CSS */
+a:focus, a:hover, .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+
+    text-decoration: none;
+    outline: none;
+}
+
+img {
+  max-width: 100%;
+}
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #0f0f0f;
+  color: #cccccc;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+.h1, h1 {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-top: 0;
+    display: inline-block;
+}
+.h3, h3 {
+    font-weight: 300;
+}
+.profile {
+    font-size: .9em;
+    color: #707070;
+    line-height: 2em;
+}
+.profile span,
+.profile img {
+  vertical-align: middle;
+}
+.profile img {
+  height: 13px;
+  vertical-align: baseline;
+}
+.profile .user-name {
+    font-size: 1.1em;
+    background: #222;
+    padding: 3px 10px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+
+#home-buttons {
+    max-height: 527px;
+    max-width: 900px;
+}
+.home-btns {
+    background: url(../images/bg-w.png) no-repeat center;
+    background-size: contain;
+}
+.home-btn {
+  stroke: #9e9e9e;
+  stroke-width: 1px;
+  -webkit-filter: drop-shadow(0 0 5px #ffd842);
+  filter: drop-shadow(0 0 5px #ffd842);
+}
+.home-btn:hover {
+  -webkit-filter: drop-shadow(0 0 5px #ffd842);
+  filter: drop-shadow(0 0 5px #ffd842);
+  stroke: #fcff00;
+}
+
+.hover-btn {
+    fill-opacity: 0;
+    stroke-opacity: 0;
+    stroke: #f7f216;
+}
+.h-btn, .h-btn a {
+    stroke: #9e9e9e;
+    stroke-opacity: .4;
+    stroke-width: 2px;
+    fill: #000;
+    fill-opacity: .6;
+}
+.h-btn text {
+    color: #fff;
+    text-transform: uppercase;
+    stroke: none;
+    font-size: 15px;
+    fill: #fff;
+    fill-opacity: 1;
+    font-weight: 300;
+    letter-spacing: 1px;
+
+}
+
+.h-btn:hover .hover-btn  {
+  fill-opacity: 1;
+    stroke-opacity: 1;
+}
+
+.h-btn:hover text {
+  /*fill: #000;*/
+}
+
+#homebtn-1.h-btn:hover .image-btn {
+  stroke:#f7f216;}
+#homebtn-1.h-btn:hover .hover-btn  {
+
+  fill-opacity: 0;
+
+  
+}
+
+
+.gruppa .item {
+    background: rgba(29, 29, 29, 0.8);
+    border: 2px solid #494949;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    /* float: left; */
+    /* width: 100%; */
+    /* margin-left: 1%; */
+    /* margin-right: 1%; */
+    box-sizing: border-box;
+    display: block;
+    padding: 10px 10px 20px;
+    position: relative;
+    height: 88px;
+}
+.p-bar {
+  background: #1a1a1a;
+  display: block;
+  position: relative;
+  height: 1em;
+  border: 1px solid #666666;
+  box-sizing: border-box;
+}
+.p-bar .value {
+  background: #0db800;
+  height: 100%;
+}
+.dev1 {
+  position: absolute;
+  width: 1px;
+  height: 27px;
+  bottom: 0;
+  z-index: 10;
+  background: #ffa200;
+}
+.dev2 {
+  position: absolute;
+  width: 1px;
+  height: 27px;
+  bottom: 0;
+  z-index: 10;
+  background: #e12c0d;
+}
+.item-title {
+
+  text-transform: uppercase;
+  /* margin-bottom: 12px; */
+  padding-right: 70px;
+  height: 30px;
+  display: table-cell;
+  vertical-align: baseline;
+  /* margin-bottom: 10px; */
+  word-wrap: break-word;
+}
+.item-value {
+    position: absolute;
+    right: 7px;
+    top: 6px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+}
+.min-value {
+    position: absolute;
+    left: 0;
+    color: #a8acb9;
+    opacity: .5;
+    margin-top: 4px;
+    font-size: .8em;
+}
+.max-value {
+    position: absolute;
+    right: 0;
+    color: #a8acb9;
+    opacity: .5;
+    margin-top: 4px;
+    font-size: .8em;
+}
+.predeli {
+    max-width: 176px;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+}
+.linear-custom{
+  height: 88px;
+}
+.dot.danger .indicator {
+    background: #e12c0d;
+}
+.radial .min-value {
+    margin-top: -14px;
+    left: 12px;
+}
+.radial .max-value {
+    margin-top: -14px;
+    right: 12px;
+}
+/* Предупреждение - достугнут предел 1*/
+.item.att {
+  box-shadow: 0 0 12px 2px #ffa200;
+  border-color: #ffa200;
+}
+/* Опасность - Достигнут предел 2 */
+.item.danger {
+  box-shadow: 0 0 12px 2px #ff0000;
+  border-color: #e12c0d;
+}
+/* Радиальная диаграмма */
+.gruppa .item.radial {
+height:auto
+}
+.radial .item-title {
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  display: block;
+}
+.radial-wrap {
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  max-width: 150px;
+}
+.klap.active {
+    box-shadow: 0 0 12px 2px #0db800;
+    border-color: #0db800;
+}
+svg.radial-stroke {
+  fill: none;
+  fill: #0db800;
+  width: 100%;
+  position: relative;
+  z-index: 3;
+}
+svg.radial-dev1 {
+  position: absolute;
+  top: 0;
+  stroke: #ffa200;
+  z-index: 5;
+  stroke-width: 1px;
+}
+svg.radial-dev2 {
+  position: absolute;
+  top: 0;
+  stroke: #e12c0d;
+  z-index: 5;
+  stroke-width: 1px;
+}
+.radial .min-value {
+  margin-top: -14px;
+  left: 12px;
+}
+.radial .max-value {
+  margin-top: -14px;
+  right: 12px;
+}
+.att svg.radial-stroke {
+  fill: #ffa200;
+}
+.danger svg.radial-stroke {
+  fill: #e12c0d;
+}
+svg.radial-shkala {
+  fill: none;
+  stroke-width: 1px;
+  fill: #1a1a1a;
+  stroke: #666666;
+  width: 100%;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+.shkala {
+  height: 100%;
+  width: 100%;
+  border: 20px solid #1a1a1a;
+  border-radius: 50%;
+  clip: rect(0, 0.5em, 1em, 0);
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.radial .item-value {
+  position: relative;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  top: -23px;
+  right: auto;
+  margin-bottom: -10px;
+}
+/* Инфоблоки без прогрессбара */
+.item.dot {
+    padding-bottom: 6px;
+}
+
+
+.dot .item-title {
+    /* display: inline-block; */
+    /* width: 50%; */
+    /* margin-right: 1%; */
+    box-sizing: border-box;
+    padding-right: 0;
+    /* line-height: 39px; */
+    display: block;
+}
+.dot .status {
+    display: block;
+    background: #191919;
+    padding: 0px 10px;
+    line-height: 2.4em;
+    border-radius: 9px;
+    border: 1px solid #505050;
+    position: relative;
+    vertical-align: top;
+}
+.dot .indicator {
+  position: absolute;
+  background: #ccc;
+  border-radius: 50%;
+    width: 1em;
+    height: 1em;
+  right: 10px;
+  top: 8px;
+}
+#lightSlider {
+  z-index: 199;
+}
+/*Состояни предупреждения */
+
+/*Состояни опасности */
+.dot.danger {
+  border-color: #505050;
+  box-shadow: none;
+}
+.dot.danger .status {
+  box-shadow: 0 0 12px 2px #ff0000;
+  border-color: #e12c0d;
+}
+
+
+.fade:not(.in) .obj-item {top:50%!important; left:50%!important}
+.nowrap {white-space: nowrap;}
+
+
+.obj-item.att {
+    box-shadow: 0 0 12px 2px #ffa200;
+    border-color: #ffa200;
+}
+
+.obj-item.active {
+    box-shadow: 0 0 12px 2px #0db800;
+    border-color: #0db800!important;
+}
+.obj-title {
+    text-align: center;
+    font-size: 12px;
+    position: absolute;
+    width: 100%;
+    margin-top: 5px;
+}
+/*
+.obj-item.att .obj-title {
+    background: #ffa200;
+  color:#000;
+}*/
+.obj-item.danger {
+    box-shadow: 0 0 12px 2px #ff0000;
+    border-color: #e12c0d;
+}
+/*
+.obj-item.danger .obj-title {
+    background: #e12c0d;
+}
+*/
+/* Кнопки */
+
+.i-close {
+    font-style: normal;
+    font-size: 34px;
+    font-weight: 300;
+    margin-right: 10px;
+    line-height: 28px;
+}
+
+/* Темные панели - переопределение bootstrap css класса */
+
+.panel-default {
+    margin-bottom: 0;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #494949;
+    background: #252525;
+}
+.panel-default>.panel-heading {
+    color: #ccc;
+    background-color: #303030;
+    border-color: #ddd;
+    text-transform: uppercase;
+}
+
+.table tr:nth-child(even) td {background: #515151}
+
+img.icon {
+    height: 20px;
+    margin-right: 5px;
+}
+.asset-title {
+    float: right;
+    text-transform: uppercase;
+    color: #ffa200;
+}
+
+#current_faults {
+  height: 60vh;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+  
+  overflow-y: scroll;
+}
+
+

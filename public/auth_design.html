@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>SMART</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="design_files/css" rel="stylesheet">
+    <link rel="stylesheet" href="design_files/bootstrap.min.css">
+    <link href="design_files/style.css" rel="stylesheet">
+    <script src="design_files/jquery.min.js"></script>
+    <script src="design_files/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bower_components/humane-js/themes/flatty.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="t-wrap" style="height: 747px;">
+                <div class="t-c-m">
+                    <form id="form">
+                        <div class="text-center">
+                            <br><img class="logo-circle fr-fic fr-dii" src="images/login-logo.png">&nbsp;
+                            <br>
+                            <br>
+                            <div class="login-form">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="icon-user-o">&nbsp;</span></div>
+                                        <select name="selectName" class="form-control" id="sel1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                                            <option disabled="" selected="" value="">Логин</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="icon-key">&nbsp;</span></div>
+                                        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+                                    </div>
+                                </div>
+                                <p class="text-center">
+                                    <input class="btn btn-primary" type="submit" value="Войти" />
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/microevent.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="bower_components/humane-js/humane.js"></script>
+    <script src="bower_components/validate/validate.min.js"></script>
+    <script>
+    'use strict';
+    let Users = Backbone.Collection.extend({
+        url: 'login/users'
+    })
+    let UsersSelect = Backbone.View.extend({
+        el: '#sel1',
+        template: _.template('<option value="<%= id %>"><%= name %></option>'),
+        render: function() {
+            this.$el.empty();
+            this.$el.append("<option disabled='' selected='' value=''>Логин</option>");
+            this.collection.each((user) => {
+                this.$el.append(this.template(user.toJSON()));
+            })
+            return this;
+        },
+        initialize: function() {
+            this.collection.fetch().then(() => {
+                this.render();
+            });
+        }
+    })
+    $('document').ready(() => {
+        let user = new Backbone.Model({
+            url: 'login/users'
+        });
+
+        let users = new Users;
+        let usersSelect = new UsersSelect({
+            collection: users
+        })
+
+        var validator = new FormValidator('form', [{
+            name: 'selectName',
+            rules: 'required'
+        }, {
+            name: 'password',
+            rules: 'required|min_length[3]|max_length[32]|alpha_dash'
+        }], function(errors, event) {
+            if (errors.length > 0) {
+                $(this.form[2]).prop('disabled', true);
+                let messages = [];
+                errors.forEach((err) => {
+                    switch (err.display) {
+                        case 'selectName':
+                            messages.push('Выберите пользователя');
+                            break;
+                        case 'password':
+                            messages.push('Пароль введен не корректно');
+                            break;
+
+                    }
+
+                    $(err.element).addClass('danger');
+                });
+                humane.log(messages, {
+                    addnCls: 'humane-error',
+                    clickToClose: true
+                }, () => {
+                    $(this.form[2]).prop('disabled', false);
+                })
+            } else {
+                event.preventDefault();
+                console.log(this.fields)
+                user.save({
+                    name: this.fields.selectName.value,
+                    password: this.fields.password.value
+                }, {
+                    url: 'login'
+                }).then((data) => {
+                    if (data.auth) {
+                        document.location.href = '/';
+                    }
+                }).fail((e) => {
+                    humane.log('Неверный пароль!', {
+                        addnCls: 'humane-error',
+                        clickToClose: true
+                    })
+                })
+            }
+        });
+
+        $('.form-control').on('focus', (event) => {
+            $(event.target).removeClass('danger');
+        })
+    })
+    </script>
+</body>
+
+</html>

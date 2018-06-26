@@ -3,6 +3,7 @@ import {Router} from './Router';
 import {history} from 'backbone';
 import {DevicesDispatcher, prepareViewGroups, prepareFaces, prepareStatuses, preparePickList, computeDeviceSize} from '../Utils';
 import Controller from '../models/Controller';
+import UserCredentials from '../models/UserCredentials';
 import FacesCollection from '../collections/FacesCollection';
 import ControllersCollection from '../collections/ControllersCollection';
 import StatusesCollection from '../collections/StatusesCollection';
@@ -31,6 +32,7 @@ export default Marionette.Application.extend({
         this.modes = new Backbone.Collection(_.toArray(this.controller.get('modes')));
         this.services = new Backbone.Collection();
         this.alarms = new AlarmsCollection();
+        this.credentials = new UserCredentials();
     },
     onStart(app, options) {
         this.router = new Router({

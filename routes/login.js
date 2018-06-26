@@ -4,9 +4,37 @@ const router = express.Router();
 const db = require('../models');
 const jwt = require('jsonwebtoken');
 const md5 = require('md5');
-const { User, UserGroup } = db;
-
+const path = require('path');
+const {User, UserGroup} = db;
+const SECRET = process.env.AUTH_SECRET;
 router
+    .get('/', (req, res) => {
+        if (req.session.token ) {
+            res.redirect('/')
+        } else {
+            res.sendFile(path.resolve('public', 'auth_design.html'));
+        }
+    })
+    .get('/logout', (req, res)=>{
+        req.session.destroy();
+        res.redirect('/login');
+    })
+    .get('/credentionals', (req, res)=>{
+        let token = req.session.token;
+        let name = req.session.name;
+        if(token){
+
+            res.json({
+                auth: true,
+                token: token,
+                name: name
+            });
+        } else {
+            res.json({
+                auth: false
+            })
+        }
+    })
     .post('/', function (req, res, next) {
 
         User
@@ -27,21 +55,26 @@ router
                 if (!passwordIsValid) {
                     return res.status(401).send({auth: false, token: null});
                 }
+                let name = user.get('name');
 
                 let token = jwt.sign(
                     {
                         id: user.get('id')
                     },
-                    process.env.AUTH_SECRET,
+                    SECRET,
                     {
                         expiresIn: 86400 // expires in 24 hours
                     }
                 );
                 let usr = {
                     id: user.get('id'),
-                    name: user.get('name'),
+                    name: name,
                     group: user.get('group'),
-                }
+                };
+
+                req.session.token = token;
+                req.session.name = name;
+
                 res.status(200).send({auth: true, token: token, user: usr});
             })
             .catch((err) => {
@@ -57,4 +90,7 @@ router
                 res.status(500).send(err);
             })
     })
+    .get('/verify', (req, res, next) => {
+        console.log('Someone tryed to verify token')
+    });
 module.exports = router;

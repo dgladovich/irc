@@ -22,10 +22,13 @@ const bot = require('./bot.js');
 
 
 /* GET home page. */
+/*router.use((req, res, next)=>{
+
+});*/
 router
     .get('/', function (req, res, next) {
-        if (/*req.user === undefined*/ false) {
-            res.redirect('/auth')
+        if (req.session.token === undefined  ) {
+            res.redirect('/login')
         } else {
             //res.sendFile(path.resolve('public', 'main.html'));
             res.sendFile(path.resolve('dist', 'index.html'));

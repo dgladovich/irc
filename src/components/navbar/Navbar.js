@@ -32,6 +32,10 @@ export default Marionette.View.extend({
             el: '#individual',
             replaceElement: true
         },
+        logout: {
+            el: '#logout',
+            replaceElement: true
+        },
         bot: {
             el: '#bot-service',
             replaceElement: true

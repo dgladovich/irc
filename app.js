@@ -18,7 +18,7 @@ app.set('view engine', 'jade');
 
 app.use(express.static('./server/static/'));
 app.use(express.static('./client/dist/'));
-app.use(passport.initialize());
+
 
 
 app.disable('x-powered-by');
@@ -33,6 +33,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/', routes);

@@ -1,0 +1,28 @@
+{
+  "name": "jquery-ui-draggable",
+  "homepage": "https://github.com/Kiri-rin/jquery-ui-draggable",
+  "authors": [
+    "Kiririn <ritsufag@gmail.com>"
+  ],
+  "description": "Custom build of jquery-ui(including only draggable component).",
+  "main": "./dist/jquery-ui-draggable.js",
+  "devDependencies": {
+    "jquery-ui": "~1.11.4"
+  },
+  "keywords": [
+    "jquery",
+    "jquery-ui",
+    "draggable"
+  ],
+  "license": "MIT",
+  "_release": "5a42fdb97e",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5a42fdb97e6c3b7e611443af824e33bdfebbdd2b"
+  },
+  "_source": "https://github.com/Kiri-rin/jquery-ui-draggable.git",
+  "_target": "*",
+  "_originalSource": "jquery-ui-draggable",
+  "_direct": true
+}

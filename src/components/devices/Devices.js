@@ -21,6 +21,9 @@ export default CollectionView.extend({
                 return Backbone.View;
         }
     },
+    filter: function(item){
+        return !!item.get('active');
+    },
     onRender: function() {
         this.$el.css({
             height: $(window).height() - (25 * $(window).height() / 100)
