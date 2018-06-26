@@ -20,6 +20,7 @@ class MemoryDataBase {
         this.faces = new FacesCollection(prepareFaces(this.devices));
         this.queues = new QueueCollection();
         this.alarms = new AlarmsCollection();
+        this.moto = process.env.motohours || 0;
     }
     getQueues(){
         return this.queues.toJSON();
