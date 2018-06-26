@@ -49,7 +49,7 @@ router
                         let createWorks = [];
                         types.map((type) => {
                             let typ = type.type;
-                            let device = type.device;
+                            let device = type.controller;
                             let servs = typ.get('service')
                             if (servs.length) {
                                 Promise.all(servs.map((service) => {

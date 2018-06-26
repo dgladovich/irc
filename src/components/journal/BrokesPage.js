@@ -19,13 +19,15 @@ const BodyRowView = View.extend({
     tagName: 'tr',
     template: body_row,
     updateStatus: function(){
-       // console.log('I am updating status');
-       // console.log(this.model.toJSON())
+        let dclass = this.model.get('status').get('dclass');
+        this.$('.indicator').removeClass(this.previousClass).addClass(dclass);
+        this.previousClass = dclass;
     },
     onRender: function(){
         this.updateStatus.call(this);
     },
     initialize: function () {
+        this.previousClass = ''
         this.listenTo(this.model, 'destroy', this.destroy.bind(this));
         this.listenTo(this.model, 'change:stat', this.updateStatus.bind(this))
     }
@@ -163,7 +165,7 @@ export default View.extend({
         this.updateAlarms();
     },
     initialize: function () {
-        this.collection = new BrokesCollection();
+        this.collection = app.brokes;
         this.listenTo(this.collection, 'update', this.updateAlarms.bind(this));
     }
 });

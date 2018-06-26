@@ -98,7 +98,7 @@ router
                                 },
                                 {
                                     model: Device,
-                                    as: 'device'
+                                    as: 'controller'
                                 }
                             ]
                         }

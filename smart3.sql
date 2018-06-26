@@ -400,14 +400,14 @@ INSERT INTO `smart_device_service_journal` (`id`, `service_id`, `expiration_date
 CREATE TABLE `smart_devs` (
   `id` int(11) NOT NULL,
   `ctrl` int(11) DEFAULT NULL COMMENT 'Controller id',
-  `typ` int(11) DEFAULT NULL COMMENT 'Type of device',
+  `typ` int(11) DEFAULT NULL COMMENT 'Type of controller',
   `contyp` int(11) DEFAULT NULL COMMENT 'Connection type (Modbus, etc...)',
   `grp` int(11) DEFAULT NULL COMMENT 'Device group',
   `name` varchar(64) NOT NULL DEFAULT '',
   `modif` int(11) DEFAULT NULL COMMENT 'Modification',
   `moto` int(11) NOT NULL DEFAULT '0' COMMENT 'Moto hours',
-  `body_id` int(11) DEFAULT NULL COMMENT 'ID of body device',
-  `parent` int(11) DEFAULT NULL COMMENT 'Parent id device',
+  `body_id` int(11) DEFAULT NULL COMMENT 'ID of body controller',
+  `parent` int(11) DEFAULT NULL COMMENT 'Parent id controller',
   `nomi` int(11) DEFAULT NULL COMMENT 'Nominal structure',
   `cur` int(11) DEFAULT NULL COMMENT 'Current structure',
   `x` int(11) NOT NULL DEFAULT '0',
@@ -1561,7 +1561,7 @@ INSERT INTO `smart_lang_routes` (`id`, `name`, `ukr`, `eng`, `rus`) VALUES
 (461, 'tit_showservice', '', 'Show service', 'Показывать сервис'),
 (462, 'tit_userservice', '', 'Use service', 'Использовать сервис'),
 (463, 'tit_usecontroll', '', 'Use system controll', 'Использовать управление'),
-(464, 'tit_tardev', '', 'Target device', 'Целевое уст-во'),
+(464, 'tit_tardev', '', 'Target controller', 'Целевое уст-во'),
 (465, 'nomi_vals', '', 'Nominal values', 'Номинальные значения');
 
 -- --------------------------------------------------------
@@ -1920,7 +1920,7 @@ CREATE TABLE `smart_service_hists` (
 
 CREATE TABLE `smart_service_works` (
   `id` int(11) NOT NULL,
-  `dev` int(11) DEFAULT NULL COMMENT 'WARNING!!!!ACHTUNG!!!!!ОСТОРОЖНО!!!!!!! this is type. Not device id, type',
+  `dev` int(11) DEFAULT NULL COMMENT 'WARNING!!!!ACHTUNG!!!!!ОСТОРОЖНО!!!!!!! this is type. Not controller id, type',
   `ser_num` tinyint(4) NOT NULL DEFAULT '0',
   `des` varchar(1024) NOT NULL,
   `user_occ` int(11) NOT NULL,

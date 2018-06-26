@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         DeviceServiceWork.belongsTo(models.Work, {as: 'works', foreignKey: 'work_id'});
         DeviceServiceWork.belongsTo(models.Work, {as: 'description', foreignKey: 'work_id'});
         DeviceServiceWork.belongsTo(models.Type, {as: 'devicetype', foreignKey: 'typ'});
-        DeviceServiceWork.belongsTo(models.Device, {as: 'device', foreignKey: 'dev'});
+        DeviceServiceWork.belongsTo(models.Device, {as: 'controller', foreignKey: 'dev'});
         DeviceServiceWork.belongsTo(models.DeviceService, {as: 'devser', foreignKey: 'service_id'});
 
     };

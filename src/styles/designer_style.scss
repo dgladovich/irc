@@ -2998,6 +2998,13 @@ input[type='text'].chart-datepicker {
   float: right;
   margin-bottom: 5px;
 }
+header{
+  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 .controller-mode{
   font-size: 1.4em;
@@ -3006,4 +3013,24 @@ input[type='text'].chart-datepicker {
 }
 .controller-mode #work-type{
   text-transform: uppercase;
+}
+
+.gruppa{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#network,
+#individual,
+#cloud,
+#messages,
+#lang-sett,
+#bot-service,
+.hover-btn{
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

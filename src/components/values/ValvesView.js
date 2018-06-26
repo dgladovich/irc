@@ -71,13 +71,23 @@ const Valve = View.extend({
 
 const Valves = CollectionView.extend({
     childView: Valve,
+    filter: function(child){
+        return !!child.get('active');
+    },
+    childViewOptions: function(model, index) {
+
+        return model.set({
+            list_index: index + 1,
+            valveStatus: ''
+        })
+    },
     onBeforeRender: function() {
-        this.collection.each((valve, index) => {
+/*        this.collection.each((valve, index) => {
             valve.set({
                 list_index: index + 1,
                 valveStatus: ''
             })
-        });
+        });*/
 /*        for (let i = 0; i < 14; i++) {
             this.collection.add({
                 list_index: i + 5,

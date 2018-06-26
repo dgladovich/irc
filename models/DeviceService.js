@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'smart_dev_servs',
     });
     DeviceService.associate = function(models) {
-        DeviceService.belongsTo(models.Device, {as: 'device', foreignKey: 'dev'});
+        DeviceService.belongsTo(models.Device, {as: 'controller', foreignKey: 'dev'});
         DeviceService.belongsTo(models.Service, {as: 'service', foreignKey: 'service_id'});
         DeviceService.hasMany(models.DeviceServiceWork, {as: 'service_work', foreignKey: 'id', sourceKey: 'service_id'});
     };

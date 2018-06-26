@@ -12,7 +12,7 @@ export default View.extend({
         to: '#calendar-to',
     },
     updateTime: function () {
-        let moto = this.device.get('moto'),
+        let moto = this.controller.get('moto'),
             previuos = this.model.get('_pre'),
             limit = this.model.get('_lim'),
             left = limit - (moto - previuos);

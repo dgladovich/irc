@@ -37,16 +37,15 @@ export default View.extend({
     },
     updateStatus: function() {
         let device = this.$('.hover-btn');
-        let deviceStatus = app.statuses
-            .findWhere({ id: this.device.get('sgrp')})
-            .get('sgrps_opts')
-            .findWhere({num: this.device.get('stat')});
+        let statuses = _.toArray(this.controller.get('stats'));
+        let cstat = this.controller.get('stat');
+        let controllerStatus = _.find(statuses, {num: cstat});
         device.removeClass(this.previousClass);
-        if (deviceStatus !== undefined) {
-            this.previousClass = deviceStatus.get('dclass');
+        if (controllerStatus !== undefined) {
+            this.previousClass = controllerStatus.dclass;
         } else {
             this.previousClass = 'off';
-            console.log('Get wrong status; Device' + this.device.get('id') + '; Status:' + this.device.get('stat') + '; Group:' + this.device.get('sgrp'))
+            console.log('Get wrong status; Device' + this.controller.get('id') + '; Status:' + this.controller.get('stat') + '; Group:' + this.controller.get('sgrp'))
         }
 
         //console.log(this.previousClass)
@@ -60,11 +59,9 @@ export default View.extend({
     },
     initialize: function() {
         this.previousClass = '';
-        this.device = app.devices.findWhere({
-            parent: null
-        });
+        this.controller = app.controller;
         this.on('rendered', this.onRender.bind(this));
         this.on('setheight', this.onSetHeight.bind(this));
-        this.listenTo(this.device, 'change:stat', this.updateStatus.bind(this))
+        this.listenTo(this.controller, 'change:stat', this.updateStatus.bind(this))
     }
 });

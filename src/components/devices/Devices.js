@@ -8,7 +8,7 @@ export default CollectionView.extend({
     childView: function(item){
         item.set('devicesize', app.deviceSize)
         switch(item.get('presentation')){
-            case 'device':
+            case 'controller':
                 return Device;
                 break;
             case 'group':

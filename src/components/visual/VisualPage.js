@@ -21,14 +21,14 @@ export default View.extend({
         });
     },
     onRender: function(){
-        this.showChildView('device', this.device);
+        this.showChildView('controller', this.controller);
         this.$el.fadeIn('slow');
     },
     initialize: function(){
         this.model = new Backbone.Model({
             title: app.language[menu_visual_observ] || menu_visual_observ
         });
-        this.device = new Device();
+        this.controller = new Device();
     }
 
 });

@@ -4268,13 +4268,13 @@ winetricks_die_if_user_not_dirowner()
 # http://www.osta.org/specs/pdf/udf102.pdf
 # https://www.ecma-international.org/publications/techreports/E-TR-071.htm
 
-# Usage: read_bytes offset count device
+# Usage: read_bytes offset count controller
 winetricks_read_bytes()
 {
     dd status=noxfer if="$3" bs=1 skip="$1" count="$2" 2>/dev/null
 }
 
-# Usage: read_hex offset count device
+# Usage: read_hex offset count controller
 winetricks_read_hex()
 {
     od -j "$1" -N "$2" -t x1 "$3"     | # offset $1, count $2, single byte hex format, file $3
@@ -4282,7 +4282,7 @@ winetricks_read_hex()
         sed '$d'                        # remove final line which is just final offset
 }
 
-# Usage: read_decimal offset device
+# Usage: read_decimal offset controller
 # Reads single four byte word, outputs in decimal.
 # Uses default endianness.
 # udf uses little endian words, so this only works on little endian machines.

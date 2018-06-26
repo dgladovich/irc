@@ -423,8 +423,8 @@
         "parent": 1,
         "nomi": null,
         "cur": null,
-        "x": 27,
-        "y": 32,
+        "x": 41,
+        "y": 86,
         "sgrp": 1,
         "stat": 6,
         "state_grp": null,
@@ -433,7 +433,7 @@
         "repairable": 1,
         "visible": 1,
         "spec_act": 0,
-        "active": 0,
+        "active": 1,
         "dports": [
           {
             "id": 8,
@@ -444,7 +444,48 @@
             "name": "state"
           }
         ],
-        "dfaces": {},
+        "dfaces": {
+          "31": {
+            "id": 31,
+            "dev": 3,
+            "tardev": null,
+            "name": "Люк ревизионный",
+            "viewgrp": 3,
+            "viewtype": null,
+            "stat_grp": 2,
+            "meas": null,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": null,
+            "lim_danger": 0,
+            "lim_danger_code": null,
+            "history_fix": 0,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 0,
+            "show_scat": 1,
+            "visible": 1,
+            "dvars": [
+              {
+                "id": 2,
+                "contyp": 6,
+                "name": "status",
+                "val": "0",
+                "active": 1,
+                "type": ""
+              }
+            ]
+          }
+        },
         "nominals": [],
         "stats": {
           "0": {
@@ -978,7 +1019,72 @@
             "name": "state_ctrl"
           }
         ],
-        "dfaces": {},
+        "dfaces": {
+          "32": {
+            "id": 32,
+            "dev": 7,
+            "tardev": null,
+            "name": "Затвор шлюзовый",
+            "viewgrp": 4,
+            "viewtype": null,
+            "stat_grp": 9,
+            "meas": null,
+            "min_val": 0,
+            "max_val": 0,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": null,
+            "lim_danger": 0,
+            "lim_danger_code": null,
+            "history_fix": 0,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 0,
+            "show_scat": 1,
+            "visible": 1,
+            "dvars": [
+              {
+                "id": 10,
+                "contyp": 2,
+                "name": "name",
+                "val": "unnamed",
+                "active": 1,
+                "type": "string"
+              },
+              {
+                "id": 11,
+                "contyp": 2,
+                "name": "description",
+                "val": "this is mb_tcp shit",
+                "active": 0,
+                "type": "string"
+              },
+              {
+                "id": 12,
+                "contyp": 2,
+                "name": "reg",
+                "val": "0",
+                "active": 1,
+                "type": "int"
+              },
+              {
+                "id": 13,
+                "contyp": 2,
+                "name": "nreg",
+                "val": "0",
+                "active": 1,
+                "type": "int"
+              }
+            ]
+          }
+        },
         "nominals": [],
         "stats": {
           "0": {
@@ -1333,7 +1439,48 @@
             "name": "state"
           }
         ],
-        "dfaces": {},
+        "dfaces": {
+          "30": {
+            "id": 30,
+            "dev": 10,
+            "tardev": null,
+            "name": "Датчик сжатого воздуха",
+            "viewgrp": 1,
+            "viewtype": 2,
+            "stat_grp": null,
+            "meas": 12,
+            "min_val": 0,
+            "max_val": 10,
+            "def": 0,
+            "lim_warning": 0,
+            "lim_warning_code": null,
+            "lim_danger": 0,
+            "lim_danger_code": null,
+            "history_fix": 1,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 0,
+            "show_scat": 1,
+            "visible": 1,
+            "dvars": [
+              {
+                "id": 2,
+                "contyp": 6,
+                "name": "status",
+                "val": "0",
+                "active": 1,
+                "type": ""
+              }
+            ]
+          }
+        },
         "nominals": [
           {
             "keyn": "presmax",
@@ -1582,7 +1729,39 @@
             "name": "Диф Давление"
           }
         ],
-        "dfaces": {},
+        "dfaces": {
+          "29": {
+            "id": 29,
+            "dev": 12,
+            "tardev": null,
+            "name": "Дифференциальное давление",
+            "viewgrp": 1,
+            "viewtype": 2,
+            "stat_grp": null,
+            "meas": 11,
+            "min_val": 0,
+            "max_val": 2000,
+            "def": 0,
+            "lim_warning": 1000,
+            "lim_warning_code": 32,
+            "lim_danger": 1500,
+            "lim_danger_code": 33,
+            "history_fix": 1,
+            "use_range": 0,
+            "range_warn_min": 0,
+            "range_warn_min_code": null,
+            "range_crit_min": 0,
+            "range_crit_min_code": null,
+            "range_warn_max": 0,
+            "range_warn_max_code": null,
+            "range_crit_max": 0,
+            "range_crit_max_code": null,
+            "orde": 1,
+            "show_scat": 1,
+            "visible": 1,
+            "dvars": []
+          }
+        },
         "nominals": [
           {
             "keyn": "minper",
@@ -1957,49 +2136,7 @@
             "name": "state"
           }
         ],
-        "dfaces": {
-          "15": {
-            "id": 15,
-            "dev": 15,
-            "tardev": null,
-            "name": "Статус",
-            "viewgrp": 3,
-            "viewtype": 4,
-            "stat_grp": 2,
-            "meas": null,
-            "min_val": 0,
-            "max_val": 0,
-            "def": 0,
-            "lim_warning": 0,
-            "lim_warning_code": null,
-            "lim_danger": 0,
-            "lim_danger_code": null,
-            "history_fix": 0,
-            "use_range": 0,
-            "range_warn_min": 0,
-            "range_warn_min_code": null,
-            "range_crit_min": 0,
-            "range_crit_min_code": null,
-            "range_warn_max": 0,
-            "range_warn_max_code": null,
-            "range_crit_max": 0,
-            "range_crit_max_code": null,
-            "orde": 0,
-            "show_scat": 0,
-            "visible": 1,
-            "dvars": [
-              {
-                "id": 61,
-                "dev": 15,
-                "dface": 15,
-                "var_id": 2,
-                "val": "",
-                "name": "status",
-                "type": ""
-              }
-            ]
-          }
-        },
+        "dfaces": {},
         "nominals": [],
         "stats": {
           "0": {
@@ -2108,48 +2245,7 @@
             "name": "state"
           }
         ],
-        "dfaces": {
-          "16": {
-            "id": 16,
-            "dev": 16,
-            "tardev": null,
-            "name": "Статус",
-            "viewgrp": 3,
-            "viewtype": null,
-            "stat_grp": 2,
-            "meas": null,
-            "min_val": 0,
-            "max_val": 0,
-            "def": 0,
-            "lim_warning": 0,
-            "lim_warning_code": null,
-            "lim_danger": 0,
-            "lim_danger_code": null,
-            "history_fix": 0,
-            "use_range": 0,
-            "range_warn_min": 0,
-            "range_warn_min_code": null,
-            "range_crit_min": 0,
-            "range_crit_min_code": null,
-            "range_warn_max": 0,
-            "range_warn_max_code": null,
-            "range_crit_max": 0,
-            "range_crit_max_code": null,
-            "orde": 0,
-            "show_scat": 0,
-            "visible": 1,
-            "dvars": [
-              {
-                "id": 2,
-                "contyp": 6,
-                "name": "status",
-                "val": "0",
-                "active": 1,
-                "type": ""
-              }
-            ]
-          }
-        },
+        "dfaces": {},
         "nominals": [],
         "stats": {
           "0": {
@@ -2258,48 +2354,7 @@
             "name": "state"
           }
         ],
-        "dfaces": {
-          "17": {
-            "id": 17,
-            "dev": 17,
-            "tardev": null,
-            "name": "Статус",
-            "viewgrp": 3,
-            "viewtype": null,
-            "stat_grp": 2,
-            "meas": null,
-            "min_val": 0,
-            "max_val": 0,
-            "def": 0,
-            "lim_warning": 0,
-            "lim_warning_code": null,
-            "lim_danger": 0,
-            "lim_danger_code": null,
-            "history_fix": 0,
-            "use_range": 0,
-            "range_warn_min": 0,
-            "range_warn_min_code": null,
-            "range_crit_min": 0,
-            "range_crit_min_code": null,
-            "range_warn_max": 0,
-            "range_warn_max_code": null,
-            "range_crit_max": 0,
-            "range_crit_max_code": null,
-            "orde": 0,
-            "show_scat": 0,
-            "visible": 1,
-            "dvars": [
-              {
-                "id": 2,
-                "contyp": 6,
-                "name": "status",
-                "val": "0",
-                "active": 1,
-                "type": ""
-              }
-            ]
-          }
-        },
+        "dfaces": {},
         "nominals": [],
         "stats": {
           "0": {
@@ -2397,7 +2452,7 @@
         "repairable": 1,
         "visible": 1,
         "spec_act": 1,
-        "active": 1,
+        "active": 0,
         "dports": [
           {
             "id": 27,
@@ -2420,19 +2475,19 @@
             "keyn": "imp_len_nzl",
             "name": "Длительность импульса",
             "meas": 8,
-            "val": "1000"
+            "val": "500"
           },
           {
             "keyn": "cycle_time_nzl",
             "name": "Продув каждые",
             "meas": 8,
-            "val": "1"
+            "val": "0"
           },
           {
             "keyn": "nozzle_chdelay",
             "name": "Задержка измерения состояния",
             "meas": 6,
-            "val": "200"
+            "val": "100"
           }
         ],
         "stats": {
@@ -2547,10 +2602,10 @@
             "id": 18,
             "dev": 19,
             "tardev": null,
-            "name": "Состояние",
-            "viewgrp": null,
+            "name": "Кнопка Аварийный Стоп",
+            "viewgrp": 3,
             "viewtype": null,
-            "stat_grp": null,
+            "stat_grp": 9,
             "meas": null,
             "min_val": 0,
             "max_val": 0,
@@ -2570,7 +2625,7 @@
             "range_crit_max": 0,
             "range_crit_max_code": null,
             "orde": 0,
-            "show_scat": 0,
+            "show_scat": 1,
             "visible": 1,
             "dvars": [
               {
@@ -2992,48 +3047,7 @@
             "name": "state"
           }
         ],
-        "dfaces": {
-          "27": {
-            "id": 27,
-            "dev": 74,
-            "tardev": null,
-            "name": "Статус",
-            "viewgrp": 3,
-            "viewtype": null,
-            "stat_grp": 2,
-            "meas": null,
-            "min_val": 0,
-            "max_val": 0,
-            "def": 0,
-            "lim_warning": 0,
-            "lim_warning_code": null,
-            "lim_danger": 0,
-            "lim_danger_code": null,
-            "history_fix": 0,
-            "use_range": 0,
-            "range_warn_min": 0,
-            "range_warn_min_code": null,
-            "range_crit_min": 0,
-            "range_crit_min_code": null,
-            "range_warn_max": 0,
-            "range_warn_max_code": null,
-            "range_crit_max": 0,
-            "range_crit_max_code": null,
-            "orde": 0,
-            "show_scat": 0,
-            "visible": 1,
-            "dvars": [
-              {
-                "id": 2,
-                "contyp": 6,
-                "name": "status",
-                "val": "0",
-                "active": 1,
-                "type": ""
-              }
-            ]
-          }
-        },
+        "dfaces": {},
         "nominals": [],
         "stats": {}
       },
@@ -3071,48 +3085,7 @@
             "name": "state"
           }
         ],
-        "dfaces": {
-          "28": {
-            "id": 28,
-            "dev": 75,
-            "tardev": null,
-            "name": "Статус",
-            "viewgrp": 3,
-            "viewtype": 4,
-            "stat_grp": null,
-            "meas": null,
-            "min_val": 0,
-            "max_val": 0,
-            "def": 0,
-            "lim_warning": 0,
-            "lim_warning_code": null,
-            "lim_danger": 0,
-            "lim_danger_code": null,
-            "history_fix": 0,
-            "use_range": 0,
-            "range_warn_min": 0,
-            "range_warn_min_code": null,
-            "range_crit_min": 0,
-            "range_crit_min_code": null,
-            "range_warn_max": 0,
-            "range_warn_max_code": null,
-            "range_crit_max": 0,
-            "range_crit_max_code": null,
-            "orde": 0,
-            "show_scat": 0,
-            "visible": 1,
-            "dvars": [
-              {
-                "id": 2,
-                "contyp": 6,
-                "name": "status",
-                "val": "0",
-                "active": 1,
-                "type": ""
-              }
-            ]
-          }
-        },
+        "dfaces": {},
         "nominals": [],
         "stats": {}
       }
@@ -3928,13 +3901,6 @@
         "port": 3001,
         "name": "Фильтр",
         "img": 1
-      },
-      {
-        "id": 6,
-        "ip": "192.168.15.102",
-        "port": 3001,
-        "name": "Конвейер скребковый",
-        "img": 46
       }
     ]
   },
@@ -4850,10 +4816,6 @@
     {
       "id": 5,
       "name": "Админ"
-    },
-    {
-      "id": 6,
-      "name": "test111"
     }
   ]
 }

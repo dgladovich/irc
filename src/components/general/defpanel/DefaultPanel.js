@@ -9,7 +9,7 @@ export default View.extend({
     regions: {
         tabs: '.tabs-wrapper-custom',
         tabsContent: {
-            el: '.device-meas-list',
+            el: '.controller-meas-list',
             replaceElement: true
         }
     },

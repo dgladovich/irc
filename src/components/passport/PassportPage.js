@@ -25,14 +25,14 @@ export default View.extend({
     },
     onRender: function () {
         /*        let height = $(window).height() - (30 * $(window).height() / 100);
-         let device = app.devices.findWhere({parent: 0});
+         let controller = app.devices.findWhere({parent: 0});
          this.showChildView('visualbody', new TabPanel({collection: collection}));
-         if (device.get('passportdata')) {
-         this.$('#shield').html(new Shield({model: device}).render().el);
-         this.$('#pickinglist').html(new PickingList({model: device}).render().el);
+         if (controller.get('passportdata')) {
+         this.$('#shield').html(new Shield({model: controller}).render().el);
+         this.$('#pickinglist').html(new PickingList({model: controller}).render().el);
          }
-         this.$('#passport').html(new Passport({model: device}).render().el);
-         this.$('#instruction').html(new Instruction({model: device}).render().el);
+         this.$('#passport').html(new Passport({model: controller}).render().el);
+         this.$('#instruction').html(new Instruction({model: controller}).render().el);
          this.$('.tab-pane').each((i, pane) => {
          if ($(pane).attr('id') !== 'shield') {
          $(pane).height(height);

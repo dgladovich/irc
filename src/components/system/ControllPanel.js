@@ -145,11 +145,11 @@ export default View.extend({
     },
     startDevice: function() {
         ch.trigger('command:start')
-        console.log('starting device')
+        console.log('starting controller')
     },
     stopDevice: function() {
         ch.trigger('command:stop')
-        console.log('stop device')
+        console.log('stop controller')
     },
     changeSpeed: function() {
         ch.trigger('command:speed', this.previousSpeed);

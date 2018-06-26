@@ -90,7 +90,7 @@ router
                     as: 'service',
                     include: [{
                         model: Device,
-                        as: 'device'
+                        as: 'controller'
                     }]
                 }]
             })
@@ -99,7 +99,7 @@ router
 
                     let service = e.get('service');
                     if (service !== null) {
-                        let device = service.get('device');
+                        let device = service.get('controller');
                         let start = moment(e.get('start')).add(e.get('transfer'), 'days').format('YYYY-MM-DD');
                         let backgroundColor = 'blue';
                         let borderColor = 'blue';
@@ -157,7 +157,7 @@ router
                     include: [{
                         distinct: 'service_id',
                         model: Device,
-                        as: 'device',
+                        as: 'controller',
                     },
                         {
                             model: DeviceServiceWork,
@@ -179,7 +179,7 @@ router
 
                     let service = e.get('service');
                     if (service !== null) {
-                        let device = service.get('device');
+                        let device = service.get('controller');
                         return {
                             id: device.get('id'),
                             title: device.get('name'),
@@ -201,7 +201,7 @@ router
     .get('/update/calendar', function (req, res, next) {
         DeviceService
             .findAll({
-                include: [{model: Device, as: 'device'},
+                include: [{model: Device, as: 'controller'},
                     {
                         as: 'service',
                         model: Service,
@@ -214,7 +214,7 @@ router
             .then((deviceServices) => {
                 let promises = [];
                 deviceServices.forEach((deviceService) => {
-                    let startDate = deviceService.get('device').get('start_date');
+                    let startDate = deviceService.get('controller').get('start_date');
 
                     let duration = moment.duration(deviceService.get('service').get('_set'), 'month');
                     let expDate = moment(startDate).add(duration).format();
@@ -244,7 +244,7 @@ router
             .findAll({
                 include: [{
                     model: Device,
-                    as: 'device'
+                    as: 'controller'
                 },
 
                     {
@@ -259,7 +259,7 @@ router
             .then((deviceServices) => {
                 Promise
                     .all(deviceServices.map((deviceService, i) => {
-                        let device = deviceService.get('device');
+                        let device = deviceService.get('controller');
                         let moto = device.get('moto');
                         let service = deviceService.get('service');
                         let startDate = moment(device.get('start_date'));

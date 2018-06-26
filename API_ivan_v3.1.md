@@ -114,7 +114,7 @@ Putting device in repair:
     {
         "control": "repair:in",
         "uuid": "f64f2940-fae4-11e7-8c5f-ef356f279131", //UUIDV1 - unique id assigned to command
-        "id": 45 // device id
+        "id": 45 controller
     } 
  ```
  Putting device out of repair:
