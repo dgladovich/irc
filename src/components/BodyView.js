@@ -127,7 +127,7 @@ export const BodyView = View.extend({
                         dev: device.get('id')
                     });
                     device.set({
-                        presentation: 'device',
+                        presentation: 'controller',
                         faces: new Backbone.Collection(faces)
                     });
                     devicesCollection.add(device);

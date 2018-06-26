@@ -49,7 +49,7 @@ export default View.extend({
         if (deviceStatus !== undefined) {
             this.previousClass = deviceStatus.get('dclass');
             let statusTranslate = app.language[deviceStatus.get('name')]
-            this.$('.device-modal-status').html(statusTranslate);
+            this.$('.controller-modal-status').html(statusTranslate);
         } else {
             this.previousClass = 'off';
             console.log('Get wrong status; Device' + this.model.get('id') + '; Status:' + this.model.get('stat') + '; Group:' + this.model.get('sgrp'))

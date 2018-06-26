@@ -27,8 +27,8 @@ const bot = require('./bot.js');
 });*/
 router
     .get('/', function (req, res, next) {
-        if (req.session.token === undefined  ) {
-            res.redirect('/login')
+        if (/*req.session.token === undefined*/ false  ) {
+            res.redirect('/login');
         } else {
             //res.sendFile(path.resolve('public', 'main.html'));
             res.sendFile(path.resolve('dist', 'index.html'));

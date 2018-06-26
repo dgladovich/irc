@@ -31,7 +31,7 @@ export default View.extend({
     },
     makeService: function() {
         this.model.set({
-            _pre: this.device.get('moto'),
+            _pre: this.controller.get('moto'),
             performed: this.works.where({ perform: 1 })
         });
         this.$('.make-service').attr('disabled', true);
@@ -59,7 +59,7 @@ export default View.extend({
         this.device = app.devices.findWhere({ id: this.model.get('dev') });
     },
     updateTime: function() {
-        let moto = this.device.get('moto');
+        let moto = this.controller.get('moto');
         let previuos = this.model.get('_pre');
         let limit = this.model.get('_lim');
         let left = limit - (moto - previuos);

@@ -23,7 +23,7 @@ const BodyRowView = View.extend({
     },
     confirmAlarm: function () {
         /*        alarmConfirm.trigger('alarm:confirm', {
-                    dev: this.model.get('device').get('lid'),
+                    dev: this.model.get('controller').get('lid'),
                     ctrl: this.model.get('ctrl'),
                     alr: this.model.get('id'),
                     date: moment().format('YYYY-MM-DD HH:mm:ss'),

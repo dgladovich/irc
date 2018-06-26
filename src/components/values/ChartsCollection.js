@@ -10,8 +10,9 @@ export default View.extend({
     regions: {
         content: '.chartlist'
     },
+
     onRender: function(){
-        let collection = this.collection.filter((face)=>{ return face.get('viewtype') !==  0});
+        let collection = this.collection.filter((face)=>{ return face.get('viewtype') !==  0 && !!face.get('history_fix')});
         this.showChildView('content', new Charts({collection: new Backbone.Collection(collection)}));
     }
 });

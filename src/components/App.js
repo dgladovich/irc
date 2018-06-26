@@ -10,6 +10,7 @@ import StatusesCollection from '../collections/StatusesCollection';
 import ViewGroupCollection from '../collections/ViewGroupsCollection';
 import AlarmsCollection from '../collections/AlarmsCollection';
 import ControllerConnection from '../connections/ControllerConnection';
+import BrokesCollection from "../collections/BrokesCollection";
 
 export default Marionette.Application.extend({
     region: '#app',
@@ -32,6 +33,7 @@ export default Marionette.Application.extend({
         this.modes = new Backbone.Collection(_.toArray(this.controller.get('modes')));
         this.services = new Backbone.Collection();
         this.alarms = new AlarmsCollection();
+        this.brokes = new BrokesCollection()
         this.credentials = new UserCredentials();
     },
     onStart(app, options) {

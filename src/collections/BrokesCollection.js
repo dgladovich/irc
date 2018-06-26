@@ -1,11 +1,13 @@
 import moment from 'moment';
+import _ from 'lodash';
 
 export default Backbone.Collection.extend({
     comparator: function (item) {
         return item.get("id");
     },
     initialize: function () {
-        app.devices.each((device) => {
+        let devices = app.devices.where({active: 1, visible: 1});
+        _.each(devices, (device) => {
             if (device.get('stat') === 2 || device.get('stat') === 3 || device.get('stat') === 5) {
                 let valveStatus = app.statuses.findWhere({
                     s_grp: device.get('sgrp'),
@@ -35,6 +37,7 @@ export default Backbone.Collection.extend({
             this.listenTo(device, 'change:stat', (device) => {
                 if (device.get('stat') === 2 || device.get('stat') === 3 || device.get('stat') === 5) {
                     let valveStatus = app.statuses.findWhere({id: device.get('sgrp')}).get('sgrps_opts').findWhere({num: device.get('stat')});
+                    let statuses = device.get('stats');
                     let error = app.errors.findWhere({
                         id: device.get('ecode')
                     });
@@ -44,6 +47,7 @@ export default Backbone.Collection.extend({
                         idle_date: moment(device.get('idle_date')).format("DD.MM.YYYY"),
                         idle_hour: moment(device.get('idle_date')).format("HH:mm:ss"),
                         status: valveStatus,
+                        statuses: statuses,
                         error: error,
                     });
                     this.add(deviceRepieter);

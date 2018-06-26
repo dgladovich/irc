@@ -59,8 +59,8 @@ export default View.extend({
          let tabsContent = this.tabPanel.getChildView('tabsContent');
 
          this.viewGroups.once('sync', () => {
-             app.devices.each((device, i) => {
-                 let faces = device.get('faces');
+             app.devices.each((controller, i) => {
+                 let faces = controller.get('faces');
                  if (faces.length > 0) {
                      faces.each((face, index) => {
                          let viewgrp = this.viewGroups.findWhere({ id: face.get('viewgrp') });

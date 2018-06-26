@@ -38,12 +38,13 @@ export default  Marionette.View.extend({
     },
     initialize: function () {
         this.model = new IndividualActivityModel;
-        if (app.controller.get('stat') === 9) {
+        if (app.controller.get('stat') === 6) {
             this.model.set({
                 status: false,
                 statusTitle: app.language[device_is_offline] || device_is_offline
             })
         }
+
         this.listenTo(this.model, 'change:status', this.updateStatus.bind(this))
     }
 })

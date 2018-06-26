@@ -1,7 +1,7 @@
 import { View, Model, CollectionView } from 'backbone.marionette';
-import table_head from '../../templates/modal/device/table_head.jst';
-import body_row from '../../templates/modal/device/body_row.jst';
-import table_template from '../../templates/modal/device/table_template.jst';
+import table_head from '../../templates/modal/controller/table_head.jst';
+import body_row from '../../templates/modal/controller/body_row.jst';
+import table_template from '../../templates/modal/controller/table_template.jst';
 import emptyMessages from '../../templates/navbar/empty_messages.jst';
 
 

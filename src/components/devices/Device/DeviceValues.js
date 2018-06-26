@@ -11,7 +11,7 @@ const BodyRowViewValue = View.extend({
     template: body_row_value,
     updateValue: function(){
         let value = this.model.get('def'),
-            valueSelector = '.device-modal-value';
+            valueSelector = '.controller-modal-value';
         console.log(`Value of ${this.model.get('name')} is: ${this.model.get('def')}`)
         this.$(valueSelector).html(value);
     },
@@ -37,7 +37,7 @@ const BodyRowViewStatus = View.extend({
     },
     updateStatus: function(){
         let deviceStatus = app.statuses.findWhere({ id: this.model.get('stat_grp')}).get('sgrps_opts').findWhere({num: this.model.get('def')}),
-            statusSelector = '.device-modal-status';
+            statusSelector = '.controller-modal-status';
 
         if (deviceStatus !== undefined) {
             let statusTranslate = app.language[deviceStatus.get('name')]

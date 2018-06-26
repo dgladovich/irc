@@ -183,7 +183,7 @@ let DeviceFormView = Backbone.View.extend({
 	render: function(){
 		let widthPer = $('.editor-field').width() / 100;
 		let heightPer = $('.editor-field').height() / 100;
-		this.$('#device-name').val( this.model.get('name') )
+		this.$('#controller-name').val( this.model.get('name') )
 		this.slider.bootstrapSlider( 'setValue', +this.model.get('size') * widthPer );
 		this.assign({
 			'select#device-type': this.deviceType,
@@ -209,7 +209,7 @@ let DeviceFormView = Backbone.View.extend({
 });
 
 let DeviceFormTypeView = Backbone.View.extend({
-	template: _.template($('script.device-type-template').html()),
+	template: _.template($('script.controller-type-template').html()),
 	render: function(){
 		this.collection.fetch().then(()=>{
 			this.collection.each(( type, i )=>{
@@ -228,7 +228,7 @@ let DeviceFormTypeView = Backbone.View.extend({
 });
 
 let DeviceFormStatusView = Backbone.View.extend({
-	template: _.template($('script.device-status-template').html()),
+	template: _.template($('script.controller-status-template').html()),
 	render: function(){
 		this.collection.fetch().then(()=>{
 			this.collection.each(( type, i )=>{
@@ -380,7 +380,7 @@ let DevicesListElemView = Backbone.View.extend({
 	selectDevice: function(){
 		return this.trigger('select');
 	},
-	template: _.template($('script.device-list-el').html()),
+	template: _.template($('script.controller-list-el').html()),
 	render: function(){
 		this.$el.html(this.template(this.model.toJSON()));
 		return this;
