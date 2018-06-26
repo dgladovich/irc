@@ -21,6 +21,53 @@ module.exports = {
             callback(errmsg, {});
         }
     },
+    future_service: function(callback) {
+        //leftHours = lim - (moto - pre)
+
+        let res = {
+            need_service: 0,
+            need_hours: 0,
+            future_service: 0,
+            future_hours: 0
+        };
+        let hours = {};
+        let moto = this.get_motohours();
+
+        this.dbdo(`SELECT * FROM smart_devs WHERE body_id != 'null'`, (err, devs) => {
+            if(!err && devs.length > 0 && devs[0]) {
+                this.dbdo(`SELECT * FROM smart_dev_servs WHERE dev = ${devs[0].id}`, (er, sers) => {
+                    if(!er) {
+                        _.each(sers, (ser) => {
+                            hours[(ser.ser_num || 0)] = (ser._lim || 0) - (moto - (ser._pre || 0));
+                        });
+                        _.each(hours, (hour, ser_n) => {
+                            if(hour <= 0) {
+                                res.need_service = ser_n;
+                                res.need_hours = hour * -1;
+                            }
+                            if (res.future_hours === 0) {
+                                res.future_service = parseInt(ser_n);
+                                res.future_hours = hour;
+                            } else {
+                                if (hour < res.future_hours) {
+                                    res.future_service = ser_n;
+                                    res.future_hours = hour;
+                                }
+                            }
+                        });
+                        callback(res);
+                    } else {
+                        callback(null);
+                    }
+                });
+            } else {
+                callback(null);
+            }
+        });
+    },
+    get_motohours: function() {
+        return process.env.motohours || 0;
+    },
     recalculate: function(days=0, callback) {
         let rnd = this.randomize();
         this.dbdo(`SELECT * from smart_alrs WHERE strftime('%Y-%m-%d', date) > date('now', '-${days} days') ORDER BY date ASC`, (err, alrs) => {
@@ -70,7 +117,10 @@ module.exports = {
                     });
                 }
             }
-            callback(this.info);
+            this.future_service((ser) => {
+                this.info.next_service = ser;
+                callback(this.info);
+            });
         });
     },
     get_info: function() {
