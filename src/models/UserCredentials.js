@@ -1,3 +1,3 @@
 export default Backbone.Model.extend({
-    url: '/login/credentials'
+    url: '/login/credentionals'
 });

@@ -45,7 +45,7 @@ export default Marionette.View.extend({
         }
     },
     events: {
-        'click .user-name': 'onUserNameClick',
+        //'click .user-name': 'onUserNameClick',
         'click #locale-ru': 'onChangeLocale',
         'click #locale-ua': 'onChangeLocale',
         'click #locale-en': 'onChangeLocale',
@@ -73,11 +73,20 @@ export default Marionette.View.extend({
     },
     updateUserName: function () {
         let userName = app.language['user_guest'] || 'user_guest';
-        let user = store.get('user');
-        if (user) {
-            userName = user.name;
-        }
+        console.log(app.credentials)
+        app.credentials.fetch()
+            .then((data)=>{
+                if(data.auth){
+                    this.$('#navbar-username').html(data.name);
+                } else {
+                    document.location.href = 'login/logout';
+                }
+            })
+            .fail((e)=>{
+                console.log('Error while fetching credentials')
+            })
         this.$('#navbar-username').html(userName);
+
     },
     onRender: function () {
 

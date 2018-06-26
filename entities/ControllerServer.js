@@ -158,6 +158,9 @@ class ControllerServer {
             case 'mode':
                 this.onChangeMode(data);
                 break;
+            case 'moto':
+                this.onChangeMoto(data);
+                break;
             case 'state':
                 this.onChangeState(data);
                 break;

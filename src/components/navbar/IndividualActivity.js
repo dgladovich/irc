@@ -1,13 +1,13 @@
 import Marionette from "backbone.marionette";
 import Radio from "backbone.radio";
 const individual = Radio.channel('individual');
-const stat_offline = 'stat_offline', connection_established = 'connection_established', device_is_offline = 'device_is_offline', connection_with_server = 'connection_with_server';
+const stat_offline = 'stat_offline', connection_with_controller = 'connection_with_controller', device_is_offline = 'device_is_offline', connection_with_server = 'connection_with_server';
 
 const IndividualActivityModel = Backbone.Model.extend({
     initialize: function () {
         this.set({
             status: true,
-            statusTitle: app.language[connection_established] || connection_established
+            statusTitle: app.language[connection_with_controller] || connection_with_controller
         })
         individual.on('individual:activity', (response) => {
             this.set(response)
