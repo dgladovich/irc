@@ -35,12 +35,27 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false,
         tableName: 'smart_dev_serworks'
     });
-    DeviceServiceWork.associate = function(models) {
-        DeviceServiceWork.belongsTo(models.Work, {as: 'works', foreignKey: 'work_id'});
-        DeviceServiceWork.belongsTo(models.Work, {as: 'description', foreignKey: 'work_id'});
-        DeviceServiceWork.belongsTo(models.Type, {as: 'devicetype', foreignKey: 'typ'});
-        DeviceServiceWork.belongsTo(models.Device, {as: 'controller', foreignKey: 'dev'});
-        DeviceServiceWork.belongsTo(models.DeviceService, {as: 'devser', foreignKey: 'service_id'});
+    DeviceServiceWork.associate = function (models) {
+        DeviceServiceWork.belongsTo(models.Work, {
+            as: 'works',
+            foreignKey: 'work_id'
+        });
+        DeviceServiceWork.belongsTo(models.Work, {
+            as: 'description',
+            foreignKey: 'work_id'
+        });
+        DeviceServiceWork.belongsTo(models.Type, {
+            as: 'devicetype',
+            foreignKey: 'typ'
+        });
+        DeviceServiceWork.belongsTo(models.Device, {
+            as: 'controller',
+            foreignKey: 'dev'
+        });
+        DeviceServiceWork.belongsTo(models.DeviceService, {
+            as: 'devser',
+            foreignKey: 'service_id'
+        });
 
     };
     return DeviceServiceWork;
