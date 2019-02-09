@@ -1,29 +1,29 @@
 // @flow
 
+const Radio = require('backbone.radio');
+const uuidv1 = require('uuid/v1');
+const moment = require('moment');
+const Database = require('better-sqlite3');
 const ControllerServer = require('./ControllerServer');
 const Logger = require('./Logger');
 const ZeoClient = require('./ZeoClient');
 const SocketServer = require('./SocketServer');
-const Radio = require('backbone.radio');
 const DataHub = require('./DataHub');
-const uuidv1 = require('uuid/v1');
-const moment = require('moment');
-const Database = require('better-sqlite3');
+
 const db = new Database('smart.db');
 
 const CC = Radio.channel('ControllerConnector');
 
 class CentralBroker {
     constructor() {
-        let broker = {broker: this};
+        const broker = { broker: this };
         this.controllerServer = new ControllerServer(broker);
         this.dh = new DataHub(broker);
         this.zeoClient = new ZeoClient(broker);
         this.socketServer = new SocketServer(broker);
         this.logger = new Logger(broker);
         this.BUFFER = [];
-        this.writingBuffer = setInterval(this.uploadBuffer.bind(this), 15000)
-
+        this.writingBuffer = setInterval(this.uploadBuffer.bind(this), 15000);
     }
 
     getControllerStatus() {
@@ -51,21 +51,21 @@ class CentralBroker {
     }
 
     handleChangedStatus(status) {
-        let {id, stat} = status;
+        const { id, stat } = status;
         this.dh.updateStatus(id, stat);
         this.socketServer.sendStatus(id, stat);
         this.zeoClient.sendStatus(id, stat);
     }
 
     handleChangedValue(value) {
-        let {id, def} = value;
+        const { id, def } = value;
         this.dh.updateValue(id, def);
         this.socketServer.sendValue(id, def);
         this.zeoClient.sendValue(id, def);
     }
 
     handleChangedState(data) {
-        let {id, state} = data;
+        const { id, state } = data;
         this.socketServer.sendState(id, state);
         this.zeoClient.sendState(id, state);
     }
@@ -90,14 +90,14 @@ class CentralBroker {
     }
 
     onControllerSpeedChange(queue) {
-        let speed = queue.get('argument');
+        const speed = queue.get('argument');
         this.dh.updateSpeed(speed);
         this.socketServer.sendSpeed(speed);
         this.zeoClient.sendSpeed(speed);
     }
 
     onControllerAlarmConfirm(queue) {
-        let {argument, execute_date, user_id} = queue.toJSON();
+        const { argument, execute_date, user_id } = queue.toJSON();
         this.dh
             .updateAlarm(argument, user_id, execute_date)
             .then((alarm) => {
@@ -112,7 +112,7 @@ class CentralBroker {
             this.dh.updateStatus(status);
             this.socketServer.sendStatus(status);
             this.zeoClient.sendStatus(status);
-        })
+        });
     }
 
     onChangeDeviceMode(pack) {
@@ -127,13 +127,13 @@ class CentralBroker {
     }
 
     onControllerExecution(data) {
-        let uuid = data.uuid;
-        let vals = {
-            status: 'executed'
+        const uuid = data.uuid;
+        const vals = {
+            status: 'executed',
         };
 
         this.dh.updateQueue(uuid, vals).then((queue) => {
-            this.afterExecutionAction.call(this, this.dh.getQueue(uuid))
+            this.afterExecutionAction.call(this, this.dh.getQueue(uuid));
         });
     }
 
@@ -142,19 +142,21 @@ class CentralBroker {
     }
 
     sendControllerInitialData() {
-        let queues = this.dh.getQueues();
+        const queues = this.dh.getQueues();
     }
 
 
     setDevicesOffline() {
         this.dh.getDevices().each((device) => {
-            let devId = device.get('id'),
-                stat = 6;
+            const devId = device.get('id');
+
+
+const stat = 6;
             console.log(`Setting device ${device.get('name')} offline`);
             device.set('stat', 6);
             this.socketServer.sendStatus(devId, stat);
             this.zeoClient.sendStatus(devId, stat);
-        })
+        });
     }
 
     setControllerOffline() {
@@ -166,30 +168,28 @@ class CentralBroker {
     writeValueBuffer(value) {
         return this.BUFFER.push({
             face_id: value.id,
-            def: value.def
+            def: value.def,
         });
     }
 
     uploadBuffer() {
         this.BUFFER.forEach((buff) => {
-            let buffer = {
+            const buffer = {
                 face_id: buff.face_id,
                 def: buff.def,
-                created_at: moment().format('YYYY-MM-DD')
+                created_at: moment().format('YYYY-MM-DD'),
             };
-
         });
-        //this.dh.bulkWriteValue(this.BUFFER);
+        // this.dh.bulkWriteValue(this.BUFFER);
 
         this.BUFFER = [];
     }
 
     afterExecutionAction(queue) {
-
-        let method = queue.get('method');
+        const method = queue.get('method');
         switch (method) {
             case 'confirm':
-                this.onControllerAlarmConfirm.call(this, queue)
+                this.onControllerAlarmConfirm.call(this, queue);
                 break;
             case 'speed':
                 this.onControllerSpeedChange.call(this, queue);
@@ -205,32 +205,35 @@ class CentralBroker {
                 break;
             default:
                 console.log(`Unknown type of execution command method: ${method}`.red);
-                return;
         }
     }
 
 
     confirmAlarm(pack) {
         if (pack) {
-            let uuid = uuidv1(),
-                confirmationMessage = {
+            const uuid = uuidv1();
+
+
+const confirmationMessage = {
                     eventGroup: 'controll',
                     method: 'confirm',
                     arguments: {
                         ivan_id: pack.ivan_id,
-                        uuid: uuid
-                    }
-                },
-                queueMessage = {
+                        uuid,
+                    },
+                };
+
+
+const queueMessage = {
                     method: 'confirm',
                     argument: pack.ivan_id,
                     user_id: pack.user_id,
-                    uuid: uuid
+                    uuid,
                 };
             this.dh
                 .addQueue(queueMessage)
                 .then((data) => {
-                    console.log(confirmationMessage)
+                    console.log(confirmationMessage);
                     this.controllerServer.sendDataToController(confirmationMessage);
                 });
         }
@@ -238,40 +241,43 @@ class CentralBroker {
 
     setRepairIn(pack) {
         console.log('Central Broker: setting device to repair', pack);
-        let uuid = uuidv1();
-        let { id } = pack;
+        const uuid = uuidv1();
+        const { id } = pack;
         this.controllerServer.repairIn(id, uuid);
-
     }
+
     setRepairOut(pack) {
         console.log('Central Broker: setting device out of repair', pack);
-        let uuid = uuidv1();
-        let { id } = pack;
+        const uuid = uuidv1();
+        const { id } = pack;
         this.controllerServer.repairOut(id, uuid);
-
     }
 
     startController(pack) {
-        let uuid = uuidv1();
+        const uuid = uuidv1();
         console.log('Central Broker: sending start command to controller');
         this.controllerServer.startController(uuid);
     }
 
     stopController(pack) {
-        let uuid = uuidv1();
+        const uuid = uuidv1();
         console.log('Central Broker: sending stop command to controller');
         this.controllerServer.stopController(uuid);
     }
 
     changeSpeed(pack) {
         console.log('Central Broker: sending change speed command to controller');
-        let uuid = uuidv1(),
-            {speed, user_id} = pack,
-            queueMessage = {
+        const uuid = uuidv1();
+
+
+const { speed, user_id } = pack;
+
+
+const queueMessage = {
                 method: 'speed',
                 argument: +speed,
                 user_id: +user_id,
-                uuid: uuid
+                uuid,
             };
         this.dh
             .addQueue(queueMessage)
@@ -279,10 +285,8 @@ class CentralBroker {
                 this.controllerServer.changeSpeed(speed, uuid);
             })
             .catch((e) => {
-                console.error(e)
+                console.error(e);
             });
-
-
     }
 
     init() {
@@ -290,7 +294,7 @@ class CentralBroker {
             .loadInitialData()
             .then(() => {
                 this.controllerServer.connect();
-            })
+            });
     }
 }
 

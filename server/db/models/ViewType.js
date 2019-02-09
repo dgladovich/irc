@@ -1,19 +1,20 @@
  'use strict';
+
  module.exports = (sequelize, DataTypes) => {
      const ViewType = sequelize.define('ViewType', {
          id: {
              type: DataTypes.INTEGER,
-             primaryKey: true
+             primaryKey: true,
          },
          name: {
-             type: DataTypes.CHAR
-         }
+             type: DataTypes.CHAR,
+         },
      }, {
          timestamps: false,
          tableName: 'smart_viewtypes',
-         freezeTableName: true
+         freezeTableName: true,
      });
-     ViewType.associate = function(models) {
+     ViewType.associate = function (models) {
      };
      return ViewType;
  };

@@ -10,11 +10,11 @@ const Face = Backbone.Model.extend({
             //console.log(`Value changed: ${this.get('name')}, ${this.get('def')}`)
         }
         this.on('change:def', onChangeValue.bind(this));
-    }*/
+    } */
 });
 
 const FacesCollection = Backbone.Collection.extend({
-    model: Face
+    model: Face,
 });
 
 module.exports = FacesCollection;

@@ -1,31 +1,32 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const ValueStatuses = sequelize.define('ValueStatuses', {
         id: {
             type: DataTypes.INTEGER,
-            primaryKey: true
+            primaryKey: true,
         },
         num: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         grp: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         name: {
-            type: DataTypes.CHAR
+            type: DataTypes.CHAR,
         },
         clr: {
-            type: DataTypes.CHAR
+            type: DataTypes.CHAR,
         },
         active: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
     }, {
         timestamps: false,
         tableName: 'smart_stat_grp_opts',
-        freezeTableName: true
+        freezeTableName: true,
     });
-    ValueStatuses.associate = function(models) {
+    ValueStatuses.associate = function (models) {
         ValueStatuses.belongsTo(models.Language, { foreignKey: 'name', targetKey: 'name' });
     };
     return ValueStatuses;

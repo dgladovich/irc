@@ -1,11 +1,11 @@
-import template from './templates/equipitem.jst';
 import { View } from 'backbone.marionette';
+import template from './templates/equipitem.jst';
 
 export default View.extend({
-    template: template,
-    className: 'equip',
-    initialize: function() {
-/*        let name = this.model.get('devices')[0].name.trim().split(" "),
+  template,
+  className: 'equip',
+  initialize() {
+    /*        let name = this.model.get('devices')[0].name.trim().split(" "),
             subName = name.pop(),
             mainName = name.join(' ');
 
@@ -13,6 +13,6 @@ export default View.extend({
         this.model.set({
             subName: subName,
             mainName: mainName
-        })*/
-    }
+        }) */
+  },
 });

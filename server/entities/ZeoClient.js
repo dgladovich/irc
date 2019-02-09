@@ -1,4 +1,5 @@
 const ZeoConnector = require('./ZeoConnector');
+
 const {
     CONTROLLER_ID,
 } = process.env;
@@ -6,15 +7,19 @@ const {
 class ZeoClient {
     constructor(opt) {
         this.broker = opt.broker;
-        this.zeoConnector = new ZeoConnector({server: this});
+        this.zeoConnector = new ZeoConnector({ server: this });
         this.zeoConnector.connect();
     }
 
     sendInitialData() {
-        let speed = this.broker.getInitialSpeed(),
-            alarms = this.broker.getUserInitialAlarms(),
-            statuses = this.broker.getUserInitialStatuses();
-        statuses.forEach(status => {
+        const speed = this.broker.getInitialSpeed();
+
+
+const alarms = this.broker.getUserInitialAlarms();
+
+
+const statuses = this.broker.getUserInitialStatuses();
+        statuses.forEach((status) => {
             this.sendStatus(status);
         });
         alarms.forEach((alarm) => {
@@ -25,61 +30,71 @@ class ZeoClient {
     }
 
     sendStatus(devId, stat) {
-        let status = {deviceId: devId, stat: stat},
-            controllerStatus = this.broker.getControllerStatus,
-            apiStatus = {
+        const status = { deviceId: devId, stat };
+
+
+const controllerStatus = this.broker.getControllerStatus;
+
+
+const apiStatus = {
                 eventGroup: 'status',
                 data: [status],
                 controller: {
                     controllerId: +CONTROLLER_ID,
-                    stat
-                }
+                    stat,
+                },
             };
-        this.zeoConnector.sendData(apiStatus)
+        this.zeoConnector.sendData(apiStatus);
     }
+
     sendState(devId, state) {
-        let st = {deviceId: devId, stat: state},
-            controllerStatus = this.broker.getControllerStatus,
-            apiStatus = {
+        const st = { deviceId: devId, stat: state };
+
+
+const controllerStatus = this.broker.getControllerStatus;
+
+
+const apiStatus = {
                 eventGroup: 'state',
                 data: [st],
                 controller: {
                     controllerId: +CONTROLLER_ID,
-                    state
-                }
+                    state,
+                },
             };
-        this.zeoConnector.sendData(apiStatus)
+        this.zeoConnector.sendData(apiStatus);
     }
-    sendValue(faceId, def){
+
+    sendValue(faceId, def) {
 
     }
 
     sendSpeed(speed) {
-        let apiSpeed = {};
+        const apiSpeed = {};
         this.zeoConnector.sendData(apiSpeed);
     }
 
     sendMode(pack) {
-        let apiMode = {};
+        const apiMode = {};
         this.zeoConnector.sendData(apiMode);
     }
 
     sendAlarmOrigin(pack) {
-        let apiAlarmOrigin = {};
+        const apiAlarmOrigin = {};
         this.zeoConnector.sendData(apiAlarmOrigin);
-
     }
 
     sendAlarmConfirmation(pack) {
-        let apiAlarmConfirmation = {};
+        const apiAlarmConfirmation = {};
         this.zeoConnector.sendData(apiAlarmConfirmation);
     }
 
     onOperatorCommand() {
     }
-    handleOperatorCommand(command){
-        console.log('ZeoClient: handling operator command', command)
-        //switch(){}
+
+    handleOperatorCommand(command) {
+        console.log('ZeoClient: handling operator command', command);
+        // switch(){}
     }
 }
 

@@ -1,20 +1,26 @@
 'use strict';
+
 const express = require('express');
+
 const router = express.Router();
-const path = require('path')
+const path = require('path');
 const _ = require('underscore');
 const moment = require('moment');
 const db = require('../models');
-const {History, Service, ServiceWork, DeviceService, DeviceServiceWork, DeviceTMC, Type, Work, WorkMaterial, Material} = db;
+
+const {
+ History, Service, ServiceWork, DeviceService, DeviceServiceWork, DeviceTMC, Type, Work, WorkMaterial, Material,
+} = db;
 const devices = _.toArray(require('../config').ctrl.devs);
-const {CONTROLLER_ID} = process.env;
+
+const { CONTROLLER_ID } = process.env;
 /* GET home page. */
 router
-    .get('/', function (req, res, next) {
+    .get('/', (req, res, next) => {
         Device
             .findAll({
                 where: {
-                    ctrl: config.controller
+                    ctrl: config.controller,
                 },
                 include: [{
                     model: Type,
@@ -29,34 +35,32 @@ router
                                 model: WorkMaterial,
                                 as: 'materials',
                                 include: [{
-                                    model: Material
-                                }]
-                            }]
-                        }]
-                    }]
-                }]
+                                    model: Material,
+                                }],
+                            }],
+                        }],
+                    }],
+                }],
             })
             .then((devices) => {
-                Promise.all(devices.map((device) => {
-                    return {
-                        device: device,
-                        type: device.get('type')
-                    }
-                }))
+                Promise.all(devices.map(device => ({
+                        device,
+                        type: device.get('type'),
+                    })))
                     .then((types) => {
-                        let services = [];
-                        let createServices = [];
-                        let createWorks = [];
+                        const services = [];
+                        const createServices = [];
+                        const createWorks = [];
                         types.map((type) => {
-                            let typ = type.type;
-                            let device = type.controller;
-                            let servs = typ.get('service')
+                            const typ = type.type;
+                            const device = type.controller;
+                            const servs = typ.get('service');
                             if (servs.length) {
                                 Promise.all(servs.map((service) => {
                                     createWorks.push({
                                         id: service.get('id'),
                                         service: service.toJSON(),
-                                        works: service.get('works')
+                                        works: service.get('works'),
                                     });
                                     return DeviceService.create({
                                         ctrl: device.get('ctrl'),
@@ -65,39 +69,37 @@ router
                                         _lim: service.get('_set'),
                                         _pre: 0,
                                         ser_type: service.get('ser_type'),
-                                        service_id: service.get('id')
-                                    })
+                                        service_id: service.get('id'),
+                                    });
                                 })).then((devservices) => {
                                     devservices.map((devser) => {
-                                        let works = _.findWhere(createWorks, {id: devser.get('service_id')}).works;
-                                        Promise.all(works.map((work) => {
-                                            return DeviceServiceWork.create({
+                                        const works = _.findWhere(createWorks, { id: devser.get('service_id') }).works;
+                                        Promise.all(works.map(work => DeviceServiceWork.create({
                                                 ctrl: device.get('ctrl'),
                                                 ser_num: devser.get('ser_num'),
                                                 service_id: devser.get('id'),
                                                 work_id: work.get('id'),
                                                 typ: work.get('dev'),
                                                 dev: device.get('id'),
-                                                user_occ: work.get('user_occ')
-                                            })
-                                        })).then((dsws) => {
+                                                user_occ: work.get('user_occ'),
+                                            }))).then((dsws) => {
                                             dsws.map((dsw) => {
-                                                //console.log(dsw.toJSON())
-                                            })
-                                        })
-                                    })
-                                })
+                                                // console.log(dsw.toJSON())
+                                            });
+                                        });
+                                    });
+                                });
                             }
                         });
 
-                        res.send(services)
-                    })
-            })
+                        res.send(services);
+                    });
+            });
     })
-    .get('/services', function (req, res, next) {
+    .get('/services', (req, res, next) => {
         DeviceService.findAll({
             where: {
-                ctrl: CONTROLLER_ID
+                ctrl: CONTROLLER_ID,
             },
             order: [['ser_num', 'ASC']],
             include: [
@@ -113,25 +115,25 @@ router
                                 as: 'materials',
                                 include: [{
                                     model: Material,
-                                    as: 'mat'
-                                }]
-                            }]
+                                    as: 'mat',
+                                }],
+                            }],
                         },
                         {
                             model: Type,
-                            as: 'devicetype'
+                            as: 'devicetype',
                         },
-                    ]
-                }
-            ]
+                    ],
+                },
+            ],
         }).then((services) => {
-            res.json(services)
-        })
+            res.json(services);
+        });
     })
     .get('/dev', (req, res, next) => {
         Device.findAll({
             where: {
-                ctrl: config.controller
+                ctrl: config.controller,
             },
             include: [{
                 model: DeviceService,
@@ -148,84 +150,90 @@ router
                          include: [{
                          model: Material
                          }]
-                         }]*/
-                    }]
-                }]
-            }]
+                         }] */
+                    }],
+                }],
+            }],
         }).then((devices) => {
-            res.json(devices)
-        })
+            res.json(devices);
+        });
     })
     .get('/servicejournal', (req, res, next) => {
-        console.log('Launch route', History)
+        console.log('Launch route', History);
         History.findAll({
             where: {
-                ctrl: CONTROLLER_ID
+                ctrl: CONTROLLER_ID,
             },
             order: [['last_service', 'DESC']],
-            limit: 20
+            limit: 20,
         }).then((history) => {
-            res.json(history)
+            res.json(history);
         }).catch((e) => {
-            console.log(e)
+            console.log(e);
             res.send(e);
-        })
+        });
     })
     .put('/', (req, res) => {
-        let id = req.body.id,
-            ser = req.body;
-        DeviceService.findById(req.body.id).then((service) => {
-            let device = _.find(devices, {id: service.get('id')});
+        const id = req.body.id;
 
-            let updatedField = {
-                _pre: device.moto
-            }
+
+const ser = req.body;
+        DeviceService.findById(req.body.id).then((service) => {
+            const device = _.find(devices, { id: service.get('id') });
+
+            const updatedField = {
+                _pre: device.moto,
+            };
             service
                 .update(updatedField)
                 .then((upService) => {
-                    let dname = device.name,
-                        date = moment().format('d.MM.YYYY HH:MM:ss'),
-                        ser_num = req.body.ser_num,
-                        works = ser.performed.length === 0 ? 'Работ не выполнено' : (() => {
-                            let performText = `Выполнены работы по следующему оборудованию: `
+                    const dname = device.name;
+
+
+const date = moment().format('d.MM.YYYY HH:MM:ss');
+
+
+const ser_num = req.body.ser_num;
+
+
+const works = ser.performed.length === 0 ? 'Работ не выполнено' : (() => {
+                            let performText = 'Выполнены работы по следующему оборудованию: ';
                             ser.performed.map((work, index) => {
                                 let sign = '';
                                 if (index + 1 < ser.performed.length) {
-                                    sign = ', '
+                                    sign = ', ';
                                 } else {
-                                    sign = ''
+                                    sign = '';
                                 }
-                                performText += work.deviceName + `${sign}`;
-
-                            })
+                                performText += `${work.deviceName}${sign}`;
+                            });
                             return performText;
-                        })()
-                    let description = `${dname}<br> <p class='service-aligner'>${date}<br> Выполнено ТО${ser_num}<br> ${works}</p>`;
-                    let historyRow = {
+                        })();
+                    const description = `${dname}<br> <p class='service-aligner'>${date}<br> Выполнено ТО${ser_num}<br> ${works}</p>`;
+                    const historyRow = {
                         service_id: id,
-                        description: description,
+                        description,
                         last_service: moment(),
-                        ctrl: req.body.ctrl
+                        ctrl: req.body.ctrl,
                     };
                     Promise
                         .all(ser.performed.map((work) => {
-                            console.log('updating service work suka')
-                            return DeviceServiceWork.update({perform: 0}, {where: {id: work.id}}).then()
+                            console.log('updating service work suka');
+                            return DeviceServiceWork.update({ perform: 0 }, { where: { id: work.id } }).then();
                         }))
                         .then(() => {
                             History.create(historyRow).then(() => {
                                 DeviceService.findById(id).then((service) => {
-                                    res.json(service)
-                                })
-                            })
+                                    res.json(service);
+                                });
+                            });
                         });
-                })
+                });
         });
     })
     .put('/performworks', (req, res) => {
-        let performed = req.body;
-        Promise.all(performed.map((work) => {
-            return DeviceServiceWork.findById(work.id, {
+        const performed = req.body;
+        Promise.all(performed.map(work => DeviceServiceWork.findById(work.id, {
                 include: [
                     {
                         model: DeviceService,
@@ -235,51 +243,65 @@ router
                         as: 'devicetype',
 
                     },
-                ]
+                ],
             }).then((work) => {
-                let service = work.get('devser');
-                let type = work.get('devicetype');
-                let device = _.find(devices, {id: work.get('dev')});
-                let sernum = service.get('ser_num');
-                let typText = type.get('name');
-                let serText = `Выполнена работа по следующему устройству`;
-                let description = `${device.name} <br><p class='service-aligner'> ТО${sernum} <br> ${serText}: ${typText}</p> `;
-                let historyRow = {
+                const service = work.get('devser');
+                const type = work.get('devicetype');
+                const device = _.find(devices, { id: work.get('dev') });
+                const sernum = service.get('ser_num');
+                const typText = type.get('name');
+                const serText = 'Выполнена работа по следующему устройству';
+                const description = `${device.name} <br><p class='service-aligner'> ТО${sernum} <br> ${serText}: ${typText}</p> `;
+                const historyRow = {
                     service_id: work.get('service_id'),
-                    description: description,
+                    description,
                     last_service: moment(),
-                    ctrl: device.ctrl
-                }
+                    ctrl: device.ctrl,
+                };
                 History.create(historyRow);
                 return work.update({
                     perform: 1,
-                    perform_date: work.datetime
-                })
-            });
-        })).then((data) => {
+                    perform_date: work.datetime,
+                });
+            }))).then((data) => {
             res.json(data);
         });
     })
     .put('/performrepair', (req, res) => {
-        let data = req.body,
-            name = data.deviceName,
-            text = data.text,
-            ctrl = data.ctrl,
-            descText = `Выполнен ремонт`,
-            repText = `Текст ремонта`,
-            datetime = moment(),
-            description = `${name}<br> ${descText}<br> ${datetime}<br> ${repText}: ${text}`,
-            historyRow = {
+        const data = req.body;
+
+
+const name = data.deviceName;
+
+
+const text = data.text;
+
+
+const ctrl = data.ctrl;
+
+
+const descText = 'Выполнен ремонт';
+
+
+const repText = 'Текст ремонта';
+
+
+const datetime = moment();
+
+
+const description = `${name}<br> ${descText}<br> ${datetime}<br> ${repText}: ${text}`;
+
+
+const historyRow = {
                 service_id: null,
-                description: description,
+                description,
                 last_service: datetime,
-                ctrl: ctrl
+                ctrl,
             };
 
         History.create(historyRow).then((data) => {
-            res.end()
+            res.end();
         });
-
     });
 
 module.exports = router;

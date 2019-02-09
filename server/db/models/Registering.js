@@ -1,20 +1,21 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const Registering = sequelize.define('Registering', {
         face_id: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         def: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         created_at: {
             type: DataTypes.DATE,
-            defaultValue: DataTypes.NOW
-        }
+            defaultValue: DataTypes.NOW,
+        },
     }, {
         timestamps: false,
         tableName: 'smart_registering',
-        freezeTableName: true
+        freezeTableName: true,
     });
     Registering.associate = function (models) {
 

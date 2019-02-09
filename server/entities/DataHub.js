@@ -9,16 +9,16 @@ class DataHub {
     }
 
     loadInitialData() {
-        let dataToLoad = [this.dbc.getQueuesJSON(), this.dbc.getAlarmsJSON()];
+        const dataToLoad = [this.dbc.getQueuesJSON(), this.dbc.getAlarmsJSON()];
         return Promise
             .all(dataToLoad)
             .then((data) => {
-                let queues = data[0];
-                let alarms = data[1];
+                const queues = data[0];
+                const alarms = data[1];
 
                 this.mdb.addQueues(queues);
                 this.mdb.addAlarms(alarms);
-            })
+            });
     }
 
     getAlarms() {
@@ -28,13 +28,15 @@ class DataHub {
     getQueues() {
         return this.mdb.getQueues();
     }
+
     getQueue(uuid) {
         return this.mdb.getQueue(uuid);
     }
 
-    getSpeed(){
+    getSpeed() {
         return this.mdb.getSpeed();
     }
+
     getDevices() {
         return this.mdb.getDevices();
     }
@@ -50,7 +52,8 @@ class DataHub {
     getStatusesJSON() {
         return this.mdb.getStatusesJSON();
     }
-    getControllerStatus(){
+
+    getControllerStatus() {
         return this.mdb.getControllerStatus();
     }
 
@@ -75,43 +78,47 @@ class DataHub {
 
     removeAlarm(uuid) {
     }
-    bulkWriteValue(values){
+
+    bulkWriteValue(values) {
         return this.dbc.bulkWriteValues(values);
     }
 
-    updateAlarm(ivan_id, user_id, date_confirm ) {
-        return this.dbc.updateAlarm(ivan_id, user_id, date_confirm )
-            .then(()=>{
+    updateAlarm(ivan_id, user_id, date_confirm) {
+        return this.dbc.updateAlarm(ivan_id, user_id, date_confirm)
+            .then(() => {
                 this.mdb.updateAlarm(ivan_id, user_id, date_confirm);
             })
-            .catch((e)=>{})
+            .catch((e) => {});
     }
 
     addQueue(qm) {
         return this.dbc.addQueue(qm)
-            .then((queueEntity)=>{
-                let queue = queueEntity.dataValues;
+            .then((queueEntity) => {
+                const queue = queueEntity.dataValues;
                 this.mdb.addQueues(queue);
             });
     }
-    updateControllerStatus(stat){
+
+    updateControllerStatus(stat) {
         this.mdb.updateControllerStatus(stat);
     }
 
     removeQueue() {
     }
+
     writeValue(value) {
         return this.dbc.writeValue(value);
     }
+
     updateQueue(uuid, values) {
-        return this.dbc.updateQueue(uuid, values).then(()=>{
-            this.mdb.updateQueue(uuid, values)
+        return this.dbc.updateQueue(uuid, values).then(() => {
+            this.mdb.updateQueue(uuid, values);
         });
     }
-    updateSpeed(value){
+
+    updateSpeed(value) {
         return this.mdb.updateSpeed(value);
     }
-
 }
 
 

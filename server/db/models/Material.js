@@ -1,30 +1,31 @@
  'use strict';
+
  module.exports = (sequelize, DataTypes) => {
      const Material = sequelize.define('Material', {
          name: {
-             type: DataTypes.CHAR
+             type: DataTypes.CHAR,
          },
          cnt: {
-             type: DataTypes.INTEGER
+             type: DataTypes.INTEGER,
          },
          meas: {
-             type: DataTypes.INTEGER
+             type: DataTypes.INTEGER,
          },
          price: {
-             type: DataTypes.INTEGER
+             type: DataTypes.INTEGER,
          },
          curr: {
-             type: DataTypes.INTEGER
+             type: DataTypes.INTEGER,
          },
          active: {
-             type: DataTypes.INTEGER
+             type: DataTypes.INTEGER,
          },
      }, {
          timestamps: false,
          tableName: 'smart_materials',
          freezeTableName: true,
      });
-     Material.associate = function(models) {
+     Material.associate = function (models) {
      };
      return Material;
  };

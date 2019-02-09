@@ -1,7 +1,7 @@
+import { View, Model } from 'backbone.marionette';
 import conv from './templates/conv.jst';
-import {View, Model} from 'backbone.marionette';
 
 
 export default View.extend({
-    template: conv
+  template: conv,
 });

@@ -1,4 +1,6 @@
-const {Alarm, Queue, User, SystemError, Registering} = require('../models');
+const {
+ Alarm, Queue, User, SystemError, Registering,
+} = require('../models');
 const Logger = require('./Logger');
 const moment = require('moment');
 const uuidv1 = require('uuid/v1');
@@ -11,7 +13,7 @@ class DatabaseConnector {
     }
 
     getQueues() {
-        return Alarm.findAll()
+        return Alarm.findAll();
     }
 
     getAlarms() {
@@ -19,11 +21,11 @@ class DatabaseConnector {
     }
 
     getQueuesJSON() {
-        return Queue.findAll({raw: true, where: { execute_date: null, user_id: null, status: 'executed' }});
+        return Queue.findAll({ raw: true, where: { execute_date: null, user_id: null, status: 'executed' } });
     }
 
     getAlarmsJSON() {
-        return Alarm.findAll({raw: true, where: { date_confirm: null, usr_confirm: 0 }});
+        return Alarm.findAll({ raw: true, where: { date_confirm: null, usr_confirm: 0 } });
     }
 
     getDevices() {
@@ -36,7 +38,7 @@ class DatabaseConnector {
 
     addQueue(queue) {
 /*        let uuid = uuidv1,
-            q = Object.assign({uuid: uuid()}, queue);*/
+            q = Object.assign({uuid: uuid()}, queue); */
         return Queue
             .create(queue)
             .catch((e) => {
@@ -48,24 +50,27 @@ class DatabaseConnector {
     }
 
     updateQueue(uuid, values) {
-        let queueUpdates = {
+        const queueUpdates = {
                 execute_date: moment(),
-            },
-            queueUpdateConditions = {
+            };
+
+
+const queueUpdateConditions = {
                 where: {
-                    uuid: uuid
+                    uuid,
                 },
                 returning: true,
-                plain: true
+                plain: true,
             };
         return Queue
             .update(Object.assign(queueUpdates, values), queueUpdateConditions)
             .catch((e) => {
-                console.log(`Error while updating queue status`.red)
+                console.log('Error while updating queue status'.red);
             });
     }
-    updateAlarm(ivan_id, user_id, date_confirm){
-        return Alarm.update({ usr_confirm: user_id, date_confirm: date_confirm }, {where: { ivan_id: ivan_id }})
+
+    updateAlarm(ivan_id, user_id, date_confirm) {
+        return Alarm.update({ usr_confirm: user_id, date_confirm }, { where: { ivan_id } });
     }
 
     addDevices() {
@@ -77,17 +82,18 @@ class DatabaseConnector {
     removeQueue() {
     }
 
-    bulkWriteValues(values){
-        console.log(values)
-        return Registering.bulkCreate(values)
+    bulkWriteValues(values) {
+        console.log(values);
+        return Registering.bulkCreate(values);
     }
 
     removeAlarm() {
     }
-    writeValue(value){
-        let valueToCreate = {
+
+    writeValue(value) {
+        const valueToCreate = {
             face_id: value.id,
-            def: value.def
+            def: value.def,
         };
         return Registering.create(valueToCreate);
     }

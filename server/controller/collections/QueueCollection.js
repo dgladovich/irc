@@ -7,20 +7,20 @@ const Queue = Backbone.Model.extend({
     defaults: {
         status: 'pending',
     },
-    initialize: function () {
-        this.on('change:status', ()=>{
-            if(this.get('status') === 'executed'){
+    initialize() {
+        this.on('change:status', () => {
+            if (this.get('status') === 'executed') {
                 this.collection.remove(this);
             } else {
 
             }
         });
-    }
+    },
 });
 
 const QueueCollection = Backbone.Collection.extend({
     url: '/que',
-    model: Queue
+    model: Queue,
 });
 
 module.exports = QueueCollection;

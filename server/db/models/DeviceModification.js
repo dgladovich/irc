@@ -1,20 +1,21 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const DeviceModification = sequelize.define('DeviceModification', {
         dev_type: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         name: {
-            type: DataTypes.CHAR
+            type: DataTypes.CHAR,
         },
         active: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
     }, {
         timestamps: false,
         tableName: 'smart_devs',
     });
-    DeviceModification.associate = function(models) {
+    DeviceModification.associate = function (models) {
     };
     return DeviceModification;
 };

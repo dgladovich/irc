@@ -1,19 +1,25 @@
 import Device from '../models/Device';
 
 export default Backbone.Collection.extend({
-    model: Device,
-    initialize: function(opt) {
-        this.each((device, index) => {
-            console.log('Collection init')
+  model: Device,
+  initialize(opt) {
+    this.each((device, index) => {
+      console.log('Collection init');
 
-            let defaultWidth = 120,
-                defaultCount = 12,
-                devicesCount = this.length,
-                devicesWidth = defaultCount / devicesCount * defaultWidth * 1.2;
+      const defaultWidth = 120;
 
-            device.set({
-                devicesize: devicesWidth
-            })
-        })
-    }
+
+      const defaultCount = 12;
+
+
+      const devicesCount = this.length;
+
+
+      const devicesWidth = defaultCount / devicesCount * defaultWidth * 1.2;
+
+      device.set({
+        devicesize: devicesWidth,
+      });
+    });
+  },
 });

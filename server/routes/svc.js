@@ -1,19 +1,21 @@
 'use strict';
+
 const express = require('express');
+
 const router = express.Router();
 const path = require('path');
-const db = require('../models')
+const db = require('../models');
 
 
 /* GET home page. */
 router
-    .get('/events', function(req, res, next) {
+    .get('/events', (req, res, next) => {
         res.end();
     })
-    .get('/sources', function(req, res, next) {
+    .get('/sources', (req, res, next) => {
         res.end();
     })
-    .get('/update', function(req, res, next) {
+    .get('/update', (req, res, next) => {
         Device.findAll({
             include: [{
                 model: Type,
@@ -25,14 +27,14 @@ router
                             model: Work,
                             as: 'works',
                         },
-                    ]
-                }]
-            }]
+                    ],
+                }],
+            }],
         }).then((devices) => {
             res.json(devices);
-        })
+        });
     })
-    .get('/updateservice', function(req, res, next) {
+    .get('/updateservice', (req, res, next) => {
         Device.findAll({
             include: [{
                 model: Type,
@@ -43,50 +45,47 @@ router
                     include: [{
                         model: Work,
                         as: 'works',
-                    }, ]
-                }]
-            }]
+                    }],
+                }],
+            }],
         }).then((devices) => {
-
             Promise.all(devices.map((device, index) => {
-                let type = device.get('type').get('id');
+                const type = device.get('type').get('id');
                 return Service.bulkCreate([{
                         ser_num: 1,
                         typ: type,
                         name: 'TO1',
-                        device_type: type
+                        device_type: type,
                     },
                     {
                         ser_num: 2,
                         typ: type,
                         name: 'TO2',
-                        device_type: type
+                        device_type: type,
                     },
                     {
                         ser_num: 3,
                         typ: type,
                         name: 'TO3',
-                        device_type: type
+                        device_type: type,
                     },
                     {
                         ser_num: 4,
                         typ: type,
                         name: 'TO4',
-                        device_type: type
+                        device_type: type,
                     },
                     {
                         ser_num: 5,
                         typ: type,
                         name: 'TO5',
-                        device_type: type
-                    }
+                        device_type: type,
+                    },
                 ]);
             })).then((services) => {
-
-                Promise.all(services.map((service) => {
-                    return Promise.all(service.map((ser) => {
-                        let service = ser.get('id');
-                        let service_number = ser.get('ser_num');
+                Promise.all(services.map(service => Promise.all(service.map((ser) => {
+                        const service = ser.get('id');
+                        const service_number = ser.get('ser_num');
                         return Promise.all([
                             Work.bulkCreate([{
                                     service_id: service,
@@ -107,18 +106,14 @@ router
                                     active: 1,
                                 },
                             ]),
-                        ])
-                    }));
-                })).then((works) => {
-                    res.json(works)
-                })
-
-            })
-
-        })
-
+                        ]);
+                    })))).then((works) => {
+                    res.json(works);
+                });
+            });
+        });
     })
-    .get('/updatedeviceservice', function(req, res, next) {
+    .get('/updatedeviceservice', (req, res, next) => {
         Device.findAll({
             include: [{
                 model: Type,
@@ -129,18 +124,17 @@ router
                     include: [{
                         model: Work,
                         as: 'works',
-                    }, ]
-                }]
-            }]
+                    }],
+                }],
+            }],
         }).then((devices) => {
             Promise.all(devices.map((device, index) => {
-                let type = device.get('type');
-                let services = type.get('services');
+                const type = device.get('type');
+                const services = type.get('services');
 
 
                 if (services.length > 0) {
-                    return Promise.all(services.map((service) => {
-                        return DeviceService
+                    return Promise.all(services.map(service => DeviceService
                             .create({
                                 ctrl: device.get('ctrl'),
                                 dev: device.get('id'),
@@ -150,35 +144,22 @@ router
                                 _pre: 666,
 
                             })
-                            .then((serv) => {
-                                return Promise.all(service.works.map((work) => {
-                                    return {
+                            .then(serv => Promise.all(service.works.map(work => ({
                                         ctrl: device.get('ctrl'),
                                         dev: device.get('id'),
                                         ser_num: serv.get('ser_num'),
                                         work: work.get('id'),
-                                        service_id: serv.get('id')
-                                    }
-                                })).then((works) => {
-                                    return DeviceWork
+                                        service_id: serv.get('id'),
+                                    }))).then(works => DeviceWork
                                         .bulkCreate(works)
-                                        .then((deviceworks) => {
-                                            return deviceworks
-                                        })
-                                })
-                            })
+                                        .then(deviceworks => deviceworks))),
                         //
-                    }))
-
-                } else {
-                    res.send('no services')
+                    ));
                 }
-
+                    res.send('no services');
             })).then((services) => {
-                res.json(services)
-            })
-
-        })
-
-    })
+                res.json(services);
+            });
+        });
+    });
 module.exports = router;

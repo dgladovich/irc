@@ -1,19 +1,20 @@
+const _ = require('lodash');
 const ControllerModel = require('./models/ControllerModel');
 const DevicesCollection = require('./collections/DevicesCollection');
 const FacesCollection = require('./collections/FacesCollection');
 const QueueCollection = require('./collections/QueueCollection');
 const AlarmsCollection = require('./collections/AlarmsCollection');
-const _ = require('lodash');
 const config = require('../config.json');
-function prepareFaces(devs){
+
+function prepareFaces(devs) {
     let faces = [];
-    devs.each((d)=>{
-        faces = faces.concat(_.toArray(d.get('dfaces')))
+    devs.each((d) => {
+        faces = faces.concat(_.toArray(d.get('dfaces')));
     });
     return faces;
 }
 class MemoryDataBase {
-    constructor(){
+    constructor() {
         this.speed = 0;
         this.controller = new ControllerModel(config.ctrl);
         this.devices = new DevicesCollection(config.ctrl.devs);
@@ -22,73 +23,95 @@ class MemoryDataBase {
         this.alarms = new AlarmsCollection();
         this.moto = process.env.motohours || 0;
     }
-    getQueues(){
+
+    getQueues() {
         return this.queues.toJSON();
     }
-    getAlarms(){
+
+    getAlarms() {
         return this.alarms.toJSON();
     }
-    getDevices(){
+
+    getDevices() {
         return this.devices;
     }
-    getSpeed(){
+
+    getSpeed() {
         return this.speed;
     }
-    getQueue(uuid){
-        return this.queues.findWhere({uuid: uuid});
+
+    getQueue(uuid) {
+        return this.queues.findWhere({ uuid });
     }
-    getDevicesJSON(){
+
+    getDevicesJSON() {
         return this.devices;
     }
-    getControllerStatus(){
+
+    getControllerStatus() {
         return this.controller.get('stat');
     }
-    getStatusesJSON(){
-        return this.devices.map((device) => { return  {id: device.get('id'), stat: device.get('stat')}});
+
+    getStatusesJSON() {
+        return this.devices.map(device => ({ id: device.get('id'), stat: device.get('stat') }));
     }
-    getValuesJSON(){
-        return this.faces.map((face) => { return  { id: face.get('id'), def: face.get('def') }});
+
+    getValuesJSON() {
+        return this.faces.map(face => ({ id: face.get('id'), def: face.get('def') }));
     }
-    getAlarmsJSON(){
+
+    getAlarmsJSON() {
         return this.alarms.toJSON();
     }
-    getFaces(){
+
+    getFaces() {
         return this.faces.toJSON();
     }
-    updateDeviceStatus(id, status){
-        console.log(`Memory database: changing status, ID: ${id}, status: ${status}`)
-        this.devices.findWhere({id: +id}).set({stat: +status});
+
+    updateDeviceStatus(id, status) {
+        console.log(`Memory database: changing status, ID: ${id}, status: ${status}`);
+        this.devices.findWhere({ id: +id }).set({ stat: +status });
     }
-    updateFaceValue(id, value){
-        console.log(`Memory database: changing face, ID: ${id}, faceId: ${value}`)
-        this.faces.findWhere({id: +id}).set('def', +value);
+
+    updateFaceValue(id, value) {
+        console.log(`Memory database: changing face, ID: ${id}, faceId: ${value}`);
+        this.faces.findWhere({ id: +id }).set('def', +value);
     }
-    updateQueue(uuid, status){
-        let executedQueue = this.queues.findWhere({uuid: uuid});
+
+    updateQueue(uuid, status) {
+        const executedQueue = this.queues.findWhere({ uuid });
         if (executedQueue) {
             executedQueue.set('status', status);
         }
     }
-    updateSpeed(value){
+
+    updateSpeed(value) {
         return this.speed = value;
     }
-    updateAlarm(ivan_id, user_id, date_confirm){
-        this.alarms.findWhere({ivan_id: ivan_id}).set({usr_confirm: user_id, date_confirm: date_confirm})
+
+    updateAlarm(ivan_id, user_id, date_confirm) {
+        this.alarms.findWhere({ ivan_id }).set({ usr_confirm: user_id, date_confirm });
     }
-    addQueues(queues){
+
+    addQueues(queues) {
         this.queues.add(queues);
     }
-    addAlarms(alarms){
+
+    addAlarms(alarms) {
         this.alarms.add(alarms);
     }
-    updateControllerStatus(stat){
-        this.controller.set('stat', stat)
-    }
-    addDevices(){}
-    addFaces(){}
-    removeQueue(){}
-    removeAlarm(){}
 
+    updateControllerStatus(stat) {
+        this.controller.set('stat', stat);
+    }
+
+    addDevices() {}
+
+    addFaces() {}
+
+    removeQueue() {}
+
+    removeAlarm() {}
 }
 
 module.exports = MemoryDataBase;

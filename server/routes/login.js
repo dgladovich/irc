@@ -1,96 +1,95 @@
 'use strict';
+
 const express = require('express');
+
 const router = express.Router();
-const db = require('../models');
 const jwt = require('jsonwebtoken');
 const md5 = require('md5');
 const path = require('path');
-const {User, UserGroup} = db;
+const db = require('../models');
+
+const { User, UserGroup } = db;
 const SECRET = process.env.AUTH_SECRET;
 router
     .get('/', (req, res) => {
-        if (req.session.token ) {
-            res.redirect('/')
+        if (req.session.token) {
+            res.redirect('/');
         } else {
             res.sendFile(path.resolve('public', 'auth_design.html'));
         }
     })
-    .get('/logout', (req, res)=>{
+    .get('/logout', (req, res) => {
         req.session.destroy();
         res.redirect('/login');
     })
-    .get('/credentionals', (req, res)=>{
-        let token = req.session.token;
-        let name = req.session.name;
-        if(token){
-
+    .get('/credentionals', (req, res) => {
+        const token = req.session.token;
+        const name = req.session.name;
+        if (token) {
             res.json({
                 auth: true,
-                token: token,
-                name: name
+                token,
+                name,
             });
         } else {
             res.json({
-                auth: false
-            })
+                auth: false,
+            });
         }
     })
-    .post('/', function (req, res, next) {
-
+    .post('/', (req, res, next) => {
         User
             .findOne({
-                where: {id: req.body.name},
+                where: { id: req.body.name },
                 include: [
                     {
                         model: UserGroup,
-                        as: 'group'
-                    }
-                ]
+                        as: 'group',
+                    },
+                ],
             })
             .then((user) => {
                 if (!user) {
                     return res.status(404).send('No user found.');
                 }
-                let passwordIsValid = md5(req.body.password) === user.get('pass');
+                const passwordIsValid = md5(req.body.password) === user.get('pass');
                 if (!passwordIsValid) {
-                    return res.status(401).send({auth: false, token: null});
+                    return res.status(401).send({ auth: false, token: null });
                 }
-                let name = user.get('name');
+                const name = user.get('name');
 
-                let token = jwt.sign(
+                const token = jwt.sign(
                     {
-                        id: user.get('id')
+                        id: user.get('id'),
                     },
                     SECRET,
                     {
-                        expiresIn: 86400 // expires in 24 hours
-                    }
+                        expiresIn: 86400, // expires in 24 hours
+                    },
                 );
-                let usr = {
+                const usr = {
                     id: user.get('id'),
-                    name: name,
+                    name,
                     group: user.get('group'),
                 };
 
                 req.session.token = token;
                 req.session.name = name;
 
-                res.status(200).send({auth: true, token: token, user: usr});
+                res.status(200).send({ auth: true, token, user: usr });
             })
-            .catch((err) => {
-                return res.status(500).send(`Error on the server. <br> ${err}`);
-            });
+            .catch(err => res.status(500).send(`Error on the server. <br> ${err}`));
     })
     .get('/users', (req, res, next) => {
-        User.findAll({attributes: ['id', 'name']})
+        User.findAll({ attributes: ['id', 'name'] })
             .then((users) => {
                 res.json(users);
             })
             .catch((err) => {
                 res.status(500).send(err);
-            })
+            });
     })
     .get('/verify', (req, res, next) => {
-        console.log('Someone tryed to verify token')
+        console.log('Someone tryed to verify token');
     });
 module.exports = router;

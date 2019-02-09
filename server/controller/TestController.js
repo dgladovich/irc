@@ -2,11 +2,12 @@ require('dotenv').config('../');
 const net = require('net');
 const Backbone = require('backbone');
 const _ = require('underscore');
-const config = require('../config.json');
+
 const PORT = 3002;
 const server = net.createServer();
 const uuidv1 = require('uuid/v1');
 const moment = require('moment');
+const config = require('../config.json');
 
 const ControllerModel = require('./ControllerModel');
 const DevicesCollection = require('./collections/DevicesCollection');
@@ -17,64 +18,58 @@ const devices = new DevicesCollection(config.ctrl.devs);
 const faces = new FacesCollection(prepareFaces(devices));
 
 controller.set({
-    devices: devices,
-    faces: faces
+    devices,
+    faces,
 });
 
 function prepareFaces(devs) {
     let faces = [];
     devs.each((d) => {
-        faces = faces.concat(_.toArray(d.get('dfaces')))
+        faces = faces.concat(_.toArray(d.get('dfaces')));
     });
     return faces;
 }
 
 server.on('connection', handleConnection);
-server.listen(PORT, function () {
+server.listen(PORT, () => {
     console.log('Testing controller server listening to %j', server.address());
 });
-let eventGroups = [
+const eventGroups = [
     'status',
     'values',
     'mode',
-    'alarm'
+    'alarm',
 ];
 
 function generateStatuses() {
-    let dlength = devices.length - 1;
-    let range = _.random(0, dlength);
-    let devs = devices.models.slice(0, range);
-    return devs.map((device) => {
-        return {
+    const dlength = devices.length - 1;
+    const range = _.random(0, dlength);
+    const devs = devices.models.slice(0, range);
+    return devs.map(device => ({
             id: device.get('id'),
-            stat: _.random(1, 6)
-        }
-    })
+            stat: _.random(1, 6),
+        }));
 }
 
 function generateValues() {
-    let flength = faces.length - 1;
-    let range = _.random(0, flength);
-    let facs = faces.models.slice(0, range);
+    const flength = faces.length - 1;
+    const range = _.random(0, flength);
+    const facs = faces.models.slice(0, range);
 
-    return facs.map((face) => {
-        return {
+    return facs.map(face => ({
             id: face.get('id'),
-            def: _.random(0, 100000)
-        }
-    })
+            def: _.random(0, 100000),
+        }));
 }
 
 function generateMode() {
-    let dlength = devices.length - 1;
-    let range = _.random(0, dlength);
-    let devs = devices.models.slice(0, range);
-    return devs.map((device) => {
-        return {
+    const dlength = devices.length - 1;
+    const range = _.random(0, dlength);
+    const devs = devices.models.slice(0, range);
+    return devs.map(device => ({
             id: device.get('id'),
-            mode: _.random(1, 6)
-        }
-    });
+            mode: _.random(1, 6),
+        }));
 }
 
 
@@ -85,8 +80,8 @@ function generateAlarm() {
         code: _.random(0, 41),
         stat: _.random(0, 6),
         date: moment(),
-        ivan_id: uuidv1()
-    }
+        ivan_id: uuidv1(),
+    };
 }
 
 function generateData(action) {
@@ -104,44 +99,43 @@ function generateData(action) {
             return generateAlarm();
             break;
         case 'mode':
-            return generateMode()
+            return generateMode();
             break;
         default:
-            console.log('Uncorrect event type')
+            console.log('Uncorrect event type');
     }
-    ``
+    '';
 }
 
 function handleConnection(conn) {
-    const remoteAddress = conn.remoteAddress + ':' + conn.remotePort;
+    const remoteAddress = `${conn.remoteAddress}:${conn.remotePort}`;
     console.log('Client connected from %s', remoteAddress);
     conn.on('data', onConnData);
     conn.once('close', onConnClose);
     conn.on('error', onConnError);
     this.gen = setInterval(() => {
         const action = eventGroups[_.random(0, 3)];
-        //const action = 'values';
+        // const action = 'values';
         const data = generateData(action);
 
-        console.log(`Sending changed data. Action: ${action}`)
+        console.log(`Sending changed data. Action: ${action}`);
         conn.write(JSON.stringify({
             eventGroup: action,
-            data: data
-        }))
+            data,
+        }));
     }, 1000);
 
     function onConnData(d) {
         let body = {};
         try {
             body = JSON.parse(d.toString());
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
         }
-        console.log(body)
-        let message = {eventGroup: 'controll', data: {uuid: body.arguments.uuid, executed: false}};
+        console.log(body);
+        const message = { eventGroup: 'controll', data: { uuid: body.arguments.uuid, executed: false } };
         setTimeout(() => {
-            conn.write(JSON.stringify(message))
+            conn.write(JSON.stringify(message));
         }, 1000);
     }
 
@@ -156,12 +150,12 @@ function handleConnection(conn) {
 }
 
 
-let shit = [
+const shit = [
     {
         eventGroup: 'status',
         data: {
             id: 123,
 
-        }
-    }
-]
+        },
+    },
+];

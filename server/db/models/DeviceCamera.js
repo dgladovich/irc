@@ -1,24 +1,25 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const DeviceCamera = sequelize.define('DeviceCamera', {
         id: {
             type: DataTypes.INTEGER,
-            primaryKey: true
+            primaryKey: true,
         },
         ip: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         dev: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         pos: {
-            type: DataTypes.STRING
-        }
+            type: DataTypes.STRING,
+        },
     }, {
         timestamps: false,
-        tableName: 'smart_dev_cameras'
+        tableName: 'smart_dev_cameras',
     });
-    DeviceCamera.associate = function(models) {
+    DeviceCamera.associate = function (models) {
     };
     return DeviceCamera;
 };

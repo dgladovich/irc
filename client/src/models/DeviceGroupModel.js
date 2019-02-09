@@ -1,9 +1,9 @@
 import Backbone from 'backbone';
 
 export default Backbone.Model.extend({
-    initialize: function(){
-/*
+  initialize() {
+    /*
         console.log(this)
 */
-    }
+  },
 });

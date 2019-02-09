@@ -1,5 +1,6 @@
 const net = require('net');
 const Logger = require('./Logger');
+
 const SECRET = process.env.AUTH_SECRET;
 const PORT = process.env.REAL_CONTROLLER_PORT;
 const ADDRESS = process.env.REAL_CONTROLLER_IP;
@@ -11,7 +12,6 @@ class ControllerConnector {
         this.client = new net.createConnection();
         this.logger = new Logger();
         this._bindEvents();
-
     }
 
     connect() {
@@ -21,7 +21,7 @@ class ControllerConnector {
 
     _bindEvents() {
         this.client.on('data', this.onReciveDataFromController.bind(this));
-        this.client.on('connect', this.onControllerConnected.bind(this))
+        this.client.on('connect', this.onControllerConnected.bind(this));
         this.client.on('close', this.onControllerDisconnected.bind(this));
         this.client.on('error', this.onControllerConnectionError.bind(this));
     }
@@ -32,14 +32,14 @@ class ControllerConnector {
 
     onControllerConnected() {
         this.isConnected = true;
-        //this.server.sendControllerInitialData();
+        // this.server.sendControllerInitialData();
         this.logger.onControllerConectionEstablish(PORT, ADDRESS);
     }
 
     onControllerDisconnected() {
         this.logger.onControllerDisconnected();
         setTimeout(this.connect.bind(this, PORT, ADDRESS), 1000);
-        //this.server.onControllerOffline();
+        // this.server.onControllerOffline();
         return this.client.destroy();
     }
 
@@ -48,18 +48,18 @@ class ControllerConnector {
             this.server.onControllerOffline();
         }
         this.isConnected = false;
-        this.logger.onControllerConnectionError()
+        this.logger.onControllerConnectionError();
     }
 
     onReciveDataFromController(data) {
         if (data) {
             try {
-                let d = JSON.parse(data.toString());
+                const d = JSON.parse(data.toString());
 
-                if(d.control){
-                    this.server.handleControllerData(d, 'controll')
+                if (d.control) {
+                    this.server.handleControllerData(d, 'controll');
                 } else {
-                    for(let key in d){
+                    for (const key in d) {
                         this.server.handleControllerData(d[key], key);
                     }
                 }
@@ -67,9 +67,8 @@ class ControllerConnector {
                 this.logger.onControllerRecieveDataWithError(e);
             }
         }
-        console.log('recieve data from controller'.yellow)
+        console.log('recieve data from controller'.yellow);
     }
-
 }
 
 module.exports = ControllerConnector;

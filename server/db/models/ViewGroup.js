@@ -1,27 +1,28 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const ViewGroup = sequelize.define('ViewGroup', {
         id: {
             type: DataTypes.INTEGER,
-            primaryKey: true
+            primaryKey: true,
         },
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         active: {
-            type: DataTypes.INTEGER
-        }
+            type: DataTypes.INTEGER,
+        },
 
     }, {
         timestamps: false,
         tableName: 'smart_viewgrps',
-        freezeTableName: true
+        freezeTableName: true,
     });
-    ViewGroup.associate = function(models) {
+    ViewGroup.associate = function (models) {
         ViewGroup.belongsTo(models.Language, {
             as: 'translate',
             foreignKey: 'name',
-            targetKey: 'name'
+            targetKey: 'name',
         });
     };
     return ViewGroup;

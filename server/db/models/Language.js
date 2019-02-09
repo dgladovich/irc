@@ -1,25 +1,26 @@
  'use strict';
+
  module.exports = (sequelize, DataTypes) => {
      const Language = sequelize.define('Language', {
          name: {
-             type: DataTypes.STRING
+             type: DataTypes.STRING,
          },
          ukr: {
-             type: DataTypes.STRING
+             type: DataTypes.STRING,
          },
          eng: {
-             type: DataTypes.STRING
+             type: DataTypes.STRING,
          },
          rus: {
-             type: DataTypes.STRING
+             type: DataTypes.STRING,
          },
 
      }, {
          timestamps: false,
          tableName: 'smart_lang_routes',
-         freezeTableName: true
+         freezeTableName: true,
      });
-     Language.associate = function(models) {
+     Language.associate = function (models) {
 
      };
      return Language;

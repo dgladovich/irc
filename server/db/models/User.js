@@ -1,33 +1,34 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
         pass: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         email: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         phone: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         lang: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         grp: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         active: {
-            type: DataTypes.INTEGER
-        }
+            type: DataTypes.INTEGER,
+        },
     }, {
         timestamps: false,
         tableName: 'smart_usr',
-        freezeTableName: true
+        freezeTableName: true,
     });
-    User.associate = function(models) {
+    User.associate = function (models) {
         User.belongsTo(models.UserGroup, { as: 'group', foreignKey: 'grp' });
     };
     return User;

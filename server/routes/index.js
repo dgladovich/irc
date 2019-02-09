@@ -22,18 +22,18 @@ const bot = require('./bot.js');
 
 
 /* GET home page. */
-/*router.use((req, res, next)=>{
+/* router.use((req, res, next)=>{
 
-});*/
+}); */
 router
-    .get('/', function (req, res, next) {
-        if (/*req.session.token === undefined*/ false  ) {
+    .get('/', (req, res, next) => {
+        if (/* req.session.token === undefined */ false) {
             res.redirect('/login');
         } else {
-            //res.sendFile(path.resolve('public', 'main.html'));
+            // res.sendFile(path.resolve('public', 'main.html'));
             res.sendFile(path.resolve('dist', 'index.html'));
         }
-    })
+    });
 router.use('/to', to);
 router.use('/controller', controller);
 router.use('/journal', journal);
@@ -47,7 +47,6 @@ router.use('/errors', errors);
 router.use('/values', values);
 router.use('/config', config);
 router.use('/bot', bot);
-
 
 
 module.exports = router;

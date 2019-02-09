@@ -1,27 +1,28 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const UserGroup = sequelize.define('UserGroup', {
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         show_service: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         use_service: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         use_controll: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         active: {
-            type: DataTypes.INTEGER
-        }
+            type: DataTypes.INTEGER,
+        },
     }, {
         timestamps: false,
         tableName: 'smart_usr_grps',
-        freezeTableName: true
+        freezeTableName: true,
     });
-    UserGroup.associate = function(models) {
+    UserGroup.associate = function (models) {
     };
     return UserGroup;
 };

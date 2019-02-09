@@ -1,63 +1,68 @@
-const SocketConnector = require('./SocketConnector');
 const jwt = require('jsonwebtoken');
+
 const SECRET = process.env.AUTH_SECRET;
 const _ = require('lodash');
+const SocketConnector = require('./SocketConnector');
 
 class SocketServer {
     constructor(opt) {
         this.broker = opt.broker;
-        this.socketConnector = new SocketConnector({server: this});
+        this.socketConnector = new SocketConnector({ server: this });
         this.listeners = [];
     }
 
     sendAlarmOrigin(alarm) {
-        let message = {
+        const message = {
             eventGroup: 'alarm',
             method: 'add',
-            arguments: Object.assign(alarm, {date_confirm: null})
+            arguments: Object.assign(alarm, { date_confirm: null }),
         };
-        this.socketConnector.sendData(message)
+        this.socketConnector.sendData(message);
     }
 
     sendAlarmConfirmation(ivan_id) {
-        let message = {
+        const message = {
             eventGroup: 'alarm',
             method: 'confirm',
-            arguments: Object.assign({ivan_id: ivan_id}, {})
+            arguments: Object.assign({ ivan_id }, {}),
         };
-        this.socketConnector.sendData(message)
+        this.socketConnector.sendData(message);
     }
 
     sendStatus(devId, stat) {
-        let status = {id: devId, stat: stat},
-            message = {
+        const status = { id: devId, stat };
+
+
+const message = {
                 eventGroup: 'status',
-                data: [Object.assign({}, status)]
+                data: [Object.assign({}, status)],
             };
-        this.socketConnector.sendData(message)
+        this.socketConnector.sendData(message);
     }
 
     sendValue(faceId, def) {
-        let message = {
+        const message = {
             eventGroup: 'value',
-            data: [{id: faceId, def: def}]
+            data: [{ id: faceId, def }],
         };
-        this.socketConnector.sendData(message)
+        this.socketConnector.sendData(message);
     }
 
     sendSpeed(speed) {
-        let message = {
+        const message = {
             eventGroup: 'speed',
-            data: {speed: speed}
+            data: { speed },
         };
         this.socketConnector.sendData(message);
     }
 
     sendState(devId, state) {
-        let st = {id: devId, state: state},
-            message = {
+        const st = { id: devId, state };
+
+
+const message = {
                 eventGroup: 'state',
-                data: [Object.assign({}, st)]
+                data: [Object.assign({}, st)],
             };
         this.socketConnector.sendData(message);
     }
@@ -66,40 +71,58 @@ class SocketServer {
     }
 
     sendInitialData(socket) {
-        let alarms = this.broker.getUserInitialAlarms(),
-            statuses = this.broker.getUserInitialStatuses(),
-            values = this.broker.getUserInitialValues(),
-            speed = this.broker.getInitialSpeed(),
-            statusPack = {
+        const alarms = this.broker.getUserInitialAlarms();
+
+
+const statuses = this.broker.getUserInitialStatuses();
+
+
+const values = this.broker.getUserInitialValues();
+
+
+const speed = this.broker.getInitialSpeed();
+
+
+const statusPack = {
                 eventGroup: 'status',
-                data: statuses
-            },
-            valuesPack = {
+                data: statuses,
+            };
+
+
+const valuesPack = {
                 eventGroup: 'value',
-                data: values
-            },
-            speedPack = {
+                data: values,
+            };
+
+
+const speedPack = {
                 eventGroup: 'speed',
-                data: {speed: speed}
-            },
-            alarmsPack = {
+                data: { speed },
+            };
+
+
+const alarmsPack = {
                 eventGroup: 'alarm',
-                method: 'add'
+                method: 'add',
             };
         setTimeout(() => {
             socket.emit('controller', statusPack);
             socket.emit('controller', valuesPack);
             socket.emit('controller', speedPack);
             alarms.forEach((alarm) => {
-                socket.emit('controller', Object.assign(alarmsPack, {arguments: alarm}))
+                socket.emit('controller', Object.assign(alarmsPack, { arguments: alarm }));
             });
         }, 750);
     }
 
     handleUserData(data, socket) {
-        let pack, userId,
-            {method, token} = data,
-            args = data.arguments;
+        let pack; let userId;
+
+
+const { method, token } = data;
+
+
+const args = data.arguments;
 
         jwt.verify(token, SECRET, (err, verified) => {
             if (err) {
@@ -113,26 +136,26 @@ class SocketServer {
                     console.log('Socket server: calling alarm confirmation method');
                     pack = {
                         ivan_id: args.ivan_id,
-                        user_id: userId
+                        user_id: userId,
                     };
                     this.broker.confirmAlarm(pack);
                     break;
                 case 'repair:in':
                     console.log('Socket server: calling repair IN method');
-                    let {id} = data.arguments;
+                    const { id } = data.arguments;
                     pack = {
                       user_id: userId,
-                      id: id
+                      id,
                     };
-                    this.broker.setRepairIn(pack)
+                    this.broker.setRepairIn(pack);
                     break;
                 case 'repair:out':
                     console.log('Socket server: calling repair OUT method');
                     pack = {
                         user_id: userId,
-                        id: id
+                        id,
                     };
-                    this.broker.setRepairOut(pack)
+                    this.broker.setRepairOut(pack);
                     break;
                 case 'speed':
                     console.log('Socket server: calling speed change method');
@@ -142,13 +165,13 @@ class SocketServer {
                         user_id: userId,
 
                     };
-                    this.broker.changeSpeed(pack)
+                    this.broker.changeSpeed(pack);
                     break;
                 case 'start':
                     console.log('Socket server: calling start method');
 
                     pack = {
-                        user_id: userId
+                        user_id: userId,
                     };
                     this.broker.startController(pack);
                     break;
@@ -157,13 +180,12 @@ class SocketServer {
                     pack = {
                         user_id: userId,
                     };
-                    this.broker.stopController(pack)
+                    this.broker.stopController(pack);
                     break;
                 default:
                     console.log(`Unknown controll command method type: ${method}`.red);
-                    return;
             }
-        })
+        });
     }
 
     validateData() {

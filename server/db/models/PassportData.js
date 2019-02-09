@@ -1,30 +1,31 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const PassportData = sequelize.define('PassportData', {
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         fact_number: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         release_date: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         weight: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         controll_otk: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         perfomance: {
-            type: DataTypes.STRING
-        }
+            type: DataTypes.STRING,
+        },
     }, {
         timestamps: false,
         tableName: 'smart_pass_data',
-        freezeTableName: true
+        freezeTableName: true,
     });
-    PassportData.associate = function(models) {
+    PassportData.associate = function (models) {
 
     };
     return PassportData;

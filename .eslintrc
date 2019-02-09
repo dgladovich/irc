@@ -1,28 +1,55 @@
-{
-    "parser": "babel-eslint",
-    "extends": [
-      "airbnb",
-      "plugin:import/errors",
-      "plugin:import/warnings",
-      "plugin:jsx-a11y/recommended",
-      "plugin:sonarjs/recommended",
-      "plugin:promise/recommended"
-    ],
-    "plugins": ["jsx-a11y", "sonarjs", "no-loops", "no-use-extend-native", "promise"],
-    "rules": {
-      "jsx-a11y/click-events-have-key-events": "off",
-      "import/no-extraneous-dependencies": [
-        "error",
-        {
-          "packageDir": "./"
-        }
-      ],
-      "allowTernary": true,
-      "sonarjs/cognitive-complexity": ["error", 30],
-      "no-loops/no-loops": 2,
-      "no-use-extend-native/no-use-extend-native": 2,
-    },
-    "settings": {
-      "import/resolver": "webpack"
-    }
-  }
+extends: airbnb-base
+plugins:
+  - import
+globals:
+  _: true
+  app: true
+  jQuery: true
+  Backbone: true
+  $: true
+  DEVELOPMENT: true
+  Polymer: true
+  window: true
+  localStorage: true
+  top: true
+  Ucs: true
+  Event: true
+  CustomEvent: true
+  document: true
+  Address4: true
+  Address6: true
+  WebSocket: true
+  hterm: true
+  lib: true
+  define: true
+  fetch: true
+  moment: true
+  Headers: true
+  html: true
+  Rx: true
+  lunr: true
+  isNaN: true
+  Number: true
+  _paq: true
+rules:
+  indent:
+  - 2
+  - 2
+  max-len: 'warn'
+  no-console: 'off'
+  func-names: 'off'
+  no-plusplus: 'off'
+  global-require: 'off'
+  no-unused-vars: 'off'
+  no-param-reassign: 'off'
+  no-underscore-dangle: 'off'
+  prefer-destructuring: 'warn'
+  no-prototype-builtins: 'off'
+  class-methods-use-this: 'off'
+  no-template-curly-in-string: 'off'
+  import/extensions: 'off'
+  import/no-unresolved: 'off'
+  import/prefer-default-export: 'off'
+  import/no-extraneous-dependencies: 'warn'
+  strict: 'off' 
+

@@ -1,43 +1,44 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const Controller = sequelize.define('Controller', {
 
         typ: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         ip: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         port: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         gid: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         task: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         cla: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         stat: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         work: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         active: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
     }, {
         timestamps: false,
         tableName: 'smart_ctrls',
         freezeTableName: true,
     });
-    Controller.associate = function(models) {
+    Controller.associate = function (models) {
     };
     return Controller;
 };

@@ -2,8 +2,8 @@ import Backbone from 'backbone';
 import store from 'store';
 
 export default Backbone.Collection.extend({
-    url: 'analitics',
-/*    sync: function () {
+  url: 'analitics',
+  /*    sync: function () {
         console.log(store.get('analitics'))
         let dfd = $.Deferred();
         if (store.get('analitics')) {
@@ -21,6 +21,6 @@ export default Backbone.Collection.extend({
         }
 
         return dfd.promise();
-    }*/
+    } */
 
-})
+});

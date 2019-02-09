@@ -3,7 +3,7 @@ const ControllerConnector = require('./ControllerConnector');
 class ControllerServer {
     constructor(opt) {
         this.broker = opt.broker;
-        this.controllerConnector = new ControllerConnector({server: this});
+        this.controllerConnector = new ControllerConnector({ server: this });
     }
 
     connect() {
@@ -11,31 +11,35 @@ class ControllerServer {
     }
 
     sendControllerInitialData() {
-        let queues = this.broker.getInitialQueues();
+        const queues = this.broker.getInitialQueues();
         this.controllerConnector.sendDataToController(queues);
     }
 
-    ////////////////////////////
-    //DATA FROM CONTROLLER
-    ///////////////////////////
+    // //////////////////////////
+    // DATA FROM CONTROLLER
+    // /////////////////////////
 
     onControllerOffline() {
         this.broker.setControllerOffline();
     }
 
     onChangeStatus(data) {
-        for (let key in data) {
-            let id = key,
-                stat = data[key];
-            this.broker.handleChangedStatus({id: id, stat: stat})
+        for (const key in data) {
+            const id = key;
+
+
+const stat = data[key];
+            this.broker.handleChangedStatus({ id, stat });
         }
     }
 
     onChangeValue(data) {
-        for (let key in data) {
-            let id = key,
-                def = data[key];
-            this.broker.handleChangedValue({id: id, def: def})
+        for (const key in data) {
+            const id = key;
+
+
+const def = data[key];
+            this.broker.handleChangedValue({ id, def });
         }
     }
 
@@ -43,103 +47,103 @@ class ControllerServer {
     }
 
     onControllerCommandExecution(command) {
-        console.log(command)
+        console.log(command);
     }
 
     onChangeSpeed(speed) {
-        console.log(speed)
+        console.log(speed);
     }
 
     onChangeMode(mode) {
-        console.log(mode)
+        console.log(mode);
     }
 
     onChangeState(data) {
-        for (let key in data) {
-            let id = key,
-                state = data[key];
-            this.broker.handleChangedState({id: id, state: state})
+        for (const key in data) {
+            const id = key;
+
+
+const state = data[key];
+            this.broker.handleChangedState({ id, state });
         }
     }
 
-    ////////////////////////
-    //COMMANDS TO CONTROLLER
-    ////////////////////////
-    _prepareCommand(uuid, method,) {
+    // //////////////////////
+    // COMMANDS TO CONTROLLER
+    // //////////////////////
+    _prepareCommand(uuid, method) {
 
     }
 
     changeSpeed(speed, uuid) {
-        console.log('Controller Server: sending ivan to change speed command')
-        let speedCommand = {
-            control: "speed",
-            uuid: uuid,
-            value: speed
+        console.log('Controller Server: sending ivan to change speed command');
+        const speedCommand = {
+            control: 'speed',
+            uuid,
+            value: speed,
 
-        }
+        };
         this.controllerConnector.sendDataToController(speedCommand);
     }
 
     startController(uuid) {
-        console.log('Controller Server: sending ivan start command')
-        let startCommand = {
-            control: "start",
-            uuid: uuid
+        console.log('Controller Server: sending ivan start command');
+        const startCommand = {
+            control: 'start',
+            uuid,
 
-        }
+        };
         this.controllerConnector.sendDataToController(startCommand);
     }
 
     stopController(uuid) {
-        console.log('Controller Server: sending ivan stop command')
-        let stopCommand = {
-            control: "stop",
-            uuid: uuid
+        console.log('Controller Server: sending ivan stop command');
+        const stopCommand = {
+            control: 'stop',
+            uuid,
 
-        }
+        };
         this.controllerConnector.sendDataToController(stopCommand);
     }
 
     repairIn(deviceId, uuid) {
         console.log('Controller Server: sending ivan repair IN command');
-        let repairInCommand = {
-            control: "repair:in",
-            uuid: uuid,
-            id: deviceId
+        const repairInCommand = {
+            control: 'repair:in',
+            uuid,
+            id: deviceId,
 
         };
         this.controllerConnector.sendDataToController(repairInCommand);
-
     }
 
     repairOut(deviceId, uuid) {
         console.log('Controller Server: sending ivan repair OUT command');
-        let repairInCommand = {
-            control: "repair:out",
-            uuid: uuid,
-            id: deviceId
+        const repairInCommand = {
+            control: 'repair:out',
+            uuid,
+            id: deviceId,
 
         };
         this.controllerConnector.sendDataToController(repairInCommand);
-
     }
 
     confirmAlarm() {
-        let startCommand = {
+        const startCommand = {
             eventGroup: 'controll',
             method: 'confirm',
             arguments: {
-                uuid: uuid,
-                alarmId: alarmId
-            }
+                uuid,
+                alarmId,
+            },
         };
         this.controllerConnector.sendDataToController(startCommand);
     }
 
 
-    ////////////////////////
-    //MAIN HANDLER
-    ////////////////////////
+    // //////////////////////
+    // MAIN HANDLER
+    // //////////////////////
     handleControllerData(data, key) {
         switch (key) {
             case 'status':
@@ -165,7 +169,7 @@ class ControllerServer {
                 this.onChangeState(data);
                 break;
             default:
-                console.log(`Uncorrect event type ${data}`.red)
+                console.log(`Uncorrect event type ${data}`.red);
         }
     }
 }

@@ -15,11 +15,11 @@ const Device = Backbone.Model.extend({
         }
         this.on('change:stat', onChangeStatus.bind(this));
         this.on('change:mode', onChangeMode.bind(this));
-    }*/
+    } */
 });
 
 const DevicesCollection = Backbone.Collection.extend({
-    model: Device
+    model: Device,
 });
 
 module.exports = DevicesCollection;

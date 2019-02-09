@@ -1,21 +1,22 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const TMC = sequelize.define('TMC', {
         desc: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         price: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         service_id: {
-            type: DataTypes.INTEGER
-        }
+            type: DataTypes.INTEGER,
+        },
     }, {
         timestamps: false,
         tableName: 'smart_device_service_journal',
-        freezeTableName: true
+        freezeTableName: true,
     });
-    TMC.associate = function(models) {
+    TMC.associate = function (models) {
     };
     return TMC;
 };

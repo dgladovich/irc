@@ -1,20 +1,22 @@
 const net = require('net');
 const moment = require('moment');
+const Radio = require('backbone.radio');
+const _ = require('underscore');
+const uuidv1 = require('uuid/v1');
+const jwt = require('jsonwebtoken');
 const ControllerModel = require('./ControllerModel');
 const DevicesCollection = require('./collections/DevicesCollection');
 const FacesCollection = require('./collections/FacesCollection');
 const QueueCollection = require('./collections/QueueCollection');
 const AlarmsCollection = require('./collections/AlarmsCollection');
-const Radio = require('backbone.radio');
-const _ = require('underscore');
-const uuidv1 = require('uuid/v1');
 const config = require('../config.json');
-const jwt = require('jsonwebtoken');
+
 const ch = Radio.channel('controllerChannel');
 const log = require('simple-node-logger').createSimpleFileLogger({
     logFilePath: 'smart.log',
-    timestampFormat: 'YYYY-MM-DD HH:mm:ss.SSS'
+    timestampFormat: 'YYYY-MM-DD HH:mm:ss.SSS',
 });
+
 const SECRET = process.env.AUTH_SECRET;
 const PORT = process.env.TEST_CONTROLLER_PORT;
 const ADDRESS = '127.0.0.1';
@@ -25,13 +27,15 @@ const faces = new FacesCollection(_.toArray(config.ctrl.cfaces));
 const queues = new QueueCollection();
 const alarms = new AlarmsCollection();
 
-const {Alarm, Queue, User, SystemError} = require('../models/index');
+const {
+Alarm, Queue, User, SystemError,
+} = require('../models/index');
 
 controller.set({
-    devices: devices,
-    faces: faces,
-    queues: queues,
-    alarms: alarms
+    devices,
+    faces,
+    queues,
+    alarms,
 });
 
 class ControllerRepeater {
@@ -40,16 +44,16 @@ class ControllerRepeater {
         this.client = new net.Socket();
         this._bindControllerEvents();
         this._bindUserEvents();
-        this._loadInitialData().then(this._connect.bind(this))
+        this._loadInitialData().then(this._connect.bind(this));
         this._connect();
 
-        log.log('info', `Controller initialized`);
+        log.log('info', 'Controller initialized');
         console.log('Controller repeater was intitialized'.cyan);
     }
 
-    ///////////////////////
-    //Connection Actions//
-    //////////////////////
+    // /////////////////////
+    // Connection Actions//
+    // ////////////////////
 
     _connect() {
         return this.client.connect(PORT, ADDRESS);
@@ -60,20 +64,20 @@ class ControllerRepeater {
     }
 
     _loadInitialData() {
-        let data = [
+        const data = [
             this._fetchAlarms(),
-            this._fetchQueues()
-        ]
-        return Promise.all(data)
+            this._fetchQueues(),
+        ];
+        return Promise.all(data);
     }
 
     _fetchQueues() {
-        return Queue.findAll({raw: true})
-            .then(qs => {
-                queues.add(qs)
+        return Queue.findAll({ raw: true })
+            .then((qs) => {
+                queues.add(qs);
             })
             .catch((e) => {
-                console.log(`Error while fetching queues to database:`.red, e)
+                console.log('Error while fetching queues to database:'.red, e);
             });
     }
 
@@ -81,21 +85,21 @@ class ControllerRepeater {
         Alarm
             .findAll({
                 where: {
-                    usr_confirm: null
+                    usr_confirm: null,
                 },
-                raw: true
+                raw: true,
             })
-            .then(alars => {
-                alarms.add(alars)
+            .then((alars) => {
+                alarms.add(alars);
             })
             .catch((e) => {
-                console.log(`Error while fetching queues to database:`.red, e)
+                console.log('Error while fetching queues to database:'.red, e);
             });
     }
 
     _bindControllerEvents() {
         this.client.on('data', this.onControllerData.bind(this));
-        this.client.on('connect', this.onControllerConnected.bind(this))
+        this.client.on('connect', this.onControllerConnected.bind(this));
         this.client.on('close', this.onControllerClose.bind(this));
         this.client.on('error', this.onControllerConnectionError.bind(this));
     }
@@ -109,25 +113,25 @@ class ControllerRepeater {
     }
 
     onControllerConnected() {
-        queues.each(queue => {
-            let args = {
+        queues.each((queue) => {
+            const args = {
                 devId: 345,
                 alarmId: queue.get('argument'),
-                uuid: queue.get('uuid')
+                uuid: queue.get('uuid'),
             };
-            let command = {
+            const command = {
                 method: queue.get('method'),
-                arguments: args
-            }
-            this.client.write(JSON.stringify(command))
+                arguments: args,
+            };
+            this.client.write(JSON.stringify(command));
         });
-        //this.client.write(JSON.stringify(queues.toJSON()))
+        // this.client.write(JSON.stringify(queues.toJSON()))
         log.log('info', 'Connection to controller established');
         console.log(`Repeater connected to TCP server on address: ${ADDRESS}, port: ${PORT}`.cyan);
     }
 
     onControllerClose() {
-        console.log(`Controller server connection closed`.cyan);
+        console.log('Controller server connection closed'.cyan);
         this.controller.get('devices').each((device) => {
             device.set('stat', 6);
         });
@@ -135,48 +139,48 @@ class ControllerRepeater {
             eventType: 'serror',
             data: [
                 {
-                    error: 'Connection with controller closed'
-                }
-            ]
+                    error: 'Connection with controller closed',
+                },
+            ],
 
         });
         setTimeout(this._connect.bind(this), 500);
     }
 
     onControllerConnectionError() {
-        console.log(`Error while connected to controller`.cyan);
-        let error = {
+        console.log('Error while connected to controller'.cyan);
+        const error = {
             uuid: uuidv1(),
-            created_at: moment().format(`DD-MM-YYYY HH:mm:ss`),
-            error_name: `Emergency disconnected from controller`
-        }
-        log.log('error', 'Error while connected to controller')
+            created_at: moment().format('DD-MM-YYYY HH:mm:ss'),
+            error_name: 'Emergency disconnected from controller',
+        };
+        log.log('error', 'Error while connected to controller');
         SystemError
             .create(error)
             .then(() => {
-                ch.trigger('serror', error)
+                ch.trigger('serror', error);
             })
             .catch((e) => {
-                console.log(`Error while writing error to database`.red)
-            })
+                console.log('Error while writing error to database'.red);
+            });
 
         this.controller.get('devices').each((device) => {
             device.set('stat', 6);
-        })
+        });
         ch.trigger('serror', {
             event: 'serror',
             data: [
                 {
-                    error: 'Error while connected to controller'
-                }
-            ]
+                    error: 'Error while connected to controller',
+                },
+            ],
 
-        })
+        });
     }
 
-    ///////////////////
-    //CONTROLLER DATA//
-    ///////////////////
+    // /////////////////
+    // CONTROLLER DATA//
+    // /////////////////
     onControllerData(d) {
         let data;
         if (d) {
@@ -191,38 +195,38 @@ class ControllerRepeater {
 
     onChangeDeviceStatus(data) {
         _.each(data, (item) => {
-            this.controller.get('devices').findWhere({id: +item.id}).set({stat: +item.stat, mode: +item.mode});
-        })
+            this.controller.get('devices').findWhere({ id: +item.id }).set({ stat: +item.stat, mode: +item.mode });
+        });
     }
 
     onChangeDeviceValue(data) {
         _.each(data, (item) => {
-            this.controller.get('faces').findWhere({id: +item.id}).set('def', +item.def);
-        })
+            this.controller.get('faces').findWhere({ id: +item.id }).set('def', +item.def);
+        });
     }
 
     onOriginAlarm(data) {
-        console.log(`Recieved alarm from controller`.cyan);
+        console.log('Recieved alarm from controller'.cyan);
 
         Alarm
             .create(data)
             .then((shit) => {
                 const message = {
-                    method: `origin`,
-                    data: data
+                    method: 'origin',
+                    data,
                 };
-                ch.trigger('alarm', message)
+                ch.trigger('alarm', message);
             })
             .catch((e) => {
-                console.log(`Error while writing alarm to database: ${e}`.red)
-            })
+                console.log(`Error while writing alarm to database: ${e}`.red);
+            });
     }
 
 
     onChangeDeviceMode(data) {
         _.each(data, (item) => {
-            this.controller.get('devices').findWhere({id: +item.id}).set('mode', +item.mode);
-        })
+            this.controller.get('devices').findWhere({ id: +item.id }).set('mode', +item.mode);
+        });
     }
 
     onControllerCommandResponse(data) {
@@ -231,46 +235,49 @@ class ControllerRepeater {
         } else {
             this.onFailControllerExecution.call(this, data);
         }
-        //ch.trigger('controll:exec', data);
+        // ch.trigger('controll:exec', data);
     }
 
     onControllerExecution(data) {
-        let uuid = data.uuid,
-            queueUpdates = {
-                execute_date: moment().format(`DD-MM-YYYY HH:mm:ss`),
+        const uuid = data.uuid;
+
+
+const queueUpdates = {
+                execute_date: moment().format('DD-MM-YYYY HH:mm:ss'),
                 status: 'executed',
-            },
-            queueUpdateConditions = {
+            };
+
+
+const queueUpdateConditions = {
                 where: {
-                    uuid: uuid
-                }
+                    uuid,
+                },
             };
         Queue
             .update(queueUpdates, queueUpdateConditions)
             .then(() => {
-                let executedQueue = queues.findWhere({uuid: uuid});
+                const executedQueue = queues.findWhere({ uuid });
                 if (executedQueue) {
                     executedQueue.set('status', 'executed');
                     this.afterExecutionAction.call(this, executedQueue);
                 }
             })
             .catch((e) => {
-                console.log(`Error while updating queue status`.red)
+                console.log('Error while updating queue status'.red);
             });
         console.log(`Controller executed command with uuid: ${uuid}`.cyan);
     }
 
     onFailControllerExecution(data) {
-        console.log(`Something go wrong while controller executed command: ${data.uuid}`.yellow)
-        log.log('error', `Something go wrong while controller executed command: ${data.uuid}`)
-
+        console.log(`Something go wrong while controller executed command: ${data.uuid}`.yellow);
+        log.log('error', `Something go wrong while controller executed command: ${data.uuid}`);
     }
 
     afterExecutionAction(queue) {
-        let method = queue.get('method');
+        const method = queue.get('method');
         switch (method) {
             case 'confirm':
-                this.onControllerAlarmConfirm.call(this, queue)
+                this.onControllerAlarmConfirm.call(this, queue);
                 break;
             case 'speed':
                 this.onControllerSpeedChange.call(this, queue);
@@ -286,64 +293,69 @@ class ControllerRepeater {
                 break;
             default:
                 console.log(`Unknown type of execution command method: ${method}`.red);
-                return;
         }
     }
 
     onControllerAlarmConfirm(queue) {
-        let aID = queue.get('argument'),
-            userId = queue.get('user_id'),
-            date_confirm = moment().format(`DD-MM-YYYY HH:mm:ss`),
-            alarmUpdates = {
+        const aID = queue.get('argument');
+
+
+const userId = queue.get('user_id');
+
+
+const date_confirm = moment().format('DD-MM-YYYY HH:mm:ss');
+
+
+const alarmUpdates = {
                 usr_confirm: userId,
-                date_confirm: date_confirm
-            },
-            alarmUpdatesConditions = {
-                where: {id: aID}
+                date_confirm,
+            };
+
+
+const alarmUpdatesConditions = {
+                where: { id: aID },
             };
         Alarm
             .update(alarmUpdates, alarmUpdatesConditions)``
             .then((alarm) => {
                 console.log('Alarm updated in DB'.cyan);
-                let message = {
+                const message = {
                     method: 'confirm',
                     data: {
-                        aID: aID,
-                        userId: userId,
-                        date_confirm: date_confirm
-                    }
-                }
+                        aID,
+                        userId,
+                        date_confirm,
+                    },
+                };
 
                 ch.trigger('alarm', message);
-
             })
             .catch((e) => {
-                console.log(`Error while updating alarm in DB`.red, e)
-            })
+                console.log('Error while updating alarm in DB'.red, e);
+            });
     }
 
-    //USER COMMANDS
+    // USER COMMANDS
     onUserCommand(data) {
-        let method = data.method;
+        const method = data.method;
         switch (method) {
             case 'confirm':
-                this.onUserAlarmConfirmation.call(this, data)
+                this.onUserAlarmConfirmation.call(this, data);
                 break;
             case 'repair':
-                this.onUserRepairCommand.call(this, data)
+                this.onUserRepairCommand.call(this, data);
                 break;
             case 'speed':
-                this.onUserChangeSpeed.call(this, data)
+                this.onUserChangeSpeed.call(this, data);
                 break;
             case 'start':
-                this.onUserStartCommand.call(this, data)
+                this.onUserStartCommand.call(this, data);
                 break;
             case 'stop':
-                this.onUserStopCommand.call(this, data)
+                this.onUserStopCommand.call(this, data);
                 break;
             default:
                 console.log(`Unknown controll command method type: ${method}`.red);
-                return;
         }
     }
 
@@ -351,187 +363,229 @@ class ControllerRepeater {
         const userId = cmnd.arguments.usrId;
         if (!userId) {
         } else {
-            const user = jwt.verify(userId, SECRET),
-                uuid = uuidv1(),
-                alarmId = cmnd.arguments.alarmId,
-                args = {
+            const user = jwt.verify(userId, SECRET);
+
+
+const uuid = uuidv1();
+
+
+const alarmId = cmnd.arguments.alarmId;
+
+
+const args = {
                     devId: cmnd.arguments.devId,
-                    alarmId: alarmId,
-                    uuid: uuid
-                },
-                command = {
+                    alarmId,
+                    uuid,
+                };
+
+
+const command = {
                     method: cmnd.method,
-                    arguments: args
-                },
-                queue = {
+                    arguments: args,
+                };
+
+
+const queue = {
                     user_id: user.id,
-                    create_date: moment().format(`DD-MM-YYYY HH:mm:ss`),
+                    create_date: moment().format('DD-MM-YYYY HH:mm:ss'),
                     status: 'pending',
                     method: 'confirm',
-                    uuid: uuid,
-                    argument: alarmId
+                    uuid,
+                    argument: alarmId,
                 };
             Queue.create(queue)
                 .then((q) => {
-                    queues.add(q.toJSON())
+                    queues.add(q.toJSON());
                     this.client.write(JSON.stringify(command));
                 })
                 .catch((e) => {
-                    console.log(`Error while writing queue to database: ${uuid}`.red, e)
+                    console.log(`Error while writing queue to database: ${uuid}`.red, e);
                 });
-            console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan)
+            console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan);
         }
     }
 
     onUserRepairCommand(cmnd) {
-        console.log(cmnd)
-        const user = jwt.verify(cmnd.arguments.usrId, SECRET),
-            uuid = uuidv1(),
-            args = {
+        console.log(cmnd);
+        const user = jwt.verify(cmnd.arguments.usrId, SECRET);
+
+
+const uuid = uuidv1();
+
+
+const args = {
                 devId: cmnd.arguments.devId,
-                uuid: uuid
-            },
-            command = {
+                uuid,
+            };
+
+
+const command = {
                 method: cmnd.method,
-                arguments: args
-            },
-            queue = {
+                arguments: args,
+            };
+
+
+const queue = {
                 user_id: user.id,
-                create_date: moment().format(`DD-MM-YYYY HH:mm:ss`),
+                create_date: moment().format('DD-MM-YYYY HH:mm:ss'),
                 status: 'pending',
                 method: 'repair',
-                uuid: uuid,
-                argument: null
+                uuid,
+                argument: null,
             };
         Queue.create(queue)
             .then((q) => {
-                queues.add(q.toJSON())
+                queues.add(q.toJSON());
                 this.client.write(JSON.stringify(command));
             })
             .catch((e) => {
-                console.log(`Error while writing queue to database: ${uuid}`.red, e)
+                console.log(`Error while writing queue to database: ${uuid}`.red, e);
             });
 
-        console.log('Calling command to repair'.cyan)
-        log.log(`User with name ${user.name} send command to set repair mode `)
-        //console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan)
+        console.log('Calling command to repair'.cyan);
+        log.log(`User with name ${user.name} send command to set repair mode `);
+        // console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan)
     }
 
     onUserChangeSpeed(cmnd) {
-        console.log(cmnd)
-        const user = jwt.verify(cmnd.arguments.usrId, SECRET),
-            uuid = uuidv1(),
-            args = {
+        console.log(cmnd);
+        const user = jwt.verify(cmnd.arguments.usrId, SECRET);
+
+
+const uuid = uuidv1();
+
+
+const args = {
                 devId: cmnd.arguments.devId,
-                uuid: uuid
-            },
-            command = {
+                uuid,
+            };
+
+
+const command = {
                 method: cmnd.method,
-                arguments: args
-            },
-            queue = {
+                arguments: args,
+            };
+
+
+const queue = {
                 user_id: user.id,
-                create_date: moment().format(`DD-MM-YYYY HH:mm:ss`),
+                create_date: moment().format('DD-MM-YYYY HH:mm:ss'),
                 status: 'pending',
                 method: 'speed',
-                uuid: uuid,
-                argument: null
+                uuid,
+                argument: null,
             };
         Queue.create(queue)
             .then((q) => {
-                queues.add(q.toJSON())
+                queues.add(q.toJSON());
                 this.client.write(JSON.stringify(command));
             })
             .catch((e) => {
-                console.log(`Error while writing queue to database: ${uuid}`.red, e)
+                console.log(`Error while writing queue to database: ${uuid}`.red, e);
             });
 
-        console.log('Calling command to change speed'.cyan)
-        log.log(`User with name ${user.name} send command to change speed `)
-        //console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan)
+        console.log('Calling command to change speed'.cyan);
+        log.log(`User with name ${user.name} send command to change speed `);
+        // console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan)
     }
 
     onUserStopCommand(cmnd) {
-        console.log(cmnd)
-        const user = jwt.verify(cmnd.arguments.usrId, SECRET),
-            uuid = uuidv1(),
-            args = {
+        console.log(cmnd);
+        const user = jwt.verify(cmnd.arguments.usrId, SECRET);
+
+
+const uuid = uuidv1();
+
+
+const args = {
                 devId: cmnd.arguments.devId,
-                uuid: uuid
-            },
-            command = {
+                uuid,
+            };
+
+
+const command = {
                 method: cmnd.method,
-                arguments: args
-            },
-            queue = {
+                arguments: args,
+            };
+
+
+const queue = {
                 user_id: user.id,
-                create_date: moment().format(`DD-MM-YYYY HH:mm:ss`),
+                create_date: moment().format('DD-MM-YYYY HH:mm:ss'),
                 status: 'pending',
                 method: 'stop',
-                uuid: uuid,
-                argument: null
+                uuid,
+                argument: null,
             };
         Queue.create(queue)
             .then((q) => {
-                queues.add(q.toJSON())
+                queues.add(q.toJSON());
                 this.client.write(JSON.stringify(command));
             })
             .catch((e) => {
-                console.log(`Error while writing queue to database: ${uuid}`.red, e)
+                console.log(`Error while writing queue to database: ${uuid}`.red, e);
             });
 
-        console.log('Calling command to stop device'.cyan)
-        log.log(`User with name ${user.name} send command to stop `)
-        //console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan)
+        console.log('Calling command to stop device'.cyan);
+        log.log(`User with name ${user.name} send command to stop `);
+        // console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan)
     }
 
     onUserStartCommand(cmnd) {
-        console.log(cmnd)
-        const user = jwt.verify(cmnd.arguments.usrId, SECRET),
-            uuid = uuidv1(),
-            args = {
+        console.log(cmnd);
+        const user = jwt.verify(cmnd.arguments.usrId, SECRET);
+
+
+const uuid = uuidv1();
+
+
+const args = {
                 devId: cmnd.arguments.devId,
-                uuid: uuid
-            },
-            command = {
+                uuid,
+            };
+
+
+const command = {
                 method: cmnd.method,
-                arguments: args
-            },
-            queue = {
+                arguments: args,
+            };
+
+
+const queue = {
                 user_id: user.id,
-                create_date: moment().format(`DD-MM-YYYY HH:mm:ss`),
+                create_date: moment().format('DD-MM-YYYY HH:mm:ss'),
                 status: 'pending',
                 method: 'start',
-                uuid: uuid,
+                uuid,
             };
         Queue.create(queue)
             .then((q) => {
-                queues.add(q.toJSON())
+                queues.add(q.toJSON());
                 this.client.write(JSON.stringify(command));
             })
             .catch((e) => {
-                console.log(`Error while writing queue to database: ${uuid}`.red, e)
+                console.log(`Error while writing queue to database: ${uuid}`.red, e);
             });
 
-        console.log('Calling command to start'.cyan)
-        log.log(`User with name ${user.name} send command to start `)
-        //console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan)
+        console.log('Calling command to start'.cyan);
+        log.log(`User with name ${user.name} send command to start `);
+        // console.log(`User with name ${user.name} send command to confirm alarm: ${args.alarmId} `.cyan)
     }
 
-    ////////////////
-    //INITIAL DATA//
-    ////////////////
+    // //////////////
+    // INITIAL DATA//
+    // //////////////
     onRequestAlarms() {
         return Alarm
             .findAll({
                 where: {
-                    usr_confirm: null
+                    usr_confirm: null,
                 },
-                raw: true
+                raw: true,
             })
             .catch((e) => {
-                console.log(`Error while getting initial alarms from DB`.red)
-            })
+                console.log('Error while getting initial alarms from DB'.red);
+            });
     }
 
     onRequestQueues() {
@@ -539,15 +593,11 @@ class ControllerRepeater {
     }
 
     onRequestStatus() {
-        return this.controller.get('devices').map((device) => {
-            return {id: device.get('id'), stat: device.get('stat')}
-        })
+        return this.controller.get('devices').map(device => ({ id: device.get('id'), stat: device.get('stat') }));
     }
 
     onRequestValues() {
-        return this.controller.get('faces').map((face) => {
-            return {id: face.get('id'), def: face.get('def')}
-        })
+        return this.controller.get('faces').map(face => ({ id: face.get('id'), def: face.get('def') }));
     }
 
     onRequestControllerStatus() {
@@ -572,7 +622,7 @@ class ControllerRepeater {
                 this.onChangeDeviceMode(data.data);
                 break;
             default:
-                console.log(`Uncorrect event type ${event}, ${data}`.red)
+                console.log(`Uncorrect event type ${event}, ${data}`.red);
         }
     }
 }

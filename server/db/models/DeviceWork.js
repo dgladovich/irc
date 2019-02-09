@@ -1,62 +1,62 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const DeviceServiceWork = sequelize.define('DeviceServiceWork', {
         ctrl: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         dev: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         typ: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         ser_num: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         work: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         done: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         service_id: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         user_occ: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         perform: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         work_id: {
-            type: DataTypes.INTEGER
-        }
+            type: DataTypes.INTEGER,
+        },
     }, {
         timestamps: false,
-        tableName: 'smart_dev_serworks'
+        tableName: 'smart_dev_serworks',
     });
     DeviceServiceWork.associate = function (models) {
         DeviceServiceWork.belongsTo(models.Work, {
             as: 'works',
-            foreignKey: 'work_id'
+            foreignKey: 'work_id',
         });
         DeviceServiceWork.belongsTo(models.Work, {
             as: 'description',
-            foreignKey: 'work_id'
+            foreignKey: 'work_id',
         });
         DeviceServiceWork.belongsTo(models.Type, {
             as: 'devicetype',
-            foreignKey: 'typ'
+            foreignKey: 'typ',
         });
         DeviceServiceWork.belongsTo(models.Device, {
             as: 'controller',
-            foreignKey: 'dev'
+            foreignKey: 'dev',
         });
         DeviceServiceWork.belongsTo(models.DeviceService, {
             as: 'devser',
-            foreignKey: 'service_id'
+            foreignKey: 'service_id',
         });
-
     };
     return DeviceServiceWork;
 };

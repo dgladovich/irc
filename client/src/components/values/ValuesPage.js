@@ -1,4 +1,4 @@
-import {View, Model} from 'backbone.marionette';
+import { View, Model } from 'backbone.marionette';
 import TabPanel from '../general/tabpanel/TabPanel';
 import CustomPanel from '../general/panel/CustomPanel';
 import Measurments from './Measurments';
@@ -6,27 +6,28 @@ import ValvesView from './ValvesView';
 import template from '../general/templates/page.jst';
 import ChartModal from './ChartModal';
 
-const button_charts = 'button_charts', menu_current_values = 'menu_current_values';
+const button_charts = 'button_charts'; const
+  menu_current_values = 'menu_current_values';
 
 export default View.extend({
-    template: template,
-    events: {
-        'click #close-page': 'hidePage'
-    },
-    hidePage: function () {
-        this.$el.fadeOut(500, () => {
-            document.location.href = '#';
-        });
-    },
-    showChartModal: function () {
-        let modal = new ChartModal();
-        modal.render().$el.modal('show');
-        $('body').append(modal.el);
-        modal.$el.on('hidden.bs.modal', () => {
-            modal.destroy();
-        })
-    },
-    /*    onDestroy: function() {
+  template,
+  events: {
+    'click #close-page': 'hidePage',
+  },
+  hidePage() {
+    this.$el.fadeOut(500, () => {
+      document.location.href = '#';
+    });
+  },
+  showChartModal() {
+    const modal = new ChartModal();
+    modal.render().$el.modal('show');
+    $('body').append(modal.el);
+    modal.$el.on('hidden.bs.modal', () => {
+      modal.destroy();
+    });
+  },
+  /*    onDestroy: function() {
             this.measurments.forEach((measurement) => {
                 measurement.destroy();
             });
@@ -34,25 +35,25 @@ export default View.extend({
                 this.valves.destroy()
             }
 
-        },*/
-    regions: {
-        tabpanel: '.panel-container'
-    },
-    onRender: function () {
-        let customPanel = new CustomPanel({collection: this.viewGroups, view: Measurments, viewKey: 'faces'});
-        this.showChildView('tabpanel', customPanel);
-        this.$('.panel-container').append(`<button class="btn btn-start btn-charts">${app.language[button_charts] || button_charts}</button>`);
-        this.$('.btn-charts').on('click', this.showChartModal.bind(this));
+        }, */
+  regions: {
+    tabpanel: '.panel-container',
+  },
+  onRender() {
+    const customPanel = new CustomPanel({ collection: this.viewGroups, view: Measurments, viewKey: 'faces' });
+    this.showChildView('tabpanel', customPanel);
+    this.$('.panel-container').append(`<button class="btn btn-start btn-charts">${app.language[button_charts] || button_charts}</button>`);
+    this.$('.btn-charts').on('click', this.showChartModal.bind(this));
 
-        if (app.controller.get('cla') === 1) {
-            let valves = app.devices.where({typ: 10});
-            this.valves = new ValvesView({collection: new Backbone.Collection(valves)});
-            let air = this.viewGroups.findWhere({name: 'obj_body'});
+    if (app.controller.get('cla') === 1) {
+      const valves = app.devices.where({ typ: 10 });
+      this.valves = new ValvesView({ collection: new Backbone.Collection(valves) });
+      const air = this.viewGroups.findWhere({ name: 'obj_body' });
 
-            this.$('.tab-pane#' + air.get('id') + ' .gruppa').append(this.valves.render().el);
-            //this.$('#' + this.viewGroupCollection.models[0].get('id')).append(shit)
-        }
-        /* this.measurments = [];
+      this.$(`.tab-pane#${air.get('id')} .gruppa`).append(this.valves.render().el);
+      // this.$('#' + this.viewGroupCollection.models[0].get('id')).append(shit)
+    }
+    /* this.measurments = [];
          this.showChildView('tabpanel', this.tabPanel);
 
          let tabs = this.tabPanel.getChildView('tabs');
@@ -92,25 +93,24 @@ export default View.extend({
                  //this.$('#' + this.viewGroupCollection.models[0].get('id')).append(shit)
              }
 
-         });*/
-        // Get rid of that pesky wrapping-div.
-        // Assumes 1 child element present in template.
-        this.$el = this.$el.children();
-        // Unwrap the element to prevent infinitely 
-        // nesting elements during re-render.
-        this.$el.unwrap();
-        this.setElement(this.$el);
-        //this.$el.fadeIn();
+         }); */
+    // Get rid of that pesky wrapping-div.
+    // Assumes 1 child element present in template.
+    this.$el = this.$el.children();
+    // Unwrap the element to prevent infinitely
+    // nesting elements during re-render.
+    this.$el.unwrap();
+    this.setElement(this.$el);
+    // this.$el.fadeIn();
 
-        this.$el.fadeIn('slow');
+    this.$el.fadeIn('slow');
+  },
+  initialize() {
+    this.model = new Backbone.Model({
+      title: app.language[menu_current_values] || menu_current_values,
+    });
 
-    },
-    initialize: function () {
-        this.model = new Backbone.Model({
-            title: app.language[menu_current_values] || menu_current_values
-        });
-
-        this.viewGroups = app.viewgrps;
-    }
+    this.viewGroups = app.viewgrps;
+  },
 
 });

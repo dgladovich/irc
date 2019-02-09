@@ -1,33 +1,34 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
     const Service = sequelize.define('Service', {
         device_type: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         ser_num: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         ser_type: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         typ: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
         _set: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         },
         active: {
-            type: DataTypes.INTEGER
-        }
+            type: DataTypes.INTEGER,
+        },
     }, {
         timestamps: false,
         tableName: 'smart_services',
-        freezeTableName: true
+        freezeTableName: true,
     });
-    Service.associate = function(models) {
+    Service.associate = function (models) {
         Service.hasMany(models.Work, {
             as: 'works',
             foreignKey: 'service_id',
@@ -35,4 +36,3 @@ module.exports = (sequelize, DataTypes) => {
     };
     return Service;
 };
-

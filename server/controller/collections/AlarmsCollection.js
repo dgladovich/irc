@@ -5,12 +5,12 @@ const ch = Radio.channel('controllerChannel');
 
 const Alarm = Backbone.Model.extend({
 
-    initialize: function () {
-    }
+    initialize() {
+    },
 });
 
 const AlarmsCollection = Backbone.Collection.extend({
-    model: Alarm
+    model: Alarm,
 });
 
 module.exports = AlarmsCollection;
