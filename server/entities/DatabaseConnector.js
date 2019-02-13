@@ -1,6 +1,6 @@
 const {
  Alarm, Queue, User, SystemError, Registering,
-} = require('../models');
+} = require('../db');
 const Logger = require('./Logger');
 const moment = require('moment');
 const uuidv1 = require('uuid/v1');

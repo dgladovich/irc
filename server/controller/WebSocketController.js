@@ -4,7 +4,7 @@ const socketioJwt = require('socketio-jwt');
 const Radio = require('backbone.radio');
 
 const ch = Radio.channel('controllerChannel');
-const { Alarm } = require('../models');
+const { Alarm } = require('../db');
 
 const PORT = process.env.CONTROLLER_PORT;
 

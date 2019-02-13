@@ -4,7 +4,7 @@ const DevicesCollection = require('./collections/DevicesCollection');
 const FacesCollection = require('./collections/FacesCollection');
 const QueueCollection = require('./collections/QueueCollection');
 const AlarmsCollection = require('./collections/AlarmsCollection');
-const config = require('../config.json');
+const config = require('../public/config.json');
 
 function prepareFaces(devs) {
     let faces = [];

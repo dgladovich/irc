@@ -1,4 +1,4 @@
-import Marionette from 'backbone.marionette';
+import { Application } from 'backbone.marionette';
 import { history } from 'backbone';
 import { Router } from './Router';
 import {
@@ -14,7 +14,7 @@ import AlarmsCollection from '../collections/AlarmsCollection';
 import ControllerConnection from '../connections/ControllerConnection';
 import BrokesCollection from '../collections/BrokesCollection';
 
-export default Marionette.Application.extend({
+export default Application.extend({
   region: '#app',
   channelName: 'user',
   onBeforeStart(data) {
@@ -46,5 +46,5 @@ export default Marionette.Application.extend({
     // this.controllerConnection = new ControllerConnection();
     history.start();
   },
-  initialize() {},
+  initialize() { },
 });

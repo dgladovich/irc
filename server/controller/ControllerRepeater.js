@@ -9,7 +9,7 @@ const DevicesCollection = require('./collections/DevicesCollection');
 const FacesCollection = require('./collections/FacesCollection');
 const QueueCollection = require('./collections/QueueCollection');
 const AlarmsCollection = require('./collections/AlarmsCollection');
-const config = require('../config.json');
+const config = require('../public/config.json');
 
 const ch = Radio.channel('controllerChannel');
 const log = require('simple-node-logger').createSimpleFileLogger({
@@ -29,7 +29,7 @@ const alarms = new AlarmsCollection();
 
 const {
 Alarm, Queue, User, SystemError,
-} = require('../models/index');
+} = require('../db');
 
 controller.set({
     devices,

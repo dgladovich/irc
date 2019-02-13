@@ -8,7 +8,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
-const webpackHotMiddleware = require('webpack-hot-middleware');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
@@ -17,7 +16,7 @@ const merge = require('webpack-merge');
 
 const webpackCommon = {
   entry: [
-    path.resolve(__dirname, './src/initialize'),
+    path.resolve(__dirname, './index.js'),
   ],
   module: {
     rules: [{
@@ -79,103 +78,41 @@ const webpackCommon = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
   ],
-  resolve: {
-    modules: [
-      path.join(__dirname, './node_modules'),
-      path.join(__dirname, './app'),
-    ],
-  },
-  resolveLoader: {
-    modules: [
-      path.join(__dirname, './node_modules'),
-    ],
-  },
+
 };
 switch (process.env.npm_lifecycle_event) {
-case 'start':
-case 'server':
-  console.log('Starting webpack server');
-  module.exports = {
-    entry: './app.js',
-    target: 'node',
-    watch: true,
-    externals: [
-      'ws',
-      nodeExternals(),
-    ],
-    output: {
-      path: path.join(__dirname, 'build'),
-      filename: 'server.js',
-    },
-  };
-  break;
-case 'dev':
-  console.log('Running webpack in development mode');
-  module.exports = merge(webpackCommon, {
-    entry: ['webpack/hot/dev-server'],
-    devtool: '#inline-source-map',
-    devServer: {
-      contentBase: [path.join(__dirname, 'dist'), path.join(__dirname, 'public')],
-      compress: true,
-      port: 8080,
-      proxy: [{
-        context: [
-          '/',
-          '/devices',
-          '/devices/viewgroups',
-          '/statuses',
-          '/svc/events',
-          '/svc/sources',
-          '/svc/update',
-          '/controllers/equipment',
-          '/errors',
-          '/camerastream',
-          '/controller',
-          '/journal',
-          '/journal/danger',
-          '/analitics',
-          '/to',
-          '/to/servicejournal',
-          '/login',
-          '/login/users',
-          '/config',
-          '/config/locale',
-          '/login/credentials',
-          '/values',
-        ],
-        target: 'http://localhost:3001',
-      }],
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-    ],
-  });
-  break;
-default:
-  console.log('Running webpack in production environment');
-  module.exports = merge(webpackCommon, {
-    devtool: 'cheap-module-source-map',
-    plugins: [
-      new UglifyJSPlugin(),
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-        },
-      }),
-      new PreloadWebpackPlugin({
-        rel: 'preload',
-        as: 'script',
-        include: 'all',
-        fileBlacklist: [/\.(css|map)$/, /base?.+/],
-      }),
-      new CompressionPlugin({
-        asset: '[path].gz[query]',
-        algorithm: 'gzip',
-        test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
-        threshold: 10240,
-        minRatio: 0.8,
-      }),
-    ],
-  });
-  break;
+  case 'start':
+  case 'dev':
+    console.log('Running webpack in development mode');
+    module.exports = merge(webpackCommon, {
+      devtool: 'cheap-module-eval-source-map',
+    });
+    break;
+  default:
+    console.log('Running webpack in production environment');
+    module.exports = merge(webpackCommon, {
+      devtool: false,
+      plugins: [
+        new UglifyJSPlugin(),
+        new webpack.DefinePlugin({
+          'process.env': {
+            NODE_ENV: JSON.stringify('production'),
+          },
+        }),
+        new PreloadWebpackPlugin({
+          rel: 'preload',
+          as: 'script',
+          include: 'all',
+          fileBlacklist: [/\.(css|map)$/, /base?.+/],
+        }),
+        new CompressionPlugin({
+          asset: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+          threshold: 10240,
+          minRatio: 0.8,
+        }),
+      ],
+    });
+    break;
 }

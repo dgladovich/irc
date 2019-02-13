@@ -7,7 +7,7 @@ const PORT = 3002;
 const server = net.createServer();
 const uuidv1 = require('uuid/v1');
 const moment = require('moment');
-const config = require('../config.json');
+const config = require('../public/config.json');
 
 const ControllerModel = require('./ControllerModel');
 const DevicesCollection = require('./collections/DevicesCollection');

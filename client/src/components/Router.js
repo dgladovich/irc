@@ -5,8 +5,8 @@ import { checkAuth, checkPermissions } from '../Utils';
 const Controller = Mn.Object.extend({
 
   initialize() {
-    this.layout = new BodyView();
     const app = this.getOption('app');
+    this.layout = new BodyView();
     this.options = this.getOption('options');
     app.showView(this.layout);
   },

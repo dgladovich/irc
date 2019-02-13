@@ -1,1 +1,3 @@
-module.exports = require('./models');
+const models = require('./models');
+
+module.exports = models;
