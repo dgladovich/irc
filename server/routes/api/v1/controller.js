@@ -1,13 +1,9 @@
-'use strict';
+const { Router } = require('express');
 
-const express = require('express');
+const db = reqm('db');
+const router = Router();
 
-const router = express.Router();
-const db = require('../db');
-
-const {
-  Controller,
-} = db;
+const { Controller } = db;
 
 router.get('/', (req, res, next) => {
   Controller

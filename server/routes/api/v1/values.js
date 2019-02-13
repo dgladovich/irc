@@ -1,16 +1,14 @@
-'use strict';
-
-const express = require('express');
-
-const router = express.Router();
+const { Router } = require('express');
 const faker = require('faker');
 const moment = require('moment');
 const _ = require('lodash');
-const config = require('../public/config.json');
-const db = require('../db');
 
+const config = reqm('public/config.json');
+const db = reqm('db');
+
+const router = Router();
 const { Registering, Sequelize } = db;
-const Op = Sequelize.Op;
+const { Op } = Sequelize;
 const faces = _.toArray(config.ctrl.cfaces);
 
 router.get('/', (req, res, next) => {

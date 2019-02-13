@@ -1,22 +1,39 @@
 import { Application } from 'backbone.marionette';
 import { history } from 'backbone';
-import { Router } from './Router';
+import Noty from 'noty';
+import { Router } from './components/Router';
 import {
-  DevicesDispatcher, prepareViewGroups, prepareFaces, prepareStatuses, preparePickList, computeDeviceSize,
-} from '../Utils';
-import Controller from '../models/Controller';
-import UserCredentials from '../models/UserCredentials';
-import FacesCollection from '../collections/FacesCollection';
-import ControllersCollection from '../collections/ControllersCollection';
-import StatusesCollection from '../collections/StatusesCollection';
-import ViewGroupCollection from '../collections/ViewGroupsCollection';
-import AlarmsCollection from '../collections/AlarmsCollection';
-import ControllerConnection from '../connections/ControllerConnection';
-import BrokesCollection from '../collections/BrokesCollection';
+  prepareViewGroups, prepareFaces, prepareStatuses, preparePickList, computeDeviceSize,
+} from './Utils';
+import Controller from './models/Controller';
+import UserCredentials from './models/UserCredentials';
+import FacesCollection from './collections/FacesCollection';
+import ControllersCollection from './collections/ControllersCollection';
+import StatusesCollection from './collections/StatusesCollection';
+import ViewGroupCollection from './collections/ViewGroupsCollection';
+import AlarmsCollection from './collections/AlarmsCollection';
+import ControllerConnection from './connections/ControllerConnection';
+import BrokesCollection from './collections/BrokesCollection';
 
 export default Application.extend({
   region: '#app',
   channelName: 'user',
+  _fetchData: new Promise((resolve, reject) => {
+
+  }),
+  _notify() {
+    new Noty({
+      text: 'Ошибка при загрузке данных, попробуйте перезагрузить страницу',
+      theme: 'metroui',
+      type: 'error',
+      layout: 'topCenter',
+      killer: true,
+      timeout: 3000,
+      progressBar: false,
+    }).show();
+  },
+  hidePreloader() { },
+  showPreloader() { },
   onBeforeStart(data) {
     this.language = data.options[1];
     this.controller = new Controller(data.options[0].ctrl);

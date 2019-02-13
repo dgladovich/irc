@@ -2,14 +2,11 @@
 
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
 
 const path = require('path');
 const merge = require('webpack-merge');
@@ -83,7 +80,7 @@ const webpackCommon = {
 switch (process.env.npm_lifecycle_event) {
 case 'start':
 case 'dev':
-  console.log('Running webpack in development mode');
+  console.log('Running webpack dev server in development mode');
   module.exports = merge(webpackCommon, {
     devtool: 'cheap-module-eval-source-map',
   });

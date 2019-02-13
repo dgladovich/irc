@@ -3,7 +3,13 @@
 /**
  * Module dependencies.
  */
+/**
+ * @global {function} reqm
+ */
 
+
+const path = require('path');
+global.reqm = p => require(path.resolve(process.cwd(), p));
 var app = require('../app');
 var debug = require('debug')('smart-svg:server');
 var http = require('http');

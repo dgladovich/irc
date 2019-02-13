@@ -1,6 +1,6 @@
-const express = require('express');
+const { Router } = require('express');
 
-const router = new express.Router();
+const router = new Router();
 
 router.get('/dashboard', (req, res) => {
   res.status(200).json({

@@ -1,12 +1,9 @@
-'use strict';
+const { Router } = require('express');
 
-const express = require('express');
-
-const router = express.Router();
-const db = require('../db');
+const router = Router();
+const db = reqm('db');
 
 const { ErrorCode } = db;
-
 
 router.get('/', (req, res, next) => {
   ErrorCode.findAll().then((errors) => {

@@ -1,4 +1,4 @@
-const express = require('express');
+const { Router } = require('express');
 const errors = require('./errors');
 const journal = require('./journal');
 const svc = require('./svc');
@@ -9,10 +9,10 @@ const statuses = require('./statuses');
 const analitics = require('./analitics');
 const values = require('./values');
 const login = require('./login');
-const config = require('./api/v1/config');
+const config = require('./config');
 const bot = require('./bot.js');
 
-const router = express.Router();
+const router = Router();
 
 router.use('/controller', controller);
 router.use('/journal', journal);
@@ -26,3 +26,5 @@ router.use('/errors', errors);
 router.use('/values', values);
 router.use('/config', config);
 router.use('/bot', bot);
+
+module.exports = router;

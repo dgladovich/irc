@@ -1,6 +1,4 @@
 import Radio from 'backbone.radio';
-import io from 'socket.io-client';
-import Noty from 'noty';
 import StatusesCollection from './collections/StatusesCollection';
 import DeviceGroupCollection from './collections/DeviceGroupCollection';
 import ErrorsCollection from './collections/ErrorsCollection';
@@ -30,14 +28,8 @@ const bot = Radio.channel('bot');
 
 export function computeDeviceSize(devLength) {
   const defaultWidth = 120;
-
-
   const defaultCount = 12;
-
-
   const devicesCount = devLength;
-
-
   const devicesWidth = defaultCount / devicesCount * defaultWidth * 1.2;
   return devicesWidth;
 }

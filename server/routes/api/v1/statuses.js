@@ -1,38 +1,39 @@
-const express = require('express');
+const { Router } = require('express');
 
-const router = express.Router();
-const db = require('../db');
+const db = reqm('db');
+
+const router = Router();
 
 const {
-    ValueStatuses,
-    Language,
+  ValueStatuses,
+  Language,
 } = db;
 
 router.get('/', (req, res, next) => {
-    ValueStatuses
-        .findAll({
-            include: [
-                {
-                    models: Language,
-                    as: 'translate',
-                },
-            ],
-        })
-        .then((statuses) => {
-            res.json({
-                data: {
-                    statuses,
-                },
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.json({
-                errors: {
-                    code: err,
-                },
-            });
-        });
+  ValueStatuses
+    .findAll({
+      include: [
+        {
+          models: Language,
+          as: 'translate',
+        },
+      ],
+    })
+    .then((statuses) => {
+      res.json({
+        data: {
+          statuses,
+        },
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({
+        errors: {
+          code: err,
+        },
+      });
+    });
 });
 
 module.exports = router;
