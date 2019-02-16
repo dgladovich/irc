@@ -13,6 +13,7 @@ const merge = require('webpack-merge');
 
 const webpackCommon = {
   entry: [
+    'babel-polyfill',
     path.resolve(__dirname, './index.js'),
   ],
   module: {
@@ -78,38 +79,38 @@ const webpackCommon = {
 
 };
 switch (process.env.npm_lifecycle_event) {
-case 'start':
-case 'dev':
-  console.log('Running webpack dev server in development mode');
-  module.exports = merge(webpackCommon, {
-    devtool: 'cheap-module-eval-source-map',
-  });
-  break;
-default:
-  console.log('Running webpack in production environment');
-  module.exports = merge(webpackCommon, {
-    devtool: false,
-    plugins: [
-      new UglifyJSPlugin(),
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-        },
-      }),
-      new PreloadWebpackPlugin({
-        rel: 'preload',
-        as: 'script',
-        include: 'all',
-        fileBlacklist: [/\.(css|map)$/, /base?.+/],
-      }),
-      new CompressionPlugin({
-        asset: '[path].gz[query]',
-        algorithm: 'gzip',
-        test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
-        threshold: 10240,
-        minRatio: 0.8,
-      }),
-    ],
-  });
-  break;
+  case 'start':
+  case 'dev':
+    console.log('Running webpack dev server in development mode');
+    module.exports = merge(webpackCommon, {
+      devtool: 'cheap-module-eval-source-map',
+    });
+    break;
+  default:
+    console.log('Running webpack in production environment');
+    module.exports = merge(webpackCommon, {
+      devtool: false,
+      plugins: [
+        new UglifyJSPlugin(),
+        new webpack.DefinePlugin({
+          'process.env': {
+            NODE_ENV: JSON.stringify('production'),
+          },
+        }),
+        new PreloadWebpackPlugin({
+          rel: 'preload',
+          as: 'script',
+          include: 'all',
+          fileBlacklist: [/\.(css|map)$/, /base?.+/],
+        }),
+        new CompressionPlugin({
+          asset: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+          threshold: 10240,
+          minRatio: 0.8,
+        }),
+      ],
+    });
+    break;
 }
