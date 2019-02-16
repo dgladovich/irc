@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import StatusesStructuresCollection from '../collections/StatusesStructuresCollection';
+import StatusesStructuresCollection from '../collections/StatusesStructures';
 
 export default Backbone.Model.extend({
   initialize() {

@@ -1,7 +1,7 @@
 import Backbone from 'backbone';
-import DevicesCollection from '../collections/DevicesCollection';
-import DeviceGroupsCollection from '../collections/DeviceGroupCollection';
-import CamerasCollection from '../collections/CamerasCollection';
+import DevicesCollection from '../collections/Devices';
+import DeviceGroupsCollection from '../collections/DeviceGroups';
+import CamerasCollection from '../collections/Cameras';
 import ControllerPassport from './ControllerPassport';
 
 export default Backbone.Model.extend({

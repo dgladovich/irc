@@ -1,6 +1,5 @@
 import Backbone from 'backbone';
 import _ from 'underscore';
-import BackboneRelational from 'backbone-relational';
 import store from 'store';
 
 export default Backbone.Collection.extend({

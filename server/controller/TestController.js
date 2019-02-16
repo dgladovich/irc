@@ -10,8 +10,8 @@ const moment = require('moment');
 const config = require('../public/config.json');
 
 const ControllerModel = require('./ControllerModel');
-const DevicesCollection = require('./collections/DevicesCollection');
-const FacesCollection = require('./collections/FacesCollection');
+const DevicesCollection = require('./collections/Devices');
+const FacesCollection = require('./collections/Faces');
 
 const controller = new ControllerModel(config.ctrl);
 const devices = new DevicesCollection(config.ctrl.devs);

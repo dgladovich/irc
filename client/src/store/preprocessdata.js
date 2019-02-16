@@ -1,0 +1,18 @@
+export default {
+  alarms: alarms => alarms,
+  analitics: analitics => analitics,
+  brokes: brokes => brokes,
+  cameras: cameras => cameras,
+  controllers: controllers => controllers,
+  devicesgroups: devicesgroups => devicesgroups,
+  devices: devices => devices,
+  errors: errors => errors,
+  faces: (faces, config) => config.devices.reduce((acc, device) => acc.concat(Object.values(device.dfaces)), []),
+  informers: informers => informers,
+  journals: journals => journals,
+  modes: modes => modes,
+  services: services => services,
+  statuses: statuses => statuses,
+  statusesStructures: statusesStructures => statusesStructures,
+  viewgroups: viewgroups => viewgroups,
+};

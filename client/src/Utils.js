@@ -1,9 +1,9 @@
 import Radio from 'backbone.radio';
-import StatusesCollection from './collections/StatusesCollection';
-import DeviceGroupCollection from './collections/DeviceGroupCollection';
-import ErrorsCollection from './collections/ErrorsCollection';
-import InformerCollection from './collections/InformerCollection';
-import Controller from './models/Controller';
+import StatusesCollection from './store/collections/Statuses';
+import DeviceGroupCollection from './store/collections/DeviceGroups';
+import ErrorsCollection from './store/collections/Errors';
+import InformerCollection from './store/collections/Informers';
+import Controller from './store/models/Controller';
 
 
 const statusesCollection = new StatusesCollection();

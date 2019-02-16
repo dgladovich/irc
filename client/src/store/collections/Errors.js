@@ -1,8 +1,8 @@
-import Backbone from 'backbone';
+import { Collection } from 'backbone';
 import _ from 'lodash';
 import store from 'store';
 
-export default Backbone.Collection.extend({
+export default Collection.extend({
   url: 'errors',
   sync() {
     const dfd = $.Deferred();

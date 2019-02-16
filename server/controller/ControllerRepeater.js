@@ -5,10 +5,10 @@ const _ = require('underscore');
 const uuidv1 = require('uuid/v1');
 const jwt = require('jsonwebtoken');
 const ControllerModel = require('./ControllerModel');
-const DevicesCollection = require('./collections/DevicesCollection');
-const FacesCollection = require('./collections/FacesCollection');
-const QueueCollection = require('./collections/QueueCollection');
-const AlarmsCollection = require('./collections/AlarmsCollection');
+const DevicesCollection = require('./collections/Devices');
+const FacesCollection = require('./collections/Faces');
+const QueueCollection = require('./collections/Queue');
+const AlarmsCollection = require('./collections/Alarms');
 const config = require('../public/config.json');
 
 const ch = Radio.channel('controllerChannel');

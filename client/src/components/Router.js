@@ -1,14 +1,14 @@
 import Mn from 'backbone.marionette';
-import { BodyView } from './BodyView';
+// import { BodyView } from './BodyView';
 import { checkAuth, checkPermissions } from '../Utils';
 
 const Controller = Mn.Object.extend({
 
   initialize() {
     const app = this.getOption('app');
-    this.layout = new BodyView();
-    this.options = this.getOption('options');
-    app.showView(this.layout);
+    //this.layout = new BodyView();
+    //this.options = this.getOption('options');
+    // app.showView(this.layout);
   },
 
   index() {
@@ -56,17 +56,20 @@ export const Router = Mn.AppRouter.extend({
   },
 
   appRoutes: {
-    '': 'index',
-    individual: 'showIndividual',
-    values: 'showValues',
-    current: 'showCurrent',
-    journal: 'showJournal',
-    passport: 'showPassport',
-    visual: 'showVisual',
-    messages: 'showMessages',
-    service: 'showService',
-    system: 'showSystemControll',
-    devices: 'showDevices',
-    testing: 'showTest',
+    '': () => {
+      console.log('should render anything');
+    },
+    // '': 'index',
+    // individual: 'showIndividual',
+    // values: 'showValues',
+    // current: 'showCurrent',
+    // journal: 'showJournal',
+    // passport: 'showPassport',
+    // visual: 'showVisual',
+    // messages: 'showMessages',
+    // service: 'showService',
+    // system: 'showSystemControll',
+    // devices: 'showDevices',
+    // testing: 'showTest',
   },
 });
