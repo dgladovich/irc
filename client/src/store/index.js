@@ -1,5 +1,9 @@
 import { Model } from 'backbone';
+import axios from 'axios';
+import Ajv from 'ajv';
+import store from 'store';
 import { CONFIG_URL, BASE_URL } from '../constants';
+import { configSchema } from './schemas';
 import preprocessData from './preprocessdata';
 import Alarms from './collections/Alarms';
 import Analitics from './collections/Analitic';
@@ -10,52 +14,114 @@ import DeviceGroups from './collections/DeviceGroups';
 import Devices from './collections/Devices';
 import Errors from './collections/Errors';
 import Faces from './collections/Faces';
-import Informer from './collections/Informers';
+import Informers from './collections/Informers';
 import Journals from './collections/Journals';
 import Modes from './collections/Modes';
 import Services from './collections/Services';
 import Statuses from './collections/Statuses';
 import StatusesStructures from './collections/StatusesStructures';
 import ViewGroups from './collections/ViewGroups';
+import PickingList from './collections/PickingList';
 import UserCredentials from './models/UserCredentials';
 import Controller from './models/Controller';
+import DevicePassport from './models/DevicePassport';
 
+const ajv = new Ajv({ allErrors: true });
+
+window.store = store;
 export default Model.extend({
-  baseUr: BASE_URL,
-  configUrl: CONFIG_URL,
-  _fetchConfig() { },
-  _fetchLocales() { },
-  _validateData() { },
-  _preprocessData() { },
+  _fetchConfig() {
+    return store.get('config') || axios.get(`${BASE_URL}${CONFIG_URL}`);
+  },
+  _fetchAlarms() { },
+  _fetchServices() { },
+  _fetchUserCredentials() { },
+  _validateData(schema, data) {
+    const validate = ajv.compile(schema);
+    return {
+      isValid: validate(data),
+      validate,
+    };
+  },
+  _preprocessData(data) {
+    return preprocessData(data);
+  },
   _initConnections() { },
-  persistStore() { },
-  checkCacheConsistance() { },
-  _initCollections() {
-    this.alarms = new Alarms();
-    this.analitics = new Analitics();
-    this.brokes = new Brokes();
-    this.cameras = new Cameras();
-    this.controllers = new Controllers();
-    this.controller = new Controller();
-    this.deviceGroups = new DeviceGroups();
-    this.devices = new Devices();
-    this.errors = new Errors();
-    this.faces = new Faces();
-    this.informers = new Informer();
-    this.journals = new Journals();
-    this.modes = new Modes();
-    this.services = new Services();
-    this.statuses = new Statuses();
-    this.statusesStructures = new StatusesStructures();
-    this.viewGroups = new ViewGroups();
-    this.user = new UserCredentials();
+  _checkCacheConsistance(lastUpdate) { return true; },
+  _persistStore(data) {
+    store.set('config', data);
+  },
+  _initCollections(config) {
+    const {
+      alarms,
+      brokes,
+      cameras,
+      controller,
+      controllers,
+      devicegroups,
+      devices,
+      errors,
+      faces,
+      informers,
+      journals,
+      modes,
+      pickinglist,
+      devicepassport,
+      services,
+      statuses,
+      users,
+      viewgroups,
+    } = config;
+    this.alarms = new Alarms(alarms);
+    //this.analitics = new Analitics(analitics);
+    //this.brokes = new Brokes(brokes);
+    this.cameras = new Cameras(cameras);
+    this.controllers = new Controllers(controllers);
+    this.controller = new Controller(controller);
+    this.deviceGroups = new DeviceGroups(devicegroups);
+    this.devices = new Devices(devices);
+    this.errors = new Errors(errors);
+    this.faces = new Faces(faces);
+    this.informers = new Informers(informers);
+    this.journals = new Journals(journals);
+    this.modes = new Modes(modes);
+    //this.services = new Services();
+    this.pickingList = new PickingList(pickinglist);
+    this.devicepassport = new DevicePassport(devicepassport);
+    this.statuses = new Statuses(statuses);
+    //this.statusesStructures = new StatusesStructures();
+    this.viewGroups = new ViewGroups(viewgroups);
+    //this.user = new UserCredentials();
   },
 
   async initialize() {
-    await this._fetchConfig();
-    await this._preprocessData();
-    await this._initCollections();
-    await this._initConnections();
+    let fetchedData;
+    let processedData;
+    const cachedConfig = store.get('config');
+    if (cachedConfig) {
+      const isCacheConsistance = await this._checkCacheConsistance(cachedConfig.lastUpdate);
+      if (isCacheConsistance) {
+        fetchedData = cachedConfig;
+      } else {
+        try {
+          fetchedData = await this._fetchConfig();
+        } catch (e) {
+          console.error('Error while fetch config');
+        }
+        this._validateData(fetchedData.data);
+        processedData = this._preprocessData(fetchedData);
+        this._persistStore({ lastUpdate: fetchedData.lastUpdate, data: processedData });
+      }
+    }
+    const validateConfig = this._validateData(configSchema, fetchedData.data);
+    if (validateConfig.isValid) {
+      processedData = this._preprocessData(fetchedData.data);// this too
+      this._initCollections(processedData);
+      await this._initConnections();
+    } else {
+      console.log('data is not valid');
+      console.log(validateConfig.validate.errors);
+    }
     // this.language = data.options[1];
     // this.controller = new Controller(data.options[0].ctrl);
     // this.picklist = new Backbone.Collection(preparePickList(this.controller.get('pickshit')));
