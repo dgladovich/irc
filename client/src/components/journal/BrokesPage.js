@@ -1,7 +1,6 @@
 import { View, Model, CollectionView } from 'backbone.marionette';
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import BrokesCollection from '../../collections/BrokesCollection';
 import table_head from './templates/brokes/table_head.jst';
 import broke_tab from './templates/brokes/broke_tab.jst';
 import body_row from './templates/brokes/body_row.jst';

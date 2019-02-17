@@ -26,21 +26,22 @@ export default Application.extend({
   hidePreloader() { },
   showPreloader() { },
   updateUserPreferences() { },
-  async onBeforeStart() {
-    await this.store.initialize();
-    await this.preferences.initialize();
+  async onBeforeStart(options) {
+    await this.store.initialize;
     await initLocalization(this.language);
+    this.triggerMethod('start', options);
   },
   onStart(app, options) {
-    // this.router = new Router({
-    //   app: this,
-    //   options,
-    // });
-    // history.start();
+    this.router = new Router({
+      app: this,
+      options,
+    });
+    history.start();
   },
-  initialize() {
+  initialize(options) {
     this.store = new Store();
     this.preferences = new UserPreferences();
     this.language = this.preferences.language || window.navigator.language || window.navigator.userLanguage || 'ru';
+    this.triggerMethod('before:start', this, options);
   },
 });

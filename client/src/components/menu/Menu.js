@@ -35,20 +35,20 @@ export default View.extend({
     } else {}
   },
   updateStatus() {
-    const device = this.$('.hover-btn');
-    const statuses = _.toArray(this.controller.get('stats'));
-    const cstat = this.controller.get('stat');
-    const controllerStatus = _.find(statuses, { num: cstat });
-    device.removeClass(this.previousClass);
-    if (controllerStatus !== undefined) {
-      this.previousClass = controllerStatus.dclass;
-    } else {
-      this.previousClass = 'off';
-      console.log(`Get wrong status; Device${this.controller.get('id')}; Status:${this.controller.get('stat')}; Group:${this.controller.get('sgrp')}`);
-    }
+    // const device = this.$('.hover-btn');
+    // const statuses = _.toArray(this.controller.get('stats'));
+    // const cstat = this.controller.get('stat');
+    // const controllerStatus = _.find(statuses, { num: cstat });
+    // device.removeClass(this.previousClass);
+    // if (controllerStatus !== undefined) {
+    //   this.previousClass = controllerStatus.dclass;
+    // } else {
+    //   this.previousClass = 'off';
+    //   console.log(`Get wrong status; Device${this.controller.get('id')}; Status:${this.controller.get('stat')}; Group:${this.controller.get('sgrp')}`);
+    // }
 
-    // console.log(this.previousClass)
-    device.addClass(this.previousClass);
+    // // console.log(this.previousClass)
+    // device.addClass(this.previousClass);
   },
   _bindEvents() {
     $(window).resize(this.setHeight.bind(this));

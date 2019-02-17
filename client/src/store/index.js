@@ -23,6 +23,7 @@ import StatusesStructures from './collections/StatusesStructures';
 import ViewGroups from './collections/ViewGroups';
 import PickingList from './collections/PickingList';
 import UserCredentials from './models/UserCredentials';
+import UsersCollection from './collections/Users';
 import Controller from './models/Controller';
 import DevicePassport from './models/DevicePassport';
 
@@ -54,7 +55,6 @@ export default Model.extend({
   _initCollections(config) {
     const {
       alarms,
-      brokes,
       cameras,
       controller,
       controllers,
@@ -67,31 +67,33 @@ export default Model.extend({
       modes,
       pickinglist,
       devicepassport,
-      services,
       statuses,
       users,
       viewgroups,
     } = config;
-    this.alarms = new Alarms(alarms);
-    //this.analitics = new Analitics(analitics);
-    //this.brokes = new Brokes(brokes);
-    this.cameras = new Cameras(cameras);
-    this.controllers = new Controllers(controllers);
-    this.controller = new Controller(controller);
-    this.deviceGroups = new DeviceGroups(devicegroups);
-    this.devices = new Devices(devices);
-    this.errors = new Errors(errors);
-    this.faces = new Faces(faces);
-    this.informers = new Informers(informers);
-    this.journals = new Journals(journals);
-    this.modes = new Modes(modes);
-    //this.services = new Services();
-    this.pickingList = new PickingList(pickinglist);
-    this.devicepassport = new DevicePassport(devicepassport);
-    this.statuses = new Statuses(statuses);
-    //this.statusesStructures = new StatusesStructures();
-    this.viewGroups = new ViewGroups(viewgroups);
-    //this.user = new UserCredentials();
+    this.set({
+      alarms: new Alarms(alarms),
+      analitics: new Analitics(),
+      brokes: new Brokes(),
+      cameras: new Cameras(cameras),
+      controllers: new Controllers(controllers),
+      controller: new Controller(controller),
+      deviceGroups: new DeviceGroups(devicegroups),
+      devices: new Devices(devices),
+      errors: new Errors(errors),
+      faces: new Faces(faces),
+      informers: new Informers(informers),
+      journals: new Journals(journals),
+      modes: new Modes(modes),
+      services: new Services(),
+      pickingList: new PickingList(pickinglist),
+      devicepassport: new DevicePassport(devicepassport),
+      statuses: new Statuses(statuses),
+      statusesStructures: new StatusesStructures(),
+      viewGroups: new ViewGroups(viewgroups),
+      user: new UserCredentials(),
+      users: new UsersCollection(users),
+    });
   },
 
   async initialize() {
@@ -119,27 +121,8 @@ export default Model.extend({
       this._initCollections(processedData);
       await this._initConnections();
     } else {
-      console.log('data is not valid');
+      console.error('data is not valid');
       console.log(validateConfig.validate.errors);
     }
-    // this.language = data.options[1];
-    // this.controller = new Controller(data.options[0].ctrl);
-    // this.picklist = new Backbone.Collection(preparePickList(this.controller.get('pickshit')));
-    // this.controllers = new ControllersCollection(data.options[0].ctrls);
-    // this.devices = this.controller.get('devs');
-    // this.deviceSize = computeDeviceSize(this.devices.length);
-    // this.deviceGroups = new Backbone.Collection(this.controller.get('dev_grps'));
-    // this.measurments = new Backbone.Collection(_.toArray(data.options[0].meas));
-    // this.faces = new FacesCollection(prepareFaces(this.devices));
-    // this.statuses = new StatusesCollection(prepareStatuses(data.options[0].statuses));
-    // this.errors = new Backbone.Collection(_.toArray(data.options[0].ecodes));
-    // this.users = new Backbone.Collection(data.options[0].usrs);
-    // this.viewgrps = new ViewGroupCollection(prepareViewGroups(data.options[0].viewgrps, this.faces));
-    // this.controllerConnection = new ControllerConnection();
-    // this.modes = new Backbone.Collection(_.toArray(this.controller.get('modes')));
-    // this.services = new Backbone.Collection();
-    // this.alarms = new AlarmsCollection();
-    // this.brokes = new BrokesCollection();
-    // this.credentials = new UserCredentials();
   },
 });
