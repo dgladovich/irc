@@ -1,10 +1,7 @@
 import { View, Model } from 'backbone.marionette';
 import template from './templates/equiplist.jst';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.min.css';
-import 'owl.carousel';
 import { setWrapHeight } from '../../Utils';
-
+import 'owl.carousel';
 
 export default View.extend({
   template,

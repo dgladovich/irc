@@ -1,0 +1,3 @@
+@function th($key) {
+  @return map-get($array-map, $key);
+}

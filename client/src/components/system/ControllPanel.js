@@ -1,4 +1,4 @@
-import slider from 'webpack-jquery-ui/slider';
+//import slider from 'webpack-jquery-ui/slider';
 import 'jquery-ui-touch-punch';
 import Radio from 'backbone.radio';
 import Noty from 'noty';

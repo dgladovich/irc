@@ -1,0 +1,23 @@
+@import 'colors';
+
+$themes: (
+  light: (
+    backgroundLight: #fff,
+    backgroundDark: #f7f7f8,
+    textColor: #fff,
+    textDark: #000,
+    textLight: #919394,
+    contentColor: #b9baba,
+    iconColor: #000,
+    deathBlue: #0f0fee
+  ),
+  dark: (
+    backgroundLight: #131b1f,
+    backgroundDark: #000,
+    textColor: #fff,
+    textDark: #fff,
+    textLight: #b9baba,
+    iconColor: #fff,
+    deathBlue: #0f0fee
+  ),
+);

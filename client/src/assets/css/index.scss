@@ -1,0 +1,10 @@
+@import 'themes';
+@import 'mixins';
+@import 'functions';
+
+#app {
+  @include customize(theme){
+    background: th(backgroundLight);
+    color: th(deathBlue);
+  }
+}

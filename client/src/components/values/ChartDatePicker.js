@@ -4,9 +4,6 @@ import faker from 'faker';
 import datepickerFactory from 'jquery-datepicker';
 import datepickerJAFactory from 'jquery-datepicker/i18n/jquery.ui.datepicker-ru';
 import template from './templates/chartdatepicker.jst';
-import 'jquery-ui/themes/base/datepicker.css';
-import 'jquery-ui/themes/base/core.css';
-import 'jquery-ui/themes/base/theme.css';
 
 datepickerFactory(jQuery);
 datepickerJAFactory(jQuery);
