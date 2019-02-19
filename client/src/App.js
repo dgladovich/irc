@@ -8,7 +8,7 @@ import initLocalization from './i18n';
 
 export default Application.extend({
   region: '#app',
-  channelName: 'user',
+  channelName: 'app',
   _notify() {
     new Noty({
       text: 'Ошибка при загрузке данных, попробуйте перезагрузить страницу',
@@ -39,9 +39,11 @@ export default Application.extend({
     history.start();
   },
   initialize(options) {
+    this.loader = document.querySelector('.loader');
     this.store = new Store();
     this.preferences = new UserPreferences();
     this.language = this.preferences.language || window.navigator.language || window.navigator.userLanguage || 'ru';
+    this.loader.style.display = 'none';
     this.triggerMethod('before:start', this, options);
   },
 });

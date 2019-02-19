@@ -6,12 +6,10 @@ export default View.extend({
   onRender() {
     this.updateStatus();
   },
-  setHeight() {
-    this.$el.css({
-      height: `${$(window).height() - 60 - this.$el.offset().top}px`,
-    });
-    this.trigger('setheight');
-  },
+  // setHeight() {
+
+  //   this.trigger('setheight');
+  // },
   render() {
     this.$el.html(this.template());
     // Get rid of that pesky wrapping-div.
@@ -21,19 +19,19 @@ export default View.extend({
     // nesting elements during re-render.
     this.$el.unwrap();
     this.setElement(this.$el);
-    this.$el.hide();
-    this._bindEvents();
-    this.$('#home-buttons')[0].addEventListener('load', this.setHeight.bind(this), true);
-    this.safariDetect();
+    //this.$el.hide();
+    //this._bindEvents();
+    // this.$('#home-buttons')[0].addEventListener('load', this.setHeight.bind(this), true);
+    // this.safariDetect();
     this.trigger('rendered');
   },
-  safariDetect() {
-    const userAgent = window.navigator.userAgent;
+  // safariDetect() {
+  //   const userAgent = window.navigator.userAgent;
 
-    if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-      setTimeout(this.setHeight.bind(this), 10);
-    } else {}
-  },
+  //   if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+  //     setTimeout(this.setHeight.bind(this), 10);
+  //   } else {}
+  // },
   updateStatus() {
     // const device = this.$('.hover-btn');
     // const statuses = _.toArray(this.controller.get('stats'));
@@ -50,9 +48,9 @@ export default View.extend({
     // // console.log(this.previousClass)
     // device.addClass(this.previousClass);
   },
-  _bindEvents() {
-    $(window).resize(this.setHeight.bind(this));
-  },
+  // _bindEvents() {
+  //   $(window).resize(this.setHeight.bind(this));
+  // },
   onSetHeight() {
     this.$el.fadeIn(800);
   },

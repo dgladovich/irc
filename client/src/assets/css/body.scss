@@ -1,0 +1,25 @@
+@import 'components/menu';
+
+#app {
+    height: 100vh;
+    overflow-y: auto;
+    @include customize(theme) {
+      background: th(backgroundDefault);
+  }
+}
+
+#wrapper {
+    height: 100%;
+}
+
+.t-wrap {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.t-c-m {
+    width: 100%;
+    padding: 0 30px;
+}
