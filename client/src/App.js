@@ -23,6 +23,7 @@ export default Application.extend({
   authUser() { },
   changeLocales() { },
   setTheme() { },
+  setMode() { },
   hidePreloader() { },
   showPreloader() { },
   updateUserPreferences() { },
