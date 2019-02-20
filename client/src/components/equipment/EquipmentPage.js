@@ -1,10 +1,10 @@
 import { View, Model } from 'backbone.marionette';
+import { t } from 'i18next';
+
 import template from '../general/templates/page.jst';
-// import EquipItem from './EquipItem';
 import EquipList from './EquipList';
 import { setWrapHeight } from '../../Utils';
 
-const menu_select_device = 'menu_select_device';
 
 export default View.extend({
   template,
@@ -12,7 +12,7 @@ export default View.extend({
     'click #close-page': 'hidePage',
   },
   regions: {
-    	content: '.panel-container',
+    content: '.panel-container',
   },
   hidePage() {
     this.$el.fadeOut(500, () => {
@@ -24,7 +24,7 @@ export default View.extend({
   },
   initialize() {
     this.model = new Backbone.Model({
-      title: app.language[menu_select_device] || menu_select_device,
+      title: t('menu_select_device'),
     });
   },
 });

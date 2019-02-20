@@ -1,11 +1,15 @@
 import aja from 'aja';
+import { Collection, Model } from 'backbone';
+import { t } from 'i18next';
 import Radio from 'backbone.radio';
-import { View, Model, CollectionView } from 'backbone.marionette';
+import { View, CollectionView } from 'backbone.marionette';
+
 import JournalTable from './JournalTable';
 import template from '../general/templates/journal-tab.jst';
 import not_found from './templates/journal/not_found.jst';
-import JournalFilterModel from '../../models/JournalFilterModel';
-import JournalCollection from '../../collections/JournalCollection';
+
+const JournalFilterModel = new Model();
+const JournalCollection = new Collection();
 
 const alarm = Radio.channel('confirm');
 const error_code = 'tit_code';
@@ -32,7 +36,7 @@ const ErrorCodes = CollectionView.extend({
     id: 'code',
   },
   onRender() {
-    const text = `<option value='all'>- ${app.language[error_code] || error_code} -</option>`;
+    const text = `<option value='all'>- ${t('error_code')} -</option>`;
     this.$el.prepend(text).val('all');
   },
 });

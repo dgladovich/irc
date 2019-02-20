@@ -3,6 +3,8 @@ import './assets/css/index.scss';
 
 export default function () {
   document.addEventListener('DOMContentLoaded', () => {
-    window.smart = new App();
+    const smart = new App();
+    console.log('assigning to window');
+    window.smart = smart;
   });
 }

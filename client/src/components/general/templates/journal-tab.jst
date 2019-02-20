@@ -1,4 +1,3 @@
-<%let message_type = 'message_type';%>
 <div class="form-inline">
     <div class="form-group">
         <input type="date" class="form-control" id="dateFrom" placeholder="Email">
@@ -8,7 +7,7 @@
     </div>
     <div class="form-group">
         <select class="form-control" id='type'>&nbsp;&nbsp;
-            <option value="all" disabled selected>- <%= app.language[message_type] || message_type %> -</option>
+            <option value="all" disabled selected>- ${t('message_type')} -</option>
             <option value="all">Все</option>
             <option value="0">Информационный</option>
             <option value="1">Тревожный</option>

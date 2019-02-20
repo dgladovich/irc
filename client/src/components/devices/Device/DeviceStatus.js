@@ -1,4 +1,5 @@
 import { View } from 'backbone.marionette';
+import { t } from 'i18next';
 import template from './templates/status.jst';
 import errocode_template from './templates/errorcode_template.jst';
 
@@ -15,12 +16,10 @@ const ErrorCodeModel = Backbone.Model.extend({
       id: this.get('dev').get('ecode'),
     }).toJSON());
     this.listenTo(this.get('dev'), 'change:ecode', (dev) => {
-      console.log(this.get('dev').get('ecode'));
       const errorCode = app
         .errors
         .findWhere({ id: this.get('dev').get('ecode') })
         .toJSON();
-      console.log(errorCode);
       this.set(errorCode);
     });
   },
@@ -48,7 +47,7 @@ export default View.extend({
     const deviceStatus = app.statuses.findWhere({ id: this.model.get('sgrp') }).get('sgrps_opts').findWhere({ num: this.model.get('stat') });
     if (deviceStatus !== undefined) {
       this.previousClass = deviceStatus.get('dclass');
-      const statusTranslate = app.language[deviceStatus.get('name')];
+      const statusTranslate = t(deviceStatus.get('name'));
       this.$('.controller-modal-status').html(statusTranslate);
     } else {
       this.previousClass = 'off';

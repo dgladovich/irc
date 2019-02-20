@@ -1,15 +1,13 @@
 import { View, Model } from 'backbone.marionette';
+import { t } from 'i18next';
+
 import TabPanel from '../general/tabpanel/TabPanel';
 import template from '../general/templates/page.jst';
-
 import DefaultPanel from '../general/defpanel/DefaultPanel';
 import Shield from './Shield';
 import Passport from './Passport';
 import PickingList from './PickingList';
 import Instruction from './Instruction';
-
-const menu_device_passport = 'menu_device_passport'; const tit_plists = 'tit_plists'; const tit_shield = 'tit_shield'; const tit_passport = 'tit_passport'; const
-  tit_instruction = 'tit_instruction';
 
 export default View.extend({
   template,
@@ -48,28 +46,28 @@ export default View.extend({
          collection: this.viewGroups,
          }); */
     this.model = new Backbone.Model({
-      title: app.language[menu_device_passport] || menu_device_passport,
+      title: t('menu_device_passport'),
     });
     this.tabsContent = new Backbone.Collection([
       {
         id: 'shield',
         view: Shield,
-        translate: app.language[tit_shield] || tit_shield,
+        translate: t('tit_shield'),
       },
       {
         id: 'passport',
         view: Passport,
-        translate: app.language[tit_passport] || tit_passport,
+        translate: t('tit_passport'),
       },
       {
         id: 'picking_list',
         view: PickingList,
-        translate: app.language[tit_plists] || tit_plists,
+        translate: t('tit_plists'),
       },
       {
         id: 'instruction_page',
         view: Instruction,
-        translate: app.language[tit_instruction] || tit_instruction,
+        translate: t('tit_instruction'),
       },
     ]);
   },

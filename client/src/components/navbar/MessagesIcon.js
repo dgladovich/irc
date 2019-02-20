@@ -2,10 +2,7 @@ import Marionette from 'backbone.marionette';
 import Radio from 'backbone.radio';
 import template from './templates/messages.jst';
 import Modal from './Modal';
-import FilterModel from '../../models/JournalFilterModel';
-
-const alarm = Radio.channel('alarm');
-const model = new FilterModel();
+import FilterModel from './models/FilterJournalModel';
 
 export default Marionette.View.extend({
   template,

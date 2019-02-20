@@ -1,4 +1,5 @@
 import { View, Model, CollectionView } from 'backbone.marionette';
+import { t } from 'i18next';
 import table_head from './templates/table_head.jst';
 import body_row from './templates/body_row.jst';
 import body_row_status from './templates/body_row_status.jst';
@@ -44,7 +45,7 @@ const BodyRowViewStatus = View.extend({
     const statusSelector = '.controller-modal-status';
 
     if (deviceStatus !== undefined) {
-      const statusTranslate = app.language[deviceStatus.get('name')];
+      const statusTranslate = t(deviceStatus.get('name'));
       this.$(statusSelector).html(statusTranslate);
     } else {
       this.previousClass = 'off';

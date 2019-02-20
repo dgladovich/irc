@@ -1,13 +1,12 @@
 import { View, Model } from 'backbone.marionette';
+import { t } from 'i18next';
+
 import TabPanel from '../general/tabpanel/TabPanel';
 import CustomPanel from '../general/panel/CustomPanel';
 import Measurments from './Measurments';
 import ValvesView from './ValvesView';
 import template from '../general/templates/page.jst';
 import ChartModal from './ChartModal';
-
-const button_charts = 'button_charts'; const
-  menu_current_values = 'menu_current_values';
 
 export default View.extend({
   template,
@@ -42,7 +41,7 @@ export default View.extend({
   onRender() {
     const customPanel = new CustomPanel({ collection: this.viewGroups, view: Measurments, viewKey: 'faces' });
     this.showChildView('tabpanel', customPanel);
-    this.$('.panel-container').append(`<button class="btn btn-start btn-charts">${app.language[button_charts] || button_charts}</button>`);
+    this.$('.panel-container').append(`<button class="btn btn-start btn-charts">${t('button_charts')}</button>`);
     this.$('.btn-charts').on('click', this.showChartModal.bind(this));
 
     if (app.controller.get('cla') === 1) {
@@ -107,7 +106,7 @@ export default View.extend({
   },
   initialize() {
     this.model = new Backbone.Model({
-      title: app.language[menu_current_values] || menu_current_values,
+      title: t('menu_current_values'),
     });
 
     this.viewGroups = app.viewgrps;

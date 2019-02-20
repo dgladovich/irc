@@ -1,12 +1,10 @@
-<% let maintenance_title = 'maintenance_title'; %>
-
 <div class="service-padding">
     <div class="row">
-        <div class="col-xs-9" id="heading<%= id %>">
+        <div class="col-xs-9" id="heading${id}">
             <h4 class="panel-title">
-                <a aria-controls="<%= id %>" data-toggle="collapse" href="#<%= id %>" class="collapsed" role="button"
+                <a aria-controls="${id}" data-toggle="collapse" href="#${id}" class="collapsed" role="button"
                    data-toggle="collapse" data-parent="#accordion" aria-expanded="false">
-                    <span><%= app.language[maintenance_title] || maintenance_title %><%= ser_num %></span>
+                    <span>${t('maintenance_title')}${ser_num}</span>
                     <span style="float:right;">
                         <span id="time-left"></span>
                     </span>&nbsp;
@@ -17,7 +15,7 @@
             <button class="btn btn-default make-service">Выполнить ТО</button>
         </div>
         <div class="col-xs-12">
-            <div class="panel-collapse collapse" id="<%= id %>" role="tabpanel" aria-labelledby="heading<%= id %>">
+            <div class="panel-collapse collapse" id="${id}" role="tabpanel" aria-labelledby="heading${id}">
                 <div class="panel-body">
                     <h4>Работы:</h4>
                     <div class="row">

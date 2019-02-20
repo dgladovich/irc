@@ -1,4 +1,6 @@
 import { View, Model } from 'backbone.marionette';
+import { t } from 'i18next';
+
 import ControllPanel from './ControllPanel';
 import template from '../general/templates/page.jst';
 
@@ -23,7 +25,7 @@ export default View.extend({
   },
   initialize() {
     this.model = new Backbone.Model({
-      title: app.language[tit_ctr] || tit_ctr,
+      title: t('tit_ctr'),
     });
   },
 

@@ -1,7 +1,9 @@
 import Marionette from 'backbone.marionette';
 import moment from 'moment';
 import store from 'store';
+import { t } from 'i18next';
 import Radio from 'backbone.radio';
+
 import template from './templates/navbar.jst';
 import MessagesIcon from './MessagesIcon';
 import AuthModalBox from './AuthModalBox';
@@ -71,19 +73,18 @@ export default Marionette.View.extend({
     this.clearInterval(this.clock);
   },
   updateUserName() {
-    const userName = app.language.user_guest || 'user_guest';
-    console.log(app.credentials);
-    app.credentials.fetch()
-      .then((data) => {
-        if (data.auth) {
-          this.$('#navbar-username').html(data.name);
-        } else {
-          document.location.href = 'login/logout';
-        }
-      })
-      .fail((e) => {
-        console.log('Error while fetching credentials');
-      });
+    const userName = t('user_guest');
+    // app.credentials.fetch()
+    //   .then((data) => {
+    //     if (data.auth) {
+    //       this.$('#navbar-username').html(data.name);
+    //     } else {
+    //       document.location.href = 'login/logout';
+    //     }
+    //   })
+    //   .fail((e) => {
+    //     console.log('Error while fetching credentials');
+    //   });
     this.$('#navbar-username').html(userName);
   },
   onRender() {
@@ -98,7 +99,7 @@ export default Marionette.View.extend({
     this.showChildView('network', new NetworkActivity());
     this.showChildView('individual', new IndividualActivity());
     this.showChildView('bot', new Bot());
-    this.$('#cloud').tooltip({ title: app.language[connection_with_server] || connection_with_server, placement: 'bottom', trigger: 'hover' });
+    //this.$('#cloud').tooltip({ title: t('connection_with_server'), placement: 'bottom', trigger: 'hover' });
     this.startClock();
     this.updateUserName();
   },

@@ -1,5 +1,3 @@
-<% let tit_name = 'tit_name', tit_factnumber = 'tit_factnumber', tit_reldate = 'tit_reldate', tit_weight = 'tit_weight', tit_productivity ='tit_productivity' %>
-
 <div class="passport-scroller">
     <div class="t-wrap">
         <div class="t-c-m">
@@ -9,25 +7,25 @@
                         <table class="sheild-table">
                             <tbody>
                                 <tr>
-                                    <td><strong><%= app.language[tit_name] || tit_name %></strong></td>
+                                    <td><strong>${t('tit_name')}</strong></td>
                                     <td><%= name %></td>
                                 </tr>
                                 <tr>
-                                    <td><strong><%= app.language[tit_factnumber] || tit_factnumber %></strong></td>
+                                    <td><strong>${t('tit_factnumber')}</strong></td>
                                     <td>
                                         000<%= fact_number %>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong><%= app.language[tit_reldate] || tit_reldate %></strong></td>
+                                    <td><strong>${t('tit_reldate')}</strong></td>
                                     <td><%= release_date %></td>
                                 </tr>
                                 <tr>
-                                    <td><strong><%= app.language[tit_weight] || tit_weight %></strong></td>
+                                    <td><strong>${t('tit_weight')}</strong></td>
                                     <td><%= weight %></td>
                                 </tr>
                                 <tr>
-                                    <td><strong><%= app.language[tit_productivity] || tit_productivity %></strong></td>
+                                    <td><strong>${t('tit_productivity')}</strong></td>
                                     <td><%= perfomance %></td>
                                 </tr>
                             </tbody>

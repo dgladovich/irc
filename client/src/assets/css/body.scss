@@ -1,8 +1,54 @@
 @import 'components/menu';
+@import 'components/header';
+/* CSS */
+
+a:focus,
+a:hover,
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+
+  text-decoration: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #0f0f0f;
+  color: #cccccc;
+  background-image: url(../images/pattern.png);
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+.h1,
+h1 {
+  font-size: 1.5em;
+  font-weight: 300;
+  margin-top: 0;
+  display: inline-block;
+}
+
+.h3,
+h3 {
+  font-weight: 300;
+}
 
 #app {
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: hidden;
     @include customize(theme) {
       background: th(backgroundDefault);
   }
@@ -22,4 +68,5 @@
 .t-c-m {
     width: 100%;
     padding: 0 30px;
+    margin: 0 auto;
 }

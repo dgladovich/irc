@@ -4,6 +4,8 @@ import { View } from 'backbone.marionette';
 import store from 'store';
 import Noty from 'noty';
 import aja from 'aja';
+import { t } from 'i18next';
+
 import template from './templates/login_form.jst';
 
 const authChannel = Radio.channel('auth');
@@ -51,7 +53,7 @@ export default View.extend({
       .on('500', (response) => {
         console.log('some server errors');
         new Noty({
-          text: app.language[error_while_auth] || error_while_auth,
+          text: t('error_while_auth'),
           theme: 'metroui',
           type: 'error',
           layout: 'topCenter',

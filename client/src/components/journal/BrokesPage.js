@@ -1,4 +1,5 @@
 import { View, Model, CollectionView } from 'backbone.marionette';
+import { t } from 'i18next';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import table_head from './templates/brokes/table_head.jst';
@@ -153,7 +154,7 @@ export default View.extend({
       this.$('#brokes-table').empty();
       this.showChildView('table', new BrokesTable({ collection: this.collection }));
     } else {
-      this.$('#brokes-table').html(`<div style="text-align: center; margin: 150px;"><h3>${app.language[empty_brokes_mess] || empty_brokes_mess}</h3></div>`);
+      this.$('#brokes-table').html(`<div style="text-align: center; margin: 150px;"><h3>${t('empty_brokes_mess')}</h3></div>`);
     }
   },
   onRender() {

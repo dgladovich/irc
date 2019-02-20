@@ -1,11 +1,11 @@
 import { View, Model } from 'backbone.marionette';
+import { t } from 'i18next';
+
 import template from '../general/templates/page.jst';
 import Filter from './VisualPageFilter';
 import Noria from './VisualPageNoria';
 import Conv from './VisualPageConv';
 import Device from './Device';
-
-const menu_visual_observ = 'menu_visual_observ';
 
 export default View.extend({
   template,
@@ -26,7 +26,7 @@ export default View.extend({
   },
   initialize() {
     this.model = new Backbone.Model({
-      title: app.language[menu_visual_observ] || menu_visual_observ,
+      title: t('menu_visual_observ'),
     });
     this.controller = new Device();
   },

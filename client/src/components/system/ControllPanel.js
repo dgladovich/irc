@@ -1,23 +1,11 @@
-//import slider from 'webpack-jquery-ui/slider';
+import slider from 'webpack-jquery-ui/slider';
 import 'jquery-ui-touch-punch';
-import Radio from 'backbone.radio';
 import Noty from 'noty';
-import { View, Model, CollectionView } from 'backbone.marionette';
+import { t } from 'i18next';
+import { View, CollectionView } from 'backbone.marionette';
 import GodMode from './GodMode';
 import device_template from './templates/device_template.jst';
 import template from './templates/system.jst';
-
-const info_speed_changed = 'info_speed_changed'; const info_speed_change = 'info_speed_change'; const
-  info_speed_change_confirm = 'info_speed_change_confirm';
-const ch = Radio.channel('controll');
-
-const ControllPanelModel = Backbone.Model.extend({
-  initialize() {
-    this.on('change', (e) => {
-      console.log(e);
-    });
-  },
-});
 
 
 const DeviceItem = View.extend({
@@ -57,7 +45,7 @@ const DeviceItem = View.extend({
       btnOutRepair.prop('disabled', false);
       btnOutRepair.removeClass('off');
     } else if (this.model.get('stat') === 9) {
-      this.previousBtn = 'off'; 'Управление системой';
+      this.previousBtn = 'off';
       btnRepair.prop('disabled', true);
       btnRepair.addClass(this.previousBtn);
       btnOutRepair.prop('disabled', true);
@@ -159,7 +147,7 @@ export default View.extend({
     const controllerMode = app.modes.findWhere({ id: mode });
     if (controllerMode) {
       const name = controllerMode.get('name');
-      translate = app.language[name];
+      translate = t(name);
     } else {
       translate = 'there is no translate';
     }
@@ -171,7 +159,7 @@ export default View.extend({
     this.$('.ui-slider-handle').html(speed);
     this.$('.ui-slider-range').width(`${100 * speed / 120}%`);
     new Noty({
-      text: `${app.language[info_speed_changed] || info_speed_changed}: ${speed}`,
+      text: `${t('info_speed_changed')}: ${speed}`,
       theme: 'metroui',
       type: 'error',
       layout: 'topCenter',
@@ -229,7 +217,7 @@ export default View.extend({
         this.previousSpeed = ui.value;
       },
       stop: (e, ui) => {
-        const confirmation = confirm(`${app.language[info_speed_change_confirm] || info_speed_change_confirm}${ui.value}`);
+        const confirmation = confirm(`${t('info_speed_change_confirm')}${ui.value}`);
         if (!confirmation) {
           this.getUI('slider').slider({
             value: this.previousSpeed,

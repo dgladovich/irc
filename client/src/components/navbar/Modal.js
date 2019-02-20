@@ -1,4 +1,6 @@
 import { View } from 'backbone.marionette';
+import { t } from 'i18next';
+
 import template from './templates/modal.jst';
 import MessagesTable from './MessagesTable';
 
@@ -29,7 +31,7 @@ export default View.extend({
     if (this.collection.length > 0) {
       this.showChildView('table', new MessagesTable({ collection: this.collection }));
     } else {
-      this.$('.modal-body').html(`<h4 class="messages-body">${app.language[info_no_mess] || info_no_mess}</h4>`);
+      this.$('.modal-body').html(`<h4 class="messages-body">${t('forgot.key')}</h4>`);
     }
   },
   initialize() {

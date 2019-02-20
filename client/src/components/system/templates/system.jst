@@ -2,14 +2,14 @@
 <div class="row">
     <div class="col-xs-6">
         <div class="controller-mode">
-            <span><%= app.language[tit_mode] || tit_mode %>: </span>
+            <span>${t('tit_mode')}: </span>
             <span id="work-type"></span>
         </div>
     </div>
     <div class="col-xs-6">
         <div class="system-page-buttons">
-            <button class="btn btn-stop"><%= app.language[btn_stophydro] || btn_stophydro %></button>
-            <button class="btn btn-start"><%= app.language[btn_starthydro] || btn_starthydro %></button>
+            <button class="btn btn-stop">${t('btn_stophydro')}</button>
+            <button class="btn btn-start">${t('btn_starthydro')}</button>
         </div>
     </div>
 </div>
@@ -17,7 +17,7 @@
     <br>
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
-            <div class="item-title"><%= app.language[tit_sys_speed] || tit_sys_speed %></div>
+            <div class="item-title">${t('tit_sys_speed')}</div>
             <div class="volume-wrap">
                 <div class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" id="slider">
                     <div class="ui-slider-handle ui-corner-all ui-state-default" id="custom-handle" style="left: 0%;"

@@ -49,7 +49,7 @@ export function preparePickList(obj) {
 export function prepareViewGroups(groups, faces) {
   return _.filter(_.toArray(groups), (group) => {
     group.faces = new Backbone.Collection(faces.where({ viewgrp: group.id }));
-    group.translate = app.language[group.name] || group.name;
+    group.translate = t(group.name);
 
     if (group.faces.length === 0) {
       return false;
@@ -65,7 +65,7 @@ export function prepareFaces(devices) {
     _.each(deviceFaces, (face) => {
       const key = app.measurments.findWhere({ id: face.meas });
       if (key) {
-        face.translate = app.language[key.get('name')];
+        face.translate = t(key.get('name'));
       } else {
         face.translate = 'no name for meas';
       }
@@ -78,7 +78,7 @@ export function prepareFaces(devices) {
 export function prepareStatuses(statuses) {
   return _.each(_.toArray(statuses), (status) => {
     status.sgrps_opts = _.each(_.toArray(status.sgrps_opts), (opt) => {
-      opt.translate = app.language[opt.name] || opt.name;
+      opt.translate = t(opt.name);
     });
   });
 }

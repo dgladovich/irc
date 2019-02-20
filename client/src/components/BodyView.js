@@ -2,8 +2,7 @@ import { View, Model } from 'backbone.marionette';
 import { history } from 'backbone';
 import store from 'store';
 import Radio from 'backbone.radio';
-import template from './general/templates/BodyTemplate.jst';
-//import Navbar from './navbar/Navbar';
+import Navbar from './navbar/Navbar';
 import Menu from './menu/Menu';
 import IndividualPage from './individual/IndividualPage';
 import AuthModalBox from './navbar/AuthModalBox';
@@ -11,17 +10,16 @@ import ValuesPage from './values/ValuesPage';
 import VisualPage from './visual/VisualPage';
 import CameraModal from './visual/CameraModal';
 import MiniVisual from './visual/MiniVisual';
-//import JournalPage from './journal/JournalPage';
+import JournalPage from './journal/JournalPage';
 import EquipmentPage from './equipment/EquipmentPage';
 import PassportPage from './passport/PassportPage';
 import TestPage from './testing/TestPage';
 import SystemControllPage from './system/SystemControllPage';
 import ServicePage from './service/ServicePage';
-//import DevicesPage from './devices/DevicesPage';
+import DevicesPage from './devices/DevicesPage';
 import ServiceChat from './remote_service/ServiceChat';
 
-const visualChannel = Radio.channel('visual');
-const authChannel = Radio.channel('auth');
+import template from './general/templates/BodyTemplate.jst';
 
 export const BodyView = View.extend({
   template,
@@ -53,7 +51,7 @@ export const BodyView = View.extend({
     // nesting elements during re-render.
     this.$el.unwrap();
     this.setElement(this.$el);
-    //this.showChildView('navbar', new Navbar());
+    this.showChildView('navbar', new Navbar());
   },
 
   showIndex() {
@@ -141,9 +139,6 @@ export const BodyView = View.extend({
   showMiniWindow(image) {
     const visual = new MiniVisual(image);
     $('body').append(visual.render().el);
-    visualChannel.once('visual:modal:open', () => {
-      visual.destroy();
-    });
   },
   showVisualModal(image) {
     const visual = new CameraModal(image);
@@ -162,16 +157,5 @@ export const BodyView = View.extend({
     // this.toggleServiceWindow();
     //this.devicesPage = new DevicesPage();
     // this.listenTo(authChannel, 'change:auth', this.toggleServiceWindow.bind(this))
-    visualChannel.on('roll-up', (image) => {
-      this.isVisualActive = true;
-      this.showMiniWindow(image);
-    });
-    visualChannel.on('visual:modal:open', (opt) => {
-      this.showVisualModal(opt);
-    });
-    visualChannel.on('roll-out', (image) => {
-      this.isVisualActive = false;
-      this.showVisualModal(image);
-    });
   },
 });

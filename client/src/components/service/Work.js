@@ -1,5 +1,7 @@
 import { View, Model } from 'backbone.marionette';
 import Radio from 'backbone.radio';
+import { t } from 'i18next';
+
 import template from './templates/work.jst';
 
 const serviceChannel = Radio.channel('servicechannel');
@@ -69,7 +71,7 @@ export default View.extend({
 */
 
     if (!_.isNull(type)) {
-      name = app.language[type.name] || type.name;
+      name = t(type.name);
     }
     this.model.set({
       worksList: this.fixString(this.model.get('works').des),

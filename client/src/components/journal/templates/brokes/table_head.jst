@@ -1,10 +1,10 @@
 <%let title_status = 'tit_stat', title_date = 'tit_date', title_time = 'tit_time', title_device = 'tit_dev', title_errors = 'tit_errcodes', title_message = 'tit_msg' %>
 <tr class="ordered-table-head" style="cursor: pointer; user-select:none;">
     <th class='order-by-id' style="width:1px">ID</th>
-    <th class='order-by-date' width="100px"><%= app.language[title_date] || title_date %> <span class="icon-sort glyphicon">&nbsp;</span></th>
-    <th class='order-by-time' style="width:1px"><%= app.language[title_time] || title_time %> <span class="icon-sort glyphicon">&nbsp;</span></th>
-    <th class='order-by-name' style="width: 100px;"><%= app.language[title_device] || title_device %><span class="icon-sort glyphicon">&nbsp;</span></th>
-    <th class='order-by-status' style="width:1px"><%= app.language[title_status] || title_status %> <span class="icon-sort glyphicon">&nbsp;</span></th>
-    <th class='order-by-code' style="width:1px"><%= app.language[title_errors] || title_errors %><span class="icon-sort glyphicon">&nbsp;</span></th>
-    <th class='order-by-msg' style="width:1px"><%= app.language[title_message] || title_message %><span class="icon-sort glyphicon">&nbsp;</span></th>
+    <th class='order-by-date' width="100px">${t('title_date')<span class="icon-sort glyphicon">&nbsp;</span></th>
+    <th class='order-by-time' style="width:1px">${t('title_time')<span class="icon-sort glyphicon">&nbsp;</span></th>
+    <th class='order-by-name' style="width: 100px;">${t('title_device')<span class="icon-sort glyphicon">&nbsp;</span></th>
+    <th class='order-by-status' style="width:1px">${t('title_status')<span class="icon-sort glyphicon">&nbsp;</span></th>
+    <th class='order-by-code' style="width:1px">${t('title_errors')<span class="icon-sort glyphicon">&nbsp;</span></th>
+    <th class='order-by-msg' style="width:1px">${t('title_message')<span class="icon-sort glyphicon">&nbsp;</span></th>
 </tr>

@@ -1,5 +1,7 @@
 import { View, Model, CollectionView } from 'backbone.marionette';
 import Radio from 'backbone.radio';
+import { t } from 'i18next';
+
 import DefaultPanel from '../general/defpanel/DefaultPanel';
 import template from '../general/templates/page.jst';
 import BrokesPage from './BrokesPage';
@@ -29,18 +31,18 @@ export default View.extend({
   },
   initialize() {
     this.model = new Backbone.Model({
-      title: app.language[menu_event_journal] || menu_event_journal,
+      title: t('menu_event_journal'),
     });
     this.tabsContent = new Backbone.Collection([
       {
         id: 'brokes',
         view: BrokesPage,
-        translate: app.language[menu_brokes_journal] || menu_brokes_journal,
+        translate: t('menu_brokes_journal'),
       },
       {
         id: 'events',
         view: JournalTab,
-        translate: app.language[menu_event_journal] || menu_event_journal,
+        translate: t('menu_event_journal'),
       },
     ]);
   },

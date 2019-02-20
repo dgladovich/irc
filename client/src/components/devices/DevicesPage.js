@@ -1,4 +1,6 @@
 import { View, Model } from 'backbone.marionette';
+import { t } from 'i18next';
+
 import Devices from './Devices';
 import template from '../general/templates/page.jst';
 
@@ -27,7 +29,7 @@ export default View.extend({
   },
   initialize(opt) {
     this.model = new Backbone.Model({
-      title: app.language[page_device_list] || page_device_list,
+      title: t(page_device_list),
     });
     this.devices = opt.data;
   },

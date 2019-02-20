@@ -1,6 +1,7 @@
 #home-buttons {
     max-height: 527px;
     max-width: 900px;
+    display: block;
 }
 
 .home-btns {
@@ -62,4 +63,78 @@
 
 #homebtn-1.h-btn:hover .hover-btn {
     fill-opacity: 0;
+}
+
+
+.home-btns {
+  background: url(../images/bg-w.png) no-repeat center;
+  background-size: contain;
+}
+
+.home-btn {
+  stroke: #9e9e9e;
+  stroke-width: 1px;
+  -webkit-filter: drop-shadow(0 0 5px #ffd842);
+  filter: drop-shadow(0 0 5px #ffd842);
+}
+
+.home-btn:hover {
+  -webkit-filter: drop-shadow(0 0 5px #ffd842);
+  filter: drop-shadow(0 0 5px #ffd842);
+  stroke: #fcff00;
+}
+
+.hover-btn {
+  fill-opacity: 0;
+  stroke-opacity: 0;
+  stroke: #f7f216;
+  /*fill: #f7f216;*/
+  transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+
+.h-btn,
+.h-btn a {
+  stroke: #9e9e9e;
+  stroke-opacity: .4;
+  stroke-width: 2px;
+  fill: #000;
+  fill-opacity: .6;
+}
+
+.h-btn text {
+  color: #fff;
+  text-transform: uppercase;
+  stroke: none;
+  font-size: 15px;
+  fill: #fff;
+  fill-opacity: 1;
+  font-weight: 300;
+  letter-spacing: 1px;
+  /*  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;  */
+}
+
+.h-btn:hover .hover-btn {
+  /*fill-opacity: 0;*/
+  stroke-opacity: 1;
+}
+
+.h-btn:hover text {
+  /*fill: #000;*/
+}
+
+#homebtn-1.h-btn:hover .image-btn {
+  stroke: #f7f216;
+}
+
+#homebtn-1.h-btn:hover .hover-btn {
+
+  fill-opacity: 0;
 }

@@ -1,4 +1,6 @@
 import { View, Model } from 'backbone.marionette';
+import { t } from 'i18next';
+
 import TabPanel from '../general/tabpanel/TabPanel';
 import template from '../general/templates/page.jst';
 import Works from './Works';
@@ -37,17 +39,17 @@ export default View.extend({
     this.tabsContent = new Backbone.Collection([
       {
         id: 'calendar',
-        translate: app.language.passport_shield || 'Календарь ТО',
+        translate: t('passport_shield'),
         view: Calendars,
       },
       {
         id: 'devser',
-        translate: app.language.passport_shield || 'Техническое обслуживание',
+        translate: t('passport_shield'),
         view: DevicesServicePage,
       },
       {
         id: 'journal',
-        translate: app.language.passport_shield || 'Журнал ТО',
+        translate: t('passport_shield'),
         view: ServiceJournal,
       },
     ]);

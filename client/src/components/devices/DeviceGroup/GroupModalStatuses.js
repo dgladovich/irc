@@ -1,4 +1,6 @@
 import { View, Model, CollectionView } from 'backbone.marionette';
+import { t } from 'i18next';
+
 import table_head from './templates/table_head.jst';
 import body_row from './templates/body_row.jst';
 import table_template from './templates/table_template.jst';
@@ -26,7 +28,7 @@ const BodyRowView = View.extend({
       console.log(`Get wrong status; Device${this.model.get('id')}; Status:${this.model.get('stat')}; Group:${this.model.get('sgrp')}`);
     }
     const langKey = deviceStatus.get('name');
-    const statusTranslate = app.language[langKey];
+    const statusTranslate = t(langKey);
     this.$('.text-center').html(statusTranslate);
     title.addClass(this.previousClass);
   },
