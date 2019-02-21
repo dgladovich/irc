@@ -4,15 +4,6 @@ import valve from './templates/valve_template.jst';
 
 const Valve = View.extend({
   template: valve,
-  onRender() {
-    // Get rid of that pesky wrapping-div.
-    // Assumes 1 child element present in template.
-    this.$el = this.$el.children();
-    // Unwrap the element to prevent infinitely
-    // nesting elements during re-render.
-    this.$el.unwrap();
-    this.setElement(this.$el);
-  },
   showStatus() {
     const device = this.$('.klap');
     device.removeClass(this.previousClass);
@@ -92,36 +83,17 @@ const Valves = CollectionView.extend({
             })
         } */
   },
-  onRender() {
-    // Get rid of that pesky wrapping-div.
-    // Assumes 1 child element present in template.
-    this.$el = this.$el.children();
-    // Unwrap the element to prevent infinitely
-    // nesting elements during re-render.
-    this.$el.unwrap();
-    this.setElement(this.$el);
-  },
 });
 
 
 export default View.extend({
   template: valves,
-
   regions: {
     valves: {
       el: '.row',
     },
   },
   onRender() {
-    // Get rid of that pesky wrapping-div.
-    // Assumes 1 child element present in template.
-    this.$el = this.$el.children();
-    // Unwrap the element to prevent infinitely
-    // nesting elements during re-render.
-    this.$el.unwrap();
-    this.setElement(this.$el);
     this.showChildView('valves', new Valves({ collection: this.collection }));
   },
-  initialize() {},
-
 });

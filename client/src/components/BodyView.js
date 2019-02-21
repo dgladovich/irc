@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import { View, Model } from 'backbone.marionette';
 import { history } from 'backbone';
 import store from 'store';
@@ -18,11 +19,17 @@ import SystemControllPage from './system/SystemControllPage';
 import ServicePage from './service/ServicePage';
 import DevicesPage from './devices/DevicesPage';
 import ServiceChat from './remote_service/ServiceChat';
-
-import template from './general/templates/BodyTemplate.jst';
+// import template from './general/templates/BodyTemplate.jst';
+const template = () => {
+  return `
+  <header></header>
+  <div id="content"></div>
+`;
+};
 
 export const BodyView = View.extend({
   template,
+  className: 'wrapper',
   isVisualActive: false,
   events: {
     'click .fingerprint': 'showAuthModal',
@@ -44,13 +51,6 @@ export const BodyView = View.extend({
     this.authModalBox.$('#login-modal').modal('show');
   },
   onRender() {
-    // Get rid of that pesky wrapping-div.
-    // Assumes 1 child element present in template.
-    this.$el = this.$el.children();
-    // Unwrap the element to prevent infinitely
-    // nesting elements during re-render.
-    this.$el.unwrap();
-    this.setElement(this.$el);
     this.showChildView('navbar', new Navbar());
   },
 

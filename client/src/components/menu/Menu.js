@@ -12,13 +12,6 @@ export default View.extend({
   // },
   render() {
     this.$el.html(this.template());
-    // Get rid of that pesky wrapping-div.
-    // Assumes 1 child element present in template.
-    this.$el = this.$el.children();
-    // Unwrap the element to prevent infinitely
-    // nesting elements during re-render.
-    this.$el.unwrap();
-    this.setElement(this.$el);
     //this.$el.hide();
     //this._bindEvents();
     // this.$('#home-buttons')[0].addEventListener('load', this.setHeight.bind(this), true);
