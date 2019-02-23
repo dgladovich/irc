@@ -1,12 +1,11 @@
-import { View } from 'backbone.marionette';
-import { html } from 'lit-html';
-import App from './App';
+import 'bootstrap/js/dist/dropdown';
+import 'webpack-icons-installer/font-awesome';
+import 'webpack-icons-installer/bootstrap';
 import './assets/css/index.scss';
+import App from './App';
 
-View.setRenderer((template, data) => html(template, data).strings);
 export default function () {
   document.addEventListener('DOMContentLoaded', () => {
-    const smart = new App();
-    window.smart = smart;
+    window.smart = new App();
   });
 }

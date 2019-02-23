@@ -1,7 +1,20 @@
+.left-nav, .right-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.left-nav > *, .right-nav > * {
+  margin: 0 10px;
+}
+.logo-container {
+  display: inline-flex;
+  float: left;
+  margin-left: -15px;
+}
 .profile {
-    font-size: .9em;
-    color: #707070;
-    line-height: 2em;
+  font-size: 0.9em;
+  color: #707070;
+  line-height: 2em;
 }
 .profile span,
 .profile img {
@@ -12,11 +25,11 @@
   vertical-align: baseline;
 }
 .profile .user-name {
-    font-size: 1.1em;
-    background: #222;
-    padding: 3px 10px;
-    display: inline-block;
-    border-radius: 4px;
+  font-size: 1.1em;
+  background: #222;
+  padding: 3px 10px;
+  display: inline-block;
+  border-radius: 4px;
 }
 
 .logo,
@@ -30,7 +43,7 @@
 }
 
 .profile {
-  font-size: .9em;
+  font-size: 0.9em;
   color: #707070;
   line-height: 2em;
 }
@@ -43,7 +56,6 @@
 .profile img {
   height: 13px;
   vertical-align: baseline;
-
 }
 
 img.user-icon {
@@ -67,7 +79,7 @@ img.user-icon {
   font-size: 1.4em;
   margin-left: 12px;
   color: #939498;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   line-height: 1.5em;
   display: inline-block;
   width: 22px;

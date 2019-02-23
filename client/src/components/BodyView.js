@@ -3,29 +3,25 @@ import { View, Model } from 'backbone.marionette';
 import { history } from 'backbone';
 import store from 'store';
 import Radio from 'backbone.radio';
-import Navbar from './navbar/Navbar';
-import Menu from './menu/Menu';
+import template from './body.jst';
+import Navbar from './navbar';
+import ValuesPanel from './pages/values';
+import Menu from './menu';
+import Page from './ui/page';
 import IndividualPage from './individual/IndividualPage';
 import AuthModalBox from './navbar/AuthModalBox';
-import ValuesPage from './values/ValuesPage';
-import VisualPage from './visual/VisualPage';
-import CameraModal from './visual/CameraModal';
-import MiniVisual from './visual/MiniVisual';
-import JournalPage from './journal/JournalPage';
-import EquipmentPage from './equipment/EquipmentPage';
-import PassportPage from './passport/PassportPage';
-import TestPage from './testing/TestPage';
-import SystemControllPage from './system/SystemControllPage';
-import ServicePage from './service/ServicePage';
-import DevicesPage from './devices/DevicesPage';
-import ServiceChat from './remote_service/ServiceChat';
-// import template from './general/templates/BodyTemplate.jst';
-const template = () => {
-  return `
-  <header></header>
-  <div id="content"></div>
-`;
-};
+//import VisualPage from './visual/VisualPage';
+//import CameraModal from './visual/CameraModal';
+//import MiniVisual from './visual/MiniVisual';
+//import JournalPage from './journal/JournalPage';
+//import EquipmentPage from './equipment/EquipmentPage';
+//import PassportPage from './passport/PassportPage';
+//import TestPage from './testing/TestPage';
+//import SystemControllPage from './system/SystemControllPage';
+//import ServicePage from './service/ServicePage';
+//import DevicesPage from './devices/DevicesPage';
+//import ServiceChat from './remote_service/ServiceChat';
+
 
 export const BodyView = View.extend({
   template,
@@ -69,7 +65,7 @@ export const BodyView = View.extend({
     history.navigate('values'); // Update the location bar
   },
   showVisual() {
-    this.showChildView('main', new VisualPage());
+    this.showChildView('main', new Page({ children: new ValuesPanel() }));
     history.navigate('visual'); // Update the location bar
   },
   // showJournal() {

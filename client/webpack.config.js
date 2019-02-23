@@ -16,6 +16,11 @@ const webpackCommon = {
     'babel-polyfill',
     path.resolve(__dirname, './index.js'),
   ],
+  resolve: {
+    alias: {
+      handlebars: 'handlebars/dist/handlebars.min.js',
+    },
+  },
   module: {
     rules: [{
       test: /\.js?$/,

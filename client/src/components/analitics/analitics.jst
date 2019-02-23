@@ -1,0 +1,9 @@
+<div class="anal-block">
+  <br>
+  <br>
+  <h4 style="text-align: center; font-weight: 600">${t('title_analitics')}</h4><br>
+  <p>${t('work_for_last_day')} <%= hours.work %> ${t('hours_meas')}.</p>
+  <p>${t('idle_because_of_emergency')}>: <%= hours.eidle %> ${t('hours_meas')}.</p>
+  <p>${t('quantity_of_crashes')}>: <%= crashes %>.</p>
+  <p>${t('closest')} ${t('maintenance_title')} <%= next_service.future_service %> ${t('through')} <%= next_service.need_hours %> ${t('hours_meas')}.</p>
+</div>

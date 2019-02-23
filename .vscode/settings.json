@@ -1,2 +1,9 @@
 {
+  "lit-html.tags": [
+    "html",
+    "template",
+  ],
+  "files.associations": {
+    "*.jst": "html"
+  }
 }
