@@ -1,5 +1,5 @@
 import { View, Model } from 'backbone.marionette';
-import Handlebars from 'handlebars';
+
 export default View.extend({
   onBeforeRender() {
     this.updateLinear(this);

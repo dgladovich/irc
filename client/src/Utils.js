@@ -1,30 +1,5 @@
 import Radio from 'backbone.radio';
-import StatusesCollection from './store/collections/Statuses';
-import DeviceGroupCollection from './store/collections/DeviceGroups';
-import ErrorsCollection from './store/collections/Errors';
-import InformerCollection from './store/collections/Informers';
-import Controller from './store/models/Controller';
 
-
-const statusesCollection = new StatusesCollection();
-const devicesGroups = new DeviceGroupCollection();
-const errors = new ErrorsCollection();
-const infos = new InformerCollection();
-const controller = new Controller();
-
-const collectionToFetch = [
-  statusesCollection,
-  devicesGroups,
-  errors,
-  controller,
-  infos,
-];
-
-const status = Radio.channel('controll');
-const network = Radio.channel('network');
-const individual = Radio.channel('individual');
-const alarm = Radio.channel('confirm');
-const bot = Radio.channel('bot');
 
 export function computeDeviceSize(devLength) {
   const defaultWidth = 120;

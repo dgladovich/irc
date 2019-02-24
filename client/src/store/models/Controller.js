@@ -5,12 +5,13 @@ import CamerasCollection from '../collections/Cameras';
 import ControllerPassport from './ControllerPassport';
 
 export default Backbone.Model.extend({
-  initialize() {
-    this.set({
-      devs: new DevicesCollection(this.get('devs')),
-      deviceGroups: new DeviceGroupsCollection(this.get('dev_grps')),
-      pass: new Backbone.Model(this.get('pass')),
-      cameras: new Backbone.Collection(this.get('cameras')),
-    });
+  initialize(opt) {
+    // const { devices } = opt;
+    // this.set({
+    //   devices,
+    //   devicesgroups: new DeviceGroupsCollection(this.get('dev_grps')),
+    //   passport: new ControllerPassport(this.get('pass')),
+    //   cameras: new CamerasCollection(this.get('cameras')),
+    // });
   },
 });

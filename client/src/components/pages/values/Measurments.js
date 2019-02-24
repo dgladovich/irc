@@ -13,22 +13,18 @@ const Measurments = CollectionView.extend({
     case 0:
     {
       return Status;
-      break;
     }
     case 1:
     {
       return Value;
-      break;
     }
     case 2:
     {
       return Linear;
-      break;
     }
     case 3:
     {
       return Radial;
-      break;
     }
     default:
       return View.extend({ template: _.noop });
@@ -38,9 +34,9 @@ const Measurments = CollectionView.extend({
 export default View.extend({
   template,
   regions: {
-    content: '.row',
+    children: '.row',
   },
   onRender() {
-    this.showChildView('content', new Measurments({ collection: this.collection }));
+    this.showChildView('children', new Measurments({ collection: this.collection }));
   },
 });

@@ -1,5 +1,5 @@
 import { CollectionView } from 'backbone.marionette';
-import Tab from './Tab';
+import Tab from './tab';
 
 export default CollectionView.extend({
   tagName: 'ul',

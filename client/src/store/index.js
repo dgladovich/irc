@@ -58,7 +58,7 @@ export default Model.extend({
       cameras,
       controller,
       controllers,
-      devicegroups,
+      devicesgroups,
       devices,
       errors,
       faces,
@@ -71,14 +71,19 @@ export default Model.extend({
       users,
       viewgroups,
     } = config;
+    const devicesCollection = new Devices(devices);
+    const controllerModel = new Controller({
+      devices: devicesCollection,
+    });
+
     this.set({
       alarms: new Alarms(alarms),
       analitics: new Analitics(),
       brokes: new Brokes(),
       cameras: new Cameras(cameras),
       controllers: new Controllers(controllers),
-      controller: new Controller(controller),
-      deviceGroups: new DeviceGroups(devicegroups),
+      controller: controllerModel,
+      devicesgroups: new DeviceGroups(devicesgroups),
       devices: new Devices(devices),
       errors: new Errors(errors),
       faces: new Faces(faces),

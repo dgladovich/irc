@@ -1,15 +1,17 @@
 import _ from 'underscore';
-import { View, Model } from 'backbone.marionette';
-import { history } from 'backbone';
-import store from 'store';
+import { View } from 'backbone.marionette';
+import { Collection, history } from 'backbone';
 import Radio from 'backbone.radio';
 import template from './body.jst';
 import Navbar from './navbar';
 import ValuesPanel from './pages/values';
+// import BrokesPanel from './pages/journal';
+// import JournalPanel from './pages/brokes';
+import MeasurmentsPanel from './pages/values/panel';
 import Menu from './menu';
 import Page from './ui/page';
+import Table from './ui/table';
 import IndividualPage from './individual/IndividualPage';
-import AuthModalBox from './navbar/AuthModalBox';
 //import VisualPage from './visual/VisualPage';
 //import CameraModal from './visual/CameraModal';
 //import MiniVisual from './visual/MiniVisual';
@@ -21,15 +23,11 @@ import AuthModalBox from './navbar/AuthModalBox';
 //import ServicePage from './service/ServicePage';
 //import DevicesPage from './devices/DevicesPage';
 //import ServiceChat from './remote_service/ServiceChat';
-
+window.View = View;
 
 export const BodyView = View.extend({
   template,
   className: 'wrapper',
-  isVisualActive: false,
-  events: {
-    'click .fingerprint': 'showAuthModal',
-  },
   regions: {
     main: {
       el: '#content',
@@ -41,19 +39,13 @@ export const BodyView = View.extend({
     },
 
   },
-  showAuthModal() {
-    this.authModalBox = new AuthModalBox();
-    $('body').append(this.authModalBox.render().el);
-    this.authModalBox.$('#login-modal').modal('show');
-  },
   onRender() {
     this.showChildView('navbar', new Navbar());
   },
 
   showIndex() {
     this.showChildView('main', new Menu());
-    /*        let menu = this.getChildView('main');
-         this.$el.fadeIn('slow'); */
+    this.$el.fadeIn('slow');
     history.navigate('#'); // Update the location bar
   },
   showIndividual() {
@@ -61,17 +53,76 @@ export const BodyView = View.extend({
     history.navigate('individual'); // Update the location bar
   },
   showValues() {
-    this.showChildView('main', new ValuesPage());
+    const { store } = window.smart;
+    const faces = store.get('faces');
+    const groups = store.get('devicesgroups');
+
+    const valuesgroups = groups.map((group) => {
+      const groupfaces = faces.where({ viewgrp: group.get('id') });
+      return {
+        id: group.get('id'),
+        name: group.get('name'),
+        title: group.get('name'),
+        view: MeasurmentsPanel,
+        collection: groupfaces,
+        length: groupfaces.length,
+      };
+    }).filter(group => group.length);
+
+    this.showChildView('main', new Page({
+      children: new ValuesPanel({ tabs: valuesgroups }),
+    }));
     history.navigate('values'); // Update the location bar
   },
   showVisual() {
-    this.showChildView('main', new Page({ children: new ValuesPanel() }));
     history.navigate('visual'); // Update the location bar
   },
-  // showJournal() {
-  //   this.showChildView('main', new JournalPage());
-  //   history.navigate('journal'); // Update the location bar
-  // },
+  showJournal() {
+    // this.showChildView('main', new JournalPage());
+    const { store } = window.smart;
+    // const journal = store.get('journals');
+    // const brokes = store.get('brokes');
+    // const tabs = [
+    //   {
+    //     id: 'brokes',
+    //     title: 'Brokes',
+    //     view: BrokesPanel,
+    //     collection: brokes,
+    //   },
+    //   {
+    //     id: 'events',
+    //     title: 'Journal',
+    //     view: JournalPanel,
+    //     collection: journal,
+    //   },
+    // ];
+    this.showChildView('main', new Page({
+      children: new Table({
+        columns: [
+          {
+            title: '#',
+            datapath: 'title',
+          },
+          {
+            title: 'Status',
+            datapath: 'stat',
+          },
+        ],
+        options: {},
+        data: [
+          {
+            title: 'pisos',
+            stat: 'active',
+          },
+          {
+            title: 'pisos2',
+            stat: 'unactive',
+          },
+        ],
+      }),
+    }));
+    history.navigate('journal'); // Update the location bar
+  },
   showCurrent() {
     this.showChildView('main', new EquipmentPage());
     history.navigate('current'); // Update the location bar
@@ -143,11 +194,6 @@ export const BodyView = View.extend({
   showMessage() {
     this.showChildView('main', new MessagesPage());
     history.navigate('messages'); // Update the location bar
-  },
-  toggleServiceWindow() {
-    if (store.get('user')) {
-      $('body').append(new ServiceChat().render().el);
-    }
   },
   initialize() {
     // this.toggleServiceWindow();

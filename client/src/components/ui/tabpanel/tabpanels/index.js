@@ -1,5 +1,5 @@
 import { CollectionView } from 'backbone.marionette';
-import TabContent from './TabContent';
+import TabContent from './tabcontent';
 
 export default CollectionView.extend({
   childView: TabContent,
