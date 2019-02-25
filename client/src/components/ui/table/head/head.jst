@@ -1,1 +1,5 @@
-<div class="thead-column"> <%= text %> </div>
+<div class="thead-column">
+  <% obj.columns.forEach((col)=>{ %>
+    <div><%= col.title %> </div>
+  <% }); %>
+</div>

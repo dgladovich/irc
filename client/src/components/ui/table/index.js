@@ -11,10 +11,11 @@ export default View.extend({
     body: '.table-body',
   },
   onRender() {
-    const headCollection = this.model.get('head');
-    const bodyCollection = this.model.get('body');
-    this.showChildView('head', new Head({ collection: headCollection }));
-    //this.showChildView('body', new Body(bodyCollection));
+    this.showChildView('head', new Head({ model: this.model }));
+    this.showChildView('body', new Body({
+      collection: this.model.get('data'),
+      columns: this.model.get('columns'),
+    }));
   },
   initialize(opt) {
     this.model = new TableModel(opt);
