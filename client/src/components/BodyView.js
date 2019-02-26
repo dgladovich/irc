@@ -8,6 +8,8 @@ import ValuesPanel from './pages/values';
 // import BrokesPanel from './pages/journal';
 // import JournalPanel from './pages/brokes';
 import MeasurmentsPanel from './pages/values/panel';
+import Equipment from './pages/equipment';
+import Passport from './pages/passport';
 import Menu from './menu';
 import Page from './ui/page';
 import Table from './ui/table';
@@ -124,11 +126,13 @@ export const BodyView = View.extend({
     history.navigate('journal'); // Update the location bar
   },
   showCurrent() {
-    this.showChildView('main', new EquipmentPage());
+    this.showChildView('main', new Page({
+      children: new Equipment(),
+    }));
     history.navigate('current'); // Update the location bar
   },
   showPassport() {
-    this.showChildView('main', new PassportPage());
+    this.showChildView('main', new Passport());
     history.navigate('passport'); // Update the location bar
   },
   showSystemControll() {
