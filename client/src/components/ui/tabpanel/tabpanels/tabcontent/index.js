@@ -1,11 +1,16 @@
 import { View } from 'backbone.marionette';
 import { Collection } from 'backbone';
 import template from './tabcontent.jst';
+import './tabpanel.scss';
 
 export default View.extend({
   template,
+  className: 'tab-pane',
   regions: {
-    children: '.row',
+    children: {
+      el: '.row',
+      replaceElement: true,
+    },
   },
   onRender() {
     const ChildModel = this.model.get('model');

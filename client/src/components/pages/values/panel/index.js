@@ -6,7 +6,8 @@ import Status from './status';
 import Value from './value';
 
 
-const Measurments = CollectionView.extend({
+// const Measurments = CollectionView.extend({
+export default CollectionView.extend({
   childView(value) {
     switch (value.get('viewtype')) {
       case null:
@@ -23,12 +24,12 @@ const Measurments = CollectionView.extend({
     }
   },
 });
-export default View.extend({
-  template,
-  regions: {
-    children: '.row',
-  },
-  onRender() {
-    this.showChildView('children', new Measurments({ collection: this.collection }));
-  },
-});
+// export default View.extend({
+//   template,
+//   regions: {
+//     children: '.row',
+//   },
+//   onRender() {
+//     this.showChildView('children', new Measurments({ collection: this.collection }));
+//   },
+// });

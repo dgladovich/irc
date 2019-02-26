@@ -6,11 +6,14 @@ import './page.scss';
 
 export default View.extend({
   template,
+  className: 'container',
   events: {
     'click #close-page': 'closePage',
   },
   regions: {
-    children: '.content',
+    children: {
+      el: '.content',
+    },
     backbutton: {
       el: '.button-back',
       replaceElement: true,
