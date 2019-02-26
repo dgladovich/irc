@@ -1,0 +1,109 @@
+.header-wrap {
+  position: relative;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 40px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+
+
+// .main-asset-title {
+//     float: right;
+//     text-transform: uppercase;
+//     color: #ffa200;
+//     padding-right: 70px;
+// }
+
+
+// .btn-back-custom {
+//     position: absolute;
+//     right: 14px;
+//     height: 40px;
+//     z-index: 1000;
+//     width: 40px;
+//     background: transparent;
+//     border: none;
+//     top: 0;
+//     border-radius: 0;
+// }
+
+// .btn-default-custom {
+//     color: #ccc;
+//     border-color: #494949;
+// }
+
+// .btn-custom {
+//     display: inline-block;
+//     padding: 6px 12px;
+//     margin-bottom: 0;
+//     font-size: 14px;
+//     font-weight: 400;
+//     line-height: 1.42857143;
+//     text-align: center;
+//     white-space: nowrap;
+//     vertical-align: middle;
+//     -ms-touch-action: manipulation;
+//     touch-action: manipulation;
+//     cursor: pointer;
+//     -webkit-user-select: none;
+//     -moz-user-select: none;
+//     -ms-user-select: none;
+//     user-select: none;
+//     background-image: none;
+//     border: 1px solid transparent;
+//     border-radius: 4px;
+// }
+
+// .btn-back span {
+//     display: block;
+//     position: absolute;
+//     background: none;
+//     top: 19px;
+//     left: 4px;
+//     right: 7px;
+//     height: 2px;
+//     transition: background 0s 0.2s;
+// }
+
+// .btn-back span::before,
+// .btn-back span::after {
+//     position: absolute;
+//     display: block;
+//     left: 0;
+//     width: 100%;
+//     background-color: #fff;
+//     content: "";
+//     height: 1px;
+//     transition-duration: 0.2s, 0.2s;
+//     transition-delay: 0.2s, 0s;
+// }
+
+// .btn-back span:after {
+//     top: 0;
+//     -ms-transform: rotate(-45deg);
+//     transform: rotate(-45deg);
+//     transition-property: top, transform;
+// }
+
+// .btn-back span:before {
+//     top: 0;
+//     -ms-transform: rotate(45deg);
+//     transform: rotate(45deg);
+//     transition-property: top, transform;
+// }
+
+// .btn-back:hover,
+// .btn-back:active {
+//     background: #333;
+// }
+
+// .btn-back:hover span::before,
+// .btn-back:hover span::after {
+//     -ms-transform: rotate(0deg);
+//     transform: rotate(0deg);
+// }
+

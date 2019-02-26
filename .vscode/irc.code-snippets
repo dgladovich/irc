@@ -1,0 +1,16 @@
+{
+  "View basic": {
+    "scope": "javascript,typescript",
+    "prefix": "view.marionette",
+    "body": [
+      "import { View } from 'backbone.marionette';",
+      "import template from './template';",
+      "\n",
+      "export default View.extend({",
+      "\ttemplate,",
+      "});",
+      "",
+    ],
+    "description": "Log output to console"
+  }
+}

@@ -1,0 +1,17 @@
+.button-back {
+  color: #ccc;
+  padding: 20px;
+  border: 1px solid rgba(214, 211, 211, 0.11);
+  border-radius: 5px;
+  line-height: 0;
+  cursor: pointer;
+  user-select: none;
+}
+.button-back:hover {
+  background: #ccc;
+  color:rgb(15, 15, 15);
+}
+.button-back:active {
+  background: transparent;
+  color: #ccc;
+}

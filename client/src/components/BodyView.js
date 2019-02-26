@@ -11,9 +11,9 @@ import MeasurmentsPanel from './pages/values/panel';
 import Equipment from './pages/equipment';
 import Passport from './pages/passport';
 import Menu from './menu';
+import Index from './pages/index';
 import Page from './ui/page';
 import Table from './ui/table';
-import IndividualPage from './individual/IndividualPage';
 //import VisualPage from './visual/VisualPage';
 //import CameraModal from './visual/CameraModal';
 //import MiniVisual from './visual/MiniVisual';
@@ -46,7 +46,7 @@ export const BodyView = View.extend({
   },
 
   showIndex() {
-    this.showChildView('main', new Menu());
+    this.showChildView('main', new Index());
     this.$el.fadeIn('slow');
     history.navigate('#'); // Update the location bar
   },
