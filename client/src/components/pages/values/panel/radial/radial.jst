@@ -1,36 +1,34 @@
-<div class="col-xs-12 col-sm-4 col-lg-4">
-  <div class="item radial ">
-    <div class="radial-wrap halfwidth" style="height: 75px;">
-      <svg class="radial-stroke" style="-webkit-transform: rotate(0deg); transform: rotate(0deg);"
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <path d="M150 75c0,41 -34,75 -75,75 -41,0 -75,-34 -75,-75l22 0c0,29 24,53 53,53 29,0 53,-24 53,-53l22 0z">
-        </path>
-      </svg>
-      <svg class="radial-shkala" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
-        <path d="M150 75c0,41 -34,75 -75,75 -41,0 -75,-34 -75,-75l22 0c0,29 24,53 53,53 29,0 53,-24 53,-53l22 0z">
-        </path>
-      </svg>
-      <svg class="radial-dev1"
-        style="-webkit-transform: rotate(<%= degree_alert %>deg); transform: rotate(<%= degree_alert %>deg);"
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <line class="fil0 str0" x1="0" y1="75" x2="24" y2="75"></line>
-      </svg>
-      <svg class="radial-dev2"
-        style="-webkit-transform: rotate(<%= degree_danger %>deg); transform: rotate(<%= degree_danger %>deg);"
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <line class="fil0 str0" x1="0" y1="75" x2="24" y2="75"></line>
-      </svg>
-    </div>
-    <div class="item-value">
-      <span class="radial-value"><%= def %></span>
-    </div>
-    <div class="predeli">
-      <div class="min-value"><%= min_val %></div>
-      <div class="max-value"><%= max_val %></div>
-    </div>
-    <div class="item-title">
-      <%= name %>
-    </div>
+<div class="item radial ">
+  <div class="radial-wrap halfwidth" style="height: 75px;">
+    <svg class="radial-stroke" style="-webkit-transform: rotate(0deg); transform: rotate(0deg);"
+      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path d="M150 75c0,41 -34,75 -75,75 -41,0 -75,-34 -75,-75l22 0c0,29 24,53 53,53 29,0 53,-24 53,-53l22 0z">
+      </path>
+    </svg>
+    <svg class="radial-shkala" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+      <path d="M150 75c0,41 -34,75 -75,75 -41,0 -75,-34 -75,-75l22 0c0,29 24,53 53,53 29,0 53,-24 53,-53l22 0z">
+      </path>
+    </svg>
+    <svg class="radial-dev1"
+      style="-webkit-transform: rotate(<%= degree_alert %>deg); transform: rotate(<%= degree_alert %>deg);"
+      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <line class="fil0 str0" x1="0" y1="75" x2="24" y2="75"></line>
+    </svg>
+    <svg class="radial-dev2"
+      style="-webkit-transform: rotate(<%= degree_danger %>deg); transform: rotate(<%= degree_danger %>deg);"
+      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <line class="fil0 str0" x1="0" y1="75" x2="24" y2="75"></line>
+    </svg>
+  </div>
+  <div class="item-value">
+    <span class="radial-value"><%= def %></span>
+  </div>
+  <div class="predeli">
+    <div class="min-value"><%= min_val %></div>
+    <div class="max-value"><%= max_val %></div>
+  </div>
+  <div class="item-title">
+    <%= name %>
   </div>
 </div>

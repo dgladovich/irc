@@ -3,6 +3,7 @@ import template from './radial.jst';
 
 export default View.extend({
   template,
+  className: 'col-xs-12 col-sm-4 col-lg-4',
   onBeforeRender() {
     this.updateRadial.call(this);
   },

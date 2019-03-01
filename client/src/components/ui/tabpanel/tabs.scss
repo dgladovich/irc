@@ -1,8 +1,9 @@
 .tabs-wrapper-custom {
+  top: 15px;
+  position: relative;
   overflow: hidden;
   border: 1px solid #494949;
   border-radius: 100px;
-  padding: 4px;
 }
 .journal-page-content.tab-content {
   border-radius: 0 0 10px 10px;

@@ -10,7 +10,10 @@ export default View.extend({
   className: 'tabpanel',
   regions: {
     tabs: '.tabs-wrapper-custom',
-    tabpanels: '.tab-content',
+    tabpanels: {
+      el: '.tab-content',
+      replaceElement: true,
+    },
   },
   onRender() {
     this.showChildView('tabs', this.tabs);

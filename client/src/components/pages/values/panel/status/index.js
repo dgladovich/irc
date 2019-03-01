@@ -3,6 +3,7 @@ import template from './status.jst';
 
 export default View.extend({
   template,
+  className: 'col-xs-12 col-sm-6 col-lg-6',
   onDestroy() {
     this.stopListening();
   },

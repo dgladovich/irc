@@ -1,13 +1,11 @@
 import { CollectionView, View } from 'backbone.marionette';
-import template from './panel.jst';
 import Radial from './radial';
 import Linear from './linear';
 import Status from './status';
 import Value from './value';
 
-
-// const Measurments = CollectionView.extend({
 export default CollectionView.extend({
+  className: 'values-content',
   childView(value) {
     switch (value.get('viewtype')) {
       case null:
@@ -24,12 +22,3 @@ export default CollectionView.extend({
     }
   },
 });
-// export default View.extend({
-//   template,
-//   regions: {
-//     children: '.row',
-//   },
-//   onRender() {
-//     this.showChildView('children', new Measurments({ collection: this.collection }));
-//   },
-// });
