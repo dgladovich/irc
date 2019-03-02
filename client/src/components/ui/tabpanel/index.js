@@ -1,4 +1,5 @@
 import { View } from 'backbone.marionette';
+import 'bootstrap/js/src/tab';
 import { Collection } from 'backbone';
 import Tabs from './tabs';
 import TabPanels from './tabpanels';
@@ -9,7 +10,10 @@ export default View.extend({
   template,
   className: 'tabpanel',
   regions: {
-    tabs: '.tabs-wrapper-custom',
+    tabs: {
+      el: '.tabs-wrapper-custom',
+      replaceElement: true,
+    },
     tabpanels: {
       el: '.tab-content',
       replaceElement: true,

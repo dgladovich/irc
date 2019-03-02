@@ -5,7 +5,7 @@ import './tabpanel.scss';
 
 export default View.extend({
   template,
-  className: 'tab-pane',
+  className: 'tab-pane fade',
   regions: {
     children: {
       el: '.row',

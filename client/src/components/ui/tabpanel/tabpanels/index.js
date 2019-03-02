@@ -8,8 +8,9 @@ export default CollectionView.extend({
     const view = new ChilViewClass({
       model: child,
       attributes: {
-        id: child.get('id'),
+        id: `pills-${child.get('id')}`,
         role: 'tabpanel',
+        'aria-labelledby': `pills-${child.get('id')}-tab`,
       },
     });
     return view;
