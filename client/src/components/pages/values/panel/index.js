@@ -3,6 +3,7 @@ import Radial from './radial';
 import Linear from './linear';
 import Status from './status';
 import Value from './value';
+import './values.scss';
 
 export default CollectionView.extend({
   className: 'values-content',
