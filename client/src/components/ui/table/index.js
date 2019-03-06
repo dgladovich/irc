@@ -3,12 +3,20 @@ import template from './table.jst';
 import TableModel from './model';
 import Head from './head';
 import Body from './body';
+import './table.scss';
 
 export default View.extend({
   template,
+  className: 'table-default',
   regions: {
-    head: '.table-head',
-    body: '.table-body',
+    head: {
+      el: '.table-head',
+      replaceElement: true,
+    },
+    body: {
+      el: '.table-body',
+      replaceElement: true,
+    },
   },
   onRender() {
     this.showChildView('head', new Head({ model: this.model }));

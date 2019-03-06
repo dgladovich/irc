@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2016",
+    "jsx": "preserve",
+    "experimentalDecorators": true
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ],
+  "baseUrl": "./", // all paths are relative to the baseUrl
+  "paths": {
+    "~/*": [
+      "*"
+    ] // resolve any `~/foo/bar` to `<baseUrl>/foo/bar`
+  }
+}

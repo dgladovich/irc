@@ -1,5 +1,3 @@
-<div class="table-body-row">
-  <% obj.columns.forEach((col) => { %>
-    <div><%= obj[col.datapath] %></div>
-  <% })  %>
-</div>
+<% obj.columns.forEach((col) => { %>
+  <div class="table-body-column"><%= obj[col.datapath] %></div>
+<% })  %>

@@ -124,15 +124,6 @@ a {
 
 
 
-.item-value {
-    position: relative;
-    right: 7px;
-    top: 6px;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #fff;
-}
-
 .btn-danger-custom {
     background: #e12c0d;
 }
@@ -511,84 +502,6 @@ table.sheild-table strong {
 .btn-custom {
     background: rgba(29, 29, 29, 0.8);
     border: 2px solid #494949;
-}
-
-.status-item .item.radial {
-    height: auto;
-}
-
-.status-item {
-    background: rgba(29, 29, 29, 0.8);
-    border: 2px solid #494949;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    display: block;
-    padding: 10px 10px 20px;
-    position: relative;
-}
-
-.status-success {
-    color: #fff;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
-
-.status-danger {
-    color: #fff;
-    background-color: #d9534f;
-    border-color: #d43f3a;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
-
-.status-primary {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
 }
 
 .measurments-block {}
@@ -1170,87 +1083,6 @@ header {
     background: #434343;
 }
 
-.panel-title {
-    display: block;
-    background: #222;
-    padding: 0px 10px;
-    line-height: 2.4em;
-    border-radius: 9px;
-    border: 1px solid #505050;
-    position: relative;
-    vertical-align: top;
-}
-
-.panel-title .indicator {
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-.indicator {
-    background: #ccc;
-    border-radius: 50%;
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-}
-
-.obj-item.danger {
-    box-shadow: 0 0 12px 2px #ff0000;
-    border-color: #e12c0d;
-}
-
-.obj-item.att {
-    box-shadow: 0 0 12px 2px #ffa200;
-    border-color: #ffa200;
-}
-
-.table.dark-table>thead>tr>th {
-    border-bottom: 2px solid #222;
-    background: #333;
-}
-
-.table>thead>tr>th.small {
-    font-size: 14px;
-}
-
-.table>thead>tr>th {
-    border-bottom: 1px solid #777;
-    background: #777;
-    color: #fff;
-    font-weight: 400;
-    font-size: 18px;
-}
-
-.dot.att .status,
-.klap.att,
-.panel-title.att,
-.fc-day-number.att {
-    box-shadow: 0 0 12px 2px #ffa200;
-    border-color: #ffa200!important;
-}
-
-.dot.danger .status,
-.klap.danger,
-.panel-title.danger,
-.fc-day-number.danger {
-    box-shadow: 0 0 12px 2px #ff0000;
-    border-color: #e12c0d!important;
-}
-
-.dot.danger .indicator,
-.klap.danger .indicator,
-.panel-title.danger .indicator,
-.fc-day-number.danger {
-    background: #e12c0d!important;
-}
-
-.dot.att .indicator,
-.klap.att .indicator,
-.panel-title.att .indicator,
-.fc-day-number.att {
-    background: #ffa200!important;
-    color: #333;
-}
 
 
 .block-wrap {
@@ -1308,27 +1140,6 @@ tbody.alarms-list {
     height: 55vh;
 }
 
-.item.item-range {
-    height: auto;
-    padding-bottom: 10px;
-}
-
-
-.klap {
-    border: 2px solid #494949;
-    border-radius: 46px;
-    margin-bottom: 5px;
-    padding: 10px;
-    text-align: center;
-    width: 42px;
-    height: 42px;
-    line-height: 42px;
-    padding: 0;
-    font-size: 18px;
-}
-.valves {
-    padding: 10px;
-}
 .col-sm-18 {
     width: 5.55%;
 }
@@ -1521,9 +1332,6 @@ tbody.alarms-list {
     background: #252525;
 }
 
-.item.datchik {
-    height: 75px;
-}
 
 .btn-repair {
     width: 50px;

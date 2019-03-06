@@ -1,0 +1,9 @@
+.table-default-head {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.table-default-head .thead-column {
+  flex: 1 1 0;
+}
