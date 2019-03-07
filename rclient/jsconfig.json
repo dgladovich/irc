@@ -1,4 +1,5 @@
 {
+  "emmet.syntaxProfiles": { "javascript": "html" },
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2016",
